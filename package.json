@@ -1,0 +1,57 @@
+{
+  "name": "ioc-extractor",
+  "version": "0.1.0",
+  "description": "IOC(Indicator of Compromise) extractor",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc",
+    "watch": "tsc -w",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "cover": "nyc npm t"
+  },
+  "nyc": {
+    "include": [
+      "src/*.ts",
+      "src/**/*.ts"
+    ],
+    "extension": [
+      ".ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ],
+    "reporter": [
+      "json",
+      "html",
+      "text"
+    ],
+    "sourceMap": true
+  },
+  "keywords": [
+    "IOC",
+    "Indicator of Compromise"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninoseki/ioc-extractor.git"
+  },
+  "author": "Manabu Niseki",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ninoseki/ioc-extractor/issues"
+  },
+  "homepage": "https://github.com/ninoseki/ioc-extractor",
+  "devDependencies": {
+    "@types/chai": "^4.1.4",
+    "@types/mocha": "^5.2.3",
+    "@types/node": "^10.3.5",
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "nyc": "^12.0.2",
+    "ts-loader": "^4.4.1",
+    "ts-node": "^7.0.0",
+    "typescript": "^2.9.2"
+  }
+}
