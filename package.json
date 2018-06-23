@@ -9,7 +9,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "cover": "nyc npm t"
+    "cover": "nyc report --reporter=lcov"
   },
   "nyc": {
     "include": [
@@ -53,5 +53,6 @@
     "ts-loader": "^4.4.1",
     "ts-node": "^7.0.0",
     "typescript": "^2.9.2"
-  }
+  },
+  "dependencies": {}
 }
