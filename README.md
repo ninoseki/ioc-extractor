@@ -1,5 +1,9 @@
 # IOC extractor
 
+[![Build Status](https://travis-ci.org/ninoseki/ioc-extractor.svg?branch=master)](https://travis-ci.org/ninoseki/ioc-extractor)
+[![Maintainability](https://api.codeclimate.com/v1/badges/d1e7e771f4b12e6415d1/maintainability)](https://codeclimate.com/github/ninoseki/ioc-extractor/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/d1e7e771f4b12e6415d1/test_coverage)](https://codeclimate.com/github/ninoseki/ioc-extractor/test_coverage)
+
 IOC extractor is a npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
 
 **Note**: the package is highly infuluenced by [cacador](https://github.com/sroberts/cacador).
