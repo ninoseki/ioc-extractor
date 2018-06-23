@@ -9,7 +9,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "cover": "nyc npm t"
+    "cover": "nyc report --reporter=text-lcov > coverage.lcov"
   },
   "nyc": {
     "include": [
