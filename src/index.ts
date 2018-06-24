@@ -1,7 +1,7 @@
 import { clean, dedup } from './aux/auxiliary';
 import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs } from './aux/regexs';
 
-declare interface Hashes {
+export declare interface Hashes {
   md5: string[] | null;
   sha1: string[] | null;
   sha256: string[] | null;
@@ -9,7 +9,7 @@ declare interface Hashes {
   ssdeep: string[] | null;
 }
 
-declare interface Networks {
+export declare interface Networks {
   domain: string[] | null;
   email: string[] | null;
   ipv4: string[] | null;
@@ -17,7 +17,7 @@ declare interface Networks {
   url: string[] | null;
 }
 
-declare interface Files {
+export declare interface Files {
   doc: string[] | null;
   exe: string[] | null;
   flash: string[] | null;
@@ -27,11 +27,11 @@ declare interface Files {
   zip: string[] | null;
 }
 
-declare interface Utilities {
+export declare interface Utilities {
   cve: string[] | null;
 }
 
-declare interface IOC {
+export declare interface IOC {
   hashes: Hashes;
   networks: Networks;
   files: Files;
