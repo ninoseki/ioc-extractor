@@ -73,7 +73,7 @@ This package supports the following IOCs:
 
 For **Networks** IOCs, the following defang techniques are supported:
 
-|Techniques|Input|Defanged|
+|Techniques|Defanged|Refanged|
 |---|---|---|
 |`[.] => .`|1.1.1[.]1|1.1.1.1|
 |`(.) => .`|1.1.1(.)1|1.1.1.1|
