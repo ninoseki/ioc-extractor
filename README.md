@@ -17,47 +17,47 @@ npm install ioc-extractor
 ## Usage
 
 ```ts
-import { getIOC } from 'ioc-extractor';
+var iocExtractor = require("ioc-extractor")
 
 const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b';
-const ioc = getIOC(input);
-console.log(ioc.hashes.md5);      // => ['f6f8179ac71eaabff12b8c024342109b']
-console.log(ioc.networks.ipv4);   // => ['1.1.1.1']
-console.log(ioc.networks.domain); // => ['google.com']
+const ioc = iocExtractor.getIOC(input);
+console.log(ioc.hashes.md5s);      // => ['f6f8179ac71eaabff12b8c024342109b']
+console.log(ioc.networks.ipv4s);   // => ['1.1.1.1']
+console.log(ioc.networks.domains); // => ['google.com']
 
 console.log(JSON.stringify(ioc));
 // {
 //    "hashes":{
-//       "md5":[
+//       "md5s":[
 //          "f6f8179ac71eaabff12b8c024342109b"
 //       ],
-//       "sha1":null,
-//       "sha256":null,
-//       "sha512":null,
-//       "ssdeep":null
+//       "sha1s":null,
+//       "sha256s":null,
+//       "sha512s":null,
+//       "ssdeeps":null
 //    },
 //    "networks":{
-//       "domain":[
+//       "domains":[
 //          "google.com"
 //       ],
-//       "email":null,
-//       "ipv4":[
+//       "emails":null,
+//       "ipv4s":[
 //          "1.1.1.1"
 //       ],
-//       "ipv6":null,
-//       "url":null
+//       "ipv6s":null,
+//       "urls":null
 //    },
 //    "files":{
-//       "doc":null,
-//       "exe":null,
-//       "flash":null,
-//       "img":null,
-//       "mac":null,
-//       "web":null,
-//       "zip":null
+//       "docs":null,
+//       "exes":null,
+//       "flashs":null,
+//       "imgs":null,
+//       "macs":null,
+//       "webs":null,
+//       "zips":null
 //    },
 //    "utilities":{
-//       "cve":null
+//       "cves":null
 //    }
 // }
 ```
