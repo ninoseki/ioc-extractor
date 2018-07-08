@@ -79,17 +79,19 @@ describe('hashRegexs', () => {
 
 describe('networkRegexes', () => {
   it('should match to all domain values', () => {
-    const input = 'github.com\ngitlab.com';
+    const input = 'test.co.jp\ngitlab.com\ntest.exe\ndev.test.co.jp';
     const matches = input.match(networkRegexs.domain)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal('github.com');
+    expect(matches.length).to.equal(3);
+    expect(matches[0]).to.equal('test.co.jp');
+    expect(matches[1]).to.equal('gitlab.com');
+    expect(matches[2]).to.equal('dev.test.co.jp');
   });
 
   it('should match to all email values', () => {
-    const input = 'test@example.com\ntest@test.com';
+    const input = 'test@test.co.jp\ntest@test.com';
     const matches = input.match(networkRegexs.email)!;
     expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal('test@example.com');
+    expect(matches[0]).to.equal('test@test.co.jp');
   });
 
   it('should match to all ipv4 values', () => {
@@ -107,10 +109,10 @@ describe('networkRegexes', () => {
   });
 
   it('should match to all url values', () => {
-    const input = 'https://github.com\nhttps://google.com';
+    const input = 'https://test.co.jp\nhttps://google.com';
     const matches = input.match(networkRegexs.url)!;
     expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal('https://github.com');
+    expect(matches[0]).to.equal('https://test.co.jp');
   });
 });
 
