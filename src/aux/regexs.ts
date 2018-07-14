@@ -9,11 +9,11 @@ function check(s: string, regexs: object): boolean {
 }
 
 export const hashRegexs = {
-  md5: /[A-Fa-f0-9]{32}/ig,
-  sha1: /[A-Fa-f0-9]{40}/ig,
-  sha256: /[A-Fa-f0-9]{64}/ig,
-  sha512: /[A-Fa-f0-9]{128}/ig,
-  ssdeep: /\d{1,}:[A-Za-z0-9/+]{3,}:[A-Za-z0-9/+]{3,}/ig,
+  md5:    /\b[A-Fa-f0-9]{32}\b/ig,
+  sha1:   /\b[A-Fa-f0-9]{40}\b/ig,
+  sha256: /\b[A-Fa-f0-9]{64}\b/ig,
+  sha512: /\b[A-Fa-f0-9]{128}\b/ig,
+  ssdeep: /\b\d{1,}:[A-Za-z0-9\/+]{3,}:[A-Za-z0-9\/+]{3,}/ig,
 };
 
 export function isHash(s: string): boolean {
