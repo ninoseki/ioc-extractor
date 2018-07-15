@@ -17,6 +17,7 @@ describe('isNetwork', () => {
     expect(isNetwork('test@test.com')).to.equal(true);
     expect(isNetwork('example.com')).to.equal(true);
     expect(isNetwork('https://www.example.com/foo/bar?baz=1')).to.equal(true);
+    expect(isNetwork('https://111.111.111.111/foo/bar?baz=1')).to.equal(true);
   });
 });
 
@@ -109,9 +110,9 @@ describe('networkRegexes', () => {
   });
 
   it('should match to all url values', () => {
-    const input = 'https://test.co.jp\nhttps://google.com';
+    const input = 'https://test.co.jp\nhttps://google.com\nhttps://111.111.111.111/test.jsp';
     const matches = input.match(networkRegexs.url)!;
-    expect(matches.length).to.equal(2);
+    expect(matches.length).to.equal(3);
     expect(matches[0]).to.equal('https://test.co.jp');
   });
 });
