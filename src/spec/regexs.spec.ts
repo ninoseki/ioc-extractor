@@ -110,7 +110,7 @@ describe('networkRegexes', () => {
   });
 
   it('should match to all url values', () => {
-    const input = 'https://test.co.jp\nhttps://google.com\nhttps://111.111.111.111/test.jsp';
+    const input = 'https://test.co.jp\nhttps://google.com\nhttps://111.111.111.111/test.jsp\nwww.example.com';
     const matches = input.match(networkRegexs.url)!;
     expect(matches.length).to.equal(3);
     expect(matches[0]).to.equal('https://test.co.jp');
