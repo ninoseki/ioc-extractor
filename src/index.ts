@@ -2,33 +2,33 @@ import { clean, dedup } from './aux/auxiliary';
 import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs } from './aux/regexs';
 
 export declare interface Hashes {
-  md5s: string[] | null;
-  sha1s: string[] | null;
-  sha256s: string[] | null;
-  sha512s: string[] | null;
-  ssdeeps: string[] | null;
+  md5s: string[];
+  sha1s: string[];
+  sha256s: string[];
+  sha512s: string[];
+  ssdeeps: string[];
 }
 
 export declare interface Networks {
-  domains: string[] | null;
-  emails: string[] | null;
-  ipv4s: string[] | null;
-  ipv6s: string[] | null;
-  urls: string[] | null;
+  domains: string[];
+  emails: string[];
+  ipv4s: string[];
+  ipv6s: string[];
+  urls: string[];
 }
 
 export declare interface Files {
-  docs: string[] | null;
-  exes: string[] | null;
-  flashes: string[] | null;
-  imgs: string[] | null;
-  macs: string[] | null;
-  webs: string[] | null;
-  zips: string[] | null;
+  docs: string[];
+  exes: string[];
+  flashes: string[];
+  imgs: string[];
+  macs: string[];
+  webs: string[];
+  zips: string[];
 }
 
 export declare interface Utilities {
-  cves: string[] | null;
+  cves: string[];
 }
 
 export declare interface IOC {
@@ -47,51 +47,47 @@ export class IOCExtractor {
   private data: string;
 
   constructor(data: string) {
-    this.data = data;
+    this.data = clean(data);
   }
 
   public getHashes(): Hashes {
-    const data = dedup(this.data);
     const hashes: Hashes = {
-      md5s: data.match(hashRegexs.md5),
-      sha1s: data.match(hashRegexs.sha1),
-      sha256s: data.match(hashRegexs.sha256),
-      sha512s: data.match(hashRegexs.sha512),
-      ssdeeps: data.match(hashRegexs.ssdeep),
+      md5s: this.matchesWithRegexp(hashRegexs.md5),
+      sha1s: this.matchesWithRegexp(hashRegexs.sha1),
+      sha256s: this.matchesWithRegexp(hashRegexs.sha256),
+      sha512s: this.matchesWithRegexp(hashRegexs.sha512),
+      ssdeeps: this.matchesWithRegexp(hashRegexs.ssdeep),
     };
     return hashes;
   }
 
   public getNetworks(): Networks {
-    const data = dedup(clean(this.data));
     const networks: Networks = {
-      domains: data.match(networkRegexs.domain),
-      emails: data.match(networkRegexs.email),
-      ipv4s: data.match(networkRegexs.ipv4),
-      ipv6s: data.match(networkRegexs.ipv6),
-      urls: data.match(networkRegexs.url),
+      domains: this.matchesWithRegexp(networkRegexs.domain),
+      emails: this.matchesWithRegexp(networkRegexs.email),
+      ipv4s: this.matchesWithRegexp(networkRegexs.ipv4),
+      ipv6s: this.matchesWithRegexp(networkRegexs.ipv6),
+      urls: this.matchesWithRegexp(networkRegexs.url),
     };
     return networks;
   }
 
   public getFiles(): Files {
-    const data = dedup(this.data);
     const files: Files = {
-      docs: data.match(fileRegexs.doc),
-      exes: data.match(fileRegexs.exe),
-      flashes: data.match(fileRegexs.flash),
-      imgs: data.match(fileRegexs.img),
-      macs: data.match(fileRegexs.mac),
-      webs: data.match(fileRegexs.web),
-      zips: data.match(fileRegexs.zip),
+      docs: this.matchesWithRegexp(fileRegexs.doc),
+      exes: this.matchesWithRegexp(fileRegexs.exe),
+      flashes: this.matchesWithRegexp(fileRegexs.flash),
+      imgs: this.matchesWithRegexp(fileRegexs.img),
+      macs: this.matchesWithRegexp(fileRegexs.mac),
+      webs: this.matchesWithRegexp(fileRegexs.web),
+      zips: this.matchesWithRegexp(fileRegexs.zip),
     };
     return files;
   }
 
   public getUtilities(): Utilities {
-    const data = dedup(this.data);
     const utilities: Utilities = {
-      cves: data.match(utilityRegexs.cve),
+      cves: this.matchesWithRegexp(utilityRegexs.cve),
     };
     return utilities;
   }
@@ -104,6 +100,11 @@ export class IOCExtractor {
       utilities: this.getUtilities(),
     };
     return ioc;
+  }
+
+  private matchesWithRegexp(regex: RegExp): string[] {
+    const matched = this.data.match(regex);
+    return matched === null ? [] : dedup(matched);
   }
 }
 

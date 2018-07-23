@@ -1,10 +1,8 @@
-
-export function dedup(s: string): string {
-  const list = s.split(/\s+/ig);
-  const uniq = list.filter((x, i, self) => {
+export function dedup(array: string[]): string[] {
+  const uniq = array.filter((x, i, self) => {
     return self.indexOf(x) === i;
   });
-  return uniq.join(' ');
+  return uniq;
 }
 
 export function clean(s: string): string {
@@ -13,5 +11,6 @@ export function clean(s: string): string {
     replace(/\.\]/ig, '.').
     replace(/\(\.\)/ig, '.').
     replace(/\(\./ig, '.').
-    replace(/\.\)/ig, '.');
+    replace(/\.\)/ig, '.').
+    replace(/hxxp/ig, 'http');
 }
