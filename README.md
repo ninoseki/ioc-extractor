@@ -31,33 +31,33 @@ console.log(JSON.stringify(ioc));
 //       "md5s":[
 //          "f6f8179ac71eaabff12b8c024342109b"
 //       ],
-//       "sha1s":null,
-//       "sha256s":null,
-//       "sha512s":null,
-//       "ssdeeps":null
+//       "sha1s":[],
+//       "sha256s":[],
+//       "sha512s":[],
+//       "ssdeeps":[]
 //    },
 //    "networks":{
 //       "domains":[
 //          "google.com"
 //       ],
-//       "emails":null,
+//       "emails":[],
 //       "ipv4s":[
 //          "1.1.1.1"
 //       ],
-//       "ipv6s":null,
-//       "urls":null
+//       "ipv6s":[],
+//       "urls":[]
 //    },
 //    "files":{
-//       "docs":null,
-//       "exes":null,
-//       "flashs":null,
-//       "imgs":null,
-//       "macs":null,
-//       "webs":null,
-//       "zips":null
+//       "docs":[],
+//       "exes":[],
+//       "flashs":[],
+//       "imgs":[],
+//       "macs":[],
+//       "webs":[],
+//       "zips":[]
 //    },
 //    "utilities":{
-//       "cves":null
+//       "cves":[]
 //    }
 // }
 ```
@@ -73,9 +73,10 @@ This package supports the following IOCs:
 
 For **Networks** IOCs, the following defang techniques are supported:
 
-|Techniques|Defanged|Refanged|
-|---|---|---|
-|`[.] => .`|1.1.1[.]1|1.1.1.1|
-|`(.) => .`|1.1.1(.)1|1.1.1.1|
-|Partial|1.1.1[.1|1.1.1.1|
-|Any combination|1.1.1[.)1|1.1.1.1|
+| Techniques      | Defanged            | Refanged           |
+|:----------------|:--------------------|:-------------------|
+| `[.] => .`      | 1.1.1[.]1           | 1.1.1.1            |
+| `(.) => .`      | 1.1.1(.)1           | 1.1.1.1            |
+| `hxxp => http`  | hxxps://google.com  | https://google.com |
+| Partial         | 1.1.1[.1            | 1.1.1.1            |
+| Any combination | hxxps:/google[.)com | https://google.com |
