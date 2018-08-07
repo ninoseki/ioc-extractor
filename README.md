@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/ninoseki/ioc-extractor.svg?branch=master)](https://travis-ci.org/ninoseki/ioc-extractor)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d1e7e771f4b12e6415d1/maintainability)](https://codeclimate.com/github/ninoseki/ioc-extractor/maintainability)
-[![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg?branch=add-coveralls-support)](https://coveralls.io/github/ninoseki/ioc-extractor?branch=add-coveralls-support)
+[![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg)](https://coveralls.io/github/ninoseki/ioc-extractor)
 
 IOC extractor is a npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
 
