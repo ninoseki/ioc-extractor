@@ -9,7 +9,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "mocha -r ts-node/register src/**/*.spec.ts",
-    "cover": "nyc report --reporter=lcov"
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "bin": {
     "ioc-extractor": "dist/bin/ioc-extractor.js"
@@ -52,6 +52,7 @@
     "@types/mocha": "^5.2.5",
     "@types/node": "^10.5.5",
     "chai": "^4.1.2",
+    "coveralls": "^3.0.2",
     "mocha": "^5.2.0",
     "nyc": "^12.0.2",
     "ts-loader": "^4.4.2",
