@@ -8,8 +8,8 @@ describe('clean', () => {
     expect(clean(input)).to.equal('1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com');
   });
   it('should replace hxxp to http', () => {
-    const input = 'hxxps://google.com\nhxxp://neverssl.com';
-    expect(clean(input)).to.equal('https://google.com\nhttp://neverssl.com');
+    const input = 'hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com';
+    expect(clean(input)).to.equal('https://google.com\nhttp://neverssl.com\nhttps://google.com');
   });
 });
 describe('dedup', () => {
