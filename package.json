@@ -8,7 +8,7 @@
     "prepare": "npm run build",
     "build": "tsc",
     "watch": "tsc -w",
-    "test": "mocha -r ts-node/register src/**/*.spec.ts",
+    "test": "nyc mocha -r ts-node/register src/**/*.spec.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   },
   "bin": {
