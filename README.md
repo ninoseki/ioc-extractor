@@ -6,7 +6,7 @@
 
 IOC extractor is a npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
 
-**Note**: the package is highly infuluenced by [cacador](https://github.com/sroberts/cacador).
+**Note**: the package is highly influenced by [cacador](https://github.com/sroberts/cacador).
 
 ## Installation
 
@@ -73,10 +73,13 @@ This package supports the following IOCs:
 
 For **Networks** IOCs, the following defang techniques are supported:
 
-| Techniques      | Defanged            | Refanged           |
-|:----------------|:--------------------|:-------------------|
-| `[.] => .`      | 1.1.1[.]1           | 1.1.1.1            |
-| `(.) => .`      | 1.1.1(.)1           | 1.1.1.1            |
-| `hxxp => http`  | hxxps://google.com  | https://google.com |
-| Partial         | 1.1.1[.1            | 1.1.1.1            |
-| Any combination | hxxps:/google[.)com | https://google.com |
+| Techniques       | Defanged                               | Refanged                   |
+|:-----------------|:---------------------------------------|:---------------------------|
+| `[.]` => `.`     | `1.1.1[.]1`                            | `1.1.1.1`                  |
+| `(.)` => `.`     | `1.1.1(.)1`                            | `1.1.1.1`                  |
+| `\.`  => `.`     | `example\.com`                         | `example.com`              |
+| `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`  |
+| `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`       |
+| `hxxp` => `http` | `hxxps://google.com`                   | `https://google.com`       |
+| Partial          | `1.1.1[.1`                             | `1.1.1.1`                  |
+| Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://example.com/path` |
