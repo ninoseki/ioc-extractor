@@ -15,6 +15,6 @@ export function clean(s: string): string {
     replace(/\[:/ig, ':').
     replace(/:\]/ig, ':').
     replace(/\\\./ig, '.').
-    replace(/\[\/\]/, '/').
+    replace(/\[\/\]/ig, '/').
     replace(/hxxp/ig, 'http');
 }
