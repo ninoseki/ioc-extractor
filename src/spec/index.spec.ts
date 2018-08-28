@@ -39,6 +39,7 @@ describe('IOCExtractor', () => {
         'http://192.168.0.1:80/path',
         'http://example.com:80/path',
         'http://example.com/',
+        'http://example.com/test',
         'http://example.com',
         'http://exa-mple.com',
         'http://ex4mple.com',
