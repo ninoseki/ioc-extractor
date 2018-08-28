@@ -4,7 +4,7 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/d1e7e771f4b12e6415d1/maintainability)](https://codeclimate.com/github/ninoseki/ioc-extractor/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg)](https://coveralls.io/github/ninoseki/ioc-extractor)
 
-IOC extractor is a npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
+IOC extractor is an npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
 
 **Note**: the package is highly influenced by [cacador](https://github.com/sroberts/cacador).
 
@@ -15,6 +15,30 @@ npm install ioc-extractor
 ```
 
 ## Usage
+
+### As a CLI
+
+```sh
+$ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor
+# {"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":["example.com"],"emails":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"urls":[]},"utilities":{"cves":[]}}
+
+# I recommend using it with jq
+$ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq .networks
+# {
+#   "domains": [
+#     "example.com"
+#   ],
+#   "emails": [],
+#   "ipv4s": [
+#     "1.1.1.1",
+#     "8.8.8.8"
+#   ],
+#   "ipv6s": [],
+#   "urls": []
+# }
+```
+
+### As a library
 
 ```ts
 var iocExtractor = require("ioc-extractor")
@@ -71,7 +95,7 @@ This package supports the following IOCs:
 - **Files**: doc, exe, flash, img, mac, web, zip
 - **Utilities**: cve
 
-For **Networks** IOCs, the following defang techniques are supported:
+For **Networks** IOCs, the following defang/refang techniques are supported:
 
 | Techniques       | Defanged                               | Refanged                        |
 |:-----------------|:---------------------------------------|:--------------------------------|
