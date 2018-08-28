@@ -73,13 +73,13 @@ This package supports the following IOCs:
 
 For **Networks** IOCs, the following defang techniques are supported:
 
-| Techniques       | Defanged                               | Refanged                   |
-|:-----------------|:---------------------------------------|:---------------------------|
-| `[.]` => `.`     | `1.1.1[.]1`                            | `1.1.1.1`                  |
-| `(.)` => `.`     | `1.1.1(.)1`                            | `1.1.1.1`                  |
-| `\.`  => `.`     | `example\.com`                         | `example.com`              |
-| `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`  |
-| `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`       |
-| `hxxp` => `http` | `hxxps://google.com`                   | `https://google.com`       |
-| Partial          | `1.1.1[.1`                             | `1.1.1.1`                  |
-| Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://example.com/path` |
+| Techniques       | Defanged                               | Refanged                        |
+|:-----------------|:---------------------------------------|:--------------------------------|
+| `[.]` => `.`     | `1.1.1[.]1`                            | `1.1.1.1`                       |
+| `(.)` => `.`     | `1.1.1(.)1`                            | `1.1.1.1`                       |
+| `\.`  => `.`     | `example\.com`                         | `example.com`                   |
+| `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`       |
+| `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`            |
+| `hxxp` => `http` | `hxxps://google.com`                   | `https://google.com`            |
+| Partial          | `1.1.1[.1`                             | `1.1.1.1`                       |
+| Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://test.example.com/path` |
