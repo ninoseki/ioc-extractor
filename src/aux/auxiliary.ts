@@ -6,15 +6,15 @@ export function dedup(array: string[]): string[] {
 }
 
 export function clean(s: string): string {
-  return s.replace(/\[\.\]/ig, '.').
-    replace(/\[\./ig, '.').
-    replace(/\.\]/ig, '.').
-    replace(/\(\.\)/ig, '.').
-    replace(/\(\./ig, '.').
-    replace(/\.\)/ig, '.').
-    replace(/\[:/ig, ':').
-    replace(/:\]/ig, ':').
-    replace(/\\\./ig, '.').
-    replace(/\[\/\]/ig, '/').
-    replace(/hxxp/ig, 'http');
+  return s.replace(/\[\.\]/ig, ".").
+    replace(/\[\./ig, ".").
+    replace(/\.\]/ig, ".").
+    replace(/\(\.\)/ig, ".").
+    replace(/\(\./ig, ".").
+    replace(/\.\)/ig, ".").
+    replace(/\[:/ig, ":").
+    replace(/:\]/ig, ":").
+    replace(/\\\./ig, ".").
+    replace(/\[\/\]/ig, "/").
+    replace(/hxxp/ig, "http");
 }

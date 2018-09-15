@@ -1,14 +1,15 @@
 {
-  "defaultSeverity": "error",
-  "extends": [
-      "tslint:recommended"
-  ],
-  "jsRules": {},
-  "rules": {
-      "quotemark": [true, "single"],
-      "indent": [true, "spaces", 2],
-      "interface-name": false,
-      "max-line-length": false
-  },
-  "rulesDirectory": []
+    "defaultSeverity": "error",
+    "extends": [
+        "tslint:recommended"
+    ],
+    "jsRules": {},
+    "rules": {
+        "indent": [true, "spaces", 2],
+        "interface-name": false,
+        "max-line-length": false,
+        "no-console": [false],
+        "quotemark": [true, "double", "avoid-escape"]
+    },
+    "rulesDirectory": []
 }
