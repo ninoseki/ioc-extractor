@@ -1,5 +1,5 @@
-import { clean, dedup } from './aux/auxiliary';
-import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs } from './aux/regexs';
+import { clean, dedup } from "./aux/auxiliary";
+import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs } from "./aux/regexs";
 
 export declare interface Hashes {
   md5s: string[];
