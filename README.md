@@ -1,5 +1,6 @@
 # IOC extractor
 
+[![npm version](https://badge.fury.io/js/ioc-extractor.svg)](https://badge.fury.io/js/ioc-extractor)
 [![Build Status](https://travis-ci.org/ninoseki/ioc-extractor.svg?branch=master)](https://travis-ci.org/ninoseki/ioc-extractor)
 [![Maintainability](https://api.codeclimate.com/v1/badges/d1e7e771f4b12e6415d1/maintainability)](https://codeclimate.com/github/ninoseki/ioc-extractor/maintainability)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg)](https://coveralls.io/github/ninoseki/ioc-extractor)
@@ -74,7 +75,7 @@ console.log(JSON.stringify(ioc));
 //    "files":{
 //       "docs":[],
 //       "exes":[],
-//       "flashs":[],
+//       "flashes":[],
 //       "imgs":[],
 //       "macs":[],
 //       "webs":[],
