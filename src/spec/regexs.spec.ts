@@ -89,7 +89,7 @@ describe("networkRegexes", () => {
   });
 
   it("should match with all email values", () => {
-    const input = "test@test.co.jp\ntest@test.com";
+    const input = "test@test.co.jp\ntest@test.com\nhoge@hoge";
     const matches = input.match(networkRegexs.email)!;
     expect(matches.length).to.equal(2);
     expect(matches[0]).to.equal("test@test.co.jp");

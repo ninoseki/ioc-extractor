@@ -1,4 +1,5 @@
-export const tlds: string[] = [
+
+const tlds: string[] = [
   "aaa",
   "abogado",
   "ac",
@@ -1066,3 +1067,5 @@ export const tlds: string[] = [
   "zuerich",
   "zw",
 ];
+
+export const tldRegexString: string = tlds.join("|");
