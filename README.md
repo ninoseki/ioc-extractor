@@ -21,7 +21,7 @@ npm install ioc-extractor
 
 ```sh
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor
-# {"cryptocurrencies":{"btcs":["1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v"],"xmrs":[]},"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":[],"emails":[],"ipv4s":[],"ipv6s":[],"urls":[]},"utilities":{"cves":[]}}
+# {"cryptocurrencies":{"btcs":[],"xmrs":[]},"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":["example.com"],"emails":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"urls":[]},"utilities":{"cves":[]}}
 
 # I recommend using it with jq
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq .networks
