@@ -55,3 +55,12 @@ export const utilityRegexs = {
 export function isUtilityItem(s: string): boolean {
   return check(s, utilityRegexs);
 }
+
+export const cryptocurrencyRegexs = {
+  btc: /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/ig,
+  xmr: /\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b/ig,
+}
+
+export function isCryptocurrency(s: string): boolean {
+  return check(s, cryptocurrencyRegexs);
+}
