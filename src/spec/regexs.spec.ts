@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { fileRegexs, hashRegexs, isFile, isHash, isNetwork, isUtilityItem, networkRegexs, utilityRegexs } from "../aux/regexs";
+import { fileRegexs, hashRegexs, isFile, isHash, isNetwork, isUtilityItem, networkRegexs, utilityRegexs, isCryptocurrency, cryptocurrencyRegexs } from "../aux/regexs";
 
 describe("isHash", () => {
   it("should detect hash values in the input", () => {
@@ -38,6 +38,15 @@ describe("isUtilityItem", () => {
     expect(isUtilityItem("CVE-2100-0000")).to.equal(false);
     expect(isUtilityItem("CVE-2016-00000")).to.equal(true);
     expect(isUtilityItem("CVE-20100-0000")).to.equal(false);
+  });
+});
+
+describe("isCryptocurrency", () => {
+  it("should detect BTC addresses in the input", () => {
+    expect(isCryptocurrency("1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj")).to.equal(true)
+  });
+  it("should detect XMR addresses in the input", () => {
+    expect(isCryptocurrency("48Fki6gnEN1QaiWNcsm8dVfX2JMg8xmjiQvuKpcdUD9rQH8WU4AXj9HKAF5AdnhKPSPLzTV7CX1Ks25BWrDeLnHuEFmhRxV")).to.equal(true)
   });
 });
 
@@ -174,5 +183,20 @@ describe("utilityRegexs", () => {
     const matches = input.match(utilityRegexs.cve)!;
     expect(matches.length).to.equal(1);
     expect(matches[0]).to.equal("CVE-2000-0001");
+  });
+});
+
+describe("cryptocurrenciesRegexs", () => {
+  it("should match with all BTC addresses in the input", () => {
+    const input = "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa 3Gj9sY6PaBHdk44jktV7AXrktjMcDqnwV8 49VLRG6oXpBEHACpoTpNh23Y3fGxStciKq";
+    const matches = input.match(cryptocurrencyRegexs.btc)!;
+    expect(matches.length).to.equal(2);
+    expect(matches[0]).to.equal("1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa");
+  });
+  it("should match with all XMR addresses in the input", () => {
+    const input = "42CujFXn1HHiwrGW3Wuh8TASmo94dv3J8DZneS5NqBhaJVNi4qK32Zj3rgcDWsrxznP1qtjJFBKtHQCcbSCY996wMHHfvhw\n42UE32EZxHAWejXi3nQ3wpYGncQnbCw6LCMh8PkcFTn6XzQUUDco2pGSpR6AJHFK1jL8tYNYJnbg2DoKxVikYvC2DamnGBJ";
+    const matches = input.match(cryptocurrencyRegexs.xmr)!;
+    expect(matches.length).to.equal(2);
+    expect(matches[0]).to.equal("42CujFXn1HHiwrGW3Wuh8TASmo94dv3J8DZneS5NqBhaJVNi4qK32Zj3rgcDWsrxznP1qtjJFBKtHQCcbSCY996wMHHfvhw");
   });
 });

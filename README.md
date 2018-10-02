@@ -21,7 +21,7 @@ npm install ioc-extractor
 
 ```sh
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor
-# {"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":["example.com"],"emails":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"urls":[]},"utilities":{"cves":[]}}
+# {"cryptocurrencies":{"btcs":["1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v"],"xmrs":[]},"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":[],"emails":[],"ipv4s":[],"ipv6s":[],"urls":[]},"utilities":{"cves":[]}}
 
 # I recommend using it with jq
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq .networks
@@ -52,38 +52,42 @@ console.log(ioc.networks.domains); // => ['google.com']
 
 console.log(JSON.stringify(ioc));
 // {
-//    "hashes":{
-//       "md5s":[
-//          "f6f8179ac71eaabff12b8c024342109b"
-//       ],
-//       "sha1s":[],
-//       "sha256s":[],
-//       "sha512s":[],
-//       "ssdeeps":[]
-//    },
-//    "networks":{
-//       "domains":[
-//          "google.com"
-//       ],
-//       "emails":[],
-//       "ipv4s":[
-//          "1.1.1.1"
-//       ],
-//       "ipv6s":[],
-//       "urls":[]
-//    },
-//    "files":{
-//       "docs":[],
-//       "exes":[],
-//       "flashes":[],
-//       "imgs":[],
-//       "macs":[],
-//       "webs":[],
-//       "zips":[]
-//    },
-//    "utilities":{
-//       "cves":[]
-//    }
+//   "cryptocurrencies": {
+//     "btcs": [],
+//     "xmrs": []
+//   },
+//   "files": {
+//     "docs": [],
+//     "exes": [],
+//     "flashes": [],
+//     "imgs": [],
+//     "macs": [],
+//     "webs": [],
+//     "zips": []
+//   },
+//   "hashes": {
+//     "md5s": [
+//       "f6f8179ac71eaabff12b8c024342109b"
+//     ],
+//     "sha1s": [],
+//     "sha256s": [],
+//     "sha512s": [],
+//     "ssdeeps": []
+//   },
+//   "networks": {
+//     "domains": [
+//       "google.com"
+//     ],
+//     "emails": [],
+//     "ipv4s": [
+//       "1.1.1.1"
+//     ],
+//     "ipv6s": [],
+//     "urls": []
+//   },
+//   "utilities": {
+//     "cves": []
+//   }
 // }
 ```
 
@@ -95,6 +99,7 @@ This package supports the following IOCs:
 - **Networks**: domain, email, ipv4, ipv6, url
 - **Files**: doc, exe, flash, img, mac, web, zip
 - **Utilities**: cve
+- **Cryptocurrencies**: btc, xmr
 
 For **Networks** IOCs, the following defang/refang techniques are supported:
 
