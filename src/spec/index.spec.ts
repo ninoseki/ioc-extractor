@@ -31,19 +31,19 @@ describe("IOCExtractor", () => {
       expect(ioc.hashes.sha256s).to.deep.equal(["01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"]);
       expect(ioc.hashes.sha512s).to.deep.equal(["be688838ca8686e5c90689bf2ab585cef1137c999b48c70b92f67a5c34dc15697b5d11c982ed6d71be1e1e7f7b4e0733884aa97c3f7a339a8ed03577cf74be09"]);
 
-      expect(ioc.networks.ipv4s).to.deep.equal(["192.168.0.1", "123.123.123.123"]);
+      expect(ioc.networks.ipv4s).to.deep.equal(["123.123.123.123", "192.168.0.1"]);
       expect(ioc.networks.ipv6s).to.deep.equal(["fdc4:2581:575b:5a72:0000:0000:0000:0001"]);
-      expect(ioc.networks.domains).to.deep.equal(["example.com", "exa-mple.com", "ex4mple.com", "short.is"]);
+      expect(ioc.networks.domains).to.deep.equal(["ex4mple.com", "exa-mple.com", "example.com", "short.is"]);
       expect(ioc.networks.urls).to.deep.equal([
+        "http://123.123.123.123/test",
         "http://192.168.0.1",
         "http://192.168.0.1:80/path",
-        "http://example.com:80/path",
+        "http://ex4mple.com",
+        "http://exa-mple.com",
+        "http://example.com",
         "http://example.com/",
         "http://example.com/test",
-        "http://example.com",
-        "http://exa-mple.com",
-        "http://ex4mple.com",
-        "http://123.123.123.123/test",
+        "http://example.com:80/path",
       ]);
 
       expect(ioc.files.docs).to.deep.equal(["bad.doc"]);
@@ -53,8 +53,8 @@ describe("IOCExtractor", () => {
         "1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj",
       ])
       expect(ioc.cryptocurrencies.xmrs).to.deep.equal([
-        "49urk473npMgWFFBBk2xLMjEqTgg1PHMzg1MjDWBST5AMEEyh58TjCvLEf58uu5kruPWu5pA1RBPKX3quEQpHKoGQ1zbTGe",
         "46bxDoy3pszR42Ds5FeygfWdbMfH7qB5hZHqEPnX6EgVhksrbzJtQYQeETZtniMfWk4Bt7TXmgybpZYRu2fTdppoAf9x7Yd",
+        "49urk473npMgWFFBBk2xLMjEqTgg1PHMzg1MjDWBST5AMEEyh58TjCvLEf58uu5kruPWu5pA1RBPKX3quEQpHKoGQ1zbTGe",
       ])
     });
   });
