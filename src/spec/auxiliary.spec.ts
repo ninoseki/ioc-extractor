@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { clean, dedup } from "../aux/auxiliary";
+import { clean, dedup, sort_by_value } from "../aux/auxiliary";
 
 describe("clean", () => {
   it("should remove parentheses and brackets in the input", () => {
@@ -28,9 +28,17 @@ describe("clean", () => {
     expect(clean(input)).to.equal("https://test.example.com/path");
   });
 });
+
 describe("dedup", () => {
   it("should filter to unique ones", () => {
     const input = ["1.1.1.1", "1.1.1.1", "github.com", "github.com"];
     expect(dedup(input)).to.deep.equal(["1.1.1.1", "github.com"]);
+  });
+});
+
+describe("sort_by_value", () => {
+  it("should filter to unique ones", () => {
+    const input = ["March", "Jan", "Jun", "Feb", "Dec", "Apr"];
+    expect(sort_by_value(input)).to.deep.equal(["Apr", "Dec", "Feb", "Jan", "Jun", "March"]);
   });
 });
