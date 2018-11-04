@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { fileRegexs, hashRegexs, isFile, isHash, isNetwork, isUtilityItem, networkRegexs, utilityRegexs, isCryptocurrency, cryptocurrencyRegexs } from "../aux/regexs";
+import { fileRegexs, hashRegexs, isFile, isHash, isNetwork, isUtilityItem, networkRegexs, utilityRegexs, isCryptocurrency, cryptocurrencyRegexs, isTracker, trackerRegexs } from "../aux/regexs";
 
 describe("isHash", () => {
   it("should detect hash values in the input", () => {
@@ -47,6 +47,12 @@ describe("isCryptocurrency", () => {
   });
   it("should detect XMR addresses in the input", () => {
     expect(isCryptocurrency("48Fki6gnEN1QaiWNcsm8dVfX2JMg8xmjiQvuKpcdUD9rQH8WU4AXj9HKAF5AdnhKPSPLzTV7CX1Ks25BWrDeLnHuEFmhRxV")).to.equal(true)
+  });
+});
+
+describe("isTracker", () => {
+  it("should detect GA tracker ID in the input", () => {
+    expect(isTracker("UA-26296840-4")).to.equal(true)
   });
 });
 
@@ -198,5 +204,15 @@ describe("cryptocurrenciesRegexs", () => {
     const matches = input.match(cryptocurrencyRegexs.xmr)!;
     expect(matches.length).to.equal(2);
     expect(matches[0]).to.equal("42CujFXn1HHiwrGW3Wuh8TASmo94dv3J8DZneS5NqBhaJVNi4qK32Zj3rgcDWsrxznP1qtjJFBKtHQCcbSCY996wMHHfvhw");
+  });
+});
+
+describe("trackerRegex", () => {
+  it("should match with all tracker values in the input", () => {
+    const input = "foo bar UA-26296840-4 baz UA-1111111-1";
+    const matches = input.match(trackerRegexs.ga)!;
+    expect(matches.length).to.equal(2);
+    expect(matches[0]).to.equal("UA-26296840-4");
+    expect(matches[1]).to.equal("UA-1111111-1");
   });
 });

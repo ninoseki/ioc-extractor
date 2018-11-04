@@ -64,3 +64,11 @@ export const cryptocurrencyRegexs = {
 export function isCryptocurrency(s: string): boolean {
   return check(s, cryptocurrencyRegexs);
 }
+
+export const trackerRegexs = {
+  ga: /UA-\d{4,9}-\d{1,4}/ig,
+}
+
+export function isTracker(s: string): boolean {
+  return check(s, trackerRegexs);
+}

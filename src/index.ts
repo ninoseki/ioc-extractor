@@ -1,5 +1,5 @@
 import { clean, dedup, sort_by_value } from "./aux/auxiliary";
-import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs, cryptocurrencyRegexs } from "./aux/regexs";
+import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs, cryptocurrencyRegexs, trackerRegexs } from "./aux/regexs";
 
 export declare interface Hashes {
   md5s: string[];
@@ -36,11 +36,16 @@ export declare interface Cryptocurrencies {
   xmrs: string[];
 }
 
+export declare interface Trackers {
+  gas: string[];
+}
+
 export declare interface IOC {
   cryptocurrencies: Cryptocurrencies;
   files: Files;
   hashes: Hashes;
   networks: Networks;
+  trackers: Trackers;
   utilities: Utilities;
 }
 
@@ -106,12 +111,20 @@ export class IOCExtractor {
     return cryptocurrencies;
   }
 
+  public getTrackers(): Trackers {
+    const trackers: Trackers = {
+      gas: this.matchesWithRegexp(trackerRegexs.ga),
+    }
+    return trackers;
+  }
+
   public getIOC(): IOC {
     const ioc: IOC = {
       cryptocurrencies: this.getCryptocurrencies(),
       files: this.getFiles(),
       hashes: this.getHashes(),
       networks: this.getNetworks(),
+      trackers: this.getTrackers(),
       utilities: this.getUtilities(),
     };
     return ioc;
