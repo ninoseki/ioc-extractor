@@ -52,7 +52,7 @@ describe("isCryptocurrency", () => {
 
 describe("isTracker", () => {
   it("should detect GA tracker ID in the input", () => {
-    expect(isTracker("UA-26296840-4")).to.equal(true)
+    expect(isTracker("UA-26296840-4")).to.equal(true);
   });
 });
 
