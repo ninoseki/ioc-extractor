@@ -21,7 +21,7 @@ npm install ioc-extractor
 
 ```sh
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor
-# {"cryptocurrencies":{"btcs":[],"xmrs":[]},"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":["example.com"],"emails":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"urls":[]},"utilities":{"cves":[]}}
+# {"cryptocurrencies":{"btcs":[],"xmrs":[]},"files":{"docs":[],"exes":[],"flashes":[],"imgs":[],"macs":[],"webs":[],"zips":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"domains":["example.com"],"emails":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"urls":[]},"trackers":{"gaTrackIDs":[],"gaPubIDs":[]},"utilities":{"cves":[]}}
 
 # I recommend using it with jq
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq .networks
@@ -85,6 +85,10 @@ console.log(JSON.stringify(ioc));
 //     "ipv6s": [],
 //     "urls": []
 //   },
+//   "trackers": {
+//     "gaTrackIDs": [],
+//     "gaPubIDs": []
+//   },
 //   "utilities": {
 //     "cves": []
 //   }
@@ -98,8 +102,9 @@ This package supports the following IOCs:
 - **Hashes**: md5, sha1, sha256, sha512, ssdeep
 - **Networks**: domain, email, ipv4, ipv6, url
 - **Files**: doc, exe, flash, img, mac, web, zip
-- **Utilities**: cve
-- **Cryptocurrencies**: btc, xmr
+- **Utilities**: cve(CVE ID)
+- **Cryptocurrencies**: btc (BTC address), xmr (XMR address)
+- **Trackers**: gaTrackID (Google Analytics tracking ID), gaPubID (Google Adsense Publisher ID)
 
 For **Networks** IOCs, the following defang/refang techniques are supported:
 
