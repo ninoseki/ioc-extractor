@@ -51,8 +51,11 @@ describe("isCryptocurrency", () => {
 });
 
 describe("isTracker", () => {
-  it("should detect GA tracker ID in the input", () => {
+  it("should detect Google Analytics code in the input", () => {
     expect(isTracker("UA-26296840-4")).to.equal(true);
+  });
+  it("should detect Google Adsense Publisher ID in the input", () => {
+    expect(isTracker("pub-9107453047749393")).to.equal(true);
   });
 });
 
@@ -208,11 +211,18 @@ describe("cryptocurrenciesRegexs", () => {
 });
 
 describe("trackerRegex", () => {
-  it("should match with all tracker values in the input", () => {
+  it("should match with all Google Analytics Code values in the input", () => {
     const input = "foo bar UA-26296840-4 baz UA-1111111-1";
-    const matches = input.match(trackerRegexs.ga)!;
+    const matches = input.match(trackerRegexs.gaTrackID)!;
     expect(matches.length).to.equal(2);
     expect(matches[0]).to.equal("UA-26296840-4");
     expect(matches[1]).to.equal("UA-1111111-1");
+  });
+  it("should match with all Google Adsense Publisher ID values in the input", () => {
+    const input = "foo bar pub-9107453047749393 baz pub-2324633754279327";
+    const matches = input.match(trackerRegexs.gaPubID)!;
+    expect(matches.length).to.equal(2);
+    expect(matches[0]).to.equal("pub-9107453047749393");
+    expect(matches[1]).to.equal("pub-2324633754279327");
   });
 });

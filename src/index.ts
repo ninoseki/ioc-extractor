@@ -37,7 +37,8 @@ export declare interface Cryptocurrencies {
 }
 
 export declare interface Trackers {
-  gas: string[];
+  gaTrackIDs: string[];
+  gaPubIDs: string[];
 }
 
 export declare interface IOC {
@@ -113,7 +114,8 @@ export class IOCExtractor {
 
   public getTrackers(): Trackers {
     const trackers: Trackers = {
-      gas: this.matchesWithRegexp(trackerRegexs.ga),
+      gaTrackIDs: this.matchesWithRegexp(trackerRegexs.gaTrackID),
+      gaPubIDs: this.matchesWithRegexp(trackerRegexs.gaPubID),
     }
     return trackers;
   }

@@ -19,7 +19,7 @@ describe("IOCExtractor", () => {
       expect(ioc.networks.urls[0]).to.equal("https://www.google.com");
       expect(ioc.files.docs).to.deep.equal([]);
       expect(ioc.utilities.cves).to.deep.equal([]);
-      expect(ioc.trackers.gas).to.deep.equal(["UA-26296840-4"]);
+      expect(ioc.trackers.gaTrackIDs[0]).to.equal("UA-26296840-4");
     });
   });
   context("complex input", () => {
