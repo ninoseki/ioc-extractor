@@ -53,6 +53,7 @@ describe("isCryptocurrency", () => {
 describe("isTracker", () => {
   it("should detect Google Analytics code in the input", () => {
     expect(isTracker("UA-26296840-4")).to.equal(true);
+    expect(isTracker("UA-26296840")).to.equal(true);
   });
   it("should detect Google Adsense Publisher ID in the input", () => {
     expect(isTracker("pub-9107453047749393")).to.equal(true);
@@ -212,11 +213,11 @@ describe("cryptocurrenciesRegexs", () => {
 
 describe("trackerRegex", () => {
   it("should match with all Google Analytics Code values in the input", () => {
-    const input = "foo bar UA-26296840-4 baz UA-1111111-1";
+    const input = "foo bar UA-26296840-4 baz UA-1111111";
     const matches = input.match(trackerRegexs.gaTrackID)!;
     expect(matches.length).to.equal(2);
     expect(matches[0]).to.equal("UA-26296840-4");
-    expect(matches[1]).to.equal("UA-1111111-1");
+    expect(matches[1]).to.equal("UA-1111111");
   });
   it("should match with all Google Adsense Publisher ID values in the input", () => {
     const input = "foo bar pub-9107453047749393 baz pub-2324633754279327";
