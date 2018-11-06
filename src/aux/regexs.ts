@@ -59,7 +59,7 @@ export function isUtilityItem(s: string): boolean {
 export const cryptocurrencyRegexs = {
   btc: /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/ig,
   xmr: /\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b/ig,
-}
+};
 
 export function isCryptocurrency(s: string): boolean {
   return check(s, cryptocurrencyRegexs);
@@ -68,7 +68,7 @@ export function isCryptocurrency(s: string): boolean {
 export const trackerRegexs = {
   gaTrackID: /UA-\d{4,9}-\d{1,4}/ig,
   gaPubID: /pub-\d{16}/ig,
-}
+};
 
 export function isTracker(s: string): boolean {
   return check(s, trackerRegexs);

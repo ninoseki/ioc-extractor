@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { fileRegexs, hashRegexs, isFile, isHash, isNetwork, isUtilityItem, networkRegexs, utilityRegexs, isCryptocurrency, cryptocurrencyRegexs, isTracker, trackerRegexs } from "../aux/regexs";
+import { cryptocurrencyRegexs, fileRegexs, hashRegexs, isCryptocurrency, isFile, isHash, isNetwork, isTracker, isUtilityItem, networkRegexs, trackerRegexs, utilityRegexs } from "../aux/regexs";
 
 describe("isHash", () => {
   it("should detect hash values in the input", () => {
@@ -43,10 +43,10 @@ describe("isUtilityItem", () => {
 
 describe("isCryptocurrency", () => {
   it("should detect BTC addresses in the input", () => {
-    expect(isCryptocurrency("1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj")).to.equal(true)
+    expect(isCryptocurrency("1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj")).to.equal(true);
   });
   it("should detect XMR addresses in the input", () => {
-    expect(isCryptocurrency("48Fki6gnEN1QaiWNcsm8dVfX2JMg8xmjiQvuKpcdUD9rQH8WU4AXj9HKAF5AdnhKPSPLzTV7CX1Ks25BWrDeLnHuEFmhRxV")).to.equal(true)
+    expect(isCryptocurrency("48Fki6gnEN1QaiWNcsm8dVfX2JMg8xmjiQvuKpcdUD9rQH8WU4AXj9HKAF5AdnhKPSPLzTV7CX1Ks25BWrDeLnHuEFmhRxV")).to.equal(true);
   });
 });
 

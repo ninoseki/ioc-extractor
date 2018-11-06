@@ -52,11 +52,11 @@ describe("IOCExtractor", () => {
       expect(ioc.cryptocurrencies.btcs).to.deep.equal([
         "1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v",
         "1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj",
-      ])
+      ]);
       expect(ioc.cryptocurrencies.xmrs).to.deep.equal([
         "46bxDoy3pszR42Ds5FeygfWdbMfH7qB5hZHqEPnX6EgVhksrbzJtQYQeETZtniMfWk4Bt7TXmgybpZYRu2fTdppoAf9x7Yd",
         "49urk473npMgWFFBBk2xLMjEqTgg1PHMzg1MjDWBST5AMEEyh58TjCvLEf58uu5kruPWu5pA1RBPKX3quEQpHKoGQ1zbTGe",
-      ])
+      ]);
     });
   });
 });
