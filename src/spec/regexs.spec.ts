@@ -11,6 +11,7 @@ describe("isHash", () => {
 
 describe("isNetwork", () => {
   it("should detect network values in the input", () => {
+    expect(isNetwork("ASN13335")).to.equal(true);
     expect(isNetwork("8.8.8.8")).to.equal(true);
     expect(isNetwork("300.300.300.300")).to.equal(false);
     expect(isNetwork("fe80::d544:e71:3c17:7710%11")).to.equal(true);
@@ -98,6 +99,14 @@ describe("hashRegexs", () => {
 });
 
 describe("networkRegexes", () => {
+  it("should match with all ans values", () => {
+    const input = "ASN13335 AS13334";
+    const matches = input.match(networkRegexs.asn)!;
+    expect(matches.length).to.equal(2);
+    expect(matches[0]).to.equal("ASN13335");
+    expect(matches[1]).to.equal("AS13334");
+  });
+
   it("should match with all domain values", () => {
     const input = "test.co.jp\ngitlab.com\ntest.exe\ndev.test.co.jp";
     const matches = input.match(networkRegexs.domain)!;

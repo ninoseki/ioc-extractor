@@ -23,6 +23,7 @@ export function isHash(s: string): boolean {
 }
 
 export const networkRegexs = {
+  asn: /(AS|ASN)\d+/ig,
   domain: new RegExp(`([A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.(${tldRegexString})\\b)`, "ig"),
   email: new RegExp(`[A-Za-z0-9_.]+@([A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*\\.(${tldRegexString})\\b)`, "ig"),
   ipv4: /(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\[?\.\]?){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/ig,

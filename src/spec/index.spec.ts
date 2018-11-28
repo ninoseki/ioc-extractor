@@ -32,6 +32,7 @@ describe("IOCExtractor", () => {
       expect(ioc.hashes.sha256s).to.deep.equal(["01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"]);
       expect(ioc.hashes.sha512s).to.deep.equal(["be688838ca8686e5c90689bf2ab585cef1137c999b48c70b92f67a5c34dc15697b5d11c982ed6d71be1e1e7f7b4e0733884aa97c3f7a339a8ed03577cf74be09"]);
 
+      expect(ioc.networks.asns).to.deep.equal(["AS3462", "ASN15169"]);
       expect(ioc.networks.ipv4s).to.deep.equal(["123.123.123.123", "192.168.0.1"]);
       expect(ioc.networks.ipv6s).to.deep.equal(["fdc4:2581:575b:5a72:0000:0000:0000:0001"]);
       expect(ioc.networks.domains).to.deep.equal(["ex4mple.com", "exa-mple.com", "example.com", "short.is"]);

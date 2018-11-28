@@ -96,3 +96,5 @@ tcp://example[.]com:80/
 46bxDoy3pszR42Ds5FeygfWdbMfH7qB5hZHqEPnX6EgVhksrbzJtQYQeETZtniMfWk4Bt7TXmgybpZYRu2fTdppoAf9x7Yd
 1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v
 1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj
+ASN15169
+AS3462

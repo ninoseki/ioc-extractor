@@ -10,6 +10,7 @@ export declare interface Hashes {
 }
 
 export declare interface Networks {
+  asns: string[];
   domains: string[];
   emails: string[];
   ipv4s: string[];
@@ -75,6 +76,7 @@ export class IOCExtractor {
 
   public getNetworks(): Networks {
     const networks: Networks = {
+      asns: this.matchesWithRegexp(networkRegexs.asn),
       domains: this.matchesWithRegexp(networkRegexs.domain),
       emails: this.matchesWithRegexp(networkRegexs.email),
       ipv4s: this.matchesWithRegexp(networkRegexs.ipv4),
