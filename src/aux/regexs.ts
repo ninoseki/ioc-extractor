@@ -67,8 +67,8 @@ export function isCryptocurrency(s: string): boolean {
 }
 
 export const trackerRegexs = {
-  gaTrackID: /UA-\d{4,9}(-\d{1,2})?/ig,
   gaPubID: /pub-\d{16}/ig,
+  gaTrackID: /UA-\d{4,9}(-\d{1,2})?/ig,
 };
 
 export function isTracker(s: string): boolean {
