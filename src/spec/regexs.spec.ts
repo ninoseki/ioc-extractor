@@ -99,7 +99,7 @@ describe("hashRegexs", () => {
 });
 
 describe("networkRegexes", () => {
-  it("should match with all ans values", () => {
+  it("should match with all asn values", () => {
     const input = "ASN13335 AS13334";
     const matches = input.match(networkRegexs.asn)!;
     expect(matches.length).to.equal(2);
