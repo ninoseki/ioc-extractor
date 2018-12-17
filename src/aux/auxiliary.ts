@@ -20,5 +20,7 @@ export function clean(s: string): string {
     replace(/:\]/ig, ":").
     replace(/\\\./ig, ".").
     replace(/\[\/\]/ig, "/").
-    replace(/hxxp/ig, "http");
+    replace(/hxxp/ig, "http").
+    replace(/\[(at|@)\]/ig, "@").
+    replace(/\((at|@)\)/ig, "@");
 }
