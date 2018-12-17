@@ -23,6 +23,22 @@ describe("clean", () => {
     const input = "http://example.com[/]test";
     expect(clean(input)).to.equal("http://example.com/test");
   });
+
+  it("should replace [at] by @", () => {
+    const input = "test[at]example.com";
+    expect(clean(input)).to.equal("test@example.com");
+  });
+
+  it("should replace [@] by @", () => {
+    const input = "test[@]example.com";
+    expect(clean(input)).to.equal("test@example.com");
+  });
+
+  it("should replace (@) by @", () => {
+    const input = "test(@)example.com";
+    expect(clean(input)).to.equal("test@example.com");
+  });
+
   it("should be deal with a mixed casec", () => {
     const input = "hxxps[:]//test\.example[.)com[/]path";
     expect(clean(input)).to.equal("https://test.example.com/path");
