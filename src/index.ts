@@ -1,4 +1,4 @@
-import { clean, dedup, sort_by_value } from "./aux/auxiliary";
+import { clean, dedup, sortByValue } from "./aux/auxiliary";
 import { cryptocurrencyRegexs, fileRegexs, hashRegexs, networkRegexs, trackerRegexs, utilityRegexs } from "./aux/regexs";
 
 export declare interface Hashes {
@@ -136,7 +136,7 @@ export class IOCExtractor {
 
   private matchesWithRegexp(regex: RegExp): string[] {
     const matched = this.data.match(regex);
-    return matched === null ? [] : sort_by_value(dedup(matched));
+    return matched === null ? [] : sortByValue(dedup(matched));
   }
 }
 
