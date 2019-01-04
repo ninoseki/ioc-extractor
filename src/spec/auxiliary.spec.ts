@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { clean, dedup, sort_by_value } from "../aux/auxiliary";
+import { clean, dedup, sortByValue } from "../aux/auxiliary";
 
 describe("clean", () => {
   it("should remove parentheses and brackets in the input", () => {
@@ -52,9 +52,9 @@ describe("dedup", () => {
   });
 });
 
-describe("sort_by_value", () => {
+describe("sortByValue", () => {
   it("should filter to unique ones", () => {
     const input = ["March", "Jan", "Jun", "Feb", "Dec", "Apr"];
-    expect(sort_by_value(input)).to.deep.equal(["Apr", "Dec", "Feb", "Jan", "Jun", "March"]);
+    expect(sortByValue(input)).to.deep.equal(["Apr", "Dec", "Feb", "Jan", "Jun", "March"]);
   });
 });

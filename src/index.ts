@@ -1,5 +1,5 @@
-import { clean, dedup, sort_by_value } from "./aux/auxiliary";
-import { fileRegexs, hashRegexs, networkRegexs, utilityRegexs, cryptocurrencyRegexs, trackerRegexs } from "./aux/regexs";
+import { clean, dedup, sortByValue } from "./aux/auxiliary";
+import { cryptocurrencyRegexs, fileRegexs, hashRegexs, networkRegexs, trackerRegexs, utilityRegexs } from "./aux/regexs";
 
 export declare interface Hashes {
   md5s: string[];
@@ -110,7 +110,7 @@ export class IOCExtractor {
     const cryptocurrencies: Cryptocurrencies = {
       btcs: this.matchesWithRegexp(cryptocurrencyRegexs.btc),
       xmrs: this.matchesWithRegexp(cryptocurrencyRegexs.xmr),
-    }
+    };
     return cryptocurrencies;
   }
 
@@ -118,7 +118,7 @@ export class IOCExtractor {
     const trackers: Trackers = {
       gaTrackIDs: this.matchesWithRegexp(trackerRegexs.gaTrackID),
       gaPubIDs: this.matchesWithRegexp(trackerRegexs.gaPubID),
-    }
+    };
     return trackers;
   }
 
@@ -136,7 +136,7 @@ export class IOCExtractor {
 
   private matchesWithRegexp(regex: RegExp): string[] {
     const matched = this.data.match(regex);
-    return matched === null ? [] : sort_by_value(dedup(matched));
+    return matched === null ? [] : sortByValue(dedup(matched));
   }
 }
 

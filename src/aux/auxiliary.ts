@@ -5,7 +5,7 @@ export function dedup(array: string[]): string[] {
   return uniq;
 }
 
-export function sort_by_value(array: string[]): string[] {
+export function sortByValue(array: string[]): string[] {
   return array.sort();
 }
 
