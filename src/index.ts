@@ -1,5 +1,5 @@
-import { clean, dedup, sortByValue } from "./aux/auxiliary";
-import { cryptocurrencyRegexs, fileRegexs, hashRegexs, networkRegexs, trackerRegexs, utilityRegexs } from "./aux/regexs";
+import { clean } from "./aux/auxiliary";
+import { extractASN, extractBTC, extractCVE, extractDoc, extractDomain, extractEmail, extractExe, extractFlash, extractGAPubID, extractGATrackID, extractImg, extractIPv4, extractIPv6, extractMac, extractMD5, extractSHA1, extractSHA256, extractSHA512, extractSSDEEP, extractURL, extractWeb, extractXMR, extractZip } from "./aux/extractor";
 
 export declare interface Hashes {
   md5s: string[];
@@ -65,59 +65,59 @@ export class IOCExtractor {
 
   public getHashes(): Hashes {
     const hashes: Hashes = {
-      md5s: this.matchesWithRegexp(hashRegexs.md5),
-      sha1s: this.matchesWithRegexp(hashRegexs.sha1),
-      sha256s: this.matchesWithRegexp(hashRegexs.sha256),
-      sha512s: this.matchesWithRegexp(hashRegexs.sha512),
-      ssdeeps: this.matchesWithRegexp(hashRegexs.ssdeep),
+      md5s: extractMD5(this.data),
+      sha1s: extractSHA1(this.data),
+      sha256s: extractSHA256(this.data),
+      sha512s: extractSHA512(this.data),
+      ssdeeps: extractSSDEEP(this.data),
     };
     return hashes;
   }
 
   public getNetworks(): Networks {
     const networks: Networks = {
-      asns: this.matchesWithRegexp(networkRegexs.asn),
-      domains: this.matchesWithRegexp(networkRegexs.domain),
-      emails: this.matchesWithRegexp(networkRegexs.email),
-      ipv4s: this.matchesWithRegexp(networkRegexs.ipv4),
-      ipv6s: this.matchesWithRegexp(networkRegexs.ipv6),
-      urls: this.matchesWithRegexp(networkRegexs.url),
+      asns: extractASN(this.data),
+      domains: extractDomain(this.data),
+      emails: extractEmail(this.data),
+      ipv4s: extractIPv4(this.data),
+      ipv6s: extractIPv6(this.data),
+      urls: extractURL(this.data),
     };
     return networks;
   }
 
   public getFiles(): Files {
     const files: Files = {
-      docs: this.matchesWithRegexp(fileRegexs.doc),
-      exes: this.matchesWithRegexp(fileRegexs.exe),
-      flashes: this.matchesWithRegexp(fileRegexs.flash),
-      imgs: this.matchesWithRegexp(fileRegexs.img),
-      macs: this.matchesWithRegexp(fileRegexs.mac),
-      webs: this.matchesWithRegexp(fileRegexs.web),
-      zips: this.matchesWithRegexp(fileRegexs.zip),
+      docs: extractDoc(this.data),
+      exes: extractExe(this.data),
+      flashes: extractFlash(this.data),
+      imgs: extractImg(this.data),
+      macs: extractMac(this.data),
+      webs: extractWeb(this.data),
+      zips: extractZip(this.data),
     };
     return files;
   }
 
   public getUtilities(): Utilities {
     const utilities: Utilities = {
-      cves: this.matchesWithRegexp(utilityRegexs.cve),
+      cves: extractCVE(this.data),
     };
     return utilities;
   }
 
   public getCryptocurrencies(): Cryptocurrencies {
     const cryptocurrencies: Cryptocurrencies = {
-      btcs: this.matchesWithRegexp(cryptocurrencyRegexs.btc),
-      xmrs: this.matchesWithRegexp(cryptocurrencyRegexs.xmr),
+      btcs: extractBTC(this.data),
+      xmrs: extractXMR(this.data),
     };
     return cryptocurrencies;
   }
 
   public getTrackers(): Trackers {
     const trackers: Trackers = {
-      gaTrackIDs: this.matchesWithRegexp(trackerRegexs.gaTrackID),
-      gaPubIDs: this.matchesWithRegexp(trackerRegexs.gaPubID),
+      gaPubIDs: extractGAPubID(this.data),
+      gaTrackIDs: extractGATrackID(this.data),
     };
     return trackers;
   }
@@ -132,11 +132,6 @@ export class IOCExtractor {
       utilities: this.getUtilities(),
     };
     return ioc;
-  }
-
-  private matchesWithRegexp(regex: RegExp): string[] {
-    const matched = this.data.match(regex);
-    return matched === null ? [] : sortByValue(dedup(matched));
   }
 }
 
