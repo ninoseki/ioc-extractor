@@ -1,5 +1,5 @@
 import { dedup, sortByValue } from "./auxiliary";
-import { cryptocurrencyRegexs, fileRegexs, hashRegexs, networkRegexs, trackerRegexs, utilityRegexs } from "./regexs";
+import { cryptocurrencyRegexs, hashRegexs, networkRegexs, trackerRegexs, utilityRegexs } from "./regexs";
 
 export function extractMD5(s: string): string[] {
   return matchesWithRegexp(s, hashRegexs.md5);
@@ -43,34 +43,6 @@ export function extractIPv6(s: string): string[] {
 
 export function extractURL(s: string): string[] {
   return matchesWithRegexp(s, networkRegexs.url);
-}
-
-export function extractDoc(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.doc);
-}
-
-export function extractExe(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.exe);
-}
-
-export function extractFlash(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.flash);
-}
-
-export function extractImg(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.img);
-}
-
-export function extractMac(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.mac);
-}
-
-export function extractWeb(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.web);
-}
-
-export function extractZip(s: string): string[] {
-  return matchesWithRegexp(s, fileRegexs.zip);
 }
 
 export function extractCVE(s: string): string[] {

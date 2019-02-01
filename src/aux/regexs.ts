@@ -35,20 +35,6 @@ export function isNetwork(s: string): boolean {
   return check(s, networkRegexs);
 }
 
-export const fileRegexs = {
-  doc: /([\w\-]+)\.(docx|doc|csv|pdf|xlsx|xls|rtf|txt|pptx|ppt|pages|keynote|numbers)/ig,
-  exe: /([\w]+)\.(exe|dll|jar)/ig,
-  flash: /([\w\-]+)\.(flv|swf)/ig,
-  img: /([\w\\-]+)\.(jpeg|jpg|gif|png|tiff|bmp)/ig,
-  mac: /([%A-Za-z\.\-\_\/ ]+\.(plist|app|pkg))/ig,
-  web: /(\w+\.(html|htm|php|jsp|asp))/ig,
-  zip: /([\w\-]+\.(zip|zipx|7z|rar|tar|gz))/ig,
-};
-
-export function isFile(s: string): boolean {
-  return check(s, fileRegexs);
-}
-
 export const utilityRegexs = {
   cve: /(CVE-(19|20)\d{2}-\d{4,7})/ig,
 };
