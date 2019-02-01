@@ -17,7 +17,6 @@ describe("IOCExtractor", () => {
       expect(ioc.networks.domains[0]).to.equal("google.com");
       expect(ioc.networks.ipv4s[0]).to.equal("1.1.1.1");
       expect(ioc.networks.urls[0]).to.equal("https://www.google.com");
-      expect(ioc.files.docs).to.deep.equal([]);
       expect(ioc.utilities.cves).to.deep.equal([]);
       expect(ioc.trackers.gaTrackIDs[0]).to.equal("UA-26296840-4");
     });
@@ -47,8 +46,6 @@ describe("IOCExtractor", () => {
         "http://example.com/test",
         "http://example.com:80/path",
       ]);
-
-      expect(ioc.files.docs).to.deep.equal(["bad.doc"]);
 
       expect(ioc.cryptocurrencies.btcs).to.deep.equal([
         "1HB5XMLmzFVj8ALj6mfBsbifRoD4miY36v",

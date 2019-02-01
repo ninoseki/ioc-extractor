@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import "mocha";
-import { cryptocurrencyRegexs, fileRegexs, hashRegexs, isCryptocurrency, isFile, isHash, isNetwork, isTracker, isUtilityItem, networkRegexs, trackerRegexs, utilityRegexs } from "../aux/regexs";
+import { cryptocurrencyRegexs, hashRegexs, isCryptocurrency, isHash, isNetwork, isTracker, isUtilityItem, networkRegexs, trackerRegexs, utilityRegexs } from "../aux/regexs";
 
 describe("isHash", () => {
   it("should detect hash values in the input", () => {
@@ -19,16 +19,6 @@ describe("isNetwork", () => {
     expect(isNetwork("example.com")).to.equal(true);
     expect(isNetwork("https://www.example.com/foo/bar?baz=1")).to.equal(true);
     expect(isNetwork("https://111.111.111.111/foo/bar?baz=1")).to.equal(true);
-  });
-});
-
-describe("isFile", () => {
-  it("should detect file values in the input", () => {
-    expect(isFile("test.doc")).to.equal(true);
-    expect(isFile("test.dl")).to.equal(false);
-    expect(isFile("test.dll")).to.equal(true);
-    expect(isFile("test.jpg")).to.equal(true);
-    expect(isFile("example.pumpkin")).to.equal(false);
   });
 });
 
@@ -142,57 +132,6 @@ describe("networkRegexes", () => {
     const matches = input.match(networkRegexs.url)!;
     expect(matches.length).to.equal(3);
     expect(matches[0]).to.equal("https://test.co.jp");
-  });
-});
-
-describe("fileRegexs", () => {
-  it("should match with all doc values in the input", () => {
-    const input = "test.doc\ntest.pptx";
-    const matches = input.match(fileRegexs.doc)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.doc");
-  });
-
-  it("should match with all exe values in the input", () => {
-    const input = "test.exe\ntest.jar";
-    const matches = input.match(fileRegexs.exe)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.exe");
-  });
-
-  it("should match with all flash values in the input", () => {
-    const input = "test.flv\ntest.swf";
-    const matches = input.match(fileRegexs.flash)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.flv");
-  });
-
-  it("should match with all img values in the input", () => {
-    const input = "test.jpeg\ntest.png";
-    const matches = input.match(fileRegexs.img)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.jpeg");
-  });
-
-  it("should match with all mac values in the input", () => {
-    const input = "test.app\ntest.pkg";
-    const matches = input.match(fileRegexs.mac)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.app");
-  });
-
-  it("should match with all web values in the input", () => {
-    const input = "test.html\ntest.jsp";
-    const matches = input.match(fileRegexs.web)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.html");
-  });
-
-  it("should match with all zip values in the input", () => {
-    const input = "test.zip\ntest.rar";
-    const matches = input.match(fileRegexs.zip)!;
-    expect(matches.length).to.equal(2);
-    expect(matches[0]).to.equal("test.zip");
   });
 });
 

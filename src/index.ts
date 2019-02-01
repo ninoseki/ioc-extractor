@@ -1,5 +1,5 @@
 import { clean } from "./aux/auxiliary";
-import { extractASN, extractBTC, extractCVE, extractDoc, extractDomain, extractEmail, extractExe, extractFlash, extractGAPubID, extractGATrackID, extractImg, extractIPv4, extractIPv6, extractMac, extractMD5, extractSHA1, extractSHA256, extractSHA512, extractSSDEEP, extractURL, extractWeb, extractXMR, extractZip } from "./aux/extractor";
+import { extractASN, extractBTC, extractCVE, extractDomain, extractEmail, extractGAPubID, extractGATrackID, extractIPv4, extractIPv6, extractMD5, extractSHA1, extractSHA256, extractSHA512, extractSSDEEP, extractURL, extractXMR } from "./aux/extractor";
 
 export declare interface Hashes {
   md5s: string[];
@@ -18,16 +18,6 @@ export declare interface Networks {
   urls: string[];
 }
 
-export declare interface Files {
-  docs: string[];
-  exes: string[];
-  flashes: string[];
-  imgs: string[];
-  macs: string[];
-  webs: string[];
-  zips: string[];
-}
-
 export declare interface Utilities {
   cves: string[];
 }
@@ -44,7 +34,6 @@ export declare interface Trackers {
 
 export declare interface IOC {
   cryptocurrencies: Cryptocurrencies;
-  files: Files;
   hashes: Hashes;
   networks: Networks;
   trackers: Trackers;
@@ -86,19 +75,6 @@ export class IOCExtractor {
     return networks;
   }
 
-  public getFiles(): Files {
-    const files: Files = {
-      docs: extractDoc(this.data),
-      exes: extractExe(this.data),
-      flashes: extractFlash(this.data),
-      imgs: extractImg(this.data),
-      macs: extractMac(this.data),
-      webs: extractWeb(this.data),
-      zips: extractZip(this.data),
-    };
-    return files;
-  }
-
   public getUtilities(): Utilities {
     const utilities: Utilities = {
       cves: extractCVE(this.data),
@@ -125,7 +101,6 @@ export class IOCExtractor {
   public getIOC(): IOC {
     const ioc: IOC = {
       cryptocurrencies: this.getCryptocurrencies(),
-      files: this.getFiles(),
       hashes: this.getHashes(),
       networks: this.getNetworks(),
       trackers: this.getTrackers(),
