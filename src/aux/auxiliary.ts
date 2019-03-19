@@ -10,17 +10,18 @@ export function sortByValue(array: string[]): string[] {
 }
 
 export function clean(s: string): string {
-  return s.replace(/\[\.\]/ig, ".").
-    replace(/\[\./ig, ".").
-    replace(/\.\]/ig, ".").
-    replace(/\(\.\)/ig, ".").
-    replace(/\(\./ig, ".").
-    replace(/\.\)/ig, ".").
-    replace(/\[:/ig, ":").
-    replace(/:\]/ig, ":").
-    replace(/\\\./ig, ".").
-    replace(/\[\/\]/ig, "/").
-    replace(/hxxp/ig, "http").
-    replace(/\[(at|@)\]/ig, "@").
-    replace(/\((at|@)\)/ig, "@");
+  return s
+    .replace(/\[\.\]/gi, ".")
+    .replace(/\[\./gi, ".")
+    .replace(/\.\]/gi, ".")
+    .replace(/\(\.\)/gi, ".")
+    .replace(/\(\./gi, ".")
+    .replace(/\.\)/gi, ".")
+    .replace(/\[:/gi, ":")
+    .replace(/:\]/gi, ":")
+    .replace(/\\\./gi, ".")
+    .replace(/\[\/\]/gi, "/")
+    .replace(/hxxp/gi, "http")
+    .replace(/\[(at|@)\]/gi, "@")
+    .replace(/\((at|@)\)/gi, "@");
 }

@@ -1,4 +1,3 @@
-
 const tlds: string[] = [
   "aaa",
   "aarp",

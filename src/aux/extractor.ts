@@ -1,5 +1,16 @@
 import { dedup, sortByValue } from "./auxiliary";
-import { cryptocurrencyRegexs, hashRegexs, networkRegexs, trackerRegexs, utilityRegexs } from "./regexs";
+import {
+  cryptocurrencyRegexs,
+  hashRegexs,
+  networkRegexs,
+  trackerRegexs,
+  utilityRegexs,
+} from "./regexs";
+
+function matchesWithRegexp(s: string, regex: RegExp): string[] {
+  const matched = s.match(regex);
+  return matched === null ? [] : sortByValue(dedup(matched));
+}
 
 export function extractMD5(s: string): string[] {
   return matchesWithRegexp(s, hashRegexs.md5);
@@ -63,9 +74,4 @@ export function extractGAPubID(s: string): string[] {
 
 export function extractGATrackID(s: string): string[] {
   return matchesWithRegexp(s, trackerRegexs.gaTrackID);
-}
-
-function matchesWithRegexp(s: string, regex: RegExp): string[] {
-  const matched = s.match(regex);
-  return matched === null ? [] : sortByValue(dedup(matched));
 }

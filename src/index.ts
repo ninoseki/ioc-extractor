@@ -1,5 +1,22 @@
 import { clean } from "./aux/auxiliary";
-import { extractASN, extractBTC, extractCVE, extractDomain, extractEmail, extractGAPubID, extractGATrackID, extractIPv4, extractIPv6, extractMD5, extractSHA1, extractSHA256, extractSHA512, extractSSDEEP, extractURL, extractXMR } from "./aux/extractor";
+import {
+  extractASN,
+  extractBTC,
+  extractCVE,
+  extractDomain,
+  extractEmail,
+  extractGAPubID,
+  extractGATrackID,
+  extractIPv4,
+  extractIPv6,
+  extractMD5,
+  extractSHA1,
+  extractSHA256,
+  extractSHA512,
+  extractSSDEEP,
+  extractURL,
+  extractXMR,
+} from "./aux/extractor";
 
 export declare interface Hashes {
   md5s: string[];
@@ -48,7 +65,7 @@ export class IOCExtractor {
 
   private data: string;
 
-  constructor(data: string) {
+  public constructor(data: string) {
     this.data = clean(data);
   }
 
