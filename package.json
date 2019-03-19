@@ -10,8 +10,8 @@
     "watch": "tsc -w",
     "test": "nyc mocha -r ts-node/register src/**/*.spec.ts",
     "coverage": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint 'src/**' --ext .ts",
-    "fmt": "prettier --write 'src/**' --ext .ts"
+    "lint": "eslint src --ext .ts",
+    "fmt": "prettier --write src/**/*.ts"
   },
   "bin": {
     "ioc-extractor": "dist/bin/ioc-extractor.js"

@@ -8,15 +8,18 @@ describe("clean", () => {
     expect(clean(input)).to.equal("1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com");
   });
   it("should replace hxxp by http", () => {
-    const input = "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
-    expect(clean(input)).to.equal("https://google.com\nhttp://neverssl.com\nhttps://google.com");
+    const input =
+      "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
+    expect(clean(input)).to.equal(
+      "https://google.com\nhttp://neverssl.com\nhttps://google.com"
+    );
   });
   it("should replace [:] by :", () => {
     const input = "http[:]//example.com";
     expect(clean(input)).to.equal("http://example.com");
   });
-  it("should replace \. by .", () => {
-    const input = "http://example\.com";
+  it("should replace . by .", () => {
+    const input = "http://example.com";
     expect(clean(input)).to.equal("http://example.com");
   });
   it("should replace [/] by /", () => {
@@ -40,7 +43,7 @@ describe("clean", () => {
   });
 
   it("should be deal with a mixed casec", () => {
-    const input = "hxxps[:]//test\.example[.)com[/]path";
+    const input = "hxxps[:]//test.example[.)com[/]path";
     expect(clean(input)).to.equal("https://test.example.com/path");
   });
 });
@@ -55,6 +58,13 @@ describe("dedup", () => {
 describe("sortByValue", () => {
   it("should filter to unique ones", () => {
     const input = ["March", "Jan", "Jun", "Feb", "Dec", "Apr"];
-    expect(sortByValue(input)).to.deep.equal(["Apr", "Dec", "Feb", "Jan", "Jun", "March"]);
+    expect(sortByValue(input)).to.deep.equal([
+      "Apr",
+      "Dec",
+      "Feb",
+      "Jan",
+      "Jun",
+      "March",
+    ]);
   });
 });
