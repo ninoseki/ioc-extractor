@@ -19,25 +19,35 @@ npm install ioc-extractor
 
 ### As a CLI
 
-```sh
+```bash
 $ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor
-# {"cryptocurrencies":{"btcs":[],"xmrs":[]},"hashes":{"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[]},"networks":{"asns":[],"domains":["example.com"],"emails":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"urls":[]},"trackers":{"gaPubIDs":[],"gaTrackIDs":[]},"utilities":{"cves":[]}}
+{"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 
-# I recommend using it with jq
-$ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq .networks
-# {
-#   "asns": [],
-#   "domains": [
-#     "example.com"
-#   ],
-#   "emails": [],
-#   "ipv4s": [
-#     "1.1.1.1",
-#     "8.8.8.8"
-#   ],
-#   "ipv6s": [],
-#   "urls": []
-# }
+# Using it with jq
+$ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
+{
+  "asns": [],
+  "btcs": [],
+  "cves": [],
+  "domains": [
+    "example.com"
+  ],
+  "emails": [],
+  "gaPubIDs": [],
+  "gaTrackIDs": [],
+  "ipv4s": [
+    "1.1.1.1",
+    "8.8.8.8"
+  ],
+  "ipv6s": [],
+  "md5s": [],
+  "sha1s": [],
+  "sha256s": [],
+  "sha512s": [],
+  "ssdeeps": [],
+  "urls": [],
+  "xmrs": []
+}
 ```
 
 ### As a library
@@ -47,45 +57,15 @@ var iocExtractor = require("ioc-extractor")
 
 const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b';
 const ioc = iocExtractor.getIOC(input);
-console.log(ioc.hashes.md5s);      // => ['f6f8179ac71eaabff12b8c024342109b']
-console.log(ioc.networks.ipv4s);   // => ['1.1.1.1']
-console.log(ioc.networks.domains); // => ['google.com']
+console.log(ioc.md5s);
+// => ['f6f8179ac71eaabff12b8c024342109b']
+console.log(ioc.ipv4s);
+// => ['1.1.1.1']
+console.log(ioc.domains);
+// => ['google.com']
 
-console.log(JSON.stringify(ioc));
-// {
-//   "cryptocurrencies": {
-//     "btcs": [],
-//     "xmrs": []
-//   },
-//   "hashes": {
-//     "md5s": [
-//       "f6f8179ac71eaabff12b8c024342109b"
-//     ],
-//     "sha1s": [],
-//     "sha256s": [],
-//     "sha512s": [],
-//     "ssdeeps": []
-//   },
-//   "networks": {
-//     "asns": [],
-//     "domains": [
-//       "google.com"
-//     ],
-//     "emails": [],
-//     "ipv4s": [
-//       "1.1.1.1"
-//     ],
-//     "ipv6s": [],
-//     "urls": []
-//   },
-//   "trackers": {
-//     "gaTrackIDs": [],
-//     "gaPubIDs": []
-//   },
-//   "utilities": {
-//     "cves": []
-//   }
-// }
+console.log(JSON.stringify(ioc))
+// => {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 ```
 
 ## Details
@@ -119,5 +99,6 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 - Python:
   - [InQuest/python-iocextract](https://github.com/InQuest/python-iocextract)
   - [cmu-sei/cyobstract](https://github.com/cmu-sei/cyobstract)
+  - [fhightower/ioc-finder](https://github.com/fhightower/ioc-finder)
 - Golang:
   - [sroberts/cacador](https://github.com/sroberts/cacador)

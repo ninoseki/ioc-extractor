@@ -1,10 +1,21 @@
 import { dedup, sortByValue } from "./auxiliary";
 import {
-  cryptocurrencyRegexs,
-  hashRegexs,
-  networkRegexs,
-  trackerRegexs,
-  utilityRegexs,
+  asnRegex,
+  btcRegex,
+  cveRegex,
+  domainRegex,
+  emailRegex,
+  gaPubIDRegex,
+  gaTrackIDRegex,
+  ipv4Regex,
+  ipv6Regex,
+  md5Regex,
+  sha1Regex,
+  sha256Regex,
+  sha512Regex,
+  ssdeepRegex,
+  urlRegex,
+  xmrRegex,
 } from "./regexs";
 
 function matchesWithRegexp(s: string, regex: RegExp): string[] {
@@ -13,65 +24,65 @@ function matchesWithRegexp(s: string, regex: RegExp): string[] {
 }
 
 export function extractMD5(s: string): string[] {
-  return matchesWithRegexp(s, hashRegexs.md5);
+  return matchesWithRegexp(s, md5Regex);
 }
 
 export function extractSHA1(s: string): string[] {
-  return matchesWithRegexp(s, hashRegexs.sha1);
+  return matchesWithRegexp(s, sha1Regex);
 }
 
 export function extractSHA256(s: string): string[] {
-  return matchesWithRegexp(s, hashRegexs.sha256);
+  return matchesWithRegexp(s, sha256Regex);
 }
 
 export function extractSHA512(s: string): string[] {
-  return matchesWithRegexp(s, hashRegexs.sha512);
+  return matchesWithRegexp(s, sha512Regex);
 }
 
 export function extractSSDEEP(s: string): string[] {
-  return matchesWithRegexp(s, hashRegexs.ssdeep);
+  return matchesWithRegexp(s, ssdeepRegex);
 }
 
 export function extractASN(s: string): string[] {
-  return matchesWithRegexp(s, networkRegexs.asn);
+  return matchesWithRegexp(s, asnRegex);
 }
 
 export function extractDomain(s: string): string[] {
-  return matchesWithRegexp(s, networkRegexs.domain);
+  return matchesWithRegexp(s, domainRegex);
 }
 
 export function extractEmail(s: string): string[] {
-  return matchesWithRegexp(s, networkRegexs.email);
+  return matchesWithRegexp(s, emailRegex);
 }
 
 export function extractIPv4(s: string): string[] {
-  return matchesWithRegexp(s, networkRegexs.ipv4);
+  return matchesWithRegexp(s, ipv4Regex);
 }
 
 export function extractIPv6(s: string): string[] {
-  return matchesWithRegexp(s, networkRegexs.ipv6);
+  return matchesWithRegexp(s, ipv6Regex);
 }
 
 export function extractURL(s: string): string[] {
-  return matchesWithRegexp(s, networkRegexs.url);
+  return matchesWithRegexp(s, urlRegex);
 }
 
 export function extractCVE(s: string): string[] {
-  return matchesWithRegexp(s, utilityRegexs.cve);
+  return matchesWithRegexp(s, cveRegex);
 }
 
 export function extractBTC(s: string): string[] {
-  return matchesWithRegexp(s, cryptocurrencyRegexs.btc);
+  return matchesWithRegexp(s, btcRegex);
 }
 
 export function extractXMR(s: string): string[] {
-  return matchesWithRegexp(s, cryptocurrencyRegexs.xmr);
+  return matchesWithRegexp(s, xmrRegex);
 }
 
 export function extractGAPubID(s: string): string[] {
-  return matchesWithRegexp(s, trackerRegexs.gaPubID);
+  return matchesWithRegexp(s, gaPubIDRegex);
 }
 
 export function extractGATrackID(s: string): string[] {
-  return matchesWithRegexp(s, trackerRegexs.gaTrackID);
+  return matchesWithRegexp(s, gaTrackIDRegex);
 }

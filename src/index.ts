@@ -18,43 +18,23 @@ import {
   extractXMR,
 } from "./aux/extractor";
 
-export declare interface Hashes {
+export declare interface IOC {
+  asns: string[];
+  btcs: string[];
+  cves: string[];
+  domains: string[];
+  emails: string[];
+  gaPubIDs: string[];
+  gaTrackIDs: string[];
+  ipv4s: string[];
+  ipv6s: string[];
   md5s: string[];
   sha1s: string[];
   sha256s: string[];
   sha512s: string[];
   ssdeeps: string[];
-}
-
-export declare interface Networks {
-  asns: string[];
-  domains: string[];
-  emails: string[];
-  ipv4s: string[];
-  ipv6s: string[];
   urls: string[];
-}
-
-export declare interface Utilities {
-  cves: string[];
-}
-
-export declare interface Cryptocurrencies {
-  btcs: string[];
   xmrs: string[];
-}
-
-export declare interface Trackers {
-  gaTrackIDs: string[];
-  gaPubIDs: string[];
-}
-
-export declare interface IOC {
-  cryptocurrencies: Cryptocurrencies;
-  hashes: Hashes;
-  networks: Networks;
-  trackers: Trackers;
-  utilities: Utilities;
 }
 
 export class IOCExtractor {
@@ -69,59 +49,24 @@ export class IOCExtractor {
     this.data = clean(data);
   }
 
-  public getHashes(): Hashes {
-    const hashes: Hashes = {
+  public getIOC(): IOC {
+    const ioc: IOC = {
+      asns: extractASN(this.data),
+      btcs: extractBTC(this.data),
+      cves: extractCVE(this.data),
+      domains: extractDomain(this.data),
+      emails: extractEmail(this.data),
+      gaPubIDs: extractGAPubID(this.data),
+      gaTrackIDs: extractGATrackID(this.data),
+      ipv4s: extractIPv4(this.data),
+      ipv6s: extractIPv6(this.data),
       md5s: extractMD5(this.data),
       sha1s: extractSHA1(this.data),
       sha256s: extractSHA256(this.data),
       sha512s: extractSHA512(this.data),
       ssdeeps: extractSSDEEP(this.data),
-    };
-    return hashes;
-  }
-
-  public getNetworks(): Networks {
-    const networks: Networks = {
-      asns: extractASN(this.data),
-      domains: extractDomain(this.data),
-      emails: extractEmail(this.data),
-      ipv4s: extractIPv4(this.data),
-      ipv6s: extractIPv6(this.data),
       urls: extractURL(this.data),
-    };
-    return networks;
-  }
-
-  public getUtilities(): Utilities {
-    const utilities: Utilities = {
-      cves: extractCVE(this.data),
-    };
-    return utilities;
-  }
-
-  public getCryptocurrencies(): Cryptocurrencies {
-    const cryptocurrencies: Cryptocurrencies = {
-      btcs: extractBTC(this.data),
       xmrs: extractXMR(this.data),
-    };
-    return cryptocurrencies;
-  }
-
-  public getTrackers(): Trackers {
-    const trackers: Trackers = {
-      gaPubIDs: extractGAPubID(this.data),
-      gaTrackIDs: extractGATrackID(this.data),
-    };
-    return trackers;
-  }
-
-  public getIOC(): IOC {
-    const ioc: IOC = {
-      cryptocurrencies: this.getCryptocurrencies(),
-      hashes: this.getHashes(),
-      networks: this.getNetworks(),
-      trackers: this.getTrackers(),
-      utilities: this.getUtilities(),
     };
     return ioc;
   }

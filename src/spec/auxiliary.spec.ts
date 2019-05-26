@@ -7,6 +7,7 @@ describe("clean", () => {
     const input = "1.1.1[.]1\n1.1.1(.)1\ngithub(.]com\ngithub(.]com";
     expect(clean(input)).to.equal("1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com");
   });
+
   it("should replace hxxp by http", () => {
     const input =
       "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
@@ -14,14 +15,17 @@ describe("clean", () => {
       "https://google.com\nhttp://neverssl.com\nhttps://google.com"
     );
   });
+
   it("should replace [:] by :", () => {
     const input = "http[:]//example.com";
     expect(clean(input)).to.equal("http://example.com");
   });
+
   it("should replace . by .", () => {
     const input = "http://example.com";
     expect(clean(input)).to.equal("http://example.com");
   });
+
   it("should replace [/] by /", () => {
     const input = "http://example.com[/]test";
     expect(clean(input)).to.equal("http://example.com/test");
