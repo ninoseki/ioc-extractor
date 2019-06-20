@@ -88,9 +88,9 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 | `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`       |
 | `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`            |
 | `hxxp` => `http` | `hxxps://google.com`                   | `https://google.com`            |
-| `[at]`           | `test[at]example.com`                  | `test@example.com`              |
-| `[@]`            | `test[@]example.com`                   | `test@example.com`              |
-| `(@)`            | `test(@)example.com`                   | `test@example.com`              |
+| `[at]` => `@`    | `test[at]example.com`                  | `test@example.com`              |
+| `[@]` => `@`     | `test[@]example.com`                   | `test@example.com`              |
+| `(@)` => `@`     | `test(@)example.com`                   | `test@example.com`              |
 | Partial          | `1.1.1[.1`                             | `1.1.1.1`                       |
 | Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://test.example.com/path` |
 
