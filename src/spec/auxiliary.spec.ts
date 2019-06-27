@@ -6,6 +6,11 @@ describe("clean", () => {
     expect(clean(input)).toBe("1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com");
   });
 
+  it("should replace _dot_ and [dot] and (dot) with .", () => {
+    const input = "1.1.1(dot)1\ngithub[dot]com";
+    expect(clean(input)).toBe("1.1.1.1\ngithub.com");
+  });
+
   it("should replace hxxp by http", () => {
     const input =
       "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
