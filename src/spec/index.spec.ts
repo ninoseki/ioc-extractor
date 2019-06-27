@@ -40,7 +40,11 @@ describe("IOCExtractor", () => {
       ]);
 
       expect(ioc.asns).toEqual(["AS3462", "ASN15169"]);
-      expect(ioc.ipv4s).toEqual(["123.123.123.123", "192.168.0.1"]);
+      expect(ioc.ipv4s).toEqual([
+        "123.123.123.123",
+        "192.168.0.1",
+        "192.188.0.1",
+      ]);
       expect(ioc.ipv6s).toEqual(["fdc4:2581:575b:5a72:0000:0000:0000:0001"]);
       expect(ioc.domains).toEqual([
         "ex4mple.com",

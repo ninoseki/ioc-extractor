@@ -23,5 +23,6 @@ export function clean(s: string): string {
     .replace(/\[\/\]/gi, "/")
     .replace(/hxxp/gi, "http")
     .replace(/\[(at|@)\]/gi, "@")
-    .replace(/\((at|@)\)/gi, "@");
+    .replace(/\((at|@)\)/gi, "@")
+    .replace(/(\[|\()dot(\]|\))/gi, ".");
 }
