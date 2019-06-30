@@ -49,7 +49,6 @@
   },
   "homepage": "https://github.com/ninoseki/ioc-extractor",
   "devDependencies": {
-    "@types/get-stdin": "^7.0.0",
     "@types/jest": "^24.0.15",
     "@types/node": "^12.0.10",
     "@typescript-eslint/eslint-plugin": "^1.11.0",
