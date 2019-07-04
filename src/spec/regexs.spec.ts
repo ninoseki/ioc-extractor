@@ -146,7 +146,7 @@ describe("isGATrackID", () => {
   });
 });
 
-describe("isGATrackID", () => {
+describe("isGAPubID", () => {
   it("checks whther a given value is GAPubID or not", () => {
     expect(isGAPubID("pub-9107453047749393")).toBe(true);
   });
