@@ -21,9 +21,9 @@ npm install ioc-extractor
 
 ```bash
 $ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor
-{"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
+{"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"macAddresses":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 
-# Using it with jq
+# Using with jq
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
 {
   "asns": [],
@@ -40,6 +40,7 @@ $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
     "8.8.8.8"
   ],
   "ipv6s": [],
+  "macAddresses": [],
   "md5s": [],
   "sha1s": [],
   "sha256s": [],
@@ -65,7 +66,7 @@ console.log(ioc.domains);
 // => ['google.com']
 
 console.log(JSON.stringify(ioc))
-// => {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
+// => {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"macAddresses":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 ```
 
 ## Details
@@ -74,6 +75,7 @@ This package supports the following IOCs:
 
 - **Hashes**: md5, sha1, sha256, sha512, ssdeep
 - **Networks**: domain, email, ipv4, ipv6, url, asn
+- **Hardwares**: mac address
 - **Utilities**: cve(CVE ID)
 - **Cryptocurrencies**: btc (BTC address), xmr (XMR address)
 - **Trackers**: gaTrackID (Google Analytics tracking ID), gaPubID (Google Adsense Publisher ID)
