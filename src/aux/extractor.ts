@@ -9,6 +9,7 @@ import {
   gaTrackIDRegex,
   ipv4Regex,
   ipv6Regex,
+  macAddressRegex,
   md5Regex,
   sha1Regex,
   sha256Regex,
@@ -85,4 +86,8 @@ export function extractGAPubID(s: string): string[] {
 
 export function extractGATrackID(s: string): string[] {
   return matchesWithRegexp(s, gaTrackIDRegex);
+}
+
+export function extractMacAddress(s: string): string[] {
+  return matchesWithRegexp(s, macAddressRegex);
 }

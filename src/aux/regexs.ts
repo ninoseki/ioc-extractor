@@ -92,3 +92,8 @@ export const gaTrackIDRegex = /UA-\d{4,9}(-\d{1,2})?/gi;
 export function isGATrackID(s: string): boolean {
   return check(s, gaTrackIDRegex);
 }
+
+export const macAddressRegex = /\b(?:[A-Fa-f0-9]{2}([-:]))(?:[A-Fa-f0-9]{2}\1){4}[A-Fa-f0-9]{2}\b/gi;
+export function isMacAddress(s: string): boolean {
+  return check(s, macAddressRegex);
+}

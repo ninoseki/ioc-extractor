@@ -9,6 +9,7 @@ import {
   extractGATrackID,
   extractIPv4,
   extractIPv6,
+  extractMacAddress,
   extractMD5,
   extractSHA1,
   extractSHA256,
@@ -28,6 +29,7 @@ export declare interface IOC {
   gaTrackIDs: string[];
   ipv4s: string[];
   ipv6s: string[];
+  macAddresses: string[];
   md5s: string[];
   sha1s: string[];
   sha256s: string[];
@@ -60,6 +62,7 @@ export class IOCExtractor {
       gaTrackIDs: extractGATrackID(this.data),
       ipv4s: extractIPv4(this.data),
       ipv6s: extractIPv6(this.data),
+      macAddresses: extractMacAddress(this.data),
       md5s: extractMD5(this.data),
       sha1s: extractSHA1(this.data),
       sha256s: extractSHA256(this.data),

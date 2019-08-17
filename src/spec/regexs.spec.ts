@@ -15,6 +15,7 @@ import {
   isEmail,
   isGAPubID,
   isGATrackID,
+  isIPv4,
   isIPv6,
   isMD5,
   isSHA1,
@@ -23,6 +24,7 @@ import {
   isSSDEEP,
   isURL,
   isXMR,
+  macAddressRegex,
   md5Regex,
   sha1Regex,
   sha256Regex,
@@ -30,8 +32,8 @@ import {
   ssdeepRegex,
   urlRegex,
   xmrRegex,
+  isMacAddress,
 } from "../aux/regexs";
-import { isIPv4 } from "net";
 
 describe("isMD5", () => {
   it("checks whther a given value is MD5 or not", () => {
@@ -149,6 +151,12 @@ describe("isGATrackID", () => {
 describe("isGAPubID", () => {
   it("checks whther a given value is GAPubID or not", () => {
     expect(isGAPubID("pub-9107453047749393")).toBe(true);
+  });
+});
+
+describe("isMacAddress", () => {
+  it("checks whther a given value is mac address or not", () => {
+    expect(isMacAddress("01-23-45-67-89-ab")).toBe(true);
   });
 });
 
@@ -291,5 +299,14 @@ describe("trackerRegex", () => {
     expect(matches.length).toBe(2);
     expect(matches[0]).toBe("pub-9107453047749393");
     expect(matches[1]).toBe("pub-2324633754279327");
+  });
+});
+
+describe("macAddressRegex", () => {
+  it("should match with mac addresses in the input", () => {
+    const input = "01:23:45:67:89:ab";
+    const matches = input.match(macAddressRegex)!;
+    expect(matches.length).toBe(1);
+    expect(matches[0]).toBe(input);
   });
 });
