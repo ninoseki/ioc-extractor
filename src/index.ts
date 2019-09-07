@@ -18,6 +18,7 @@ import {
   extractURL,
   extractXMR,
 } from "./aux/extractor";
+import { convertToSTIX2, STIX2 } from "./stix2/stix2";
 
 export declare interface IOC {
   asns: string[];
@@ -77,4 +78,9 @@ export class IOCExtractor {
 
 export function getIOC(data: string): IOC {
   return IOCExtractor.getIOC(data);
+}
+
+export function getSTIX2(data: string): STIX2 {
+  const ioc = getIOC(data);
+  return convertToSTIX2(ioc);
 }
