@@ -17,7 +17,7 @@ import {
   ssdeepRegex,
   urlRegex,
   xmrRegex,
-} from "./regexs";
+} from "./regexes";
 
 function matchesWithRegexp(s: string, regex: RegExp): string[] {
   const matched = s.match(regex);

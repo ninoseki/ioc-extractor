@@ -33,7 +33,7 @@ import {
   urlRegex,
   xmrRegex,
   isMacAddress,
-} from "../aux/regexs";
+} from "../aux/regexes";
 
 describe("isMD5", () => {
   it("checks whther a given value is MD5 or not", () => {
