@@ -11,22 +11,13 @@ export function sortByValue(array: string[]): string[] {
 
 export function clean(s: string): string {
   return s
-    .replace(/\[\.\]/gi, ".")
-    .replace(/\[\./gi, ".")
-    .replace(/\.\]/gi, ".")
-    .replace(/\(\.\)/gi, ".")
-    .replace(/\(\./gi, ".")
-    .replace(/\.\)/gi, ".")
-    .replace(/\{\.\}/gi, ".")
-    .replace(/\{\./gi, ".")
-    .replace(/\.\}/gi, ".")
-    .replace(/\[:/gi, ":")
-    .replace(/:\]/gi, ":")
+    .replace(/(\[|\(|\{)\.(\]|\)|\})/gi, ".")
+    .replace(/(\[|\(|\{)\./gi, ".")
+    .replace(/\.(\]|\)|\})/gi, ".")
+    .replace(/\[:\]/gi, ":")
     .replace(/\\\./gi, ".")
     .replace(/\[\/\]/gi, "/")
     .replace(/hxxp/gi, "http")
-    .replace(/\[(at|@)\]/gi, "@")
-    .replace(/\((at|@)\)/gi, "@")
-    .replace(/\{(at|@)\}/gi, "@")
+    .replace(/(\[|\(|\{)(at|@)(\]|\)|\})/gi, "@")
     .replace(/(\[|\(|\{)dot(\]|\)|\})/gi, ".");
 }
