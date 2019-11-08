@@ -97,6 +97,7 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 | `{@}` => `@`     | `test{@}example.com`                   | `test@example.com`              |
 | `[dot]` => `.`   | `test@example[dot]com`                 | `test@example.com`              |
 | `(dot)` => `.`   | `test@example(dot)com`                 | `test@example.com`              |
+| `{dot}` => `.`   | `test@example{dot}com`                 | `test@example.com`              |
 | Partial          | `1.1.1[.1`                             | `1.1.1.1`                       |
 | Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://test.example.com/path` |
 
