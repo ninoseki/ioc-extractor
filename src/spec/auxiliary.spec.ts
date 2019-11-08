@@ -1,17 +1,44 @@
 import { clean, dedup, sortByValue } from "../aux/auxiliary";
 
 describe("clean", () => {
-  it("should remove parentheses and brackets in the input", () => {
-    const input =
-      "1.1.1[.]1\n1.1.1(.)1\ngithub(.]com\ngithub(.]com\nexample{.}com";
-    expect(clean(input)).toBe(
-      "1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com\nexample.com"
-    );
+  it("should replace [.] by .", () => {
+    const input = "example[.]com";
+    expect(clean(input)).toBe("example.com");
   });
 
-  it("should replace _dot_ and [dot] and (dot) with .", () => {
-    const input = "1.1.1(dot)1\ngithub[dot]com";
-    expect(clean(input)).toBe("1.1.1.1\ngithub.com");
+  it("should replace (.) by .", () => {
+    const input = "example(.)com";
+    expect(clean(input)).toBe("example.com");
+  });
+
+  it("should replace {.} by .", () => {
+    const input = "example{.}com";
+    expect(clean(input)).toBe("example.com");
+  });
+
+  it("should replace mixied brackets by .", () => {
+    const input = "test(.}test{.)example[.)com";
+    expect(clean(input)).toBe("test.test.example.com");
+  });
+
+  it("should replace mixied partial brackets by .", () => {
+    const input = "1.)1[.1.)1";
+    expect(clean(input)).toBe("1.1.1.1");
+  });
+
+  it("should replace (dot) by .", () => {
+    const input = "1.1.1(dot)1";
+    expect(clean(input)).toBe("1.1.1.1");
+  });
+
+  it("should replace [dot] by .", () => {
+    const input = "example[dot]com";
+    expect(clean(input)).toBe("example.com");
+  });
+
+  it("should replace {dot} by .", () => {
+    const input = "example{dot}com";
+    expect(clean(input)).toBe("example.com");
   });
 
   it("should replace hxxp by http", () => {
@@ -55,11 +82,6 @@ describe("clean", () => {
   it("should replace {@} by @", () => {
     const input = "test{@}example.com";
     expect(clean(input)).toBe("test@example.com");
-  });
-
-  it("should replace {dot} by .", () => {
-    const input = "example{dot}com";
-    expect(clean(input)).toBe("example.com");
   });
 
   it("should be deal with a mixed casec", () => {
