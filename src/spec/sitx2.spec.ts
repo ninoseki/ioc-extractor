@@ -2,17 +2,24 @@ import { getIOC } from "../";
 import { convertToSTIX2, isHash, convertToPattern } from "../stix2/stix2";
 
 describe("isHash", () => {
-  expect(isHash("domain-name")).toBe(false);
-  expect(isHash("sha256")).toBe(true);
+  it("return false", () => {
+    expect(isHash("domain-name")).toBe(false);
+  });
+
+  it("return true", () => {
+    expect(isHash("sha256")).toBe(true);
+  });
 });
 
 describe("convertToPattern", () => {
-  expect(convertToPattern("domain-name", "example.com")).toBe(
-    "[domain-name:value = 'example.com']"
-  );
-  expect(convertToPattern("md5", "f6f8179ac71eaabff12b8c024342109b")).toBe(
-    "[file:hashes.md5 = 'f6f8179ac71eaabff12b8c024342109b']"
-  );
+  it("return stix pattern", () => {
+    expect(convertToPattern("domain-name", "example.com")).toBe(
+      "[domain-name:value = 'example.com']"
+    );
+    expect(convertToPattern("md5", "f6f8179ac71eaabff12b8c024342109b")).toBe(
+      "[file:hashes.md5 = 'f6f8179ac71eaabff12b8c024342109b']"
+    );
+  });
 });
 
 describe("convertSTIX2", () => {
