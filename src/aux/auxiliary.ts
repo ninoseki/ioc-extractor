@@ -28,5 +28,5 @@ export function clean(s: string): string {
     .replace(/\[(at|@)\]/gi, "@")
     .replace(/\((at|@)\)/gi, "@")
     .replace(/\{(at|@)\}/gi, "@")
-    .replace(/(\[|\()dot(\]|\))/gi, ".");
+    .replace(/(\[|\(|\{)dot(\]|\)|\})/gi, ".");
 }
