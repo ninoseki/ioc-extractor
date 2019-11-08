@@ -52,6 +52,11 @@ describe("clean", () => {
     expect(clean(input)).toBe("test@example.com");
   });
 
+  it("should replace {@} by @", () => {
+    const input = "test{@}example.com";
+    expect(clean(input)).toBe("test@example.com");
+  });
+
   it("should be deal with a mixed casec", () => {
     const input = "hxxps[:]//test.example[.)com[/]path";
     expect(clean(input)).toBe("https://test.example.com/path");
