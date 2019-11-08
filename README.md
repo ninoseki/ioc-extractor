@@ -86,6 +86,7 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 |------------------|----------------------------------------|---------------------------------|
 | `[.]` => `.`     | `1.1.1[.]1`                            | `1.1.1.1`                       |
 | `(.)` => `.`     | `1.1.1(.)1`                            | `1.1.1.1`                       |
+| `{.}` => `.`     | `1.1.1{.}1`                            | `1.1.1.1`                       |
 | `\.`  => `.`     | `example\.com`                         | `example.com`                   |
 | `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`       |
 | `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`            |

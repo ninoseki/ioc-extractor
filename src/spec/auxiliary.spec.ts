@@ -2,8 +2,11 @@ import { clean, dedup, sortByValue } from "../aux/auxiliary";
 
 describe("clean", () => {
   it("should remove parentheses and brackets in the input", () => {
-    const input = "1.1.1[.]1\n1.1.1(.)1\ngithub(.]com\ngithub(.]com";
-    expect(clean(input)).toBe("1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com");
+    const input =
+      "1.1.1[.]1\n1.1.1(.)1\ngithub(.]com\ngithub(.]com\nexample{.}com";
+    expect(clean(input)).toBe(
+      "1.1.1.1\n1.1.1.1\ngithub.com\ngithub.com\nexample.com"
+    );
   });
 
   it("should replace _dot_ and [dot] and (dot) with .", () => {
