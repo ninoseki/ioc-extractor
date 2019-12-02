@@ -17,7 +17,7 @@ export function clean(s: string): string {
     .replace(/\[:\]/gi, ":")
     .replace(/\\\./gi, ".")
     .replace(/\[\/\]/gi, "/")
-    .replace(/hxxp/gi, "http")
+    .replace(/hxxp(s?):\/\//gi, "http$1://")
     .replace(/(\[|\(|\{)(at|@)(\]|\)|\})/gi, "@")
     .replace(/(\[|\(|\{)dot(\]|\)|\})/gi, ".");
 }

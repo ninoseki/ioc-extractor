@@ -41,12 +41,15 @@ describe("clean", () => {
     expect(clean(input)).toBe("example.com");
   });
 
-  it("should replace hxxp by http", () => {
+  it("should replace hxxp:// by http://", () => {
     const input =
       "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
     expect(clean(input)).toBe(
       "https://google.com\nhttp://neverssl.com\nhttps://google.com"
     );
+
+    const input2 = "hxxpfoo";
+    expect(clean(input2)).toBe("hxxpfoo");
   });
 
   it("should replace [:] by :", () => {
