@@ -1,3 +1,6 @@
 import * as tlds from "tlds";
+import * as punycode from "punycode";
 
-export const tldRegexString: string = tlds.join("|");
+const asciiTlds = tlds.map(tld => punycode.toASCII(tld));
+
+export const tldRegexString: string = asciiTlds.join("|");

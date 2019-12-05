@@ -51,6 +51,7 @@
   "devDependencies": {
     "@types/jest": "^24.0.23",
     "@types/node": "^12.12.14",
+    "@types/punycode": "^2.1.0",
     "@types/tlds": "^1.199.0",
     "@types/uuid": "^3.4.6",
     "@typescript-eslint/eslint-plugin": "^2.9.0",
@@ -69,6 +70,7 @@
   },
   "dependencies": {
     "get-stdin": "^7.0.0",
+    "punycode": "^2.1.1",
     "tlds": "^1.203.1",
     "uuid": "^3.3.3"
   }
