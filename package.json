@@ -71,7 +71,6 @@
   "dependencies": {
     "get-stdin": "^7.0.0",
     "punycode": "^2.1.1",
-    "tlds": "1.203.1",
     "uuid": "^3.3.3"
   }
 }
