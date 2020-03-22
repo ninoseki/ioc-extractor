@@ -72,31 +72,31 @@ export function convertToSTIX2(ioc: IOC): STIX2 {
   const timestamp = new Date(Date.now()).toISOString();
   let objects: Indicator[] = [];
   objects = objects.concat(
-    ioc.ipv4s.map(i => convertToObject("ipv4-addr", i, timestamp))
+    ioc.ipv4s.map((i) => convertToObject("ipv4-addr", i, timestamp))
   );
   objects = objects.concat(
-    ioc.ipv6s.map(i => convertToObject("ipv6-addr", i, timestamp))
+    ioc.ipv6s.map((i) => convertToObject("ipv6-addr", i, timestamp))
   );
   objects = objects.concat(
-    ioc.domains.map(i => convertToObject("domain-name", i, timestamp))
+    ioc.domains.map((i) => convertToObject("domain-name", i, timestamp))
   );
   objects = objects.concat(
-    ioc.urls.map(i => convertToObject("url", i, timestamp))
+    ioc.urls.map((i) => convertToObject("url", i, timestamp))
   );
   objects = objects.concat(
-    ioc.emails.map(i => convertToObject("email-addr", i, timestamp))
+    ioc.emails.map((i) => convertToObject("email-addr", i, timestamp))
   );
   objects = objects.concat(
-    ioc.md5s.map(i => convertToObject("md5", i, timestamp))
+    ioc.md5s.map((i) => convertToObject("md5", i, timestamp))
   );
   objects = objects.concat(
-    ioc.sha1s.map(i => convertToObject("sha1", i, timestamp))
+    ioc.sha1s.map((i) => convertToObject("sha1", i, timestamp))
   );
   objects = objects.concat(
-    ioc.sha256s.map(i => convertToObject("sha256", i, timestamp))
+    ioc.sha256s.map((i) => convertToObject("sha256", i, timestamp))
   );
   objects = objects.concat(
-    ioc.sha512s.map(i => convertToObject("sha512", i, timestamp))
+    ioc.sha512s.map((i) => convertToObject("sha512", i, timestamp))
   );
 
   return { spec_version: "2.0", type: "bundle", objects: objects };

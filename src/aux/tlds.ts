@@ -1519,6 +1519,6 @@ const tlds = [
   "zw",
 ];
 
-const asciiTlds = tlds.map(tld => punycode.toASCII(tld));
+const asciiTlds = tlds.map((tld) => punycode.toASCII(tld));
 
 export const tldRegexString: string = asciiTlds.join("|");
