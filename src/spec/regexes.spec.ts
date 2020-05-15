@@ -88,6 +88,10 @@ describe("isDomain", () => {
   it("checks whther a given value is Domain or not", () => {
     expect(isDomain("example.com")).toBe(true);
     expect(isDomain("example.xn--pbt977c")).toBe(true);
+    expect(isDomain("お名前.com")).toBe(true);
+    expect(isDomain("EXAMPLE.com")).toBe(true);
+
+    expect(isDomain(".com")).toBe(false);
   });
 });
 
@@ -281,12 +285,12 @@ describe("networkRegexes", () => {
 
   it("should match with all url values", () => {
     const input =
-      "https://test.co.jp\nhttps://google.com\nhttps://111.111.111.111/test.jsp\nwww.example.com";
+      "https://test-1.co.jp\nhttps://お名前.com\nhttps://google.com\nhttps://111.111.111.111/test.jsp\nwww.example.com";
     const matches = input.match(urlRegex);
     expect(matches).not.toBe(null);
     if (matches) {
-      expect(matches.length).toBe(3);
-      expect(matches[0]).toBe("https://test.co.jp");
+      expect(matches.length).toBe(4);
+      expect(matches[0]).toBe("https://test-1.co.jp");
     }
   });
 });
