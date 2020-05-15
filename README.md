@@ -4,6 +4,7 @@
 [![Build Status](https://travis-ci.com/ninoseki/ioc-extractor.svg?branch=master)](https://travis-ci.com/ninoseki/ioc-extractor)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/ioc-extractor/badge)](https://www.codefactor.io/repository/github/ninoseki/ioc-extractor)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg)](https://coveralls.io/github/ninoseki/ioc-extractor)
+[![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://ninoseki.github.io/ioc-extractor/)
 
 IOC extractor is an npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
 
@@ -68,6 +69,8 @@ console.log(ioc.domains);
 console.log(JSON.stringify(ioc))
 // => {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"macAddresses":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 ```
+
+See [docs](https://ninoseki.github.io/ioc-extractor/) for more details.
 
 ## Details
 
