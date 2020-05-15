@@ -41,6 +41,14 @@ export declare interface IOC {
 }
 
 export class IOCExtractor {
+  /**
+   * Returns an IOC in data
+   *
+   * @static
+   * @param {string} data A string
+   * @returns {IOC}
+   * @memberof IOCExtractor
+   */
   public static getIOC(data: string): IOC {
     const extractor = new IOCExtractor(data);
     return extractor.getIOC();
@@ -51,7 +59,12 @@ export class IOCExtractor {
   public constructor(data: string) {
     this.data = clean(data);
   }
-
+  /**
+   * Returns an IOC of the data
+   *
+   * @returns {IOC}
+   * @memberof IOCExtractor
+   */
   public getIOC(): IOC {
     const ioc: IOC = {
       asns: extractASN(this.data),
@@ -75,11 +88,23 @@ export class IOCExtractor {
     return ioc;
   }
 }
-
+/**
+ * Retuerns an IOC of data
+ *
+ * @export
+ * @param {string} data A string
+ * @returns {IOC}
+ */
 export function getIOC(data: string): IOC {
   return IOCExtractor.getIOC(data);
 }
-
+/**
+ * Returns an IOC of data as STIX2 format
+ *
+ * @export
+ * @param {string} data
+ * @returns {STIX2}
+ */
 export function getSTIX2(data: string): STIX2 {
   const ioc = getIOC(data);
   return convertToSTIX2(ioc);
