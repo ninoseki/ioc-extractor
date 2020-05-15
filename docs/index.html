@@ -1,0 +1,566 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>ioc-extractor</title>
+	<meta name="description" content="Documentation for ioc-extractor">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">ioc-extractor</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+							<input type="checkbox" id="tsd-filter-only-exported" />
+							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1>ioc-extractor</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<a href="#ioc-extractor" id="ioc-extractor" style="color: inherit; text-decoration: none;">
+					<h1>IOC extractor</h1>
+				</a>
+				<p><a href="https://badge.fury.io/js/ioc-extractor"><img src="https://badge.fury.io/js/ioc-extractor.svg" alt="npm version"></a>
+					<a href="https://travis-ci.com/ninoseki/ioc-extractor"><img src="https://travis-ci.com/ninoseki/ioc-extractor.svg?branch=master" alt="Build Status"></a>
+					<a href="https://www.codefactor.io/repository/github/ninoseki/ioc-extractor"><img src="https://www.codefactor.io/repository/github/ninoseki/ioc-extractor/badge" alt="CodeFactor"></a>
+				<a href="https://coveralls.io/github/ninoseki/ioc-extractor"><img src="https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg" alt="Coverage Status"></a></p>
+				<p>IOC extractor is an npm package for extracting common <a href="https://en.wikipedia.org/wiki/Indicator_of_compromise">IOC(Indicator of Compromise)</a> from a block of text.</p>
+				<p><strong>Note</strong>: the package is highly influenced by <a href="https://github.com/sroberts/cacador">cacador</a>.</p>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
+				<pre><code class="language-sh">npm install ioc-extractor</code></pre>
+				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
+					<h2>Usage</h2>
+				</a>
+				<a href="#as-a-cli" id="as-a-cli" style="color: inherit; text-decoration: none;">
+					<h3>As a CLI</h3>
+				</a>
+				<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"1.1.1.1 8.8.8.8 example.com"</span> | ioc-extractor
+{<span class="hljs-string">"asns"</span>:[],<span class="hljs-string">"btcs"</span>:[],<span class="hljs-string">"cves"</span>:[],<span class="hljs-string">"domains"</span>:[<span class="hljs-string">"example.com"</span>],<span class="hljs-string">"emails"</span>:[],<span class="hljs-string">"gaPubIDs"</span>:[],<span class="hljs-string">"gaTrackIDs"</span>:[],<span class="hljs-string">"ipv4s"</span>:[<span class="hljs-string">"1.1.1.1"</span>,<span class="hljs-string">"8.8.8.8"</span>],<span class="hljs-string">"ipv6s"</span>:[],<span class="hljs-string">"macAddresses"</span>:[],<span class="hljs-string">"md5s"</span>:[],<span class="hljs-string">"sha1s"</span>:[],<span class="hljs-string">"sha256s"</span>:[],<span class="hljs-string">"sha512s"</span>:[],<span class="hljs-string">"ssdeeps"</span>:[],<span class="hljs-string">"urls"</span>:[],<span class="hljs-string">"xmrs"</span>:[]}
+
+<span class="hljs-comment"># Using with jq</span>
+$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"1.1.1.1 8.8.8.8 example.com "</span> | ioc-extractor | jq
+{
+  <span class="hljs-string">"asns"</span>: [],
+  <span class="hljs-string">"btcs"</span>: [],
+  <span class="hljs-string">"cves"</span>: [],
+  <span class="hljs-string">"domains"</span>: [
+    <span class="hljs-string">"example.com"</span>
+  ],
+  <span class="hljs-string">"emails"</span>: [],
+  <span class="hljs-string">"gaPubIDs"</span>: [],
+  <span class="hljs-string">"gaTrackIDs"</span>: [],
+  <span class="hljs-string">"ipv4s"</span>: [
+    <span class="hljs-string">"1.1.1.1"</span>,
+    <span class="hljs-string">"8.8.8.8"</span>
+  ],
+  <span class="hljs-string">"ipv6s"</span>: [],
+  <span class="hljs-string">"macAddresses"</span>: [],
+  <span class="hljs-string">"md5s"</span>: [],
+  <span class="hljs-string">"sha1s"</span>: [],
+  <span class="hljs-string">"sha256s"</span>: [],
+  <span class="hljs-string">"sha512s"</span>: [],
+  <span class="hljs-string">"ssdeeps"</span>: [],
+  <span class="hljs-string">"urls"</span>: [],
+  <span class="hljs-string">"xmrs"</span>: []
+}</code></pre>
+				<a href="#as-a-library" id="as-a-library" style="color: inherit; text-decoration: none;">
+					<h3>As a library</h3>
+				</a>
+				<pre><code class="language-ts"><span class="hljs-keyword">var</span> iocExtractor = <span class="hljs-built_in">require</span>(<span class="hljs-string">"ioc-extractor"</span>)
+
+<span class="hljs-keyword">const</span> input = <span class="hljs-string">'1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b'</span>;
+<span class="hljs-keyword">const</span> ioc = iocExtractor.getIOC(input);
+<span class="hljs-built_in">console</span>.log(ioc.md5s);
+<span class="hljs-comment">// =&gt; ['f6f8179ac71eaabff12b8c024342109b']</span>
+<span class="hljs-built_in">console</span>.log(ioc.ipv4s);
+<span class="hljs-comment">// =&gt; ['1.1.1.1']</span>
+<span class="hljs-built_in">console</span>.log(ioc.domains);
+<span class="hljs-comment">// =&gt; ['google.com']</span>
+
+<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(ioc))
+<span class="hljs-comment">// =&gt; {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"macAddresses":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}</span></code></pre>
+				<a href="#details" id="details" style="color: inherit; text-decoration: none;">
+					<h2>Details</h2>
+				</a>
+				<p>This package supports the following IOCs:</p>
+				<ul>
+					<li><strong>Hashes</strong>: md5, sha1, sha256, sha512, ssdeep</li>
+					<li><strong>Networks</strong>: domain, email, ipv4, ipv6, url, asn</li>
+					<li><strong>Hardwares</strong>: mac address</li>
+					<li><strong>Utilities</strong>: cve(CVE ID)</li>
+					<li><strong>Cryptocurrencies</strong>: btc (BTC address), xmr (XMR address)</li>
+					<li><strong>Trackers</strong>: gaTrackID (Google Analytics tracking ID), gaPubID (Google Adsense Publisher ID)</li>
+				</ul>
+				<p>For <strong>Networks</strong> IOCs, the following defang/refang techniques are supported:</p>
+				<table>
+					<thead>
+						<tr>
+							<th>Techniques</th>
+							<th>Defanged</th>
+							<th>Refanged</th>
+						</tr>
+					</thead>
+					<tbody><tr>
+							<td><code>[.]</code> =&gt; <code>.</code></td>
+							<td><code>1.1.1[.]1</code></td>
+							<td><code>1.1.1.1</code></td>
+						</tr>
+						<tr>
+							<td><code>(.)</code> =&gt; <code>.</code></td>
+							<td><code>1.1.1(.)1</code></td>
+							<td><code>1.1.1.1</code></td>
+						</tr>
+						<tr>
+							<td><code>{.}</code> =&gt; <code>.</code></td>
+							<td><code>1.1.1{.}1</code></td>
+							<td><code>1.1.1.1</code></td>
+						</tr>
+						<tr>
+							<td><code>\.</code>  =&gt; <code>.</code></td>
+							<td><code>example\.com</code></td>
+							<td><code>example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>[/]</code> =&gt; <code>/</code></td>
+							<td><code>http://example.com[/]path</code></td>
+							<td><code>http://example.com/path</code></td>
+						</tr>
+						<tr>
+							<td><code>[:]</code> =&gt; <code>:</code></td>
+							<td><code>http[:]//example.com</code></td>
+							<td><code>http://example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>hxxp</code> =&gt; <code>http</code></td>
+							<td><code>hxxps://google.com</code></td>
+							<td><code>https://google.com</code></td>
+						</tr>
+						<tr>
+							<td><code>[at]</code> =&gt; <code>@</code></td>
+							<td><code>test[at]example.com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>[@]</code> =&gt; <code>@</code></td>
+							<td><code>test[@]example.com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>(@)</code> =&gt; <code>@</code></td>
+							<td><code>test(@)example.com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>{@}</code> =&gt; <code>@</code></td>
+							<td><code>test{@}example.com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>[dot]</code> =&gt; <code>.</code></td>
+							<td><code>test@example[dot]com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>(dot)</code> =&gt; <code>.</code></td>
+							<td><code>test@example(dot)com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td><code>{dot}</code> =&gt; <code>.</code></td>
+							<td><code>test@example{dot}com</code></td>
+							<td><code>test@example.com</code></td>
+						</tr>
+						<tr>
+							<td>Partial</td>
+							<td><code>1.1.1[.1</code></td>
+							<td><code>1.1.1.1</code></td>
+						</tr>
+						<tr>
+							<td>Any combination</td>
+							<td><code>hxxps[:]//test\.example[.)com[/]path</code></td>
+							<td><code>https://test.example.com/path</code></td>
+						</tr>
+				</tbody></table>
+				<a href="#sitx2-support" id="sitx2-support" style="color: inherit; text-decoration: none;">
+					<h2>SITX2 support</h2>
+				</a>
+				<p>This package provides a partial support of STIX2 format.</p>
+				<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">"1.1.1.1 8.8.8.8 example.com"</span> | ioc-extractor --sitx2 | jq
+{
+  <span class="hljs-string">"spec_version"</span>: <span class="hljs-string">"2.0"</span>,
+  <span class="hljs-string">"type"</span>: <span class="hljs-string">"bundle"</span>,
+  <span class="hljs-string">"objects"</span>: [
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"indicator"</span>,
+      <span class="hljs-string">"id"</span>: <span class="hljs-string">"indicator--e0dc210b-fc7e-4dcc-8a5e-a220b32bd070"</span>,
+      <span class="hljs-string">"created"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>,
+      <span class="hljs-string">"modified"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>,
+      <span class="hljs-string">"labels"</span>: [
+        <span class="hljs-string">"malicious-activity"</span>
+      ],
+      <span class="hljs-string">"pattern"</span>: <span class="hljs-string">"[ipv4-addr:value = '1.1.1.1']"</span>,
+      <span class="hljs-string">"valid_from"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>
+    },
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"indicator"</span>,
+      <span class="hljs-string">"id"</span>: <span class="hljs-string">"indicator--f77971ea-37de-4ddb-a147-613fec3401b3"</span>,
+      <span class="hljs-string">"created"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>,
+      <span class="hljs-string">"modified"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>,
+      <span class="hljs-string">"labels"</span>: [
+        <span class="hljs-string">"malicious-activity"</span>
+      ],
+      <span class="hljs-string">"pattern"</span>: <span class="hljs-string">"[domain-name:value = 'google.com']"</span>,
+      <span class="hljs-string">"valid_from"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>
+    },
+    {
+      <span class="hljs-string">"type"</span>: <span class="hljs-string">"indicator"</span>,
+      <span class="hljs-string">"id"</span>: <span class="hljs-string">"indicator--0461539a-dc75-4cd1-ab74-24d964c8609c"</span>,
+      <span class="hljs-string">"created"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>,
+      <span class="hljs-string">"modified"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>,
+      <span class="hljs-string">"labels"</span>: [
+        <span class="hljs-string">"malicious-activity"</span>
+      ],
+      <span class="hljs-string">"pattern"</span>: <span class="hljs-string">"[file:hashes.md5 = 'f6f8179ac71eaabff12b8c024342109b']"</span>,
+      <span class="hljs-string">"valid_from"</span>: <span class="hljs-string">"2019-09-07T12:40:13.104Z"</span>
+    }
+  ]
+}</code></pre>
+				<p>The following indicator patterns are supported.</p>
+				<ul>
+					<li>ipv4-addr</li>
+					<li>ipv6-addr</li>
+					<li>domain-name</li>
+					<li>url</li>
+					<li>email-addr</li>
+					<li>file:hashes.{md5|sha1|sha256|sha512}</li>
+				</ul>
+				<a href="#alternatives" id="alternatives" style="color: inherit; text-decoration: none;">
+					<h2>Alternatives</h2>
+				</a>
+				<ul>
+					<li>Python:<ul>
+							<li><a href="https://github.com/InQuest/python-iocextract">InQuest/python-iocextract</a></li>
+							<li><a href="https://github.com/cmu-sei/cyobstract">cmu-sei/cyobstract</a></li>
+							<li><a href="https://github.com/fhightower/ioc-finder">fhightower/ioc-finder</a></li>
+						</ul>
+					</li>
+					<li>Golang:<ul>
+							<li><a href="https://github.com/sroberts/cacador">sroberts/cacador</a></li>
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/indicator.html" class="tsd-kind-icon">Indicator</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/stix2.html" class="tsd-kind-icon">STIX2</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#pattern_type" class="tsd-kind-icon">PATTERN_<wbr>TYPE</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#spec_type" class="tsd-kind-icon">SPEC_<wbr>TYPE</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#spec_version" class="tsd-kind-icon">SPEC_<wbr>VERSION</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#asnregex" class="tsd-kind-icon">asn<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#auth" class="tsd-kind-icon">auth</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#btcregex" class="tsd-kind-icon">btc<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#cveregex" class="tsd-kind-icon">cve<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#domain" class="tsd-kind-icon">domain</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#domainregex" class="tsd-kind-icon">domain<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#emailregex" class="tsd-kind-icon">email<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#gapubidregex" class="tsd-kind-icon">ga<wbr>PubIDRegex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#gatrackidregex" class="tsd-kind-icon">ga<wbr>TrackIDRegex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ipv4" class="tsd-kind-icon">ipv4</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ipv4regex" class="tsd-kind-icon">ipv4<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ipv6" class="tsd-kind-icon">ipv6</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ipv6regex" class="tsd-kind-icon">ipv6<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#macaddressregex" class="tsd-kind-icon">mac<wbr>Address<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#md5regex" class="tsd-kind-icon">md5<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#path" class="tsd-kind-icon">path</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#port" class="tsd-kind-icon">port</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#protocol" class="tsd-kind-icon">protocol</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sha1regex" class="tsd-kind-icon">sha1<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sha256regex" class="tsd-kind-icon">sha256<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#sha512regex" class="tsd-kind-icon">sha512<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#ssdeepregex" class="tsd-kind-icon">ssdeep<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#tldregexstring" class="tsd-kind-icon">tld<wbr>Regex<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#tlds" class="tsd-kind-icon">tlds</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#url" class="tsd-kind-icon">url</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#urlregex" class="tsd-kind-icon">url<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#v6seg" class="tsd-kind-icon">v6seg</a>
+					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#xmrregex" class="tsd-kind-icon">xmr<wbr>Regex</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#check" class="tsd-kind-icon">check</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#clean" class="tsd-kind-icon">clean</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#converttoobject" class="tsd-kind-icon">convert<wbr>ToObject</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#converttopattern" class="tsd-kind-icon">convert<wbr>ToPattern</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#converttostix2" class="tsd-kind-icon">convert<wbr>ToSTIX2</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#dedup" class="tsd-kind-icon">dedup</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#exportasstix2" class="tsd-kind-icon">export<wbr>AsSTIX2</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractasn" class="tsd-kind-icon">extractASN</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractbtc" class="tsd-kind-icon">extractBTC</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractcve" class="tsd-kind-icon">extractCVE</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractdomain" class="tsd-kind-icon">extract<wbr>Domain</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractemail" class="tsd-kind-icon">extract<wbr>Email</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractgapubid" class="tsd-kind-icon">extractGAPubID</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractgatrackid" class="tsd-kind-icon">extractGATrackID</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractipv4" class="tsd-kind-icon">extractIPv4</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractipv6" class="tsd-kind-icon">extractIPv6</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractmd5" class="tsd-kind-icon">extractMD5</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractmacaddress" class="tsd-kind-icon">extract<wbr>Mac<wbr>Address</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractsha1" class="tsd-kind-icon">extractSHA1</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractsha256" class="tsd-kind-icon">extractSHA256</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractsha512" class="tsd-kind-icon">extractSHA512</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractssdeep" class="tsd-kind-icon">extractSSDEEP</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extracturl" class="tsd-kind-icon">extractURL</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#extractxmr" class="tsd-kind-icon">extractXMR</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isasn" class="tsd-kind-icon">isASN</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isbtc" class="tsd-kind-icon">isBTC</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#iscve" class="tsd-kind-icon">isCVE</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isdomain" class="tsd-kind-icon">is<wbr>Domain</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isemail" class="tsd-kind-icon">is<wbr>Email</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isgapubid" class="tsd-kind-icon">isGAPubID</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isgatrackid" class="tsd-kind-icon">isGATrackID</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#ishash" class="tsd-kind-icon">is<wbr>Hash</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isipv4" class="tsd-kind-icon">isIPv4</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isipv6" class="tsd-kind-icon">isIPv6</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#ismd5" class="tsd-kind-icon">isMD5</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#ismacaddress" class="tsd-kind-icon">is<wbr>Mac<wbr>Address</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#issha1" class="tsd-kind-icon">isSHA1</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#issha256" class="tsd-kind-icon">isSHA256</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#issha512" class="tsd-kind-icon">isSHA512</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isssdeep" class="tsd-kind-icon">isSSDEEP</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isurl" class="tsd-kind-icon">isURL</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#isxmr" class="tsd-kind-icon">isXMR</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#matcheswithregexp" class="tsd-kind-icon">matches<wbr>With<wbr>Regexp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#sortbyvalue" class="tsd-kind-icon">sort<wbr>ByValue</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

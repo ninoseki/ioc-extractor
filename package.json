@@ -66,6 +66,7 @@
     "ts-jest": "^25.5.1",
     "ts-loader": "^7.0.3",
     "ts-node": "^8.10.1",
+    "typedoc": "^0.17.6",
     "typescript": "^3.8.3"
   },
   "dependencies": {
