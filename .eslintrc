@@ -10,7 +10,8 @@
   ],
   "plugins": [
     "@typescript-eslint",
-    "jest"
+    "jest",
+    "simple-import-sort"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
