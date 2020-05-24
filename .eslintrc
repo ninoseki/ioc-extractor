@@ -21,6 +21,7 @@
   "rules": {
     "@typescript-eslint/interface-name-prefix": 0,
     "max-len": 0,
-    "no-console": 0
+    "no-console": 0,
+    "simple-import-sort/sort": "error"
   }
 }

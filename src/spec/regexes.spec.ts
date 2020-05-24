@@ -17,6 +17,7 @@ import {
   isGATrackID,
   isIPv4,
   isIPv6,
+  isMacAddress,
   isMD5,
   isSHA1,
   isSHA256,
@@ -32,7 +33,6 @@ import {
   ssdeepRegex,
   urlRegex,
   xmrRegex,
-  isMacAddress,
 } from "../aux/regexes";
 
 describe("isMD5", () => {

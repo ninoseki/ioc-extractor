@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 import * as getStdin from "get-stdin";
+
 import { getIOC, getSTIX2 } from "../";
 
 function exportAsSTIX2(): boolean {

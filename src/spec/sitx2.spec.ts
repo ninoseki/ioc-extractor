@@ -1,5 +1,5 @@
 import { getIOC } from "../";
-import { convertToSTIX2, isHash, convertToPattern } from "../stix2/stix2";
+import { convertToPattern,convertToSTIX2, isHash } from "../stix2/stix2";
 
 describe("isHash", () => {
   it("return false", () => {
