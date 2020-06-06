@@ -21,6 +21,7 @@ export function dedup(array: string[]): string[] {
 export function sortByValue(array: string[]): string[] {
   return array.sort();
 }
+
 /**
  * Remove defanged symbols from a string
  *
@@ -28,7 +29,7 @@ export function sortByValue(array: string[]): string[] {
  * @param {string} s A string
  * @returns {string} A cleaned (aka refanged) string
  */
-export function clean(s: string): string {
+export function defang(s: string): string {
   return s
     .replace(/(\[|\(|\{)\.(\]|\)|\})/gi, ".")
     .replace(/(\[|\(|\{)\./gi, ".")
@@ -40,4 +41,16 @@ export function clean(s: string): string {
     .replace(/h\*\*p(s?):\/\//gi, "http$1://")
     .replace(/(\[|\(|\{)(at|@)(\]|\)|\})/gi, "@")
     .replace(/(\[|\(|\{)dot(\]|\)|\})/gi, ".");
+}
+
+/**
+ * Alias for defang
+ *
+ * @deprecated
+ * @export
+ * @param {string} s A string
+ * @returns {string} A cleaned (aka refanged) string
+ */
+export function clean(s: string): string {
+  return defang(s);
 }

@@ -1,5 +1,5 @@
-import { getIOC } from "../";
-import { convertToPattern,convertToSTIX2, isHash } from "../stix2/stix2";
+import { extractIOC } from "../";
+import { convertToPattern, convertToSTIX2, isHash } from "../stix2/stix2";
 
 describe("isHash", () => {
   it("return false", () => {
@@ -24,7 +24,7 @@ describe("convertToPattern", () => {
 
 describe("convertSTIX2", () => {
   it("return STIX2 object", () => {
-    const ioc = getIOC("1.1.1.1 example.com");
+    const ioc = extractIOC("1.1.1.1 example.com");
     const stix2 = convertToSTIX2(ioc);
     expect(stix2.objects.length).toBe(2);
 

@@ -55,10 +55,10 @@ $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
 ### As a library
 
 ```ts
-var iocExtractor = require("ioc-extractor")
+import { extractIOC } from "ioc-extractor";
 
 const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b';
-const ioc = iocExtractor.getIOC(input);
+const ioc = extractIOC(input);
 console.log(ioc.md5s);
 // => ['f6f8179ac71eaabff12b8c024342109b']
 console.log(ioc.ipv4s);
@@ -68,6 +68,25 @@ console.log(ioc.domains);
 
 console.log(JSON.stringify(ioc))
 // => {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"macAddresses":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
+```
+
+If you want to extract a specific type of IOC, you can use `extractXXX` function.
+
+```ts
+import { extractDomain, extractIPv4, extractMD5 } from "ioc-extractor";
+
+const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
+const defanged = defang(input);
+// => 1.1.1.1 google.com f6f8179ac71eaabff12b8c024342109b
+
+const ipv4s = extractIPv4(defanged);
+// => ['1.1.1.1']
+
+const domains = extractDomain(defanged);
+// => ['google.com']
+
+const md5s = extractMD5(defanged);
+// => ['f6f8179ac71eaabff12b8c024342109b']
 ```
 
 See [docs](https://ninoseki.github.io/ioc-extractor/) for more details.
