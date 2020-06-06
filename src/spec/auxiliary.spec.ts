@@ -1,106 +1,106 @@
-import { clean, dedup, sortByValue } from "../aux/auxiliary";
+import { dedup, refang, sortByValue } from "../aux/auxiliary";
 
-describe("clean", () => {
+describe("refang", () => {
   it("should replace [.] by .", () => {
     const input = "example[.]com";
-    expect(clean(input)).toBe("example.com");
+    expect(refang(input)).toBe("example.com");
   });
 
   it("should replace (.) by .", () => {
     const input = "example(.)com";
-    expect(clean(input)).toBe("example.com");
+    expect(refang(input)).toBe("example.com");
   });
 
   it("should replace {.} by .", () => {
     const input = "example{.}com";
-    expect(clean(input)).toBe("example.com");
+    expect(refang(input)).toBe("example.com");
   });
 
   it("should replace mixied brackets by .", () => {
     const input = "test(.}test{.)example[.)com";
-    expect(clean(input)).toBe("test.test.example.com");
+    expect(refang(input)).toBe("test.test.example.com");
   });
 
   it("should replace mixied partial brackets by .", () => {
     const input = "1.)1[.1.)1";
-    expect(clean(input)).toBe("1.1.1.1");
+    expect(refang(input)).toBe("1.1.1.1");
   });
 
   it("should replace (dot) by .", () => {
     const input = "1.1.1(dot)1";
-    expect(clean(input)).toBe("1.1.1.1");
+    expect(refang(input)).toBe("1.1.1.1");
   });
 
   it("should replace [dot] by .", () => {
     const input = "example[dot]com";
-    expect(clean(input)).toBe("example.com");
+    expect(refang(input)).toBe("example.com");
   });
 
   it("should replace {dot} by .", () => {
     const input = "example{dot}com";
-    expect(clean(input)).toBe("example.com");
+    expect(refang(input)).toBe("example.com");
   });
 
   it("should replace hxxp:// by http://", () => {
     const input =
       "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
-    expect(clean(input)).toBe(
+    expect(refang(input)).toBe(
       "https://google.com\nhttp://neverssl.com\nhttps://google.com"
     );
 
     const input2 = "hxxpfoo";
-    expect(clean(input2)).toBe("hxxpfoo");
+    expect(refang(input2)).toBe("hxxpfoo");
   });
 
   it("should replace h**p:// by http://", () => {
     const input =
       "h**ps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
-    expect(clean(input)).toBe(
+    expect(refang(input)).toBe(
       "https://google.com\nhttp://neverssl.com\nhttps://google.com"
     );
 
     const input2 = "h**pfoo";
-    expect(clean(input2)).toBe("h**pfoo");
+    expect(refang(input2)).toBe("h**pfoo");
   });
 
   it("should replace [:] by :", () => {
     const input = "http[:]//example.com";
-    expect(clean(input)).toBe("http://example.com");
+    expect(refang(input)).toBe("http://example.com");
   });
 
   it("should replace . by .", () => {
     const input = "http://example.com";
-    expect(clean(input)).toBe("http://example.com");
+    expect(refang(input)).toBe("http://example.com");
   });
 
   it("should replace [/] by /", () => {
     const input = "http://example.com[/]test";
-    expect(clean(input)).toBe("http://example.com/test");
+    expect(refang(input)).toBe("http://example.com/test");
   });
 
   it("should replace [at] by @", () => {
     const input = "test[at]example.com";
-    expect(clean(input)).toBe("test@example.com");
+    expect(refang(input)).toBe("test@example.com");
   });
 
   it("should replace [@] by @", () => {
     const input = "test[@]example.com";
-    expect(clean(input)).toBe("test@example.com");
+    expect(refang(input)).toBe("test@example.com");
   });
 
   it("should replace (@) by @", () => {
     const input = "test(@)example.com";
-    expect(clean(input)).toBe("test@example.com");
+    expect(refang(input)).toBe("test@example.com");
   });
 
   it("should replace {@} by @", () => {
     const input = "test{@}example.com";
-    expect(clean(input)).toBe("test@example.com");
+    expect(refang(input)).toBe("test@example.com");
   });
 
   it("should be deal with a mixed casec", () => {
     const input = "hxxps[:]//test.example[.)com[/]path";
-    expect(clean(input)).toBe("https://test.example.com/path");
+    expect(refang(input)).toBe("https://test.example.com/path");
   });
 });
 

@@ -1,14 +1,14 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { getIOC } from "../index";
+import { extractIOC } from "../index";
 
 describe("IOCExtractor", () => {
   describe("simple input", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "1.1.1[.]1 google(.)com https://www.google[.]com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4";
-      const ioc = getIOC(input);
+      const ioc = extractIOC(input);
 
       expect(ioc.md5s[0]).toBe("f6f8179ac71eaabff12b8c024342109b");
       expect(ioc.md5s.length).toBe(1);
@@ -29,7 +29,7 @@ describe("IOCExtractor", () => {
       const input: string = fs
         .readFileSync(path.resolve(__dirname, "./fixtures/input.txt"))
         .toString();
-      const ioc = getIOC(input);
+      const ioc = extractIOC(input);
 
       expect(ioc.md5s).toEqual(["68b329da9893e34099c7d8ad5cb9c940"]);
       expect(ioc.sha1s).toEqual(["adc83b19e793491b1c6ea0fd8b46cd9f32e592fc"]);

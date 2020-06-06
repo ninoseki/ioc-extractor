@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import * as getStdin from "get-stdin";
 
-import { getIOC, getSTIX2 } from "../";
+import { extractIOC, extractSTIX2 } from "../";
 
 function exportAsSTIX2(): boolean {
   if (process.argv.length !== 3) {
@@ -14,6 +14,6 @@ function exportAsSTIX2(): boolean {
 
 (async (): Promise<void> => {
   const str = await getStdin();
-  const ioc = exportAsSTIX2() ? getSTIX2(str) : getIOC(str);
+  const ioc = exportAsSTIX2() ? extractSTIX2(str) : extractIOC(str);
   console.log(JSON.stringify(ioc));
 })();
