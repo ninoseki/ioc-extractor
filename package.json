@@ -12,7 +12,8 @@
     "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls",
     "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix",
-    "fmt": "prettier --write src/**/*.ts"
+    "fmt": "prettier --write src/**/*.ts",
+    "docs:build": "typedoc"
   },
   "bin": {
     "ioc-extractor": "dist/bin/ioc-extractor.js"
