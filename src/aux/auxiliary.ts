@@ -29,7 +29,7 @@ export function sortByValue(array: string[]): string[] {
  * @param {string} s A string
  * @returns {string} A cleaned (aka refanged) string
  */
-export function defang(s: string): string {
+export function refang(s: string): string {
   return s
     .replace(/(\[|\(|\{)\.(\]|\)|\})/gi, ".")
     .replace(/(\[|\(|\{)\./gi, ".")
@@ -44,7 +44,7 @@ export function defang(s: string): string {
 }
 
 /**
- * Alias for defang
+ * Alias for refang
  *
  * @deprecated
  * @export
@@ -52,5 +52,5 @@ export function defang(s: string): string {
  * @returns {string} A cleaned (aka refanged) string
  */
 export function clean(s: string): string {
-  return defang(s);
+  return refang(s);
 }

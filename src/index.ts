@@ -1,4 +1,4 @@
-import { defang } from "./aux/auxiliary";
+import { refang } from "./aux/auxiliary";
 import {
   extractASN,
   extractBTC,
@@ -21,7 +21,7 @@ import {
 import { convertToSTIX2, STIX2 } from "./stix2/stix2";
 
 export {
-  defang,
+  refang,
   extractASN,
   extractBTC,
   extractCVE,
@@ -91,7 +91,7 @@ export class IOCExtractor {
   private data: string;
 
   public constructor(data: string) {
-    this.data = defang(data);
+    this.data = refang(data);
   }
 
   /**
