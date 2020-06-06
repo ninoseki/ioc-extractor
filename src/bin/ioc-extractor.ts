@@ -12,7 +12,8 @@ function exportAsSTIX2(): boolean {
   return argv === "--stix2";
 }
 
-getStdin().then((str) => {
+(async (): Promise<void> => {
+  const str = await getStdin();
   const ioc = exportAsSTIX2() ? getSTIX2(str) : getIOC(str);
   console.log(JSON.stringify(ioc));
-});
+})();
