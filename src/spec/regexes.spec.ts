@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/prefer-regexp-exec */
 import {
   asnRegex,
   btcRegex,

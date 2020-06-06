@@ -27,6 +27,7 @@ import {
  * @returns {string[]} An array of matched strings, returns an empty array if not matched
  */
 function matchesWithRegexp(s: string, regex: RegExp): string[] {
+  // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
   const matched = s.match(regex);
   return matched === null ? [] : sortByValue(dedup(matched));
 }

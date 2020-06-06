@@ -7,6 +7,7 @@ import { tldRegexString } from "./tlds";
  * @returns {boolean} returns true if a string matches with a regexp
  */
 function check(s: string, regex: RegExp): boolean {
+  // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
   if (s.match(regex)) {
     return true;
   }
