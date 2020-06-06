@@ -70,7 +70,8 @@
 				<p><a href="https://badge.fury.io/js/ioc-extractor"><img src="https://badge.fury.io/js/ioc-extractor.svg" alt="npm version"></a>
 					<a href="https://travis-ci.com/ninoseki/ioc-extractor"><img src="https://travis-ci.com/ninoseki/ioc-extractor.svg?branch=master" alt="Build Status"></a>
 					<a href="https://www.codefactor.io/repository/github/ninoseki/ioc-extractor"><img src="https://www.codefactor.io/repository/github/ninoseki/ioc-extractor/badge" alt="CodeFactor"></a>
-				<a href="https://coveralls.io/github/ninoseki/ioc-extractor"><img src="https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg" alt="Coverage Status"></a></p>
+					<a href="https://coveralls.io/github/ninoseki/ioc-extractor"><img src="https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg" alt="Coverage Status"></a>
+				<a href="https://ninoseki.github.io/ioc-extractor/"><img src="https://img.shields.io/badge/docs-latest-brightgreen.svg" alt="Documentation"></a></p>
 				<p>IOC extractor is an npm package for extracting common <a href="https://en.wikipedia.org/wiki/Indicator_of_compromise">IOC(Indicator of Compromise)</a> from a block of text.</p>
 				<p><strong>Note</strong>: the package is highly influenced by <a href="https://github.com/sroberts/cacador">cacador</a>.</p>
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
@@ -115,10 +116,10 @@ $ <span class="hljs-built_in">echo</span> <span class="hljs-string">"1.1.1.1 8.8
 				<a href="#as-a-library" id="as-a-library" style="color: inherit; text-decoration: none;">
 					<h3>As a library</h3>
 				</a>
-				<pre><code class="language-ts"><span class="hljs-keyword">var</span> iocExtractor = <span class="hljs-built_in">require</span>(<span class="hljs-string">"ioc-extractor"</span>)
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { extractIOC } <span class="hljs-keyword">from</span> <span class="hljs-string">"ioc-extractor"</span>;
 
 <span class="hljs-keyword">const</span> input = <span class="hljs-string">'1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b'</span>;
-<span class="hljs-keyword">const</span> ioc = iocExtractor.getIOC(input);
+<span class="hljs-keyword">const</span> ioc = extractIOC(input);
 <span class="hljs-built_in">console</span>.log(ioc.md5s);
 <span class="hljs-comment">// =&gt; ['f6f8179ac71eaabff12b8c024342109b']</span>
 <span class="hljs-built_in">console</span>.log(ioc.ipv4s);
@@ -128,6 +129,22 @@ $ <span class="hljs-built_in">echo</span> <span class="hljs-string">"1.1.1.1 8.8
 
 <span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(ioc))
 <span class="hljs-comment">// =&gt; {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"macAddresses":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}</span></code></pre>
+				<p>If you want to extract a specific type of IOC, you can use <code>extractXXX</code> function.</p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { refang, extractDomain, extractIPv4, extractMD5 } <span class="hljs-keyword">from</span> <span class="hljs-string">"ioc-extractor"</span>;
+
+<span class="hljs-keyword">const</span> input = <span class="hljs-string">"1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b"</span>;
+<span class="hljs-keyword">const</span> refanged = refang(input);
+<span class="hljs-comment">// =&gt; 1.1.1.1 google.com f6f8179ac71eaabff12b8c024342109b</span>
+
+<span class="hljs-keyword">const</span> ipv4s = extractIPv4(refanged);
+<span class="hljs-comment">// =&gt; ['1.1.1.1']</span>
+
+<span class="hljs-keyword">const</span> domains = extractDomain(refanged);
+<span class="hljs-comment">// =&gt; ['google.com']</span>
+
+<span class="hljs-keyword">const</span> md5s = extractMD5(refanged);
+<span class="hljs-comment">// =&gt; ['f6f8179ac71eaabff12b8c024342109b']</span></code></pre>
+				<p>See <a href="https://ninoseki.github.io/ioc-extractor/">docs</a> for more details.</p>
 				<a href="#details" id="details" style="color: inherit; text-decoration: none;">
 					<h2>Details</h2>
 				</a>
@@ -537,6 +554,9 @@ $ <span class="hljs-built_in">echo</span> <span class="hljs-string">"1.1.1.1 8.8
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#matcheswithregexp" class="tsd-kind-icon">matches<wbr>With<wbr>Regexp</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#refang" class="tsd-kind-icon">refang</a>
 					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#sortbyvalue" class="tsd-kind-icon">sort<wbr>ByValue</a>
