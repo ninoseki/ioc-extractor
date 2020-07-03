@@ -88,7 +88,7 @@ describe("isASN", () => {
 describe("isDomain", () => {
   it("checks whther a given value is Domain or not", () => {
     expect(isDomain("example.com")).toBe(true);
-    expect(isDomain("example.xn--pbt977c")).toBe(true);
+    expect(isDomain("example.xn--zfr164b")).toBe(true);
     expect(isDomain("お名前.com")).toBe(true);
     expect(isDomain("EXAMPLE.com")).toBe(true);
 
