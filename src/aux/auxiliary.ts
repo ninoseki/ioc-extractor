@@ -31,6 +31,7 @@ export function sortByValue(array: string[]): string[] {
  */
 export function refang(s: string): string {
   return s
+    .replace(/\s\.\s/gi, ".")
     .replace(/(\[|\(|\{)\.(\]|\)|\})/gi, ".")
     .replace(/(\[|\(|\{)\./gi, ".")
     .replace(/\.(\]|\)|\})/gi, ".")
