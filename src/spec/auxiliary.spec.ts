@@ -1,6 +1,11 @@
 import { dedup, refang, sortByValue } from "../aux/auxiliary";
 
 describe("refang", () => {
+  it("should replace ' . '  by .", () => {
+    const input = "example . com";
+    expect(refang(input)).toBe("example.com");
+  });
+
   it("should replace [.] by .", () => {
     const input = "example[.]com";
     expect(refang(input)).toBe("example.com");
