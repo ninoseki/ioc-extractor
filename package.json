@@ -63,6 +63,7 @@
   },
   "homepage": "https://github.com/ninoseki/ioc-extractor",
   "devDependencies": {
+    "@types/array-unique": "^0.3.0",
     "@types/benchmark": "^1.0.33",
     "@types/jest": "26.0.12",
     "@types/node": "14.6.2",
@@ -88,6 +89,7 @@
     "typescript": "4.0.2"
   },
   "dependencies": {
+    "array-unique": "^0.3.2",
     "get-stdin": "^8.0.0",
     "punycode": "^2.1.1",
     "uuid": "^8.3.0"
