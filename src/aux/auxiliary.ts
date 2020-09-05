@@ -22,6 +22,10 @@ export function sortByValue(array: string[]): string[] {
   return array.sort();
 }
 
+function orRegExp(regexps: RegExp[]): RegExp {
+  return new RegExp(regexps.map((r) => r.source).join("|"), "gi");
+}
+
 /**
  * Remove defanged symbols from a string
  *
@@ -30,18 +34,25 @@ export function sortByValue(array: string[]): string[] {
  * @returns {string} A cleaned (aka refanged) string
  */
 export function refang(s: string): string {
+  const dot = orRegExp([
+    /\s\.\s/,
+    /(\[|\(|\{)\.(\]|\)|\})/,
+    /(\[|\(|\{)\./,
+    /\.(\]|\)|\})/,
+    /\\\./,
+    /(\[|\(|\{)dot(\]|\)|\})/,
+  ]);
+  const colon = /\[:\]/;
+  const slash = /\[\/\]/;
+  const at = /(\[|\(|\{)(at|@)(\]|\)|\})/;
+
   return s
-    .replace(/\s\.\s/gi, ".")
-    .replace(/(\[|\(|\{)\.(\]|\)|\})/gi, ".")
-    .replace(/(\[|\(|\{)\./gi, ".")
-    .replace(/\.(\]|\)|\})/gi, ".")
-    .replace(/\[:\]/gi, ":")
-    .replace(/\\\./gi, ".")
-    .replace(/\[\/\]/gi, "/")
+    .replace(dot, ".")
+    .replace(colon, ":")
+    .replace(slash, "/")
     .replace(/hxxp(s?):\/\//gi, "http$1://")
     .replace(/h\*\*p(s?):\/\//gi, "http$1://")
-    .replace(/(\[|\(|\{)(at|@)(\]|\)|\})/gi, "@")
-    .replace(/(\[|\(|\{)dot(\]|\)|\})/gi, ".");
+    .replace(at, "@");
 }
 
 /**

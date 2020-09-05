@@ -38,3 +38,6 @@ Thumbs.db
 
 # Ignore built ts files
 dist/**/*
+
+# Benchmark
+benchmark/**/*
