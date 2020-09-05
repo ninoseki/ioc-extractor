@@ -42,9 +42,9 @@ export function refang(s: string): string {
     /\\\./,
     /(\[|\(|\{)dot(\]|\)|\})/,
   ]);
-  const colon = /\[:\]/;
-  const slash = /\[\/\]/;
-  const at = /(\[|\(|\{)(at|@)(\]|\)|\})/;
+  const colon = /\[:\]/gi;
+  const slash = /\[\/\]/gi;
+  const at = /(\[|\(|\{)(at|@)(\]|\)|\})/gi;
 
   return s
     .replace(dot, ".")

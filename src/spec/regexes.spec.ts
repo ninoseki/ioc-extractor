@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/prefer-regexp-exec */
+/* eslint-disable @typescript-eslint/prefer-regexp-exec, jest/no-conditional-expect */
 import {
   asnRegex,
   btcRegex,
