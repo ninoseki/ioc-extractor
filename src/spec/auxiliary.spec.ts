@@ -107,6 +107,12 @@ describe("refang", () => {
     const input = "hxxps[:]//test.example[.)com[/]path";
     expect(refang(input)).toBe("https://test.example.com/path");
   });
+
+  it("should repalace all occurrences", () => {
+    expect(refang("[at](at)[at]")).toBe("@@@");
+    expect(refang("[/][/]")).toBe("//");
+    expect(refang("[:][:]")).toBe("::");
+  });
 });
 
 describe("dedup", () => {
