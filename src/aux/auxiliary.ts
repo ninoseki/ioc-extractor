@@ -1,3 +1,5 @@
+import * as arrayUnique from "array-unique";
+
 /**
  * Reject duplications from an array
  *
@@ -6,11 +8,9 @@
  * @returns {string[]} A uniquified array of string
  */
 export function dedup(array: string[]): string[] {
-  const uniq = array.filter((x, i, self) => {
-    return self.indexOf(x) === i;
-  });
-  return uniq;
+  return arrayUnique(array);
 }
+
 /**
  * Soar an array by value
  *
