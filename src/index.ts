@@ -72,7 +72,7 @@ export class IOCExtractor {
    */
   public static extractIOC(data: string): IOC {
     const extractor = new IOCExtractor(data);
-    return extractor.getIOC();
+    return extractor.extractIOC();
   }
 
   /**
