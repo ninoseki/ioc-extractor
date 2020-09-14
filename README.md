@@ -21,6 +21,16 @@ npm install ioc-extractor
 ### As a CLI
 
 ```bash
+$ ioc-extractor --help
+Usage: ioc-extractor [options]
+
+Options:
+  -s2, --stix2   output in STIX2 format
+  -t, --threads  use threads
+  -h, --help     display help for command
+```
+
+```bash
 $ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor
 {"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"macAddresses":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 
@@ -50,6 +60,9 @@ $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
   "urls": [],
   "xmrs": []
 }
+
+# Using -t(--threads) option makes sense if you want to process a big chunk of text
+$ cat big.txt | ioc-extractor -t
 ```
 
 ### As a library
@@ -126,7 +139,7 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 
 ## SITX2 support
 
-This package provides a partial support of STIX2 format.
+This package provides a partial support of the STIX2 format.
 
 ```bash
 $ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor --sitx2 | jq
