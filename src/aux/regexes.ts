@@ -168,7 +168,7 @@ const protocol = "(?:(?:https?)://)";
 const auth = "(?:\\S+(?::\\S*)?@)?";
 const port = "(?::\\d{2,5})?";
 const path = '(?:[/?#][^\\s"]*)?';
-const url = `(?:${protocol})${auth}(?:localhost|${ipv4}|${domain})${port}${path}`;
+const url = `(?:${protocol})${auth}(?:${domain}|localhost|${ipv4})${port}${path}`;
 
 export const urlRegex = new RegExp(url, "gi");
 
