@@ -294,6 +294,19 @@ describe("networkRegexes", () => {
       expect(matches[0]).toBe("https://test-1.co.jp");
     }
   });
+
+  it("should match with all url values (edge cases ver.)", () => {
+    const input =
+      "https://localhost.domain.com:443 https://1.1.1.domain.com:443 https://1.1.1.1.domain.com:443";
+    const matches = input.match(urlRegex);
+    expect(matches).not.toBe(null);
+    if (matches) {
+      expect(matches.length).toBe(3);
+      expect(matches[0]).toBe("https://localhost.domain.com:443");
+      expect(matches[1]).toBe("https://1.1.1.domain.com:443");
+      expect(matches[2]).toBe("https://1.1.1.1.domain.com:443");
+    }
+  });
 });
 
 describe("utilityRegexs", () => {
