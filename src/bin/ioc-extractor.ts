@@ -1,19 +1,33 @@
 #!/usr/bin/env node
+import { program } from "commander";
 import * as getStdin from "get-stdin";
 
-import { extractIOC, extractSTIX2 } from "../";
+import { extractIOC, extractIOCAsync } from "../";
+import { convertToSTIX2 } from "../stix2/stix2";
 
-function exportAsSTIX2(): boolean {
-  if (process.argv.length !== 3) {
-    return false;
-  }
-
-  const argv = process.argv[2];
-  return argv === "--stix2";
+interface Options {
+  stix2?: boolean;
+  threads?: boolean;
 }
 
 (async (): Promise<void> => {
   const str = await getStdin();
-  const ioc = exportAsSTIX2() ? extractSTIX2(str) : extractIOC(str);
-  console.log(JSON.stringify(ioc));
+
+  program
+    .option("-s2, --stix2", "output in STIX2 format")
+    .option("-t, --threads", "use threads");
+  program.parse();
+
+  const options = <Options>program;
+  const threads = options.threads !== undefined ? options.threads : false;
+  const stix2 = options.stix2 !== undefined ? options.stix2 : false;
+
+  const ioc = threads ? await extractIOCAsync(str) : extractIOC(str);
+
+  if (stix2) {
+    const stix2Obj = convertToSTIX2(ioc);
+    console.log(JSON.stringify(stix2Obj));
+  } else {
+    console.log(JSON.stringify(ioc));
+  }
 })();
