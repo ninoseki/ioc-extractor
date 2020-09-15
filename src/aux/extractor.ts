@@ -5,6 +5,7 @@ import {
   cveRegex,
   domainRegex,
   emailRegex,
+  ethRegex,
   gaPubIDRegex,
   gaTrackIDRegex,
   ipv4Regex,
@@ -212,4 +213,15 @@ export function extractGATrackID(s: string): string[] {
  */
 export function extractMacAddress(s: string): string[] {
   return matchesWithRegexp(s, macAddressRegex);
+}
+
+/**
+ * Extract ETH addresses from a string
+ *
+ * @export
+ * @param {string} s A string
+ * @returns {string[]} An array of ETH addresses
+ */
+export function extractETH(s: string): string[] {
+  return matchesWithRegexp(s, ethRegex);
 }
