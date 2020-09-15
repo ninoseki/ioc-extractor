@@ -260,3 +260,16 @@ export const macAddressRegex = /\b(?:[A-Fa-f0-9]{2}([-:]))(?:[A-Fa-f0-9]{2}\1){4
 export function isMacAddress(s: string): boolean {
   return check(s, macAddressRegex);
 }
+
+export const ethRegex = /\b0x[a-fA-F0-9]{40}\b/gi;
+
+/**
+ * Check whether a string is an ETH address or not
+ *
+ * @export
+ * @param {string} s A string
+ * @returns {boolean} return true if a string is an ETH address
+ */
+export function isETH(s: string): boolean {
+  return check(s, ethRegex);
+}

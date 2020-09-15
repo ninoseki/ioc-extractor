@@ -6,6 +6,7 @@ import {
   extractCVE,
   extractDomain,
   extractEmail,
+  extractETH,
   extractGAPubID,
   extractGATrackID,
   extractIPv4,
@@ -35,6 +36,9 @@ const extractor = {
   },
   extractEmail(text: string): string[] {
     return extractEmail(text);
+  },
+  extractETH(text: string): string[] {
+    return extractETH(text);
   },
   extractGAPubID(text: string): string[] {
     return extractGAPubID(text);

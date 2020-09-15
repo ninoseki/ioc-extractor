@@ -95,6 +95,7 @@ describe("IOCExtractor", () => {
         "46bxDoy3pszR42Ds5FeygfWdbMfH7qB5hZHqEPnX6EgVhksrbzJtQYQeETZtniMfWk4Bt7TXmgybpZYRu2fTdppoAf9x7Yd",
         "49urk473npMgWFFBBk2xLMjEqTgg1PHMzg1MjDWBST5AMEEyh58TjCvLEf58uu5kruPWu5pA1RBPKX3quEQpHKoGQ1zbTGe",
       ]);
+      expect(ioc.eths).toEqual(["0x32Be343B94f860124dC4fEe278FDCBD38C102D88"]);
     });
   });
 });

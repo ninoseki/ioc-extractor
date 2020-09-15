@@ -9,6 +9,7 @@ import {
   extractCVE,
   extractDomain,
   extractEmail,
+  extractETH,
   extractGAPubID,
   extractGATrackID,
   extractIPv4,
@@ -26,12 +27,12 @@ import { convertToSTIX2, STIX2 } from "./stix2/stix2";
 import { Extractor } from "./workers/extractor";
 
 export {
-  refang,
   extractASN,
   extractBTC,
   extractCVE,
   extractDomain,
   extractEmail,
+  extractETH,
   extractGAPubID,
   extractGATrackID,
   extractIPv4,
@@ -44,6 +45,7 @@ export {
   extractSSDEEP,
   extractURL,
   extractXMR,
+  refang,
 };
 
 export declare interface IOC {
@@ -52,6 +54,7 @@ export declare interface IOC {
   cves: string[];
   domains: string[];
   emails: string[];
+  eths: string[];
   gaPubIDs: string[];
   gaTrackIDs: string[];
   ipv4s: string[];
@@ -125,6 +128,7 @@ export class IOCExtractor {
       cves: extractCVE(this.data),
       domains: extractDomain(this.data),
       emails: extractEmail(this.data),
+      eths: extractETH(this.data),
       gaPubIDs: extractGAPubID(this.data),
       gaTrackIDs: extractGATrackID(this.data),
       ipv4s: extractIPv4(this.data),
@@ -177,6 +181,11 @@ export class IOCExtractor {
       extractor.extractEmail(this.data)
     );
     tasks.push(extractEmailTask);
+
+    const extractETHTask = pool.queue((extractor) =>
+      extractor.extractETH(this.data)
+    );
+    tasks.push(extractETHTask);
 
     const extractGAPubIDTask = pool.queue((extractor) =>
       extractor.extractGAPubID(this.data)
@@ -247,18 +256,19 @@ export class IOCExtractor {
       cves: results[2],
       domains: results[3],
       emails: results[4],
-      gaPubIDs: results[5],
-      gaTrackIDs: results[6],
-      ipv4s: results[7],
-      ipv6s: results[8],
-      macAddresses: results[9],
-      md5s: results[10],
-      sha1s: results[11],
-      sha256s: results[12],
-      sha512s: results[13],
-      ssdeeps: results[14],
-      urls: results[15],
-      xmrs: results[16],
+      eths: results[5],
+      gaPubIDs: results[6],
+      gaTrackIDs: results[7],
+      ipv4s: results[8],
+      ipv6s: results[9],
+      macAddresses: results[10],
+      md5s: results[11],
+      sha1s: results[12],
+      sha256s: results[13],
+      sha512s: results[14],
+      ssdeeps: results[15],
+      urls: results[16],
+      xmrs: results[17],
     };
 
     return ioc;

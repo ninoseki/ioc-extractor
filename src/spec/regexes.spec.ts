@@ -5,6 +5,7 @@ import {
   cveRegex,
   domainRegex,
   emailRegex,
+  ethRegex,
   gaPubIDRegex,
   gaTrackIDRegex,
   ipv4Regex,
@@ -14,6 +15,7 @@ import {
   isCVE,
   isDomain,
   isEmail,
+  isETH,
   isGAPubID,
   isGATrackID,
   isIPv4,
@@ -163,6 +165,12 @@ describe("isGAPubID", () => {
 describe("isMacAddress", () => {
   it("checks whther a given value is mac address or not", () => {
     expect(isMacAddress("01-23-45-67-89-ab")).toBe(true);
+  });
+});
+
+describe("isETH", () => {
+  it("checks whther a given value is an ETH address or not", () => {
+    expect(isETH("0x4966db520b0680fc19df5d7774ca96f42e6abd4f")).toBe(true);
   });
 });
 
@@ -378,5 +386,17 @@ describe("macAddressRegex", () => {
       expect(matches.length).toBe(1);
       expect(matches[0]).toBe(input);
     }
+  });
+
+  describe("ethRegex", () => {
+    it("should match with an ETH address in the input", () => {
+      const input = "0x4966db520b0680fc19df5d7774ca96f42e6abd4f";
+      const matches = input.match(ethRegex);
+      expect(matches).not.toBe(null);
+      if (matches) {
+        expect(matches.length).toBe(1);
+        expect(matches[0]).toBe(input);
+      }
+    });
   });
 });

@@ -32,7 +32,7 @@ Options:
 
 ```bash
 $ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor
-{"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"macAddresses":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
+{"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"eths":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"macAddresses":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 
 # Using with jq
 $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
@@ -44,6 +44,7 @@ $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
     "example.com"
   ],
   "emails": [],
+  "eths": [],
   "gaPubIDs": [],
   "gaTrackIDs": [],
   "ipv4s": [
@@ -112,7 +113,7 @@ This package supports the following IOCs:
 - **Networks**: domain, email, ipv4, ipv6, url, asn
 - **Hardwares**: mac address
 - **Utilities**: cve(CVE ID)
-- **Cryptocurrencies**: btc (BTC address), xmr (XMR address)
+- **Cryptocurrencies**: btc (BTC address), eth (ETH address), xmr (XMR address)
 - **Trackers**: gaTrackID (Google Analytics tracking ID), gaPubID (Google Adsense Publisher ID)
 
 For **Networks** IOCs, the following defang/refang techniques are supported:
