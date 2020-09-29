@@ -250,14 +250,17 @@ describe("networkRegexes", () => {
   });
 
   it("should match with all domain values", () => {
-    const input = "test.co.jp\ngitlab.com\ntest.exe\ndev.test.co.jp";
+    const input =
+      "test.co.jp\ngitlab.com\ntest.exe\ndev.test.co.jp www.ne-foo.com www.jp_bar.com";
     const matches = input.match(domainRegex);
     expect(matches).not.toBe(null);
     if (matches) {
-      expect(matches.length).toBe(3);
+      expect(matches.length).toBe(5);
       expect(matches[0]).toBe("test.co.jp");
       expect(matches[1]).toBe("gitlab.com");
       expect(matches[2]).toBe("dev.test.co.jp");
+      expect(matches[3]).toBe("www.ne-foo.com");
+      expect(matches[4]).toBe("www.jp_bar.com");
     }
   });
 
