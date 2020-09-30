@@ -1,3 +1,5 @@
+import { exception } from "console";
+
 /* eslint-disable @typescript-eslint/prefer-regexp-exec, jest/no-conditional-expect */
 import {
   asnRegex,
@@ -251,16 +253,39 @@ describe("networkRegexes", () => {
 
   it("should match with all domain values", () => {
     const input =
-      "test.co.jp\ngitlab.com\ntest.exe\ndev.test.co.jp www.ne-foo.com www.jp_bar.com";
+      "test.co.jp\ngitlab.com\ntest.exe\ndev.test.co.jp www.ne-foo.com";
     const matches = input.match(domainRegex);
     expect(matches).not.toBe(null);
     if (matches) {
-      expect(matches.length).toBe(5);
+      expect(matches.length).toBe(4);
       expect(matches[0]).toBe("test.co.jp");
       expect(matches[1]).toBe("gitlab.com");
       expect(matches[2]).toBe("dev.test.co.jp");
       expect(matches[3]).toBe("www.ne-foo.com");
-      expect(matches[4]).toBe("www.jp_bar.com");
+    }
+  });
+
+  it("should not match with invalid domain values", () => {
+    const domains = [
+      "error.invalid",
+      "-error-.invalid",
+      "a.b-.de",
+      "-.co",
+      "_.co",
+      "a.b-.co",
+      "a.b_.co",
+      ".www.foo.bar",
+      "www.foo.bar.",
+      ".www.foo.bar.",
+    ];
+    const input = domains.join(" ");
+    const matches = input.match(domainRegex);
+    expect(matches).not.toBe(null);
+    if (matches) {
+      expect(matches.length).toBe(3);
+      expect(matches[0]).toBe("www.foo.bar");
+      expect(matches[1]).toBe("www.foo.bar");
+      expect(matches[2]).toBe("www.foo.bar");
     }
   });
 
