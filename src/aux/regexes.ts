@@ -92,7 +92,7 @@ export function isASN(s: string): boolean {
   return check(s, asnRegex);
 }
 
-const domain = `([a-z0-9\\u00a1-\\uffff]([a-z0-9\\u00a1-\\uffff-]*[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
+const domain = `([a-z0-9\\u00a1-\\uffff]((?!.*\\-\\-)[a-z0-9\\u00a1-\\uffff-]*[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
 export const domainRegex = new RegExp(domain, "gi");
 
 /**

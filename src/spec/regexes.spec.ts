@@ -270,6 +270,9 @@ describe("networkRegexes", () => {
       "error.invalid",
       "-error-.invalid",
       "a.b-.de",
+      "a.b--c.jp",
+      "--.jp",
+      "a--.jp",
       "-.co",
       "_.co",
       "a.b-.co",
@@ -282,10 +285,11 @@ describe("networkRegexes", () => {
     const matches = input.match(domainRegex);
     expect(matches).not.toBe(null);
     if (matches) {
-      expect(matches.length).toBe(3);
-      expect(matches[0]).toBe("www.foo.bar");
+      expect(matches.length).toBe(4);
+      expect(matches[0]).toBe("c.jp");
       expect(matches[1]).toBe("www.foo.bar");
       expect(matches[2]).toBe("www.foo.bar");
+      expect(matches[3]).toBe("www.foo.bar");
     }
   });
 
