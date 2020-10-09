@@ -66,20 +66,20 @@
     "@types/array-unique": "0.3.0",
     "@types/benchmark": "1.0.33",
     "@types/jest": "26.0.14",
-    "@types/node": "14.11.2",
+    "@types/node": "14.11.8",
     "@types/punycode": "2.1.0",
     "@types/uuid": "8.3.0",
-    "@typescript-eslint/eslint-plugin": "4.3.0",
-    "@typescript-eslint/parser": "4.3.0",
+    "@typescript-eslint/eslint-plugin": "4.4.0",
+    "@typescript-eslint/parser": "4.4.0",
     "benny": "3.6.14",
     "coveralls": "3.1.0",
     "eslint": "7.10.0",
     "eslint-config-prettier": "6.12.0",
-    "eslint-plugin-jest": "24.0.2",
+    "eslint-plugin-jest": "24.1.0",
     "eslint-plugin-prettier": "3.1.4",
     "eslint-plugin-simple-import-sort": "5.0.3",
     "husky": "4.3.0",
-    "jest": "26.4.2",
+    "jest": "26.5.2",
     "lint-staged": "10.4.0",
     "prettier": "2.1.2",
     "ts-jest": "26.4.1",
@@ -94,6 +94,6 @@
     "get-stdin": "^8.0.0",
     "punycode": "^2.1.1",
     "threads": "^1.6.3",
-    "uuid": "^8.3.0"
+    "uuid": "^8.3.1"
   }
 }
