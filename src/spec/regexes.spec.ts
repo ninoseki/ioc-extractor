@@ -1,5 +1,3 @@
-import { exception } from "console";
-
 /* eslint-disable @typescript-eslint/prefer-regexp-exec, jest/no-conditional-expect */
 import {
   asnRegex,
@@ -97,6 +95,11 @@ describe("isDomain", () => {
     expect(isDomain("EXAMPLE.com")).toBe(true);
 
     expect(isDomain(".com")).toBe(false);
+
+    // Labels must be 63 characters or less.
+    expect(isDomain(`${"a".repeat(63)}.com`)).toBe(true);
+    // do not check the length strictly
+    expect(isDomain(`${"a".repeat(256)}.com`)).toBe(false);
   });
 });
 
