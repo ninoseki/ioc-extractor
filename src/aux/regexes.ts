@@ -1,4 +1,5 @@
 import { tldRegexString } from "./tlds";
+
 /**
  * Check whether a string matches with a regexp or not
  *
@@ -8,10 +9,11 @@ import { tldRegexString } from "./tlds";
  */
 function check(s: string, regex: RegExp): boolean {
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-  if (s.match(regex)) {
-    return true;
+  const match = s.match(regex);
+  if (match === null) {
+    return false;
   }
-  return false;
+  return match[0].length == s.length;
 }
 
 export const md5Regex = /\b[A-Fa-f0-9]{32}\b/gi;
@@ -92,7 +94,7 @@ export function isASN(s: string): boolean {
   return check(s, asnRegex);
 }
 
-const domain = `([a-z0-9\\u00a1-\\uffff]((?!.*\\-\\-)[a-z0-9\\u00a1-\\uffff-]*[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
+const domain = `([a-z0-9\\u00a1-\\uffff]{1,63}((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
 export const domainRegex = new RegExp(domain, "gi");
 
 /**
