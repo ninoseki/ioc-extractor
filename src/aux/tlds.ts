@@ -1171,6 +1171,7 @@ const tlds = [
   "song",
   "sony",
   "soy",
+  "spa",
   "space",
   "spiegel",
   "sport",
