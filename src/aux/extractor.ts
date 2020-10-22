@@ -8,6 +8,8 @@ import {
   ethRegex,
   gaPubIDRegex,
   gaTrackIDRegex,
+  internationalizedDomainRegex,
+  internationalizedURLRegex,
   ipv4Regex,
   ipv6Regex,
   macAddressRegex,
@@ -99,9 +101,13 @@ export function extractASN(s: string): string[] {
  *
  * @export
  * @param {string} s A string
+ * @param {boolean} enableIDN enable or disable IDN extraction
  * @returns {string[]} An array of domains
  */
-export function extractDomain(s: string): string[] {
+export function extractDomain(s: string, enableIDN = true): string[] {
+  if (enableIDN) {
+    return matchesWithRegexp(s, internationalizedDomainRegex);
+  }
   return matchesWithRegexp(s, domainRegex);
 }
 
@@ -143,9 +149,13 @@ export function extractIPv6(s: string): string[] {
  *
  * @export
  * @param {string} s A string
+ * @param {boolean} enableIDN Enable or disable IDN extraction
  * @returns {string[]} An array of URLs
  */
-export function extractURL(s: string): string[] {
+export function extractURL(s: string, enableIDN = true): string[] {
+  if (enableIDN) {
+    return matchesWithRegexp(s, internationalizedURLRegex);
+  }
   return matchesWithRegexp(s, urlRegex);
 }
 

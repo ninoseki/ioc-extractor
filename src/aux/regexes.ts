@@ -94,7 +94,13 @@ export function isASN(s: string): boolean {
   return check(s, asnRegex);
 }
 
-const domain = `([a-z0-9\\u00a1-\\uffff]{1,63}((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
+const internationalizedDomain = `([a-z0-9\\u00a1-\\uffff]{1,63}((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
+export const internationalizedDomainRegex = new RegExp(
+  internationalizedDomain,
+  "gi"
+);
+
+const domain = `([a-z0-9]{1,63}((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(${tldRegexString})\\b`;
 export const domainRegex = new RegExp(domain, "gi");
 
 /**
@@ -102,9 +108,13 @@ export const domainRegex = new RegExp(domain, "gi");
  *
  * @export
  * @param {string} s A string
+ * @param {boolean} enableIDN Enable or disable IDN extraction
  * @returns {boolean} return true if a string is a domain
  */
-export function isDomain(s: string): boolean {
+export function isDomain(s: string, enableIDN = true): boolean {
+  if (enableIDN) {
+    return check(s, internationalizedDomainRegex);
+  }
   return check(s, domainRegex);
 }
 
@@ -171,17 +181,23 @@ const auth = "(?:\\S+(?::\\S*)?@)?";
 const port = "(?::\\d{2,5})?";
 const path = '(?:[/?#][^\\s"]*)?';
 const url = `(?:${protocol})${auth}(?:${domain}|localhost|${ipv4})${port}${path}`;
+const internationalizedURL = `(?:${protocol})${auth}(?:${internationalizedDomain}|localhost|${ipv4})${port}${path}`;
 
 export const urlRegex = new RegExp(url, "gi");
+export const internationalizedURLRegex = new RegExp(internationalizedURL, "gi");
 
 /**
  * Check whether a string is a URL or not
  *
  * @export
  * @param {string} s A string
+ * @param {boolean} enableIDN Enable or disable IDN extraction
  * @returns {boolean} return true if a string is a URL
  */
-export function isURL(s: string): boolean {
+export function isURL(s: string, enableIDN = true): boolean {
+  if (enableIDN) {
+    return check(s, internationalizedURLRegex);
+  }
   return check(s, urlRegex);
 }
 
