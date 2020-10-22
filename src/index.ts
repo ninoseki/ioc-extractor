@@ -293,7 +293,7 @@ export class IOCExtractor {
 }
 
 /**
- * Retuerns an IOC of data
+ * Returns an IOC of data
  *
  * @export
  * @param {string} data A string
@@ -305,7 +305,7 @@ export function extractIOC(data: string, enableIDN = true): IOC {
 }
 
 /**
- * Retuerns an IOC of data in async
+ * Returns an IOC of data in async
  *
  * @export
  * @param {string} data A string
