@@ -31,8 +31,8 @@ const extractor = {
   extractCVE(text: string): string[] {
     return extractCVE(text);
   },
-  extractDomain(text: string): string[] {
-    return extractDomain(text);
+  extractDomain(text: string, enableIDN = true): string[] {
+    return extractDomain(text, enableIDN);
   },
   extractEmail(text: string): string[] {
     return extractEmail(text);
@@ -70,8 +70,8 @@ const extractor = {
   extractSSDEEP(text: string): string[] {
     return extractSSDEEP(text);
   },
-  extractURL(text: string): string[] {
-    return extractURL(text);
+  extractURL(text: string, enableIDN = true): string[] {
+    return extractURL(text, enableIDN);
   },
   extractXMR(text: string): string[] {
     return extractXMR(text);
