@@ -25,8 +25,9 @@ $ ioc-extractor --help
 Usage: ioc-extractor [options]
 
 Options:
-  -s2, --stix2   output in STIX2 format
-  -t, --threads  use threads
+  -s2, --stix2   output in STIX2 format (default: false)
+  -t, --threads  use threads (default: false)
+  --disable-idn  disable IDN extraction (default: false)
   -h, --help     display help for command
 ```
 
