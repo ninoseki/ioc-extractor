@@ -8,21 +8,28 @@ import { convertToSTIX2 } from "../stix2/stix2";
 interface Options {
   stix2?: boolean;
   threads?: boolean;
+  disableIdn?: boolean;
 }
 
 (async (): Promise<void> => {
   const str = await getStdin();
 
   program
-    .option("-s2, --stix2", "output in STIX2 format")
-    .option("-t, --threads", "use threads");
+    .option("-s2, --stix2", "output in STIX2 format", false)
+    .option("-t, --threads", "use threads", false)
+    .option("--disable-idn", "disable IDN extraction", false);
   program.parse();
 
   const options = <Options>program;
   const threads = options.threads !== undefined ? options.threads : false;
   const stix2 = options.stix2 !== undefined ? options.stix2 : false;
+  const disalbeIDN =
+    options.disableIdn !== undefined ? options.disableIdn : false;
+  const enableIDN = !disalbeIDN;
 
-  const ioc = threads ? await extractIOCAsync(str) : extractIOC(str);
+  const ioc = threads
+    ? await extractIOCAsync(str, enableIDN)
+    : extractIOC(str, enableIDN);
 
   if (stix2) {
     const stix2Obj = convertToSTIX2(ioc);
