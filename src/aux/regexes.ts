@@ -119,15 +119,23 @@ export function isDomain(s: string, enableIDN = true): boolean {
 }
 
 export const emailRegex = new RegExp(`[A-Za-z0-9_.]+@${domain}`, "gi");
+export const internationalizedEmailRegex = new RegExp(
+  `[A-Za-z0-9_.]+@${internationalizedDomain}`,
+  "gi"
+);
 
 /**
- * Check whether a string is a domain or not
+ * Check whether a string is an email or not
  *
  * @export
  * @param {string} s A string
+ * @param {boolean} enableIDN Enable or disable IDN extraction
  * @returns {boolean} return true if a string is a domain
  */
-export function isEmail(s: string): boolean {
+export function isEmail(s: string, enableIDN = true): boolean {
+  if (enableIDN) {
+    return check(s, internationalizedEmailRegex);
+  }
   return check(s, emailRegex);
 }
 

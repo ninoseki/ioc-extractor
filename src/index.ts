@@ -133,7 +133,7 @@ export class IOCExtractor {
       btcs: extractBTC(this.data),
       cves: extractCVE(this.data),
       domains: extractDomain(this.data, enableIDN),
-      emails: extractEmail(this.data),
+      emails: extractEmail(this.data, enableIDN),
       eths: extractETH(this.data),
       gaPubIDs: extractGAPubID(this.data),
       gaTrackIDs: extractGATrackID(this.data),
@@ -185,7 +185,7 @@ export class IOCExtractor {
     tasks.push(extractDomainTask);
 
     const extractEmailTask = pool.queue((extractor) =>
-      extractor.extractEmail(this.data)
+      extractor.extractEmail(this.data, enableIDN)
     );
     tasks.push(extractEmailTask);
 
