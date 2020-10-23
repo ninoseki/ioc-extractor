@@ -7,35 +7,44 @@ describe("IOCExtractor", () => {
   describe("simple input", () => {
     it("should extract IOCs from the input", () => {
       const input =
-        "1.1.1[.]1 2.2.2 . 2 google(.)com テスト.example.com https://www.google[.]com http://テスト.example.com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4";
+        "1.1.1[.]1 2.2.2 . 2 google(.)com テスト.example.com https://www.google[.]com http://テスト.example.com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4 test@テスト.example.com";
       const ioc = extractIOC(input);
 
-      expect(ioc.md5s[0]).toBe("f6f8179ac71eaabff12b8c024342109b");
       expect(ioc.md5s.length).toBe(1);
+      expect(ioc.md5s[0]).toBe("f6f8179ac71eaabff12b8c024342109b");
+
+      expect(ioc.sha256s.length).toBe(1);
       expect(ioc.sha256s[0]).toBe(
         "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
       );
-      expect(ioc.sha256s.length).toBe(1);
 
+      expect(ioc.domains.length).toBe(3);
       expect(ioc.domains[0]).toBe("google.com");
       expect(ioc.domains[1]).toBe("www.google.com");
       expect(ioc.domains[2]).toBe("テスト.example.com");
 
+      expect(ioc.ipv4s.length).toBe(2);
       expect(ioc.ipv4s[0]).toBe("1.1.1.1");
       expect(ioc.ipv4s[1]).toBe("2.2.2.2");
 
+      expect(ioc.urls.length).toBe(2);
       expect(ioc.urls[0]).toBe("http://テスト.example.com");
       expect(ioc.urls[1]).toBe("https://www.google.com");
 
-      expect(ioc.cves).toEqual([]);
+      expect(ioc.cves.length).toBe(0);
+
+      expect(ioc.gaTrackIDs.length).toBe(1);
       expect(ioc.gaTrackIDs[0]).toBe("UA-26296840-4");
+
+      expect(ioc.emails.length).toBe(1);
+      expect(ioc.emails[0]).toBe("test@テスト.example.com");
     });
   });
 
   describe("simple input with disabled IDN", () => {
     it("should extract IOCs from the input", () => {
       const input =
-        "テスト.example.com example.com http://テスト.example.com http://example.com";
+        "テスト.example.com example.com http://テスト.example.com http://example.com test@テスト.example.com test@example.com";
       const ioc = extractIOC(input, false);
 
       expect(ioc.domains.length).toBe(1);
@@ -43,6 +52,9 @@ describe("IOCExtractor", () => {
 
       expect(ioc.urls.length).toBe(1);
       expect(ioc.urls[0]).toBe("http://example.com");
+
+      expect(ioc.emails.length).toBe(1);
+      expect(ioc.emails[0]).toBe("test@example.com");
     });
   });
 

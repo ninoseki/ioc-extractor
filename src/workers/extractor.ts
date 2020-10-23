@@ -34,8 +34,8 @@ const extractor = {
   extractDomain(text: string, enableIDN = true): string[] {
     return extractDomain(text, enableIDN);
   },
-  extractEmail(text: string): string[] {
-    return extractEmail(text);
+  extractEmail(text: string, enableIDN = true): string[] {
+    return extractEmail(text, enableIDN);
   },
   extractETH(text: string): string[] {
     return extractETH(text);

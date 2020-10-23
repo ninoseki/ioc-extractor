@@ -9,6 +9,7 @@ import {
   gaPubIDRegex,
   gaTrackIDRegex,
   internationalizedDomainRegex,
+  internationalizedEmailRegex,
   internationalizedURLRegex,
   ipv4Regex,
   ipv6Regex,
@@ -116,9 +117,13 @@ export function extractDomain(s: string, enableIDN = true): string[] {
  *
  * @export
  * @param {string} s A string
+ * @param {boolean} enableIDN Enable or disable IDN extraction
  * @returns {string[]} An array of emails
  */
-export function extractEmail(s: string): string[] {
+export function extractEmail(s: string, enableIDN = true): string[] {
+  if (enableIDN) {
+    return matchesWithRegexp(s, internationalizedEmailRegex);
+  }
   return matchesWithRegexp(s, emailRegex);
 }
 
