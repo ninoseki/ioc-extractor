@@ -92,8 +92,18 @@ describe("isDomain", () => {
   it("checks whther a given value is Domain or not", () => {
     expect(isDomain("example.com")).toBe(true);
     expect(isDomain("example.xn--zfr164b")).toBe(true);
-    expect(isDomain("お名前.com")).toBe(true);
     expect(isDomain("EXAMPLE.com")).toBe(true);
+    expect(isDomain("xn--l8jaa.com")).toBe(true);
+
+    expect(isDomain("xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", true)).toBe(
+      true
+    );
+    expect(isDomain("xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", false)).toBe(
+      true
+    );
+
+    expect(isDomain("あ.com", true)).toBe(true);
+    expect(isDomain("あ.com", false)).toBe(false);
 
     expect(isDomain(".com")).toBe(false);
 

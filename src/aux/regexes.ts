@@ -94,13 +94,13 @@ export function isASN(s: string): boolean {
   return check(s, asnRegex);
 }
 
-const internationalizedDomain = `([a-z0-9\\u00a1-\\uffff]{1,63}((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
+const internationalizedDomain = `(([a-z0-9\\u00a1-\\uffff]{1,63}|xn--)((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegexString})\\b`;
 export const internationalizedDomainRegex = new RegExp(
   internationalizedDomain,
   "gi"
 );
 
-const domain = `([a-z0-9]{1,63}((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(${tldRegexString})\\b`;
+const domain = `(([a-z0-9]{1,63}|xn--)((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(${tldRegexString})\\b`;
 export const domainRegex = new RegExp(domain, "gi");
 
 /**
