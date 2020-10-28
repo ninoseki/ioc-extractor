@@ -46,26 +46,22 @@ describe("refang", () => {
     expect(refang(input)).toBe("example.com");
   });
 
-  it("should replace hxxp:// by http://", () => {
-    const input =
-      "hxxps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
-    expect(refang(input)).toBe(
-      "https://google.com\nhttp://neverssl.com\nhttps://google.com"
-    );
-
-    const input2 = "hxxpfoo";
-    expect(refang(input2)).toBe("hxxpfoo");
+  it.each([
+    ["hxxps://google.com", "https://google.com"],
+    ["hxxp://neverssl.com", "http://neverssl.com"],
+    ["hxxps://google[.)com", "https://google.com"],
+    ["hxxpfoo", "hxxpfoo"],
+  ])("should replace hxxp:// by http://", (string, expected) => {
+    expect(refang(string)).toBe(expected);
   });
 
-  it("should replace h**p:// by http://", () => {
-    const input =
-      "h**ps://google.com\nhxxp://neverssl.com\nhxxps://google[.)com";
-    expect(refang(input)).toBe(
-      "https://google.com\nhttp://neverssl.com\nhttps://google.com"
-    );
-
-    const input2 = "h**pfoo";
-    expect(refang(input2)).toBe("h**pfoo");
+  it.each([
+    ["h**ps://google.com", "https://google.com"],
+    ["h**p://neverssl.com", "http://neverssl.com"],
+    ["h**ps://google[.)com", "https://google.com"],
+    ["h**pfoo", "h**pfoo"],
+  ])("should replace h**p:// by http://", (string, expected) => {
+    expect(refang(string)).toBe(expected);
   });
 
   it("should replace [:] by :", () => {
@@ -108,10 +104,12 @@ describe("refang", () => {
     expect(refang(input)).toBe("https://test.example.com/path");
   });
 
-  it("should repalace all occurrences", () => {
-    expect(refang("[at](at)[at]")).toBe("@@@");
-    expect(refang("[/][/]")).toBe("//");
-    expect(refang("[:][:]")).toBe("::");
+  it.each([
+    ["[at](at)[at]", "@@@"],
+    ["[/][/]", "//"],
+    ["[:][:]", "::"],
+  ])("should repalace all occurrences", (string, expected) => {
+    expect(refang(string)).toBe(expected);
   });
 });
 

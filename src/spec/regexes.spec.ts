@@ -40,9 +40,11 @@ import {
 } from "../aux/regexes";
 
 describe("isMD5", () => {
-  it("checks whther a given value is MD5 or not", () => {
-    expect(isMD5("874058e8d8582bf85c115ce319c5b0af")).toBe(true);
-    expect(isMD5("874058e8d8582bf85c115ce319c5b0a")).toBe(false);
+  it.each([
+    ["874058e8d8582bf85c115ce319c5b0af", true],
+    ["874058e8d8582bf85c115ce319c5b0a", false],
+  ])("checks whther a given value is MD5 or not", (string, expected) => {
+    expect(isMD5(string)).toBe(expected);
   });
 });
 
@@ -89,24 +91,27 @@ describe("isASN", () => {
 });
 
 describe("isDomain", () => {
-  it("checks whther a given value is Domain or not", () => {
-    expect(isDomain("example.com")).toBe(true);
-    expect(isDomain("example.xn--zfr164b")).toBe(true);
-    expect(isDomain("EXAMPLE.com")).toBe(true);
-    expect(isDomain("xn--l8jaa.com")).toBe(true);
+  it.each([
+    ["example.com", true, true],
+    ["example.com", false, true],
+    ["example.xn--zfr164b", true, true],
+    ["example.xn--zfr164b", false, true],
+    ["EXAMPLE.com", true, true],
+    ["EXAMPLE.com", false, true],
+    ["xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", true, true],
+    ["xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", false, true],
+    ["あ.com", true, true],
+    ["あ.com", false, false],
+    [".com", true, false],
+    [".com", false, false],
+  ])(
+    "checks whther a given value is a domain or not",
+    (string, enalbleIDN, expected) => {
+      expect(isDomain(string, enalbleIDN)).toBe(expected);
+    }
+  );
 
-    expect(isDomain("xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", true)).toBe(
-      true
-    );
-    expect(isDomain("xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", false)).toBe(
-      true
-    );
-
-    expect(isDomain("あ.com", true)).toBe(true);
-    expect(isDomain("あ.com", false)).toBe(false);
-
-    expect(isDomain(".com")).toBe(false);
-
+  it("checks a length of a domain", () => {
     // Labels must be 63 characters or less.
     expect(isDomain(`${"a".repeat(63)}.com`)).toBe(true);
     // do not check the length strictly
@@ -133,19 +138,23 @@ describe("isEmail", () => {
 });
 
 describe("isURL", () => {
-  it("checks whther a given value is URL or not", () => {
-    expect(isURL("https://www.example.com/foo/bar?baz=1")).toBe(true);
-    expect(isURL("https://111.111.111.111/foo/bar?baz=1")).toBe(true);
+  it.each([
+    ["https://www.example.com/foo/bar?baz=1", true],
+    ["https://111.111.111.111/foo/bar?baz=1", true],
+  ])("checks whther a given value is URL or not", (string, expected) => {
+    expect(isURL(string)).toBe(expected);
   });
 });
 
 describe("isCVE", () => {
-  it("checks whther a given value is CVE or not", () => {
-    expect(isCVE("CVE-1800-0000")).toBe(false);
-    expect(isCVE("CVE-2016-0000")).toBe(true);
-    expect(isCVE("CVE-2100-0000")).toBe(false);
-    expect(isCVE("CVE-2016-00000")).toBe(true);
-    expect(isCVE("CVE-20100-0000")).toBe(false);
+  it.each([
+    ["CVE-1800-0000", false],
+    ["CVE-2016-0000", true],
+    ["CVE-2100-0000", false],
+    ["CVE-2016-00000", true],
+    ["CVE-20100-0000", false],
+  ])("checks whther a given value is CVE or not", (string, expected) => {
+    expect(isCVE(string)).toBe(expected);
   });
 });
 
@@ -166,9 +175,11 @@ describe("isXMR", () => {
 });
 
 describe("isGATrackID", () => {
-  it("checks whther a given value is GATrackID or not", () => {
-    expect(isGATrackID("UA-26296840-4")).toBe(true);
-    expect(isGATrackID("UA-26296840")).toBe(true);
+  it.each([
+    ["UA-26296840-4", true],
+    ["UA-26296840", true],
+  ])("checks whther a given value is GATrackID or not", (string, expected) => {
+    expect(isGATrackID(string)).toBe(expected);
   });
 });
 
