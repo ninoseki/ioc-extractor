@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>STIX2 | ioc-extractor</title>
+	<title>Options | ioc-extractor</title>
 	<meta name="description" content="Documentation for ioc-extractor">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
@@ -56,10 +56,10 @@
 					<a href="../globals.html">Globals</a>
 				</li>
 				<li>
-					<a href="stix2.html">STIX2</a>
+					<a href="options.html">Options</a>
 				</li>
 			</ul>
-			<h1>Interface STIX2</h1>
+			<h1>Interface Options</h1>
 		</div>
 	</div>
 </header>
@@ -70,7 +70,7 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<span class="target">STIX2</span>
+						<span class="target">Options</span>
 					</li>
 				</ul>
 			</section>
@@ -81,9 +81,10 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="stix2.html#objects" class="tsd-kind-icon">objects</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="stix2.html#spec_version" class="tsd-kind-icon">spec_<wbr>version</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="stix2.html#type" class="tsd-kind-icon">type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="options.html#disableidn" class="tsd-kind-icon">disable<wbr>Idn</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="options.html#disablestricttld" class="tsd-kind-icon">disable<wbr>Strict<wbr>Tld</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="options.html#stix2" class="tsd-kind-icon">stix2</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface"><a href="options.html#threads" class="tsd-kind-icon">threads</a></li>
 							</ul>
 						</section>
 					</div>
@@ -92,32 +93,42 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="objects" class="tsd-anchor"></a>
-					<h3>objects</h3>
-					<div class="tsd-signature tsd-kind-icon">objects<span class="tsd-signature-symbol">:</span> <a href="indicator.html" class="tsd-signature-type">Indicator</a><span class="tsd-signature-symbol">[]</span></div>
+					<a name="disableidn" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> disable<wbr>Idn</h3>
+					<div class="tsd-signature tsd-kind-icon">disable<wbr>Idn<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/stix2/stix2.ts#L21">stix2/stix2.ts:21</a></li>
+							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/bin/ioc-extractor.ts#L11">bin/ioc-extractor.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="spec_version" class="tsd-anchor"></a>
-					<h3>spec_<wbr>version</h3>
-					<div class="tsd-signature tsd-kind-icon">spec_<wbr>version<span class="tsd-signature-symbol">:</span> <a href="../globals.html#spec_version" class="tsd-signature-type">SPEC_VERSION</a></div>
+					<a name="disablestricttld" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> disable<wbr>Strict<wbr>Tld</h3>
+					<div class="tsd-signature tsd-kind-icon">disable<wbr>Strict<wbr>Tld<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/stix2/stix2.ts#L19">stix2/stix2.ts:19</a></li>
+							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/bin/ioc-extractor.ts#L12">bin/ioc-extractor.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
-					<a name="type" class="tsd-anchor"></a>
-					<h3>type</h3>
-					<div class="tsd-signature tsd-kind-icon">type<span class="tsd-signature-symbol">:</span> <a href="../globals.html#spec_type" class="tsd-signature-type">SPEC_TYPE</a></div>
+					<a name="stix2" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> stix2</h3>
+					<div class="tsd-signature tsd-kind-icon">stix2<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/stix2/stix2.ts#L20">stix2/stix2.ts:20</a></li>
+							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/bin/ioc-extractor.ts#L9">bin/ioc-extractor.ts:9</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
+					<a name="threads" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> threads</h3>
+					<div class="tsd-signature tsd-kind-icon">threads<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">false</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">true</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/ninoseki/ioc-extractor/blob/5815c6d/src/bin/ioc-extractor.ts#L10">bin/ioc-extractor.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -136,16 +147,19 @@
 				</ul>
 				<ul class="current">
 					<li class="current tsd-kind-interface">
-						<a href="stix2.html" class="tsd-kind-icon">STIX2</a>
+						<a href="options.html" class="tsd-kind-icon">Options</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="stix2.html#objects" class="tsd-kind-icon">objects</a>
+								<a href="options.html#disableidn" class="tsd-kind-icon">disable<wbr>Idn</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="stix2.html#spec_version" class="tsd-kind-icon">spec_<wbr>version</a>
+								<a href="options.html#disablestricttld" class="tsd-kind-icon">disable<wbr>Strict<wbr>Tld</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
-								<a href="stix2.html#type" class="tsd-kind-icon">type</a>
+								<a href="options.html#stix2" class="tsd-kind-icon">stix2</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface">
+								<a href="options.html#threads" class="tsd-kind-icon">threads</a>
 							</li>
 						</ul>
 					</li>
