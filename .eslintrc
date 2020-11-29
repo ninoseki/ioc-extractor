@@ -25,6 +25,7 @@
     "max-len": 0,
     "no-console": 0,
     "prettier/prettier": "error",
-    "simple-import-sort/imports": "error"
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   }
 }
