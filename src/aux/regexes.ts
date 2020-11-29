@@ -100,8 +100,17 @@ export const internationalizedDomainRegex = new RegExp(
   "gi"
 );
 
+const nonStrictInternationalizedDomain = `(([a-z0-9\\u00a1-\\uffff]{1,63}|xn--)((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(?:[a-z0-9\\u00a1-\\uffff-]{2,63})\\b`;
+export const nonStrictInternationalizedDomainRegex = new RegExp(
+  nonStrictInternationalizedDomain,
+  "gi"
+);
+
 const domain = `(([a-z0-9]{1,63}|xn--)((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(${tldRegexString})\\b`;
 export const domainRegex = new RegExp(domain, "gi");
+
+const nonStrictDomain = `(([a-z0-9]{1,63}|xn--)((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(?:[a-z-]{2,})`;
+export const nonStrictDomainRegex = new RegExp(nonStrictDomain, "gi");
 
 /**
  * Check whether a string is a domain or not
@@ -109,18 +118,39 @@ export const domainRegex = new RegExp(domain, "gi");
  * @export
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
+ * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {boolean} return true if a string is a domain
  */
-export function isDomain(s: string, enableIDN = true): boolean {
-  if (enableIDN) {
+export function isDomain(
+  s: string,
+  enableIDN = true,
+  strictTLD = true
+): boolean {
+  if (enableIDN && strictTLD) {
     return check(s, internationalizedDomainRegex);
   }
-  return check(s, domainRegex);
+  if (enableIDN) {
+    return check(s, nonStrictInternationalizedDomainRegex);
+  }
+
+  if (strictTLD) {
+    return check(s, domainRegex);
+  }
+  return check(s, nonStrictDomainRegex);
 }
 
 export const emailRegex = new RegExp(`[A-Za-z0-9_.]+@${domain}`, "gi");
+export const nonStrictEmailRegex = new RegExp(
+  `[A-Za-z0-9_.]+@${nonStrictDomain}`,
+  "gi"
+);
+
 export const internationalizedEmailRegex = new RegExp(
   `[A-Za-z0-9_.]+@${internationalizedDomain}`,
+  "gi"
+);
+export const nonStrictInternationalizedEmailRegex = new RegExp(
+  `[A-Za-z0-9_.]+@${nonStrictInternationalizedDomain}`,
   "gi"
 );
 
@@ -130,13 +160,25 @@ export const internationalizedEmailRegex = new RegExp(
  * @export
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
+ * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {boolean} return true if a string is a domain
  */
-export function isEmail(s: string, enableIDN = true): boolean {
-  if (enableIDN) {
+export function isEmail(
+  s: string,
+  enableIDN = true,
+  strictTLD = true
+): boolean {
+  if (enableIDN && strictTLD) {
     return check(s, internationalizedEmailRegex);
   }
-  return check(s, emailRegex);
+  if (enableIDN) {
+    return check(s, nonStrictInternationalizedEmailRegex);
+  }
+
+  if (strictTLD) {
+    return check(s, emailRegex);
+  }
+  return check(s, nonStrictEmailRegex);
 }
 
 const ipv4 =
@@ -188,11 +230,21 @@ const protocol = "(?:(?:https?)://)";
 const auth = "(?:\\S+(?::\\S*)?@)?";
 const port = "(?::\\d{2,5})?";
 const path = '(?:[/?#][^\\s"]*)?';
+
 const url = `(?:${protocol})${auth}(?:${domain}|localhost|${ipv4})${port}${path}`;
+const nonStrictURL = `(?:${protocol})${auth}(?:${nonStrictDomain}|localhost|${ipv4})${port}${path}`;
+
 const internationalizedURL = `(?:${protocol})${auth}(?:${internationalizedDomain}|localhost|${ipv4})${port}${path}`;
+const nonStrictInternationalizedURL = `(?:${protocol})${auth}(?:${nonStrictInternationalizedDomain}|localhost|${ipv4})${port}${path}`;
 
 export const urlRegex = new RegExp(url, "gi");
+export const nonStrictURLRegex = new RegExp(nonStrictURL, "gi");
+
 export const internationalizedURLRegex = new RegExp(internationalizedURL, "gi");
+export const nonStrictInternationalizedURLRegex = new RegExp(
+  nonStrictInternationalizedURL,
+  "gi"
+);
 
 /**
  * Check whether a string is a URL or not
@@ -200,13 +252,21 @@ export const internationalizedURLRegex = new RegExp(internationalizedURL, "gi");
  * @export
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
+ * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {boolean} return true if a string is a URL
  */
-export function isURL(s: string, enableIDN = true): boolean {
-  if (enableIDN) {
+export function isURL(s: string, enableIDN = true, strictTLD = true): boolean {
+  if (enableIDN && strictTLD) {
     return check(s, internationalizedURLRegex);
   }
-  return check(s, urlRegex);
+  if (enableIDN) {
+    return check(s, nonStrictInternationalizedURLRegex);
+  }
+
+  if (strictTLD) {
+    return check(s, urlRegex);
+  }
+  return check(s, nonStrictURLRegex);
 }
 
 export const cveRegex = /(CVE-(19|20)\d{2}-\d{4,7})/gi;

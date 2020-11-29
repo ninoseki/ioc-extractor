@@ -7,7 +7,7 @@ describe("IOCExtractor", () => {
   describe("simple input", () => {
     it("should extract IOCs from the input", () => {
       const input =
-        "1.1.1[.]1 2.2.2 . 2 google(.)com テスト.example.com https://www.google[.]com http://テスト.example.com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4 test@テスト.example.com";
+        "1.1.1[.]1 2.2.2 . 2 google(.)com テスト.example.com https://www.google[.]com http://テスト.example.com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4 test@テスト.example.com example.nope";
       const ioc = extractIOC(input);
 
       expect(ioc.md5s.length).toBe(1);
@@ -41,10 +41,10 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with disabled IDN", () => {
+  describe("simple input with disabled IDN extraciton", () => {
     it("should extract IOCs from the input", () => {
       const input =
-        "テスト.example.com example.com http://テスト.example.com http://example.com test@テスト.example.com test@example.com";
+        "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
       const ioc = extractIOC(input, false);
 
       expect(ioc.domains.length).toBe(1);
@@ -55,6 +55,49 @@ describe("IOCExtractor", () => {
 
       expect(ioc.emails.length).toBe(1);
       expect(ioc.emails[0]).toBe("test@example.com");
+    });
+  });
+
+  describe("simple input with non-strict TLD validaton", () => {
+    it("should extract IOCs from the input", () => {
+      const input =
+        "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
+      const ioc = extractIOC(input, true, false);
+
+      expect(ioc.domains.length).toBe(3);
+      expect(ioc.domains[0]).toBe("example.com");
+      expect(ioc.domains[1]).toBe("example.nope");
+      expect(ioc.domains[2]).toBe("テスト.nope");
+
+      expect(ioc.urls.length).toBe(3);
+      expect(ioc.urls[0]).toBe("http://example.com");
+      expect(ioc.urls[1]).toBe("http://example.nope");
+      expect(ioc.urls[2]).toBe("http://テスト.nope");
+
+      expect(ioc.emails.length).toBe(3);
+      expect(ioc.emails[0]).toBe("test@example.com");
+      expect(ioc.emails[1]).toBe("test@example.nope");
+      expect(ioc.emails[2]).toBe("test@テスト.nope");
+    });
+  });
+
+  describe("simple input with non-strict TLD validaton & disabled IDN extraction", () => {
+    it("should extract IOCs from the input", () => {
+      const input =
+        "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
+      const ioc = extractIOC(input, false, false);
+
+      expect(ioc.domains.length).toBe(2);
+      expect(ioc.domains[0]).toBe("example.com");
+      expect(ioc.domains[1]).toBe("example.nope");
+
+      expect(ioc.urls.length).toBe(2);
+      expect(ioc.urls[0]).toBe("http://example.com");
+      expect(ioc.urls[1]).toBe("http://example.nope");
+
+      expect(ioc.emails.length).toBe(2);
+      expect(ioc.emails[0]).toBe("test@example.com");
+      expect(ioc.emails[1]).toBe("test@example.nope");
     });
   });
 

@@ -15,6 +15,12 @@ import {
   ipv6Regex,
   macAddressRegex,
   md5Regex,
+  nonStrictDomainRegex,
+  nonStrictEmailRegex,
+  nonStrictInternationalizedDomainRegex,
+  nonStrictInternationalizedEmailRegex,
+  nonStrictInternationalizedURLRegex,
+  nonStrictURLRegex,
   sha1Regex,
   sha256Regex,
   sha512Regex,
@@ -103,13 +109,25 @@ export function extractASN(s: string): string[] {
  * @export
  * @param {string} s A string
  * @param {boolean} enableIDN enable or disable IDN extraction
+ * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {string[]} An array of domains
  */
-export function extractDomain(s: string, enableIDN = true): string[] {
-  if (enableIDN) {
+export function extractDomain(
+  s: string,
+  enableIDN = true,
+  strictTLD = true
+): string[] {
+  if (enableIDN && strictTLD) {
     return matchesWithRegexp(s, internationalizedDomainRegex);
   }
-  return matchesWithRegexp(s, domainRegex);
+  if (enableIDN) {
+    return matchesWithRegexp(s, nonStrictInternationalizedDomainRegex);
+  }
+
+  if (strictTLD) {
+    return matchesWithRegexp(s, domainRegex);
+  }
+  return matchesWithRegexp(s, nonStrictDomainRegex);
 }
 
 /**
@@ -118,13 +136,25 @@ export function extractDomain(s: string, enableIDN = true): string[] {
  * @export
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
+ * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {string[]} An array of emails
  */
-export function extractEmail(s: string, enableIDN = true): string[] {
-  if (enableIDN) {
+export function extractEmail(
+  s: string,
+  enableIDN = true,
+  strictTLD = true
+): string[] {
+  if (enableIDN && strictTLD) {
     return matchesWithRegexp(s, internationalizedEmailRegex);
   }
-  return matchesWithRegexp(s, emailRegex);
+  if (enableIDN) {
+    return matchesWithRegexp(s, nonStrictInternationalizedEmailRegex);
+  }
+
+  if (strictTLD) {
+    return matchesWithRegexp(s, emailRegex);
+  }
+  return matchesWithRegexp(s, nonStrictEmailRegex);
 }
 
 /**
@@ -155,13 +185,25 @@ export function extractIPv6(s: string): string[] {
  * @export
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
+ * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {string[]} An array of URLs
  */
-export function extractURL(s: string, enableIDN = true): string[] {
-  if (enableIDN) {
+export function extractURL(
+  s: string,
+  enableIDN = true,
+  strictTLD = true
+): string[] {
+  if (enableIDN && strictTLD) {
     return matchesWithRegexp(s, internationalizedURLRegex);
   }
-  return matchesWithRegexp(s, urlRegex);
+  if (enableIDN) {
+    return matchesWithRegexp(s, nonStrictInternationalizedURLRegex);
+  }
+
+  if (strictTLD) {
+    return matchesWithRegexp(s, urlRegex);
+  }
+  return matchesWithRegexp(s, nonStrictURLRegex);
 }
 
 /**
