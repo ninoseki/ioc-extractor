@@ -9,6 +9,7 @@ interface Options {
   stix2?: boolean;
   threads?: boolean;
   disableIdn?: boolean;
+  disableStrictTld?: boolean;
 }
 
 (async (): Promise<void> => {
@@ -17,19 +18,25 @@ interface Options {
   program
     .option("-s2, --stix2", "output in STIX2 format", false)
     .option("-t, --threads", "use threads", false)
-    .option("--disable-idn", "disable IDN extraction", false);
+    .option("--disable-idn", "disable IDN extraction", false)
+    .option("--disable-strict-tld", "disable strict TLD validation", false);
   program.parse();
 
   const options = <Options>program;
   const threads = options.threads !== undefined ? options.threads : false;
   const stix2 = options.stix2 !== undefined ? options.stix2 : false;
+
   const disalbeIDN =
     options.disableIdn !== undefined ? options.disableIdn : false;
   const enableIDN = !disalbeIDN;
 
+  const disableStrictTLD =
+    options.disableStrictTld !== undefined ? options.disableStrictTld : false;
+  const strictTLD = !disableStrictTLD;
+
   const ioc = threads
-    ? await extractIOCAsync(str, enableIDN)
-    : extractIOC(str, enableIDN);
+    ? await extractIOCAsync(str, enableIDN, strictTLD)
+    : extractIOC(str, enableIDN, strictTLD);
 
   if (stix2) {
     const stix2Obj = convertToSTIX2(ioc);

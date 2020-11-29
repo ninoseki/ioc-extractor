@@ -31,11 +31,11 @@ const extractor = {
   extractCVE(text: string): string[] {
     return extractCVE(text);
   },
-  extractDomain(text: string, enableIDN = true): string[] {
-    return extractDomain(text, enableIDN);
+  extractDomain(text: string, enableIDN = true, strictTLD = true): string[] {
+    return extractDomain(text, enableIDN, strictTLD);
   },
-  extractEmail(text: string, enableIDN = true): string[] {
-    return extractEmail(text, enableIDN);
+  extractEmail(text: string, enableIDN = true, strictTLD = true): string[] {
+    return extractEmail(text, enableIDN, strictTLD);
   },
   extractETH(text: string): string[] {
     return extractETH(text);
@@ -70,8 +70,8 @@ const extractor = {
   extractSSDEEP(text: string): string[] {
     return extractSSDEEP(text);
   },
-  extractURL(text: string, enableIDN = true): string[] {
-    return extractURL(text, enableIDN);
+  extractURL(text: string, enableIDN = true, strictTLD = true): string[] {
+    return extractURL(text, enableIDN, strictTLD);
   },
   extractXMR(text: string): string[] {
     return extractXMR(text);
