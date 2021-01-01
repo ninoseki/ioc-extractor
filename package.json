@@ -1,6 +1,6 @@
 {
   "name": "ioc-extractor",
-  "version": "2.6.2",
+  "version": "2.7.0",
   "description": "IOC(Indicator of Compromise) extractor",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -9,7 +9,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest",
-    "coverage": "jest --coverage && cat ./coverage/lcov.info | coveralls",
+    "coverage": "jest --coverage",
     "lint": "eslint src --ext .ts",
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier src/**/*.ts",
