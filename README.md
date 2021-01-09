@@ -1,7 +1,7 @@
 # IOC extractor
 
 [![npm version](https://badge.fury.io/js/ioc-extractor.svg)](https://badge.fury.io/js/ioc-extractor)
-[![Build Status](https://travis-ci.com/ninoseki/ioc-extractor.svg?branch=master)](https://travis-ci.com/ninoseki/ioc-extractor)
+![Node.js CI](https://github.com/ninoseki/ioc-extractor/workflows/Node.js%20CI/badge.svg)
 [![CodeFactor](https://www.codefactor.io/repository/github/ninoseki/ioc-extractor/badge)](https://www.codefactor.io/repository/github/ninoseki/ioc-extractor)
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg)](https://coveralls.io/github/ninoseki/ioc-extractor)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://ninoseki.github.io/ioc-extractor/)
