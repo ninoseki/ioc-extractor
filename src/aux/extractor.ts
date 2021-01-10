@@ -1,46 +1,47 @@
 import { dedup, sortByValue } from "./auxiliary";
 import {
-  asnRegex,
-  btcRegex,
-  cveRegex,
-  domainRegex,
-  emailRegex,
-  ethRegex,
-  gaPubIDRegex,
-  gaTrackIDRegex,
-  internationalizedDomainRegex,
-  internationalizedEmailRegex,
-  internationalizedURLRegex,
-  ipv4Regex,
-  ipv6Regex,
-  macAddressRegex,
-  md5Regex,
-  nonStrictDomainRegex,
-  nonStrictEmailRegex,
-  nonStrictInternationalizedDomainRegex,
-  nonStrictInternationalizedEmailRegex,
-  nonStrictInternationalizedURLRegex,
-  nonStrictURLRegex,
-  sha1Regex,
-  sha256Regex,
-  sha512Regex,
-  ssdeepRegex,
-  urlRegex,
-  xmrRegex,
-} from "./regexes";
+  getASNRegExp,
+  getBTCRegExp,
+  getCVERegExp,
+  getDomainRegExp,
+  getEmailRegExp,
+  getETHRegExp,
+  getGAPubIDRegExp,
+  getGATrackIDRegExp,
+  getInternationalizedDomainRegExp,
+  getInternationalizedEmailRegExp,
+  getInternationalizedURLRegExp,
+  getIPv4RegExp,
+  getIPv6RegExp,
+  getMACAddressRegExp,
+  getMD5RegExp,
+  getNonStrictDomainRegExp,
+  getNonStrictEmailRegExp,
+  getNonStrictInternationalizedDomainRegExp,
+  getNonStrictInternationalizedEmailRegExp,
+  getNonStrictInternationalizedURLRegExp,
+  getNonStrictURLRegExp,
+  getSHA1RegExp,
+  getSHA256RegExp,
+  getSHA512RegExp,
+  getSSDEEPRegExp,
+  getURLRegExp,
+  getXMRRegExp,
+} from "./regexpes";
 
 /**
  * Perform String match() by using a regexp
  *
  * @param {string} s A string
- * @param {RegExp} regex A regexp to use
+ * @param {RegExp} regexp A regexp to use
  * @returns {string[]} An array of matched strings, returns an empty array if not matched
  */
-function matchesWithRegexp(s: string, regex: RegExp): string[] {
+function matchesWithRegExp(s: string, regexp: RegExp): string[] {
   // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
-  const matched = s.match(regex);
+  const matched = s.match(regexp);
   return matched === null ? [] : sortByValue(dedup(matched));
 }
+
 /**
  * Extract MD5s from a string
  *
@@ -49,7 +50,8 @@ function matchesWithRegexp(s: string, regex: RegExp): string[] {
  * @returns {string[]} An array of MD5s
  */
 export function extractMD5(s: string): string[] {
-  return matchesWithRegexp(s, md5Regex);
+  const regexp = getMD5RegExp();
+  return matchesWithRegExp(s, regexp);
 }
 /**
  * Extract SHA1s from a string
@@ -59,7 +61,8 @@ export function extractMD5(s: string): string[] {
  * @returns {string[]} An array of SHA1s
  */
 export function extractSHA1(s: string): string[] {
-  return matchesWithRegexp(s, sha1Regex);
+  const regexp = getSHA1RegExp();
+  return matchesWithRegExp(s, regexp);
 }
 /**
  * Extract SHA256s from a string
@@ -69,7 +72,8 @@ export function extractSHA1(s: string): string[] {
  * @returns {string[]} An array of SHA256s
  */
 export function extractSHA256(s: string): string[] {
-  return matchesWithRegexp(s, sha256Regex);
+  const regexp = getSHA256RegExp();
+  return matchesWithRegExp(s, regexp);
 }
 /**
  * Extract SHA512s from a string
@@ -79,7 +83,8 @@ export function extractSHA256(s: string): string[] {
  * @returns {string[]} An array of SHA512s
  */
 export function extractSHA512(s: string): string[] {
-  return matchesWithRegexp(s, sha512Regex);
+  const regexp = getSHA512RegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -90,7 +95,8 @@ export function extractSHA512(s: string): string[] {
  * @returns {string[]} An array of SSDEEPs
  */
 export function extractSSDEEP(s: string): string[] {
-  return matchesWithRegexp(s, ssdeepRegex);
+  const regexp = getSSDEEPRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 /**
  * Extract ASNs from a string
@@ -100,7 +106,8 @@ export function extractSSDEEP(s: string): string[] {
  * @returns {string[]} An array of ASNs
  */
 export function extractASN(s: string): string[] {
-  return matchesWithRegexp(s, asnRegex);
+  const regexp = getASNRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -118,16 +125,22 @@ export function extractDomain(
   strictTLD = true
 ): string[] {
   if (enableIDN && strictTLD) {
-    return matchesWithRegexp(s, internationalizedDomainRegex);
+    const internationalizedDomainRegExp = getInternationalizedDomainRegExp();
+    return matchesWithRegExp(s, internationalizedDomainRegExp);
   }
+
   if (enableIDN) {
-    return matchesWithRegexp(s, nonStrictInternationalizedDomainRegex);
+    const nonStrictInternationalizedDomainRegExp = getNonStrictInternationalizedDomainRegExp();
+    return matchesWithRegExp(s, nonStrictInternationalizedDomainRegExp);
   }
 
   if (strictTLD) {
-    return matchesWithRegexp(s, domainRegex);
+    const domainRegExp = getDomainRegExp();
+    return matchesWithRegExp(s, domainRegExp);
   }
-  return matchesWithRegexp(s, nonStrictDomainRegex);
+
+  const nonStrictDomainRegExp = getNonStrictDomainRegExp();
+  return matchesWithRegExp(s, nonStrictDomainRegExp);
 }
 
 /**
@@ -145,16 +158,22 @@ export function extractEmail(
   strictTLD = true
 ): string[] {
   if (enableIDN && strictTLD) {
-    return matchesWithRegexp(s, internationalizedEmailRegex);
+    const internationalizedEmailRegExp = getInternationalizedEmailRegExp();
+    return matchesWithRegExp(s, internationalizedEmailRegExp);
   }
+
   if (enableIDN) {
-    return matchesWithRegexp(s, nonStrictInternationalizedEmailRegex);
+    const nonStrictInternationalizedEmailRegExp = getNonStrictInternationalizedEmailRegExp();
+    return matchesWithRegExp(s, nonStrictInternationalizedEmailRegExp);
   }
 
   if (strictTLD) {
-    return matchesWithRegexp(s, emailRegex);
+    const emailRegExp = getEmailRegExp();
+    return matchesWithRegExp(s, emailRegExp);
   }
-  return matchesWithRegexp(s, nonStrictEmailRegex);
+
+  const nonStrictEmailRegExp = getNonStrictEmailRegExp();
+  return matchesWithRegExp(s, nonStrictEmailRegExp);
 }
 
 /**
@@ -165,7 +184,8 @@ export function extractEmail(
  * @returns {string[]} An array of IPv4s
  */
 export function extractIPv4(s: string): string[] {
-  return matchesWithRegexp(s, ipv4Regex);
+  const regexp = getIPv4RegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -176,7 +196,8 @@ export function extractIPv4(s: string): string[] {
  * @returns {string[]} An array of IPv6s
  */
 export function extractIPv6(s: string): string[] {
-  return matchesWithRegexp(s, ipv6Regex);
+  const regexp = getIPv6RegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -194,16 +215,22 @@ export function extractURL(
   strictTLD = true
 ): string[] {
   if (enableIDN && strictTLD) {
-    return matchesWithRegexp(s, internationalizedURLRegex);
+    const internationalizedURLRegExp = getInternationalizedURLRegExp();
+    return matchesWithRegExp(s, internationalizedURLRegExp);
   }
+
   if (enableIDN) {
-    return matchesWithRegexp(s, nonStrictInternationalizedURLRegex);
+    const nonStrictInternationalizedURLRegExp = getNonStrictInternationalizedURLRegExp();
+    return matchesWithRegExp(s, nonStrictInternationalizedURLRegExp);
   }
 
   if (strictTLD) {
-    return matchesWithRegexp(s, urlRegex);
+    const urlRegExp = getURLRegExp();
+    return matchesWithRegExp(s, urlRegExp);
   }
-  return matchesWithRegexp(s, nonStrictURLRegex);
+
+  const nonStrictURLRegExp = getNonStrictURLRegExp();
+  return matchesWithRegExp(s, nonStrictURLRegExp);
 }
 
 /**
@@ -214,7 +241,8 @@ export function extractURL(
  * @returns {string[]} An array of CVEs
  */
 export function extractCVE(s: string): string[] {
-  return matchesWithRegexp(s, cveRegex);
+  const regexp = getCVERegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -225,7 +253,8 @@ export function extractCVE(s: string): string[] {
  * @returns {string[]} An array of BTCs
  */
 export function extractBTC(s: string): string[] {
-  return matchesWithRegexp(s, btcRegex);
+  const regexp = getBTCRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -236,7 +265,8 @@ export function extractBTC(s: string): string[] {
  * @returns {string[]} An array of XMRs
  */
 export function extractXMR(s: string): string[] {
-  return matchesWithRegexp(s, xmrRegex);
+  const regexp = getXMRRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -247,7 +277,8 @@ export function extractXMR(s: string): string[] {
  * @returns {string[]} An array of Google Adsense Publisher IDs
  */
 export function extractGAPubID(s: string): string[] {
-  return matchesWithRegexp(s, gaPubIDRegex);
+  const regexp = getGAPubIDRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -258,7 +289,8 @@ export function extractGAPubID(s: string): string[] {
  * @returns {string[]} An array of Google Analytics tracking IDs
  */
 export function extractGATrackID(s: string): string[] {
-  return matchesWithRegexp(s, gaTrackIDRegex);
+  const regexp = getGATrackIDRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -269,7 +301,8 @@ export function extractGATrackID(s: string): string[] {
  * @returns {string[]} An array of mac addresses
  */
 export function extractMacAddress(s: string): string[] {
-  return matchesWithRegexp(s, macAddressRegex);
+  const regexp = getMACAddressRegExp();
+  return matchesWithRegExp(s, regexp);
 }
 
 /**
@@ -280,5 +313,6 @@ export function extractMacAddress(s: string): string[] {
  * @returns {string[]} An array of ETH addresses
  */
 export function extractETH(s: string): string[] {
-  return matchesWithRegexp(s, ethRegex);
+  const regexp = getETHRegExp();
+  return matchesWithRegExp(s, regexp);
 }
