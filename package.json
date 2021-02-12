@@ -14,15 +14,13 @@
     "lint:fix": "npm run lint -- --fix",
     "prettier": "prettier src/**/*.ts",
     "prettier:write": "prettier --write src/**/*.ts",
-    "docs:build": "typedoc"
+    "docs:build": "typedoc",
+    "postinstall": "husky install",
+    "prepublishOnly": "pinst --disable",
+    "postpublish": "pinst --enable"
   },
   "bin": {
     "ioc-extractor": "dist/bin/ioc-extractor.js"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   },
   "lint-staged": {
     "*.ts": [
@@ -67,11 +65,11 @@
     "@types/benchmark": "2.1.0",
     "@types/jest": "26.0.20",
     "@types/memoizee": "0.4.5",
-    "@types/node": "14.14.25",
+    "@types/node": "14.14.27",
     "@types/punycode": "2.1.0",
     "@types/uuid": "8.3.0",
-    "@typescript-eslint/eslint-plugin": "4.14.2",
-    "@typescript-eslint/parser": "4.14.2",
+    "@typescript-eslint/eslint-plugin": "4.15.0",
+    "@typescript-eslint/parser": "4.15.0",
     "benny": "3.6.15",
     "coveralls": "3.1.0",
     "eslint": "7.19.0",
@@ -79,15 +77,16 @@
     "eslint-plugin-jest": "24.1.3",
     "eslint-plugin-prettier": "3.3.1",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "husky": "4.3.8",
+    "husky": "^5.0.9",
     "jest": "26.6.3",
     "lint-staged": "10.5.4",
+    "pinst": "^2.1.4",
     "prettier": "2.2.1",
-    "ts-jest": "26.5.0",
-    "ts-loader": "8.0.15",
+    "ts-jest": "26.5.1",
+    "ts-loader": "8.0.17",
     "ts-node": "9.1.1",
-    "typedoc": "0.20.21",
-    "typescript": "4.1.3"
+    "typedoc": "0.20.24",
+    "typescript": "4.1.5"
   },
   "dependencies": {
     "array-unique": "^0.3.2",
