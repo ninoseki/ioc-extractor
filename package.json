@@ -11,9 +11,6 @@
     "test": "jest",
     "coverage": "jest --coverage",
     "lint": "eslint src --ext .ts",
-    "lint:fix": "npm run lint -- --fix",
-    "prettier": "prettier src/**/*.ts",
-    "prettier:write": "prettier --write src/**/*.ts",
     "docs:build": "typedoc",
     "postinstall": "husky install",
     "prepublishOnly": "pinst --disable",
@@ -24,8 +21,7 @@
   },
   "lint-staged": {
     "*.ts": [
-      "npm run lint:fix",
-      "npm run prettier:write"
+      "npm run lint -- --fix"
     ]
   },
   "nyc": {
