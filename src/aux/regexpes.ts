@@ -218,7 +218,7 @@ export const getNonStrictInternationalizedEmailRegExp = (): RegExp => {
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
  * @param {boolean} strictTLD Enable or disable strict TLD validation
- * @returns {boolean} return true if a string is a domain
+ * @returns {boolean} true if a string is a domain
  */
 export function isEmail(
   s: string,
@@ -258,7 +258,7 @@ export const getIPv4RegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is an IPv4
+ * @returns {boolean} true if a string is an IPv4
  */
 export function isIPv4(s: string): boolean {
   const regexp = getIPv4RegExp();
@@ -298,7 +298,7 @@ export const getIPv6RegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is an IPv6
+ * @returns {boolean} true if a string is an IPv6
  */
 export function isIPv6(s: string): boolean {
   const regexp = getIPv6RegExp();
@@ -345,7 +345,7 @@ export const getNonStrictInternationalizedURLRegExp = (): RegExp => {
  * @param {string} s A string
  * @param {boolean} enableIDN Enable or disable IDN extraction
  * @param {boolean} strictTLD Enable or disable strict TLD validation
- * @returns {boolean} return true if a string is a URL
+ * @returns {boolean} true if a string is a URL
  */
 export function isURL(s: string, enableIDN = true, strictTLD = true): boolean {
   if (enableIDN && strictTLD) {
@@ -376,7 +376,7 @@ export const getCVERegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is a CVE
+ * @returns {boolean} true if a string is a CVE
  */
 export function isCVE(s: string): boolean {
   const regexp = getCVERegExp();
@@ -408,7 +408,7 @@ export const getXMRRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is an XMR
+ * @returns {boolean} true if a string is an XMR
  */
 export function isXMR(s: string): boolean {
   const regexp = getXMRRegExp();
@@ -424,7 +424,7 @@ export const getGAPubIDRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is a Google Adsense Publisher ID
+ * @returns {boolean} true if a string is a Google Adsense Publisher ID
  */
 export function isGAPubID(s: string): boolean {
   const regexp = getGAPubIDRegExp();
@@ -440,7 +440,7 @@ export const getGATrackIDRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is a Google Analytics tracking ID
+ * @returns {boolean} true if a string is a Google Analytics tracking ID
  */
 export function isGATrackID(s: string): boolean {
   const regexp = getGATrackIDRegExp();
@@ -456,7 +456,7 @@ export const getMACAddressRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is a mac address
+ * @returns {boolean} true if a string is a mac address
  */
 export function isMacAddress(s: string): boolean {
   const regexp = getMACAddressRegExp();
@@ -472,7 +472,7 @@ export const getETHRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @returns {boolean} return true if a string is an ETH address
+ * @returns {boolean} true if a string is an ETH address
  */
 export function isETH(s: string): boolean {
   const regexp = getETHRegExp();

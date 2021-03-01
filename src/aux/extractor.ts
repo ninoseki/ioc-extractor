@@ -115,7 +115,7 @@ export function extractASN(s: string): string[] {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN enable or disable IDN extraction
+ * @param {boolean} enableIDN Enable or disable IDN extraction
  * @param {boolean} strictTLD Enable or disable strict TLD validation
  * @returns {string[]} An array of domains
  */
