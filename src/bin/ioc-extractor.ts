@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from "commander";
-import * as getStdin from "get-stdin";
+import getStdin from "get-stdin";
 
 import { extractIOC, extractIOCAsync } from "../";
 import { convertToSTIX2 } from "../stix2/stix2";
