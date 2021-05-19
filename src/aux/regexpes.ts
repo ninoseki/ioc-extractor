@@ -191,24 +191,26 @@ export function isDomain(
   return check(s, nonStrictDomainRegExp);
 }
 
+const localPart = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+";
+
 export const getEmailRegExp = (): RegExp => {
   const domain = getDomainRegExpString();
-  return new RegExp(`[A-Za-z0-9_.]+@${domain}`, "gi");
+  return new RegExp(`${localPart}@${domain}`, "gi");
 };
 
 export const getNonStrictEmailRegExp = (): RegExp => {
   const nonStrictDomain = getNonStrictDomainRegExpString();
-  return new RegExp(`[A-Za-z0-9_.]+@${nonStrictDomain}`, "gi");
+  return new RegExp(`${localPart}@${nonStrictDomain}`, "gi");
 };
 
 export const getInternationalizedEmailRegExp = (): RegExp => {
   const internationalizedDomain = getInternationalizedDomainRegExpString();
-  return new RegExp(`[A-Za-z0-9_.]+@${internationalizedDomain}`, "gi");
+  return new RegExp(`${localPart}@${internationalizedDomain}`, "gi");
 };
 
 export const getNonStrictInternationalizedEmailRegExp = (): RegExp => {
   const nonStrictInternationalizedDomain = getNonStrictInternationalizedDomainRegExpString();
-  return new RegExp(`[A-Za-z0-9_.]+@${nonStrictInternationalizedDomain}`, "gi");
+  return new RegExp(`${localPart}@${nonStrictInternationalizedDomain}`, "gi");
 };
 
 /**
