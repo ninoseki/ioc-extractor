@@ -134,6 +134,9 @@ describe("isIPv6", () => {
 describe("isEmail", () => {
   it("checks whther a given value is Email or not", () => {
     expect(isEmail("test@test.com")).toBe(true);
+    expect(isEmail("foo-bar@test.com")).toBe(true);
+    expect(isEmail("foo.bar@test.com")).toBe(true);
+    expect(isEmail("foo#bar@test.com")).toBe(true);
   });
 });
 
