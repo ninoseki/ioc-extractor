@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { program } from "commander";
-import getStdin from "get-stdin";
+import * as getStdin from "get-stdin";
 
 import { extractIOC, extractIOCAsync } from "../";
 import { convertToSTIX2 } from "../stix2/stix2";
@@ -13,6 +13,7 @@ interface Options {
 }
 
 (async (): Promise<void> => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-assignment
   const str = await getStdin();
 
   program
