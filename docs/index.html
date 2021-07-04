@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for ioc-extractor">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -40,8 +41,6 @@
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
 							<input type="checkbox" id="tsd-filter-externals" checked />
 							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,11 +50,6 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
 			<h1>ioc-extractor</h1>
 		</div>
 	</div>
@@ -68,7 +62,7 @@
 					<h1>IOC extractor</h1>
 				</a>
 				<p><a href="https://badge.fury.io/js/ioc-extractor"><img src="https://badge.fury.io/js/ioc-extractor.svg" alt="npm version"></a>
-					<a href="https://travis-ci.com/ninoseki/ioc-extractor"><img src="https://travis-ci.com/ninoseki/ioc-extractor.svg?branch=master" alt="Build Status"></a>
+					<img src="https://github.com/ninoseki/ioc-extractor/workflows/Node.js%20CI/badge.svg" alt="Node.js CI">
 					<a href="https://www.codefactor.io/repository/github/ninoseki/ioc-extractor"><img src="https://www.codefactor.io/repository/github/ninoseki/ioc-extractor/badge" alt="CodeFactor"></a>
 					<a href="https://coveralls.io/github/ninoseki/ioc-extractor"><img src="https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg" alt="Coverage Status"></a>
 				<a href="https://ninoseki.github.io/ioc-extractor/"><img src="https://img.shields.io/badge/docs-latest-brightgreen.svg" alt="Documentation"></a></p>
@@ -77,86 +71,91 @@
 				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
 					<h2>Installation</h2>
 				</a>
-				<pre><code class="language-sh">npm install ioc-extractor</code></pre>
+				<pre><code class="language-sh"><span style="color: #000000">npm install ioc-extractor</span>
+</code></pre>
 				<a href="#usage" id="usage" style="color: inherit; text-decoration: none;">
 					<h2>Usage</h2>
 				</a>
 				<a href="#as-a-cli" id="as-a-cli" style="color: inherit; text-decoration: none;">
 					<h3>As a CLI</h3>
 				</a>
-				<pre><code class="language-bash">$ ioc-extractor --<span class="hljs-built_in">help</span>
-Usage: ioc-extractor [options]
+				<pre><code class="language-bash"><span style="color: #000000">$ ioc-extractor --help</span>
+<span style="color: #000000">Usage: ioc-extractor [options]</span>
 
-Options:
-  -s2, --stix2          output <span class="hljs-keyword">in</span> STIX2 format (default: <span class="hljs-literal">false</span>)
-  -t, --threads         use threads (default: <span class="hljs-literal">false</span>)
-  --disable-idn         <span class="hljs-built_in">disable</span> IDN extraction (default: <span class="hljs-literal">false</span>)
-  --disable-strict-tld  <span class="hljs-built_in">disable</span> strict TLD validation (default: <span class="hljs-literal">false</span>)
-  -h, --<span class="hljs-built_in">help</span>            display <span class="hljs-built_in">help</span> <span class="hljs-keyword">for</span> <span class="hljs-built_in">command</span></code></pre>
-				<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1.1.1.1 8.8.8.8 example.com&quot;</span> | ioc-extractor
-{<span class="hljs-string">&quot;asns&quot;</span>:[],<span class="hljs-string">&quot;btcs&quot;</span>:[],<span class="hljs-string">&quot;cves&quot;</span>:[],<span class="hljs-string">&quot;domains&quot;</span>:[<span class="hljs-string">&quot;example.com&quot;</span>],<span class="hljs-string">&quot;emails&quot;</span>:[],<span class="hljs-string">&quot;eths&quot;</span>:[],<span class="hljs-string">&quot;gaPubIDs&quot;</span>:[],<span class="hljs-string">&quot;gaTrackIDs&quot;</span>:[],<span class="hljs-string">&quot;ipv4s&quot;</span>:[<span class="hljs-string">&quot;1.1.1.1&quot;</span>,<span class="hljs-string">&quot;8.8.8.8&quot;</span>],<span class="hljs-string">&quot;ipv6s&quot;</span>:[],<span class="hljs-string">&quot;macAddresses&quot;</span>:[],<span class="hljs-string">&quot;md5s&quot;</span>:[],<span class="hljs-string">&quot;sha1s&quot;</span>:[],<span class="hljs-string">&quot;sha256s&quot;</span>:[],<span class="hljs-string">&quot;sha512s&quot;</span>:[],<span class="hljs-string">&quot;ssdeeps&quot;</span>:[],<span class="hljs-string">&quot;urls&quot;</span>:[],<span class="hljs-string">&quot;xmrs&quot;</span>:[]}
+<span style="color: #000000">Options:</span>
+<span style="color: #000000">  -s2, --stix2          output </span><span style="color: #AF00DB">in</span><span style="color: #000000"> STIX2 format (default: false)</span>
+<span style="color: #000000">  -t, --threads         use threads (default: false)</span>
+<span style="color: #000000">  --disable-idn         disable IDN extraction (default: false)</span>
+<span style="color: #000000">  --disable-strict-tld  disable strict TLD validation (default: false)</span>
+<span style="color: #000000">  -h, --help            display </span><span style="color: #795E26">help</span><span style="color: #000000"> </span><span style="color: #AF00DB">for</span><span style="color: #000000"> </span><span style="color: #795E26">command</span>
+</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">$ </span><span style="color: #795E26">echo</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;1.1.1.1 8.8.8.8 example.com&quot;</span><span style="color: #000000"> | ioc-extractor</span>
+<span style="color: #000000">{</span><span style="color: #A31515">&quot;asns&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;btcs&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;cves&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;domains&quot;</span><span style="color: #000000">:[</span><span style="color: #A31515">&quot;example.com&quot;</span><span style="color: #000000">],</span><span style="color: #A31515">&quot;emails&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;eths&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;gaPubIDs&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;gaTrackIDs&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;ipv4s&quot;</span><span style="color: #000000">:[</span><span style="color: #A31515">&quot;1.1.1.1&quot;</span><span style="color: #000000">,</span><span style="color: #A31515">&quot;8.8.8.8&quot;</span><span style="color: #000000">],</span><span style="color: #A31515">&quot;ipv6s&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;macAddresses&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;md5s&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;sha1s&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;sha256s&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;sha512s&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;ssdeeps&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;urls&quot;</span><span style="color: #000000">:[],</span><span style="color: #A31515">&quot;xmrs&quot;</span><span style="color: #000000">:[]}</span>
 
-<span class="hljs-comment"># Using with jq</span>
-$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1.1.1.1 8.8.8.8 example.com &quot;</span> | ioc-extractor | jq
-{
-  <span class="hljs-string">&quot;asns&quot;</span>: [],
-  <span class="hljs-string">&quot;btcs&quot;</span>: [],
-  <span class="hljs-string">&quot;cves&quot;</span>: [],
-  <span class="hljs-string">&quot;domains&quot;</span>: [
-    <span class="hljs-string">&quot;example.com&quot;</span>
-  ],
-  <span class="hljs-string">&quot;emails&quot;</span>: [],
-  <span class="hljs-string">&quot;eths&quot;</span>: [],
-  <span class="hljs-string">&quot;gaPubIDs&quot;</span>: [],
-  <span class="hljs-string">&quot;gaTrackIDs&quot;</span>: [],
-  <span class="hljs-string">&quot;ipv4s&quot;</span>: [
-    <span class="hljs-string">&quot;1.1.1.1&quot;</span>,
-    <span class="hljs-string">&quot;8.8.8.8&quot;</span>
-  ],
-  <span class="hljs-string">&quot;ipv6s&quot;</span>: [],
-  <span class="hljs-string">&quot;macAddresses&quot;</span>: [],
-  <span class="hljs-string">&quot;md5s&quot;</span>: [],
-  <span class="hljs-string">&quot;sha1s&quot;</span>: [],
-  <span class="hljs-string">&quot;sha256s&quot;</span>: [],
-  <span class="hljs-string">&quot;sha512s&quot;</span>: [],
-  <span class="hljs-string">&quot;ssdeeps&quot;</span>: [],
-  <span class="hljs-string">&quot;urls&quot;</span>: [],
-  <span class="hljs-string">&quot;xmrs&quot;</span>: []
-}
+<span style="color: #008000"># Using with jq</span>
+<span style="color: #000000">$ </span><span style="color: #795E26">echo</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;1.1.1.1 8.8.8.8 example.com &quot;</span><span style="color: #000000"> | ioc-extractor | jq</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;asns&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;btcs&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;cves&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;domains&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;example.com&quot;</span>
+<span style="color: #000000">  ],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;emails&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;eths&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;gaPubIDs&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;gaTrackIDs&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;ipv4s&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;1.1.1.1&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;8.8.8.8&quot;</span>
+<span style="color: #000000">  ],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;ipv6s&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;macAddresses&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;md5s&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;sha1s&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;sha256s&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;sha512s&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;ssdeeps&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;urls&quot;</span><span style="color: #000000">: [],</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;xmrs&quot;</span><span style="color: #000000">: []</span>
+<span style="color: #000000">}</span>
 
-<span class="hljs-comment"># Using -t(--threads) option makes sense if you want to process a big chunk of text</span>
-$ cat big.txt | ioc-extractor -t</code></pre>
+<span style="color: #008000"># Using -t(--threads) option makes sense if you want to process a big chunk of text</span>
+<span style="color: #000000">$ cat big.txt | ioc-extractor -t</span>
+</code></pre>
 				<a href="#as-a-library" id="as-a-library" style="color: inherit; text-decoration: none;">
 					<h3>As a library</h3>
 				</a>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { extractIOC } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;ioc-extractor&quot;</span>;
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">extractIOC</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;ioc-extractor&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-keyword">const</span> input = <span class="hljs-string">&#x27;1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b&#x27;</span>;
-<span class="hljs-keyword">const</span> ioc = extractIOC(input);
-<span class="hljs-built_in">console</span>.log(ioc.md5s);
-<span class="hljs-comment">// =&gt; [&#x27;f6f8179ac71eaabff12b8c024342109b&#x27;]</span>
-<span class="hljs-built_in">console</span>.log(ioc.ipv4s);
-<span class="hljs-comment">// =&gt; [&#x27;1.1.1.1&#x27;]</span>
-<span class="hljs-built_in">console</span>.log(ioc.domains);
-<span class="hljs-comment">// =&gt; [&#x27;google.com&#x27;]</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">input</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b&#039;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ioc</span><span style="color: #000000"> = </span><span style="color: #795E26">extractIOC</span><span style="color: #000000">(</span><span style="color: #001080">input</span><span style="color: #000000">);</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">ioc</span><span style="color: #000000">.</span><span style="color: #001080">md5s</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [&#039;f6f8179ac71eaabff12b8c024342109b&#039;]</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">ioc</span><span style="color: #000000">.</span><span style="color: #001080">ipv4s</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [&#039;1.1.1.1&#039;]</span>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #001080">ioc</span><span style="color: #000000">.</span><span style="color: #001080">domains</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [&#039;google.com&#039;]</span>
 
-<span class="hljs-built_in">console</span>.log(<span class="hljs-built_in">JSON</span>.stringify(ioc))
-<span class="hljs-comment">// =&gt; {&quot;asns&quot;:[],&quot;btcs&quot;:[],&quot;cves&quot;:[],&quot;domains&quot;:[&quot;google.com&quot;],&quot;emails&quot;:[],&quot;gaPubIDs&quot;:[],&quot;gaTrackIDs&quot;:[],&quot;ipv4s&quot;:[&quot;1.1.1.1&quot;],&quot;ipv6s&quot;:[],&quot;macAddresses&quot;:[],&quot;md5s&quot;:[&quot;f6f8179ac71eaabff12b8c024342109b&quot;],&quot;sha1s&quot;:[],&quot;sha256s&quot;:[],&quot;sha512s&quot;:[],&quot;ssdeeps&quot;:[],&quot;urls&quot;:[],&quot;xmrs&quot;:[]}</span></code></pre>
+<span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #267F99">JSON</span><span style="color: #000000">.</span><span style="color: #795E26">stringify</span><span style="color: #000000">(</span><span style="color: #001080">ioc</span><span style="color: #000000">))</span>
+<span style="color: #008000">// =&gt; {&quot;asns&quot;:[],&quot;btcs&quot;:[],&quot;cves&quot;:[],&quot;domains&quot;:[&quot;google.com&quot;],&quot;emails&quot;:[],&quot;gaPubIDs&quot;:[],&quot;gaTrackIDs&quot;:[],&quot;ipv4s&quot;:[&quot;1.1.1.1&quot;],&quot;ipv6s&quot;:[],&quot;macAddresses&quot;:[],&quot;md5s&quot;:[&quot;f6f8179ac71eaabff12b8c024342109b&quot;],&quot;sha1s&quot;:[],&quot;sha256s&quot;:[],&quot;sha512s&quot;:[],&quot;ssdeeps&quot;:[],&quot;urls&quot;:[],&quot;xmrs&quot;:[]}</span>
+</code></pre>
 				<p>If you want to extract a specific type of IOC, you can use <code>extractXXX</code> function.</p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> { refang, extractDomain, extractIPv4, extractMD5 } <span class="hljs-keyword">from</span> <span class="hljs-string">&quot;ioc-extractor&quot;</span>;
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> { </span><span style="color: #001080">refang</span><span style="color: #000000">, </span><span style="color: #001080">extractDomains</span><span style="color: #000000">, </span><span style="color: #001080">extractIPv4s</span><span style="color: #000000">, </span><span style="color: #001080">extractMD5s</span><span style="color: #000000"> } </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;ioc-extractor&quot;</span><span style="color: #000000">;</span>
 
-<span class="hljs-keyword">const</span> input = <span class="hljs-string">&quot;1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b&quot;</span>;
-<span class="hljs-keyword">const</span> refanged = refang(input);
-<span class="hljs-comment">// =&gt; 1.1.1.1 google.com f6f8179ac71eaabff12b8c024342109b</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">input</span><span style="color: #000000"> = </span><span style="color: #A31515">&quot;1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b&quot;</span><span style="color: #000000">;</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">refanged</span><span style="color: #000000"> = </span><span style="color: #795E26">refang</span><span style="color: #000000">(</span><span style="color: #001080">input</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; 1.1.1.1 google.com f6f8179ac71eaabff12b8c024342109b</span>
 
-<span class="hljs-keyword">const</span> ipv4s = extractIPv4(refanged);
-<span class="hljs-comment">// =&gt; [&#x27;1.1.1.1&#x27;]</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ipv4s</span><span style="color: #000000"> = </span><span style="color: #795E26">extractIPv4s</span><span style="color: #000000">(</span><span style="color: #001080">refanged</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [&#039;1.1.1.1&#039;]</span>
 
-<span class="hljs-keyword">const</span> domains = extractDomain(refanged);
-<span class="hljs-comment">// =&gt; [&#x27;google.com&#x27;]</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">domains</span><span style="color: #000000"> = </span><span style="color: #795E26">extractDomains</span><span style="color: #000000">(</span><span style="color: #001080">refanged</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [&#039;google.com&#039;]</span>
 
-<span class="hljs-keyword">const</span> md5s = extractMD5(refanged);
-<span class="hljs-comment">// =&gt; [&#x27;f6f8179ac71eaabff12b8c024342109b&#x27;]</span></code></pre>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">md5s</span><span style="color: #000000"> = </span><span style="color: #795E26">extractMD5s</span><span style="color: #000000">(</span><span style="color: #001080">refanged</span><span style="color: #000000">);</span>
+<span style="color: #008000">// =&gt; [&#039;f6f8179ac71eaabff12b8c024342109b&#039;]</span>
+</code></pre>
 				<p>See <a href="https://ninoseki.github.io/ioc-extractor/">docs</a> for more details.</p>
 				<a href="#details" id="details" style="color: inherit; text-decoration: none;">
 					<h2>Details</h2>
@@ -269,46 +268,47 @@ $ cat big.txt | ioc-extractor -t</code></pre>
 					<h2>SITX2 support</h2>
 				</a>
 				<p>This package provides a partial support of the STIX2 format.</p>
-				<pre><code class="language-bash">$ <span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;1.1.1.1 8.8.8.8 example.com&quot;</span> | ioc-extractor --sitx2 | jq
-{
-  <span class="hljs-string">&quot;spec_version&quot;</span>: <span class="hljs-string">&quot;2.0&quot;</span>,
-  <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;bundle&quot;</span>,
-  <span class="hljs-string">&quot;objects&quot;</span>: [
-    {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;indicator&quot;</span>,
-      <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;indicator--e0dc210b-fc7e-4dcc-8a5e-a220b32bd070&quot;</span>,
-      <span class="hljs-string">&quot;created&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>,
-      <span class="hljs-string">&quot;modified&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>,
-      <span class="hljs-string">&quot;labels&quot;</span>: [
-        <span class="hljs-string">&quot;malicious-activity&quot;</span>
-      ],
-      <span class="hljs-string">&quot;pattern&quot;</span>: <span class="hljs-string">&quot;[ipv4-addr:value = &#x27;1.1.1.1&#x27;]&quot;</span>,
-      <span class="hljs-string">&quot;valid_from&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>
-    },
-    {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;indicator&quot;</span>,
-      <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;indicator--f77971ea-37de-4ddb-a147-613fec3401b3&quot;</span>,
-      <span class="hljs-string">&quot;created&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>,
-      <span class="hljs-string">&quot;modified&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>,
-      <span class="hljs-string">&quot;labels&quot;</span>: [
-        <span class="hljs-string">&quot;malicious-activity&quot;</span>
-      ],
-      <span class="hljs-string">&quot;pattern&quot;</span>: <span class="hljs-string">&quot;[domain-name:value = &#x27;google.com&#x27;]&quot;</span>,
-      <span class="hljs-string">&quot;valid_from&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>
-    },
-    {
-      <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;indicator&quot;</span>,
-      <span class="hljs-string">&quot;id&quot;</span>: <span class="hljs-string">&quot;indicator--0461539a-dc75-4cd1-ab74-24d964c8609c&quot;</span>,
-      <span class="hljs-string">&quot;created&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>,
-      <span class="hljs-string">&quot;modified&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>,
-      <span class="hljs-string">&quot;labels&quot;</span>: [
-        <span class="hljs-string">&quot;malicious-activity&quot;</span>
-      ],
-      <span class="hljs-string">&quot;pattern&quot;</span>: <span class="hljs-string">&quot;[file:hashes.md5 = &#x27;f6f8179ac71eaabff12b8c024342109b&#x27;]&quot;</span>,
-      <span class="hljs-string">&quot;valid_from&quot;</span>: <span class="hljs-string">&quot;2019-09-07T12:40:13.104Z&quot;</span>
-    }
-  ]
-}</code></pre>
+				<pre><code class="language-bash"><span style="color: #000000">$ </span><span style="color: #795E26">echo</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;1.1.1.1 8.8.8.8 example.com&quot;</span><span style="color: #000000"> | ioc-extractor --sitx2 | jq</span>
+<span style="color: #000000">{</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;spec_version&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2.0&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;bundle&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">  </span><span style="color: #A31515">&quot;objects&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;indicator&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;indicator--e0dc210b-fc7e-4dcc-8a5e-a220b32bd070&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;created&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;modified&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;labels&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;malicious-activity&quot;</span>
+<span style="color: #000000">      ],</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;pattern&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;[ipv4-addr:value = &#039;1.1.1.1&#039;]&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;valid_from&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;indicator&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;indicator--f77971ea-37de-4ddb-a147-613fec3401b3&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;created&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;modified&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;labels&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;malicious-activity&quot;</span>
+<span style="color: #000000">      ],</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;pattern&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;[domain-name:value = &#039;google.com&#039;]&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;valid_from&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span>
+<span style="color: #000000">    },</span>
+<span style="color: #000000">    {</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;indicator&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;id&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;indicator--0461539a-dc75-4cd1-ab74-24d964c8609c&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;created&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;modified&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;labels&quot;</span><span style="color: #000000">: [</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&quot;malicious-activity&quot;</span>
+<span style="color: #000000">      ],</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;pattern&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;[file:hashes.md5 = &#039;f6f8179ac71eaabff12b8c024342109b&#039;]&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">      </span><span style="color: #A31515">&quot;valid_from&quot;</span><span style="color: #000000">: </span><span style="color: #A31515">&quot;2019-09-07T12:40:13.104Z&quot;</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">  ]</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<p>The following indicator patterns are supported.</p>
 				<ul>
 					<li>ipv4-addr</li>
@@ -338,312 +338,147 @@ $ cat big.txt | ioc-extractor -t</code></pre>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/indicator.html" class="tsd-kind-icon">Indicator</a>
+					<li class=" tsd-kind-class">
+						<a href="classes/iocextractor.html" class="tsd-kind-icon">IOCExtractor</a>
 					</li>
 					<li class=" tsd-kind-interface">
-						<a href="interfaces/options.html" class="tsd-kind-icon">Options</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/stix2.html" class="tsd-kind-icon">STIX2</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#extractor" class="tsd-kind-icon">Extractor</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#pattern_type" class="tsd-kind-icon">PATTERN_<wbr>TYPE</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#spec_type" class="tsd-kind-icon">SPEC_<wbr>TYPE</a>
-					</li>
-					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#spec_version" class="tsd-kind-icon">SPEC_<wbr>VERSION</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#asnregex" class="tsd-kind-icon">asn<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#auth" class="tsd-kind-icon">auth</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#btcregex" class="tsd-kind-icon">btc<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#cveregex" class="tsd-kind-icon">cve<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#domain" class="tsd-kind-icon">domain</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#domainregex" class="tsd-kind-icon">domain<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#emailregex" class="tsd-kind-icon">email<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ethregex" class="tsd-kind-icon">eth<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#gapubidregex" class="tsd-kind-icon">ga<wbr>PubIDRegex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#gatrackidregex" class="tsd-kind-icon">ga<wbr>TrackIDRegex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#input" class="tsd-kind-icon">input</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#internationalizeddomain" class="tsd-kind-icon">internationalized<wbr>Domain</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#internationalizeddomainregex" class="tsd-kind-icon">internationalized<wbr>Domain<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#internationalizedemailregex" class="tsd-kind-icon">internationalized<wbr>Email<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#internationalizedurl" class="tsd-kind-icon">internationalizedURL</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#internationalizedurlregex" class="tsd-kind-icon">internationalizedURLRegex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ipv4" class="tsd-kind-icon">ipv4</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ipv4regex" class="tsd-kind-icon">ipv4<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ipv6" class="tsd-kind-icon">ipv6</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ipv6regex" class="tsd-kind-icon">ipv6<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#macaddressregex" class="tsd-kind-icon">mac<wbr>Address<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#md5regex" class="tsd-kind-icon">md5<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictdomain" class="tsd-kind-icon">non<wbr>Strict<wbr>Domain</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictdomainregex" class="tsd-kind-icon">non<wbr>Strict<wbr>Domain<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictemailregex" class="tsd-kind-icon">non<wbr>Strict<wbr>Email<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictinternationalizeddomain" class="tsd-kind-icon">non<wbr>Strict<wbr>Internationalized<wbr>Domain</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictinternationalizeddomainregex" class="tsd-kind-icon">non<wbr>Strict<wbr>Internationalized<wbr>Domain<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictinternationalizedemailregex" class="tsd-kind-icon">non<wbr>Strict<wbr>Internationalized<wbr>Email<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictinternationalizedurl" class="tsd-kind-icon">non<wbr>Strict<wbr>InternationalizedURL</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstrictinternationalizedurlregex" class="tsd-kind-icon">non<wbr>Strict<wbr>InternationalizedURLRegex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstricturl" class="tsd-kind-icon">non<wbr>StrictURL</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#nonstricturlregex" class="tsd-kind-icon">non<wbr>StrictURLRegex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#path" class="tsd-kind-icon">path</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#port" class="tsd-kind-icon">port</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#protocol" class="tsd-kind-icon">protocol</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#sha1regex" class="tsd-kind-icon">sha1<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#sha256regex" class="tsd-kind-icon">sha256<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#sha512regex" class="tsd-kind-icon">sha512<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#ssdeepregex" class="tsd-kind-icon">ssdeep<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#tldregexstring" class="tsd-kind-icon">tld<wbr>Regex<wbr>String</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#tlds" class="tsd-kind-icon">tlds</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#url" class="tsd-kind-icon">url</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#urlregex" class="tsd-kind-icon">url<wbr>Regex</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#v6seg" class="tsd-kind-icon">v6seg</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#xmrregex" class="tsd-kind-icon">xmr<wbr>Regex</a>
+						<a href="interfaces/ioc.html" class="tsd-kind-icon">IOC</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#check" class="tsd-kind-icon">check</a>
+						<a href="modules.html#extractasn" class="tsd-kind-icon">extractASN</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#clean" class="tsd-kind-icon">clean</a>
+						<a href="modules.html#extractasns" class="tsd-kind-icon">extractASNs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttoobject" class="tsd-kind-icon">convert<wbr>ToObject</a>
+						<a href="modules.html#extractbtc" class="tsd-kind-icon">extractBTC</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttopattern" class="tsd-kind-icon">convert<wbr>ToPattern</a>
+						<a href="modules.html#extractbtcs" class="tsd-kind-icon">extractBTCs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#converttostix2" class="tsd-kind-icon">convert<wbr>ToSTIX2</a>
+						<a href="modules.html#extractcve" class="tsd-kind-icon">extractCVE</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#dedup" class="tsd-kind-icon">dedup</a>
+						<a href="modules.html#extractcves" class="tsd-kind-icon">extractCVEs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractasn" class="tsd-kind-icon">extractASN</a>
+						<a href="modules.html#extractdomain" class="tsd-kind-icon">extract<wbr>Domain</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractbtc" class="tsd-kind-icon">extractBTC</a>
+						<a href="modules.html#extractdomains" class="tsd-kind-icon">extract<wbr>Domains</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractcve" class="tsd-kind-icon">extractCVE</a>
+						<a href="modules.html#extracteth" class="tsd-kind-icon">extractETH</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractdomain" class="tsd-kind-icon">extract<wbr>Domain</a>
+						<a href="modules.html#extracteths" class="tsd-kind-icon">extractETHs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extracteth" class="tsd-kind-icon">extractETH</a>
+						<a href="modules.html#extractemail" class="tsd-kind-icon">extract<wbr>Email</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractemail" class="tsd-kind-icon">extract<wbr>Email</a>
+						<a href="modules.html#extractemails" class="tsd-kind-icon">extract<wbr>Emails</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractgapubid" class="tsd-kind-icon">extractGAPubID</a>
+						<a href="modules.html#extractgapubid" class="tsd-kind-icon">extractGAPubID</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractgatrackid" class="tsd-kind-icon">extractGATrackID</a>
+						<a href="modules.html#extractgapubids" class="tsd-kind-icon">extractGAPubIDs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractipv4" class="tsd-kind-icon">extractIPv4</a>
+						<a href="modules.html#extractgatrackid" class="tsd-kind-icon">extractGATrackID</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractipv6" class="tsd-kind-icon">extractIPv6</a>
+						<a href="modules.html#extractgatrackids" class="tsd-kind-icon">extractGATrackIDs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractmd5" class="tsd-kind-icon">extractMD5</a>
+						<a href="modules.html#extractioc" class="tsd-kind-icon">extractIOC</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractmacaddress" class="tsd-kind-icon">extract<wbr>Mac<wbr>Address</a>
+						<a href="modules.html#extractiocasync" class="tsd-kind-icon">extractIOCAsync</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractsha1" class="tsd-kind-icon">extractSHA1</a>
+						<a href="modules.html#extractipv4" class="tsd-kind-icon">extractIPv4</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractsha256" class="tsd-kind-icon">extractSHA256</a>
+						<a href="modules.html#extractipv4s" class="tsd-kind-icon">extractIPv4s</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractsha512" class="tsd-kind-icon">extractSHA512</a>
+						<a href="modules.html#extractipv6" class="tsd-kind-icon">extractIPv6</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractssdeep" class="tsd-kind-icon">extractSSDEEP</a>
+						<a href="modules.html#extractipv6s" class="tsd-kind-icon">extractIPv6s</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extracturl" class="tsd-kind-icon">extractURL</a>
+						<a href="modules.html#extractmd5" class="tsd-kind-icon">extractMD5</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#extractxmr" class="tsd-kind-icon">extractXMR</a>
+						<a href="modules.html#extractmd5s" class="tsd-kind-icon">extractMD5s</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isasn" class="tsd-kind-icon">isASN</a>
+						<a href="modules.html#extractmacaddress" class="tsd-kind-icon">extract<wbr>Mac<wbr>Address</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isbtc" class="tsd-kind-icon">isBTC</a>
+						<a href="modules.html#extractmacaddresses" class="tsd-kind-icon">extract<wbr>Mac<wbr>Addresses</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#iscve" class="tsd-kind-icon">isCVE</a>
+						<a href="modules.html#extractsha1" class="tsd-kind-icon">extractSHA1</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isdomain" class="tsd-kind-icon">is<wbr>Domain</a>
+						<a href="modules.html#extractsha1s" class="tsd-kind-icon">extractSHA1s</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#iseth" class="tsd-kind-icon">isETH</a>
+						<a href="modules.html#extractsha256" class="tsd-kind-icon">extractSHA256</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isemail" class="tsd-kind-icon">is<wbr>Email</a>
+						<a href="modules.html#extractsha256s" class="tsd-kind-icon">extractSHA256s</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isgapubid" class="tsd-kind-icon">isGAPubID</a>
+						<a href="modules.html#extractsha512" class="tsd-kind-icon">extractSHA512</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isgatrackid" class="tsd-kind-icon">isGATrackID</a>
+						<a href="modules.html#extractsha512s" class="tsd-kind-icon">extractSHA512s</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#ishash" class="tsd-kind-icon">is<wbr>Hash</a>
+						<a href="modules.html#extractssdeep" class="tsd-kind-icon">extractSSDEEP</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isipv4" class="tsd-kind-icon">isIPv4</a>
+						<a href="modules.html#extractssdeeps" class="tsd-kind-icon">extractSSDEEPs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isipv6" class="tsd-kind-icon">isIPv6</a>
+						<a href="modules.html#extractstix2" class="tsd-kind-icon">extractSTIX2</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#ismd5" class="tsd-kind-icon">isMD5</a>
+						<a href="modules.html#extractstix2async" class="tsd-kind-icon">extractSTIX2<wbr>Async</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#ismacaddress" class="tsd-kind-icon">is<wbr>Mac<wbr>Address</a>
+						<a href="modules.html#extracturl" class="tsd-kind-icon">extractURL</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#issha1" class="tsd-kind-icon">isSHA1</a>
+						<a href="modules.html#extracturls" class="tsd-kind-icon">extractURLs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#issha256" class="tsd-kind-icon">isSHA256</a>
+						<a href="modules.html#extractxmr" class="tsd-kind-icon">extractXMR</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#issha512" class="tsd-kind-icon">isSHA512</a>
+						<a href="modules.html#extractxmrs" class="tsd-kind-icon">extractXMRs</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isssdeep" class="tsd-kind-icon">isSSDEEP</a>
+						<a href="modules.html#getioc" class="tsd-kind-icon">getIOC</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isurl" class="tsd-kind-icon">isURL</a>
+						<a href="modules.html#getstix2" class="tsd-kind-icon">getSTIX2</a>
 					</li>
 					<li class=" tsd-kind-function">
-						<a href="globals.html#isxmr" class="tsd-kind-icon">isXMR</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#matcheswithregexp" class="tsd-kind-icon">matches<wbr>With<wbr>Regexp</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#orregexp" class="tsd-kind-icon">or<wbr>Reg<wbr>Exp</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#refang" class="tsd-kind-icon">refang</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="globals.html#sortbyvalue" class="tsd-kind-icon">sort<wbr>ByValue</a>
-					</li>
-					<li class=" tsd-kind-object-literal">
-						<a href="globals.html#extractor" class="tsd-kind-icon">extractor</a>
+						<a href="modules.html#refang" class="tsd-kind-icon">refang</a>
 					</li>
 				</ul>
 			</nav>
@@ -655,7 +490,17 @@ $ cat big.txt | ioc-extractor -t</code></pre>
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
