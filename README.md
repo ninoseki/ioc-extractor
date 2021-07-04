@@ -89,19 +89,19 @@ console.log(JSON.stringify(ioc))
 If you want to extract a specific type of IOC, you can use `extractXXX` function.
 
 ```ts
-import { refang, extractDomain, extractIPv4, extractMD5 } from "ioc-extractor";
+import { refang, extractDomains, extractIPv4s, extractMD5s } from "ioc-extractor";
 
 const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
 const refanged = refang(input);
 // => 1.1.1.1 google.com f6f8179ac71eaabff12b8c024342109b
 
-const ipv4s = extractIPv4(refanged);
+const ipv4s = extractIPv4s(refanged);
 // => ['1.1.1.1']
 
-const domains = extractDomain(refanged);
+const domains = extractDomains(refanged);
 // => ['google.com']
 
-const md5s = extractMD5(refanged);
+const md5s = extractMD5s(refanged);
 // => ['f6f8179ac71eaabff12b8c024342109b']
 ```
 

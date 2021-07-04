@@ -1,5 +1,5 @@
 {
-  "mode": "file",
+  "entryPoints": ["src/index.ts"],
   "out": "docs",
   "exclude": "**/*+(index|.spec|.e2e).ts"
 }

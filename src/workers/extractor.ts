@@ -1,80 +1,80 @@
 import { expose } from "threads/worker";
 
 import {
-  extractASN,
-  extractBTC,
-  extractCVE,
-  extractDomain,
-  extractEmail,
-  extractETH,
-  extractGAPubID,
-  extractGATrackID,
-  extractIPv4,
-  extractIPv6,
-  extractMacAddress,
-  extractMD5,
-  extractSHA1,
-  extractSHA256,
-  extractSHA512,
-  extractSSDEEP,
-  extractURL,
-  extractXMR,
+  extractASNs,
+  extractBTCs,
+  extractCVEs,
+  extractDomains,
+  extractEmails,
+  extractETHs,
+  extractGAPubIDs,
+  extractGATrackIDs,
+  extractIPv4s,
+  extractIPv6s,
+  extractMacAddresses,
+  extractMD5s,
+  extractSHA1s,
+  extractSHA256s,
+  extractSHA512s,
+  extractSSDEEPs,
+  extractURLs,
+  extractXMRs,
 } from "../aux/extractor";
 
 const extractor = {
-  extractASN(text: string): string[] {
-    return extractASN(text);
+  extractASNs(text: string): string[] {
+    return extractASNs(text);
   },
-  extractBTC(text: string): string[] {
-    return extractBTC(text);
+  extractBTCs(text: string): string[] {
+    return extractBTCs(text);
   },
-  extractCVE(text: string): string[] {
-    return extractCVE(text);
+  extractCVEs(text: string): string[] {
+    return extractCVEs(text);
   },
-  extractDomain(text: string, enableIDN = true, strictTLD = true): string[] {
-    return extractDomain(text, enableIDN, strictTLD);
+  extractDomains(text: string, enableIDN = true, strictTLD = true): string[] {
+    return extractDomains(text, enableIDN, strictTLD);
   },
-  extractEmail(text: string, enableIDN = true, strictTLD = true): string[] {
-    return extractEmail(text, enableIDN, strictTLD);
+  extractEmails(text: string, enableIDN = true, strictTLD = true): string[] {
+    return extractEmails(text, enableIDN, strictTLD);
   },
-  extractETH(text: string): string[] {
-    return extractETH(text);
+  extractETHs(text: string): string[] {
+    return extractETHs(text);
   },
-  extractGAPubID(text: string): string[] {
-    return extractGAPubID(text);
+  extractGAPubIDs(text: string): string[] {
+    return extractGAPubIDs(text);
   },
-  extractGATrackID(text: string): string[] {
-    return extractGATrackID(text);
+  extractGATrackIDs(text: string): string[] {
+    return extractGATrackIDs(text);
   },
-  extractIPv4(text: string): string[] {
-    return extractIPv4(text);
+  extractIPv4s(text: string): string[] {
+    return extractIPv4s(text);
   },
-  extractIPv6(text: string): string[] {
-    return extractIPv6(text);
+  extractIPv6s(text: string): string[] {
+    return extractIPv6s(text);
   },
-  extractMacAddress(text: string): string[] {
-    return extractMacAddress(text);
+  extractMacAddresses(text: string): string[] {
+    return extractMacAddresses(text);
   },
-  extractMD5(text: string): string[] {
-    return extractMD5(text);
+  extractMD5s(text: string): string[] {
+    return extractMD5s(text);
   },
-  extractSHA1(text: string): string[] {
-    return extractSHA1(text);
+  extractSHA1s(text: string): string[] {
+    return extractSHA1s(text);
   },
-  extractSHA256(text: string): string[] {
-    return extractSHA256(text);
+  extractSHA256s(text: string): string[] {
+    return extractSHA256s(text);
   },
-  extractSHA512(text: string): string[] {
-    return extractSHA512(text);
+  extractSHA512s(text: string): string[] {
+    return extractSHA512s(text);
   },
-  extractSSDEEP(text: string): string[] {
-    return extractSSDEEP(text);
+  extractSSDEEPs(text: string): string[] {
+    return extractSSDEEPs(text);
   },
-  extractURL(text: string, enableIDN = true, strictTLD = true): string[] {
-    return extractURL(text, enableIDN, strictTLD);
+  extractURLs(text: string, enableIDN = true, strictTLD = true): string[] {
+    return extractURLs(text, enableIDN, strictTLD);
   },
-  extractXMR(text: string): string[] {
-    return extractXMR(text);
+  extractXMRs(text: string): string[] {
+    return extractXMRs(text);
   },
 };
 

@@ -5,46 +5,82 @@ import { ModuleThread } from "threads/dist/types/master";
 import { refang } from "./aux/auxiliary";
 import {
   extractASN,
+  extractASNs,
   extractBTC,
+  extractBTCs,
   extractCVE,
+  extractCVEs,
   extractDomain,
+  extractDomains,
   extractEmail,
+  extractEmails,
   extractETH,
+  extractETHs,
   extractGAPubID,
+  extractGAPubIDs,
   extractGATrackID,
+  extractGATrackIDs,
   extractIPv4,
+  extractIPv4s,
   extractIPv6,
+  extractIPv6s,
   extractMacAddress,
+  extractMacAddresses,
   extractMD5,
+  extractMD5s,
   extractSHA1,
+  extractSHA1s,
   extractSHA256,
+  extractSHA256s,
   extractSHA512,
+  extractSHA512s,
   extractSSDEEP,
+  extractSSDEEPs,
   extractURL,
+  extractURLs,
   extractXMR,
+  extractXMRs,
 } from "./aux/extractor";
 import { convertToSTIX2, STIX2 } from "./stix2/stix2";
 import { Extractor } from "./workers/extractor";
 
 export {
   extractASN,
+  extractASNs,
   extractBTC,
+  extractBTCs,
   extractCVE,
+  extractCVEs,
   extractDomain,
+  extractDomains,
   extractEmail,
+  extractEmails,
   extractETH,
+  extractETHs,
   extractGAPubID,
+  extractGAPubIDs,
   extractGATrackID,
+  extractGATrackIDs,
   extractIPv4,
+  extractIPv4s,
   extractIPv6,
+  extractIPv6s,
   extractMacAddress,
+  extractMacAddresses,
   extractMD5,
+  extractMD5s,
   extractSHA1,
+  extractSHA1s,
   extractSHA256,
+  extractSHA256s,
   extractSHA512,
+  extractSHA512s,
   extractSSDEEP,
+  extractSSDEEPs,
   extractURL,
+  extractURLs,
   extractXMR,
+  extractXMRs,
   refang,
 };
 
@@ -137,24 +173,24 @@ export class IOCExtractor {
    */
   public extractIOC(enableIDN = true, strictTLD = true): IOC {
     const ioc: IOC = {
-      asns: extractASN(this.data),
-      btcs: extractBTC(this.data),
-      cves: extractCVE(this.data),
-      domains: extractDomain(this.data, enableIDN, strictTLD),
-      emails: extractEmail(this.data, enableIDN, strictTLD),
-      eths: extractETH(this.data),
-      gaPubIDs: extractGAPubID(this.data),
-      gaTrackIDs: extractGATrackID(this.data),
-      ipv4s: extractIPv4(this.data),
-      ipv6s: extractIPv6(this.data),
-      macAddresses: extractMacAddress(this.data),
-      md5s: extractMD5(this.data),
-      sha1s: extractSHA1(this.data),
-      sha256s: extractSHA256(this.data),
-      sha512s: extractSHA512(this.data),
-      ssdeeps: extractSSDEEP(this.data),
-      urls: extractURL(this.data, enableIDN, strictTLD),
-      xmrs: extractXMR(this.data),
+      asns: extractASNs(this.data),
+      btcs: extractBTCs(this.data),
+      cves: extractCVEs(this.data),
+      domains: extractDomains(this.data, enableIDN, strictTLD),
+      emails: extractEmails(this.data, enableIDN, strictTLD),
+      eths: extractETHs(this.data),
+      gaPubIDs: extractGAPubIDs(this.data),
+      gaTrackIDs: extractGATrackIDs(this.data),
+      ipv4s: extractIPv4s(this.data),
+      ipv6s: extractIPv6s(this.data),
+      macAddresses: extractMacAddresses(this.data),
+      md5s: extractMD5s(this.data),
+      sha1s: extractSHA1s(this.data),
+      sha256s: extractSHA256s(this.data),
+      sha512s: extractSHA512s(this.data),
+      ssdeeps: extractSSDEEPs(this.data),
+      urls: extractURLs(this.data, enableIDN, strictTLD),
+      xmrs: extractXMRs(this.data),
     };
     return ioc;
   }
@@ -177,92 +213,92 @@ export class IOCExtractor {
     const tasks: QueuedTask<ModuleThread<Extractor>, string[]>[] = [];
 
     const extractASNTask = pool.queue((extractor) =>
-      extractor.extractASN(this.data)
+      extractor.extractASNs(this.data)
     );
     tasks.push(extractASNTask);
 
     const extractBTCTask = pool.queue((extractor) =>
-      extractor.extractBTC(this.data)
+      extractor.extractBTCs(this.data)
     );
     tasks.push(extractBTCTask);
 
     const extractCVETask = pool.queue((extractor) =>
-      extractor.extractCVE(this.data)
+      extractor.extractCVEs(this.data)
     );
     tasks.push(extractCVETask);
 
     const extractDomainTask = pool.queue((extractor) =>
-      extractor.extractDomain(this.data, enableIDN, strictTLD)
+      extractor.extractDomains(this.data, enableIDN, strictTLD)
     );
     tasks.push(extractDomainTask);
 
     const extractEmailTask = pool.queue((extractor) =>
-      extractor.extractEmail(this.data, enableIDN, strictTLD)
+      extractor.extractEmails(this.data, enableIDN, strictTLD)
     );
     tasks.push(extractEmailTask);
 
     const extractETHTask = pool.queue((extractor) =>
-      extractor.extractETH(this.data)
+      extractor.extractETHs(this.data)
     );
     tasks.push(extractETHTask);
 
     const extractGAPubIDTask = pool.queue((extractor) =>
-      extractor.extractGAPubID(this.data)
+      extractor.extractGAPubIDs(this.data)
     );
     tasks.push(extractGAPubIDTask);
 
     const extractGATrackIDTask = pool.queue((extractor) =>
-      extractor.extractGATrackID(this.data)
+      extractor.extractGATrackIDs(this.data)
     );
     tasks.push(extractGATrackIDTask);
 
     const extractIPv4Task = pool.queue((extractor) =>
-      extractor.extractIPv4(this.data)
+      extractor.extractIPv4s(this.data)
     );
     tasks.push(extractIPv4Task);
 
     const extractIPv6Task = pool.queue((extractor) =>
-      extractor.extractIPv6(this.data)
+      extractor.extractIPv6s(this.data)
     );
     tasks.push(extractIPv6Task);
 
     const extractMacAddressTask = pool.queue((extractor) =>
-      extractor.extractMacAddress(this.data)
+      extractor.extractMacAddresses(this.data)
     );
     tasks.push(extractMacAddressTask);
 
     const extractMD5Task = pool.queue((extractor) =>
-      extractor.extractMD5(this.data)
+      extractor.extractMD5s(this.data)
     );
     tasks.push(extractMD5Task);
 
     const extractSHA1Task = pool.queue((extractor) =>
-      extractor.extractSHA1(this.data)
+      extractor.extractSHA1s(this.data)
     );
     tasks.push(extractSHA1Task);
 
     const extractSHA256Task = pool.queue((extractor) =>
-      extractor.extractSHA256(this.data)
+      extractor.extractSHA256s(this.data)
     );
     tasks.push(extractSHA256Task);
 
     const extractSHA512Task = pool.queue((extractor) =>
-      extractor.extractSHA512(this.data)
+      extractor.extractSHA512s(this.data)
     );
     tasks.push(extractSHA512Task);
 
     const extractSSDEEPTask = pool.queue((extractor) =>
-      extractor.extractSSDEEP(this.data)
+      extractor.extractSSDEEPs(this.data)
     );
     tasks.push(extractSSDEEPTask);
 
     const extractURLTask = pool.queue((extractor) =>
-      extractor.extractURL(this.data, enableIDN, strictTLD)
+      extractor.extractURLs(this.data, enableIDN, strictTLD)
     );
     tasks.push(extractURLTask);
 
     const extractXMRTask = pool.queue((extractor) =>
-      extractor.extractXMR(this.data)
+      extractor.extractXMRs(this.data)
     );
     tasks.push(extractXMRTask);
 

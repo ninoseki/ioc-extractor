@@ -19,7 +19,7 @@ function check(s: string, regexp: RegExp): boolean {
 }
 
 export const getMD5RegExp = (): RegExp => {
-  return /\b[A-Fa-f0-9]{32}\b/gi;
+  return /\b[A-Fa-f0-9]{32}\b/g;
 };
 
 /**
@@ -35,7 +35,7 @@ export function isMD5(s: string): boolean {
 }
 
 export const getSHA1RegExp = (): RegExp => {
-  return /\b[A-Fa-f0-9]{40}\b/gi;
+  return /\b[A-Fa-f0-9]{40}\b/g;
 };
 
 /**
@@ -51,7 +51,7 @@ export function isSHA1(s: string): boolean {
 }
 
 export const getSHA256RegExp = (): RegExp => {
-  return /\b[A-Fa-f0-9]{64}\b/gi;
+  return /\b[A-Fa-f0-9]{64}\b/g;
 };
 
 /**
@@ -67,7 +67,7 @@ export function isSHA256(s: string): boolean {
 }
 
 export const getSHA512RegExp = (): RegExp => {
-  return /\b[A-Fa-f0-9]{128}\b/gi;
+  return /\b[A-Fa-f0-9]{128}\b/g;
 };
 
 /**
@@ -83,7 +83,7 @@ export function isSHA512(s: string): boolean {
 }
 
 export const getSSDEEPRegExp = (): RegExp => {
-  return /\b\d{1,}:[A-Za-z0-9/+]{3,}:[A-Za-z0-9/+]{3,}/gi;
+  return /\b\d{1,}:[A-Za-z0-9/+]{3,}:[A-Za-z0-9/+]{3,}/g;
 };
 
 /**
@@ -133,7 +133,8 @@ const getNonStrictInternationalizedDomainRegExpString = () => {
 };
 
 export const getNonStrictInternationalizedDomainRegExp = (): RegExp => {
-  const nonStrictInternationalizedDomain = getNonStrictInternationalizedDomainRegExpString();
+  const nonStrictInternationalizedDomain =
+    getNonStrictInternationalizedDomainRegExpString();
   return new RegExp(nonStrictInternationalizedDomain, "gi");
 };
 
@@ -178,7 +179,8 @@ export function isDomain(
   }
 
   if (enableIDN) {
-    const nonStrictInternationalizedDomainRegExp = getNonStrictInternationalizedDomainRegExp();
+    const nonStrictInternationalizedDomainRegExp =
+      getNonStrictInternationalizedDomainRegExp();
     return check(s, nonStrictInternationalizedDomainRegExp);
   }
 
@@ -209,7 +211,8 @@ export const getInternationalizedEmailRegExp = (): RegExp => {
 };
 
 export const getNonStrictInternationalizedEmailRegExp = (): RegExp => {
-  const nonStrictInternationalizedDomain = getNonStrictInternationalizedDomainRegExpString();
+  const nonStrictInternationalizedDomain =
+    getNonStrictInternationalizedDomainRegExpString();
   return new RegExp(`${localPart}@${nonStrictInternationalizedDomain}`, "gi");
 };
 
@@ -233,7 +236,8 @@ export function isEmail(
   }
 
   if (enableIDN) {
-    const nonStrictInternationalizedEmailRegExp = getNonStrictInternationalizedEmailRegExp();
+    const nonStrictInternationalizedEmailRegExp =
+      getNonStrictInternationalizedEmailRegExp();
     return check(s, nonStrictInternationalizedEmailRegExp);
   }
 
@@ -334,7 +338,8 @@ export const getInternationalizedURLRegExp = (): RegExp => {
 };
 
 export const getNonStrictInternationalizedURLRegExp = (): RegExp => {
-  const nonStrictInternationalizedDomain = getNonStrictInternationalizedDomainRegExpString();
+  const nonStrictInternationalizedDomain =
+    getNonStrictInternationalizedDomainRegExpString();
   const ipv4 = getIPv4RegExpString();
   const nonStrictInternationalizedURL = `(?:${protocol})${auth}(?:${nonStrictInternationalizedDomain}|localhost|${ipv4})${port}${path}`;
   return new RegExp(nonStrictInternationalizedURL, "gi");
@@ -356,7 +361,8 @@ export function isURL(s: string, enableIDN = true, strictTLD = true): boolean {
   }
 
   if (enableIDN) {
-    const nonStrictInternationalizedURLRegExp = getNonStrictInternationalizedURLRegExp();
+    const nonStrictInternationalizedURLRegExp =
+      getNonStrictInternationalizedURLRegExp();
     return check(s, nonStrictInternationalizedURLRegExp);
   }
 
@@ -386,7 +392,7 @@ export function isCVE(s: string): boolean {
 }
 
 export const getBTCRegExp = (): RegExp => {
-  return /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/gi;
+  return /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/g;
 };
 
 /**
@@ -402,7 +408,7 @@ export function isBTC(s: string): boolean {
 }
 
 export const getXMRRegExp = (): RegExp => {
-  return /\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b/gi;
+  return /\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b/g;
 };
 
 /**
@@ -450,7 +456,7 @@ export function isGATrackID(s: string): boolean {
 }
 
 export const getMACAddressRegExp = (): RegExp => {
-  return /\b(?:[A-Fa-f0-9]{2}([-:]))(?:[A-Fa-f0-9]{2}\1){4}[A-Fa-f0-9]{2}\b/gi;
+  return /\b(?:[A-Fa-f0-9]{2}([-:]))(?:[A-Fa-f0-9]{2}\1){4}[A-Fa-f0-9]{2}\b/g;
 };
 
 /**
@@ -466,7 +472,7 @@ export function isMacAddress(s: string): boolean {
 }
 
 export const getETHRegExp = (): RegExp => {
-  return /\b0x[a-fA-F0-9]{40}\b/gi;
+  return /\b0x[a-fA-F0-9]{40}\b/g;
 };
 
 /**
