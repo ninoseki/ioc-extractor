@@ -6,9 +6,15 @@
         "sourceMap": true,
         "declaration": true,
         "strict": true,
-        "rootDir": "src",
+        "rootDirs": ["src", "spec"],
         "outDir": "dist",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "src/*"
+            ]
+        },
     },
     "exclude": [
         "node_modules",
