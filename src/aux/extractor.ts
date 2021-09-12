@@ -1,5 +1,3 @@
-import { match } from "assert/strict";
-
 import { dedup, sortByValue } from "./auxiliary";
 import {
   getASNRegExp,
