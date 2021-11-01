@@ -73,7 +73,7 @@
     "eslint-plugin-jest": "24.4.0",
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-simple-import-sort": "7.0.0",
-    "husky": "7.0.2",
+    "husky": "7.0.4",
     "jest": "27.1.1",
     "lint-staged": "11.1.2",
     "pinst": "2.1.6",
