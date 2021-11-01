@@ -78,7 +78,7 @@
     "lint-staged": "11.1.2",
     "pinst": "2.1.6",
     "prettier": "2.4.0",
-    "ts-jest": "27.0.5",
+    "ts-jest": "27.0.7",
     "ts-loader": "9.2.5",
     "ts-node": "10.2.1",
     "typedoc": "0.22.6",
