@@ -54,15 +54,3 @@ export function refang(s: string): string {
     .replace(/h\*\*p(s?):\/\//gi, "http$1://")
     .replace(at, "@");
 }
-
-/**
- * Alias for refang
- *
- * @deprecated
- * @export
- * @param {string} s A string
- * @returns {string} A cleaned (aka refanged) string
- */
-export function clean(s: string): string {
-  return refang(s);
-}
