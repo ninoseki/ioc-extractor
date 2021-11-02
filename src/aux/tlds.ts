@@ -864,6 +864,7 @@ export function getTLDs(): string[] {
     "mtr",
     "mu",
     "museum",
+    "music",
     "mutual",
     "mutuelle",
     "mv",
