@@ -144,19 +144,6 @@ export class IOCExtractor {
     return await extractor.extractIOCAsync(enableIDN, strictTLD);
   }
 
-  /**
-   * Alias for extractIOC
-   *
-   * @deprecated
-   * @static
-   * @param {string} data
-   * @returns {IOC}
-   * @memberof IOCExtractor
-   */
-  public static getIOC(data: string): IOC {
-    return this.extractIOC(data);
-  }
-
   private data: string;
 
   public constructor(data: string) {
@@ -194,6 +181,8 @@ export class IOCExtractor {
     };
     return ioc;
   }
+
+  /* eslint-disable @typescript-eslint/no-unsafe-argument */
 
   /**
    * Returns an IOC of the data in async
@@ -329,15 +318,7 @@ export class IOCExtractor {
     return ioc;
   }
 
-  /**
-   * Alias for getIOC
-   * @deprecated
-   * @returns {IOC}
-   * @memberof IOCExtractor
-   */
-  public getIOC(): IOC {
-    return this.extractIOC();
-  }
+  /* eslint-enable @typescript-eslint/no-unsafe-argument */
 }
 
 /**
@@ -375,17 +356,6 @@ export async function extractIOCAsync(
 }
 
 /**
- * Alias for extractIOC
- * @deprecated
- * @export
- * @param {string} data A string
- * @returns {IOC}
- */
-export function getIOC(data: string): IOC {
-  return extractIOC(data);
-}
-
-/**
  * Returns an IOC of data as STIX2 format
  *
  * @export
@@ -419,15 +389,4 @@ export async function extractSTIX2Async(
 ): Promise<STIX2> {
   const ioc = await extractIOCAsync(data, enableIDN, strictTLD);
   return convertToSTIX2(ioc);
-}
-
-/**
- * Alias for extractSTIX2
- * @deprecated
- * @export
- * @param {string} data
- * @returns {STIX2}
- */
-export function getSTIX2(data: string): STIX2 {
-  return extractSTIX2(data);
 }
