@@ -1,5 +1,6 @@
 import { expose } from "threads/worker";
 
+import { Options } from "..";
 import {
   extractASNs,
   extractBTCs,
@@ -31,11 +32,11 @@ const extractor = {
   extractCVEs(text: string): string[] {
     return extractCVEs(text);
   },
-  extractDomains(text: string, enableIDN = true, strictTLD = true): string[] {
-    return extractDomains(text, enableIDN, strictTLD);
+  extractDomains(text: string, options: Options): string[] {
+    return extractDomains(text, options);
   },
-  extractEmails(text: string, enableIDN = true, strictTLD = true): string[] {
-    return extractEmails(text, enableIDN, strictTLD);
+  extractEmails(text: string, options: Options): string[] {
+    return extractEmails(text, options);
   },
   extractETHs(text: string): string[] {
     return extractETHs(text);
@@ -70,8 +71,8 @@ const extractor = {
   extractSSDEEPs(text: string): string[] {
     return extractSSDEEPs(text);
   },
-  extractURLs(text: string, enableIDN = true, strictTLD = true): string[] {
-    return extractURLs(text, enableIDN, strictTLD);
+  extractURLs(text: string, options: Options): string[] {
+    return extractURLs(text, options);
   },
   extractXMRs(text: string): string[] {
     return extractXMRs(text);

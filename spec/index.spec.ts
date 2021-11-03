@@ -45,7 +45,7 @@ describe("IOCExtractor", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, false);
+      const ioc = extractIOC(input, { enableIDN: false });
 
       expect(ioc.domains.length).toBe(1);
       expect(ioc.domains[0]).toBe("example.com");
@@ -62,7 +62,7 @@ describe("IOCExtractor", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, true, false);
+      const ioc = extractIOC(input, { enableIDN: true, strictTLD: false });
 
       expect(ioc.domains.length).toBe(3);
       expect(ioc.domains[0]).toBe("example.com");
@@ -85,7 +85,7 @@ describe("IOCExtractor", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, false, false);
+      const ioc = extractIOC(input, { enableIDN: false, strictTLD: false });
 
       expect(ioc.domains.length).toBe(2);
       expect(ioc.domains[0]).toBe("example.com");
