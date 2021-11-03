@@ -23,21 +23,22 @@ interface Options {
     .option("--disable-strict-tld", "disable strict TLD validation", false);
   program.parse();
 
-  const options = <Options>program;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  const options = <Options>program.opts();
   const threads = options.threads !== undefined ? options.threads : false;
   const stix2 = options.stix2 !== undefined ? options.stix2 : false;
 
-  const disalbeIDN =
+  const disableIDN =
     options.disableIdn !== undefined ? options.disableIdn : false;
-  const enableIDN = !disalbeIDN;
+  const enableIDN = !disableIDN;
 
   const disableStrictTLD =
     options.disableStrictTld !== undefined ? options.disableStrictTld : false;
   const strictTLD = !disableStrictTLD;
 
   const ioc = threads
-    ? await extractIOCAsync(str, enableIDN, strictTLD)
-    : extractIOC(str, enableIDN, strictTLD);
+    ? await extractIOCAsync(str, { enableIDN, strictTLD })
+    : extractIOC(str, { enableIDN, strictTLD });
 
   if (stix2) {
     const stix2Obj = convertToSTIX2(ioc);
