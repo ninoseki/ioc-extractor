@@ -84,7 +84,12 @@ export {
   refang,
 };
 
-export declare interface IOC {
+export interface Options {
+  enableIDN?: boolean;
+  strictTLD?: boolean;
+}
+
+export interface IOC {
   asns: string[];
   btcs: string[];
   cves: string[];
@@ -111,18 +116,16 @@ export class IOCExtractor {
    *
    * @static
    * @param {string} data A string
-   * @param {boolean} enableIDN Enable or disable IDN
-   * @param {boolean} strictTLD Enable or disable strict TLD validation
+   * @param {Options} options
    * @returns {IOC}
    * @memberof IOCExtractor
    */
   public static extractIOC(
     data: string,
-    enableIDN = true,
-    strictTLD = true
+    options: Options = { enableIDN: true, strictTLD: true }
   ): IOC {
     const extractor = new IOCExtractor(data);
-    return extractor.extractIOC(enableIDN, strictTLD);
+    return extractor.extractIOC(options);
   }
 
   /**
@@ -130,18 +133,16 @@ export class IOCExtractor {
    *
    * @static
    * @param {string} data A string
-   * @param {boolean} enableIDN Enable or disable IDN extraction
-   * @param {boolean} strictTLD Enable or disable strict TLD validation
+   * @param {Options} options
    * @returns {Promise<IOC>}
    * @memberof IOCExtractor
    */
   public static async extractIOCAsync(
     data: string,
-    enableIDN = true,
-    strictTLD = true
+    options: Options = { enableIDN: true, strictTLD: true }
   ): Promise<IOC> {
     const extractor = new IOCExtractor(data);
-    return await extractor.extractIOCAsync(enableIDN, strictTLD);
+    return await extractor.extractIOCAsync(options);
   }
 
   private data: string;
@@ -154,17 +155,18 @@ export class IOCExtractor {
    * Returns an IOC of the data
    *
    * @returns {IOC}
-   * @param {boolean} enableIDN Enable or disable IDN extraction
-   * @param {boolean} strictTLD Enable or disable strict TLD validation
+   * @param {Options} options
    * @memberof IOCExtractor
    */
-  public extractIOC(enableIDN = true, strictTLD = true): IOC {
+  public extractIOC(
+    options: Options = { enableIDN: true, strictTLD: true }
+  ): IOC {
     const ioc: IOC = {
       asns: extractASNs(this.data),
       btcs: extractBTCs(this.data),
       cves: extractCVEs(this.data),
-      domains: extractDomains(this.data, enableIDN, strictTLD),
-      emails: extractEmails(this.data, enableIDN, strictTLD),
+      domains: extractDomains(this.data, options),
+      emails: extractEmails(this.data, options),
       eths: extractETHs(this.data),
       gaPubIDs: extractGAPubIDs(this.data),
       gaTrackIDs: extractGATrackIDs(this.data),
@@ -176,7 +178,7 @@ export class IOCExtractor {
       sha256s: extractSHA256s(this.data),
       sha512s: extractSHA512s(this.data),
       ssdeeps: extractSSDEEPs(this.data),
-      urls: extractURLs(this.data, enableIDN, strictTLD),
+      urls: extractURLs(this.data, options),
       xmrs: extractXMRs(this.data),
     };
     return ioc;
@@ -188,13 +190,11 @@ export class IOCExtractor {
    * Returns an IOC of the data in async
    *
    * @returns {Promise<IOC>}
-   * @param {boolean} enableIDN Enable or disable IDN extraction
-   * @param {boolean} strictTLD Enable or disable strict TLD validation
+   * @param {Options} options
    * @memberof IOCExtractor
    */
   public async extractIOCAsync(
-    enableIDN = true,
-    strictTLD = true
+    options: Options = { enableIDN: true, strictTLD: true }
   ): Promise<IOC> {
     const pool = Pool(() =>
       spawn<Extractor>(new Worker("./workers/extractor"))
@@ -217,12 +217,12 @@ export class IOCExtractor {
     tasks.push(extractCVETask);
 
     const extractDomainTask = pool.queue((extractor) =>
-      extractor.extractDomains(this.data, enableIDN, strictTLD)
+      extractor.extractDomains(this.data, options)
     );
     tasks.push(extractDomainTask);
 
     const extractEmailTask = pool.queue((extractor) =>
-      extractor.extractEmails(this.data, enableIDN, strictTLD)
+      extractor.extractEmails(this.data, options)
     );
     tasks.push(extractEmailTask);
 
@@ -282,7 +282,7 @@ export class IOCExtractor {
     tasks.push(extractSSDEEPTask);
 
     const extractURLTask = pool.queue((extractor) =>
-      extractor.extractURLs(this.data, enableIDN, strictTLD)
+      extractor.extractURLs(this.data, options)
     );
     tasks.push(extractURLTask);
 
@@ -326,16 +326,14 @@ export class IOCExtractor {
  *
  * @export
  * @param {string} data A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {IOC}
  */
 export function extractIOC(
   data: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): IOC {
-  return IOCExtractor.extractIOC(data, enableIDN, strictTLD);
+  return IOCExtractor.extractIOC(data, options);
 }
 
 /**
@@ -343,16 +341,14 @@ export function extractIOC(
  *
  * @export
  * @param {string} data A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {Promise<IOC>}
  */
 export async function extractIOCAsync(
   data: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): Promise<IOC> {
-  return await IOCExtractor.extractIOCAsync(data, enableIDN, strictTLD);
+  return await IOCExtractor.extractIOCAsync(data, options);
 }
 
 /**
@@ -360,16 +356,14 @@ export async function extractIOCAsync(
  *
  * @export
  * @param {string} data
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {STIX2}
  */
 export function extractSTIX2(
   data: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): STIX2 {
-  const ioc = extractIOC(data, enableIDN, strictTLD);
+  const ioc = extractIOC(data, options);
   return convertToSTIX2(ioc);
 }
 
@@ -378,15 +372,13 @@ export function extractSTIX2(
  *
  * @export
  * @param {string} data
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {Promise<STIX2>}
  */
 export async function extractSTIX2Async(
   data: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): Promise<STIX2> {
-  const ioc = await extractIOCAsync(data, enableIDN, strictTLD);
+  const ioc = await extractIOCAsync(data, options);
   return convertToSTIX2(ioc);
 }

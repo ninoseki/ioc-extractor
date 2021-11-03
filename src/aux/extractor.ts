@@ -1,3 +1,4 @@
+import { Options } from "..";
 import { dedup, sortByValue } from "./auxiliary";
 import {
   getASNRegExp,
@@ -28,6 +29,12 @@ import {
   getURLRegExp,
   getXMRRegExp,
 } from "./regexpes";
+
+function normalizeOptions(options: Options): Options {
+  const strictTLD = options.strictTLD !== undefined ? options.strictTLD : true;
+  const enableIDN = options.enableIDN !== undefined ? options.enableIDN : true;
+  return { strictTLD, enableIDN };
+}
 
 /**
  * Perform String match() by using a regexp
@@ -197,16 +204,16 @@ export function extractASN(s: string): string | null {
   return getFirstMatchedValue(s, regexp);
 }
 
-function selectRegExpForDomain(enableIDN: boolean, strictTLD: boolean): RegExp {
-  if (enableIDN && strictTLD) {
+function selectRegExpForDomain(options: Options): RegExp {
+  if (options.enableIDN && options.strictTLD) {
     return getInternationalizedDomainRegExp();
   }
 
-  if (enableIDN) {
+  if (options.enableIDN) {
     return getNonStrictInternationalizedDomainRegExp();
   }
 
-  if (strictTLD) {
+  if (options.strictTLD) {
     return getDomainRegExp();
   }
 
@@ -218,16 +225,14 @@ function selectRegExpForDomain(enableIDN: boolean, strictTLD: boolean): RegExp {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {string[]} An array of domains
  */
 export function extractDomains(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): string[] {
-  const regexp = selectRegExpForDomain(enableIDN, strictTLD);
+  const regexp = selectRegExpForDomain(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
 }
 
@@ -236,29 +241,27 @@ export function extractDomains(
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {string | null} Domain
  */
 export function extractDomain(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): string | null {
-  const regexp = selectRegExpForDomain(enableIDN, strictTLD);
+  const regexp = selectRegExpForDomain(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
 }
 
-function selectRegExpForEmail(enableIDN: boolean, strictTLD: boolean): RegExp {
-  if (enableIDN && strictTLD) {
+function selectRegExpForEmail(options: Options): RegExp {
+  if (options.enableIDN && options.strictTLD) {
     return getInternationalizedEmailRegExp();
   }
 
-  if (enableIDN) {
+  if (options.enableIDN) {
     return getNonStrictInternationalizedEmailRegExp();
   }
 
-  if (strictTLD) {
+  if (options.strictTLD) {
     return getEmailRegExp();
   }
 
@@ -270,16 +273,14 @@ function selectRegExpForEmail(enableIDN: boolean, strictTLD: boolean): RegExp {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {string[]} An array of emails
  */
 export function extractEmails(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): string[] {
-  const regexp = selectRegExpForEmail(enableIDN, strictTLD);
+  const regexp = selectRegExpForEmail(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
 }
 
@@ -288,16 +289,14 @@ export function extractEmails(
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {string | null} Email
  */
 export function extractEmail(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): string | null {
-  const regexp = selectRegExpForEmail(enableIDN, strictTLD);
+  const regexp = selectRegExpForEmail(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
 }
 
@@ -349,16 +348,16 @@ export function extractIPv6(s: string): string | null {
   return getFirstMatchedValue(s, regexp);
 }
 
-function selectRegExpForURL(enableIDN: boolean, strictTLD: boolean): RegExp {
-  if (enableIDN && strictTLD) {
+function selectRegExpForURL(options: Options): RegExp {
+  if (options.enableIDN && options.strictTLD) {
     return getInternationalizedURLRegExp();
   }
 
-  if (enableIDN) {
+  if (options.enableIDN) {
     return getNonStrictInternationalizedURLRegExp();
   }
 
-  if (strictTLD) {
+  if (options.strictTLD) {
     return getURLRegExp();
   }
 
@@ -370,16 +369,14 @@ function selectRegExpForURL(enableIDN: boolean, strictTLD: boolean): RegExp {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {string[]} An array of URLs
  */
 export function extractURLs(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): string[] {
-  const regexp = selectRegExpForURL(enableIDN, strictTLD);
+  const regexp = selectRegExpForURL(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
 }
 
@@ -388,16 +385,14 @@ export function extractURLs(
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {string | null} URL
  */
 export function extractURL(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): string | null {
-  const regexp = selectRegExpForURL(enableIDN, strictTLD);
+  const regexp = selectRegExpForURL(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
 }
 
