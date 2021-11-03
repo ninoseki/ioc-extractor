@@ -29,12 +29,7 @@ import {
   getURLRegExp,
   getXMRRegExp,
 } from "./regexpes";
-
-function normalizeOptions(options: Options): Options {
-  const strictTLD = options.strictTLD !== undefined ? options.strictTLD : true;
-  const enableIDN = options.enableIDN !== undefined ? options.enableIDN : true;
-  return { strictTLD, enableIDN };
-}
+import { normalizeOptions } from "./utils";
 
 /**
  * Perform String match() by using a regexp

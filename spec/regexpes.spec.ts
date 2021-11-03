@@ -107,7 +107,7 @@ describe("isDomain", () => {
   ])(
     "checks whether a given value is a domain or not",
     (string, enableIDN, expected) => {
-      expect(isDomain(string, enableIDN)).toBe(expected);
+      expect(isDomain(string, { enableIDN })).toBe(expected);
     }
   );
 
