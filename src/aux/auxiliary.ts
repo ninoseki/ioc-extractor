@@ -45,12 +45,12 @@ export function refang(s: string): string {
   const colon = /\[:\]/gi;
   const slash = /\[\/\]/gi;
   const at = /(\[|\(|\{)(at|@)(\]|\)|\})/gi;
+  const http = /h(xx|\*\*)p(s?):\/\//gi;
 
   return s
     .replace(dot, ".")
     .replace(colon, ":")
     .replace(slash, "/")
-    .replace(/hxxp(s?):\/\//gi, "http$1://")
-    .replace(/h\*\*p(s?):\/\//gi, "http$1://")
+    .replace(http, "http$2://")
     .replace(at, "@");
 }
