@@ -24,3 +24,11 @@ package-lock.json
 yarn.lock
 .github/
 CONTRIBUTING.md
+.husky
+.nyc_output
+coverage
+renovate.json
+docs
+spec
+scripts
+dist/spec/
