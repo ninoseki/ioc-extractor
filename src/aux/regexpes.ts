@@ -1,6 +1,8 @@
 import * as memoize from "memoizee";
 
+import { Options } from "..";
 import { getTLDRegExpString } from "./tlds";
+import { normalizeOptions } from "./utils";
 
 /**
  * Check whether a string matches with a regexp or not
@@ -164,27 +166,26 @@ export const getNonStrictDomainRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {boolean} return true if a string is a domain
  */
 export function isDomain(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): boolean {
-  if (enableIDN && strictTLD) {
+  options = normalizeOptions(options);
+  if (options.enableIDN && options.strictTLD) {
     const internationalizedDomainRegExp = getInternationalizedDomainRegExp();
     return check(s, internationalizedDomainRegExp);
   }
 
-  if (enableIDN) {
+  if (options.enableIDN) {
     const nonStrictInternationalizedDomainRegExp =
       getNonStrictInternationalizedDomainRegExp();
     return check(s, nonStrictInternationalizedDomainRegExp);
   }
 
-  if (strictTLD) {
+  if (options.strictTLD) {
     const domainRegExp = getDomainRegExp();
     return check(s, domainRegExp);
   }
@@ -221,27 +222,26 @@ export const getNonStrictInternationalizedEmailRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {boolean} true if a string is a domain
  */
 export function isEmail(
   s: string,
-  enableIDN = true,
-  strictTLD = true
+  options: Options = { enableIDN: true, strictTLD: true }
 ): boolean {
-  if (enableIDN && strictTLD) {
+  options = normalizeOptions(options);
+  if (options.enableIDN && options.strictTLD) {
     const internationalizedEmailRegExp = getInternationalizedEmailRegExp();
     return check(s, internationalizedEmailRegExp);
   }
 
-  if (enableIDN) {
+  if (options.enableIDN) {
     const nonStrictInternationalizedEmailRegExp =
       getNonStrictInternationalizedEmailRegExp();
     return check(s, nonStrictInternationalizedEmailRegExp);
   }
 
-  if (strictTLD) {
+  if (options.strictTLD) {
     const emailRegExp = getEmailRegExp();
     return check(s, emailRegExp);
   }
@@ -350,23 +350,26 @@ export const getNonStrictInternationalizedURLRegExp = (): RegExp => {
  *
  * @export
  * @param {string} s A string
- * @param {boolean} enableIDN Enable or disable IDN extraction
- * @param {boolean} strictTLD Enable or disable strict TLD validation
+ * @param {Options} options
  * @returns {boolean} true if a string is a URL
  */
-export function isURL(s: string, enableIDN = true, strictTLD = true): boolean {
-  if (enableIDN && strictTLD) {
+export function isURL(
+  s: string,
+  options: Options = { enableIDN: true, strictTLD: true }
+): boolean {
+  options = normalizeOptions(options);
+  if (options.enableIDN && options.strictTLD) {
     const internationalizedURLRegExp = getInternationalizedURLRegExp();
     return check(s, internationalizedURLRegExp);
   }
 
-  if (enableIDN) {
+  if (options.enableIDN) {
     const nonStrictInternationalizedURLRegExp =
       getNonStrictInternationalizedURLRegExp();
     return check(s, nonStrictInternationalizedURLRegExp);
   }
 
-  if (strictTLD) {
+  if (options.strictTLD) {
     const urlRegExp = getURLRegExp();
     return check(s, urlRegExp);
   }
