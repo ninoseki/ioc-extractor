@@ -1,6 +1,6 @@
 {
   "name": "ioc-extractor",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "description": "IOC(Indicator of Compromise) extractor",
   "main": "dist/src/index.js",
   "types": "dist/src/index.d.ts",
