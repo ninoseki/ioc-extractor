@@ -41,7 +41,7 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with disabled IDN extraciton", () => {
+  describe("simple input with disabled IDN extraction", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
@@ -58,7 +58,7 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with non-strict TLD validaton", () => {
+  describe("simple input with non-strict TLD validation", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
@@ -81,7 +81,7 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with non-strict TLD validaton & disabled IDN extraction", () => {
+  describe("simple input with non-strict TLD validation & disabled IDN extraction", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
@@ -98,6 +98,18 @@ describe("IOCExtractor", () => {
       expect(ioc.emails.length).toBe(2);
       expect(ioc.emails[0]).toBe("test@example.com");
       expect(ioc.emails[1]).toBe("test@example.nope");
+    });
+  });
+
+  describe("simple input with disabled refang option", () => {
+    it("should extract IOCs from the input", () => {
+      const input = "example[.]com 1.1.1.1";
+      const ioc = extractIOC(input, { enableRefang: false });
+
+      expect(ioc.domains.length).toBe(0);
+
+      expect(ioc.ipv4s.length).toBe(1);
+      expect(ioc.ipv4s[0]).toBe("1.1.1.1");
     });
   });
 
