@@ -251,7 +251,7 @@ export function isEmail(
 }
 
 export const getIPv4RegExpString = (): string => {
-  return "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\[?\\.]?){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
+  return "(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)(?:\\.(?:25[0-5]|2[0-4]\\d|1\\d\\d|[1-9]\\d|\\d)){3}";
 };
 
 export const getIPv4RegExp = (): RegExp => {

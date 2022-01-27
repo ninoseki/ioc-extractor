@@ -74,6 +74,7 @@ describe("extractDomain", () => {
   const value = "example.com";
   it("extract a value", () => {
     expect(extractDomain(value)).toBe(value);
+    expect(extractDomain(value.replace(".", "[.]"))).toBe(null);
     expect(extractDomain("")).toBe(null);
   });
 });
@@ -82,6 +83,7 @@ describe("extractIPv4", () => {
   const value = "1.1.1.1";
   it("extract a value", () => {
     expect(extractIPv4(value)).toBe(value);
+    expect(extractIPv4(value.replace(".", "[.]"))).toBe(null);
     expect(extractIPv4("")).toBe(null);
   });
 });
@@ -98,6 +100,7 @@ describe("extractEmail", () => {
   const value = "test@texample.com";
   it("extract a value", () => {
     expect(extractEmail(value)).toBe(value);
+    expect(extractEmail(value.replace(".", "[.]"))).toBe(null);
     expect(extractEmail("")).toBe(null);
   });
 });
@@ -106,6 +109,7 @@ describe("extractURL", () => {
   const value = "http://example.com";
   it("extract a value", () => {
     expect(extractURL(value)).toBe(value);
+    expect(extractURL(value.replace(".", "[.]"))).toBe(null);
     expect(extractURL("")).toBe(null);
   });
 });
