@@ -13,7 +13,7 @@ IOC extractor is an npm package for extracting common [IOC(Indicator of Compromi
 ## Installation
 
 ```sh
-npm install ioc-extractor
+sudo npm install -g ioc-extractor
 ```
 
 ## Usage
