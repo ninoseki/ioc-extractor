@@ -41,6 +41,7 @@ import {
   extractXMR,
   extractXMRs,
 } from "./aux/extractor";
+import { normalizeOptions } from "./aux/utils";
 import { convertToSTIX2, STIX2 } from "./stix2/stix2";
 import { IOC, Options } from "./types";
 import { Extractor } from "./workers/extractor";
@@ -138,13 +139,17 @@ export class IOCExtractor {
   public extractIOC(
     options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
   ): IOC {
-    const normalizedData = options.enableRefang ? refang(this.data) : this.data;
+    const normalizedOptions = normalizeOptions(options);
+    const normalizedData = normalizedOptions.enableRefang
+      ? refang(this.data)
+      : this.data;
+
     const ioc: IOC = {
       asns: extractASNs(normalizedData),
       btcs: extractBTCs(normalizedData),
       cves: extractCVEs(normalizedData),
-      domains: extractDomains(normalizedData, options),
-      emails: extractEmails(normalizedData, options),
+      domains: extractDomains(normalizedData, normalizedOptions),
+      emails: extractEmails(normalizedData, normalizedOptions),
       eths: extractETHs(normalizedData),
       gaPubIDs: extractGAPubIDs(normalizedData),
       gaTrackIDs: extractGATrackIDs(normalizedData),
@@ -156,7 +161,7 @@ export class IOCExtractor {
       sha256s: extractSHA256s(normalizedData),
       sha512s: extractSHA512s(normalizedData),
       ssdeeps: extractSSDEEPs(normalizedData),
-      urls: extractURLs(normalizedData, options),
+      urls: extractURLs(normalizedData, normalizedOptions),
       xmrs: extractXMRs(normalizedData),
     };
     return ioc;
@@ -179,7 +184,10 @@ export class IOCExtractor {
     );
     const tasks: QueuedTask<ModuleThread<Extractor>, string[]>[] = [];
 
-    const normalizedData = options.enableRefang ? refang(this.data) : this.data;
+    const normalizedOptions = normalizeOptions(options);
+    const normalizedData = normalizedOptions.enableRefang
+      ? refang(this.data)
+      : this.data;
 
     const extractASNTask = pool.queue((extractor) =>
       extractor.extractASNs(normalizedData)
@@ -197,12 +205,12 @@ export class IOCExtractor {
     tasks.push(extractCVETask);
 
     const extractDomainTask = pool.queue((extractor) =>
-      extractor.extractDomains(normalizedData, options)
+      extractor.extractDomains(normalizedData, normalizedOptions)
     );
     tasks.push(extractDomainTask);
 
     const extractEmailTask = pool.queue((extractor) =>
-      extractor.extractEmails(normalizedData, options)
+      extractor.extractEmails(normalizedData, normalizedOptions)
     );
     tasks.push(extractEmailTask);
 
@@ -262,7 +270,7 @@ export class IOCExtractor {
     tasks.push(extractSSDEEPTask);
 
     const extractURLTask = pool.queue((extractor) =>
-      extractor.extractURLs(normalizedData, options)
+      extractor.extractURLs(normalizedData, normalizedOptions)
     );
     tasks.push(extractURLTask);
 
