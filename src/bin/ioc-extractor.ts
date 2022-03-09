@@ -10,6 +10,7 @@ interface Options {
   threads?: boolean;
   disableIdn?: boolean;
   disableStrictTld?: boolean;
+  disableRefang?: boolean;
 }
 
 (async (): Promise<void> => {
@@ -20,7 +21,8 @@ interface Options {
     .option("-s2, --stix2", "output in STIX2 format", false)
     .option("-t, --threads", "use threads", false)
     .option("--disable-idn", "disable IDN extraction", false)
-    .option("--disable-strict-tld", "disable strict TLD validation", false);
+    .option("--disable-strict-tld", "disable strict TLD validation", false)
+    .option("--disable-refang", "disable refang", false);
   program.parse();
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
@@ -36,9 +38,13 @@ interface Options {
     options.disableStrictTld !== undefined ? options.disableStrictTld : false;
   const strictTLD = !disableStrictTLD;
 
+  const disableRefang =
+    options.disableRefang !== undefined ? options.disableRefang : false;
+  const enableRefang = !disableRefang;
+
   const ioc = threads
-    ? await extractIOCAsync(str, { enableIDN, strictTLD })
-    : extractIOC(str, { enableIDN, strictTLD });
+    ? await extractIOCAsync(str, { enableIDN, strictTLD, enableRefang })
+    : extractIOC(str, { enableIDN, strictTLD, enableRefang });
 
   if (stix2) {
     const stix2Obj = convertToSTIX2(ioc);
