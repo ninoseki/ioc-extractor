@@ -13,6 +13,8 @@ IOC extractor is an npm package for extracting common [IOC(Indicator of Compromi
 ## Installation
 
 ```sh
+npm install -g ioc-extractor
+# or if you want to use ioc-extractor as a library in your JS/TS project
 npm install ioc-extractor
 ```
 
@@ -29,6 +31,7 @@ Options:
   -t, --threads         use threads (default: false)
   --disable-idn         disable IDN extraction (default: false)
   --disable-strict-tld  disable strict TLD validation (default: false)
+  --disable-refang      disable refang (default: false)
   -h, --help            display help for command
 ```
 
@@ -113,7 +116,7 @@ This package supports the following IOCs:
 
 - **Hashes**: md5, sha1, sha256, sha512, ssdeep
 - **Networks**: domain, email, ipv4, ipv6, url, asn
-- **Hardwares**: mac address
+- **Hardwares**: mac_address
 - **Utilities**: cve(CVE ID)
 - **Cryptocurrencies**: btc (BTC address), eth (ETH address), xmr (XMR address)
 - **Trackers**: gaTrackID (Google Analytics tracking ID), gaPubID (Google Adsense Publisher ID)
