@@ -1,9 +1,14 @@
 name: Node.js CI
 
-on: ["pull_request"]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
 
 jobs:
-  build:
+  test:
 
     runs-on: ubuntu-latest
 
@@ -26,7 +31,20 @@ jobs:
       - name: Run tests
         run: npm run coverage
 
-      - name: Coveralls
+      - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
+          github-token: ${{ secrets.github_token }}
+          flag-name: run-${{ matrix.ruby-version }}
+          parallel: true
+
+  coverage:
+    name: Coverage
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Coveralls Finished
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.github_token }}
+          parallel-finished: true
