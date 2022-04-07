@@ -690,6 +690,7 @@ export function getTLDs(): string[] {
     "kh",
     "ki",
     "kia",
+    "kids",
     "kim",
     "kinder",
     "kindle",
