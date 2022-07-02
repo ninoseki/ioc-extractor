@@ -104,16 +104,21 @@ describe("refang", () => {
     expect(refang(input)).toBe("test@example.com");
   });
 
-  it("should be deal with a mixed casec", () => {
-    const input = "hxxps[:]//test.example[.)com[/]path";
-    expect(refang(input)).toBe("https://test.example.com/path");
+  it.each([
+    ["hxxps[:]//test.example[.)com[/]path", "https://test.example.com/path"],
+    [
+      "hxxps[://]test.example[.)com[/]path[:]80",
+      "https://test.example.com/path:80",
+    ],
+  ])("can deal with a mixed cases", (string, expected) => {
+    expect(refang(string)).toBe(expected);
   });
 
   it.each([
     ["[at](at)[at]", "@@@"],
     ["[/][/]", "//"],
     ["[:][:]", "::"],
-  ])("should repalace all occurrences", (string, expected) => {
+  ])("should replace all occurrences", (string, expected) => {
     expect(refang(string)).toBe(expected);
   });
 });
