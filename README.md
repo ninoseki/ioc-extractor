@@ -1,4 +1,4 @@
-# IOC extractor
+# IoC extractor
 
 [![npm version](https://badge.fury.io/js/ioc-extractor.svg)](https://badge.fury.io/js/ioc-extractor)
 ![Node.js CI](https://github.com/ninoseki/ioc-extractor/workflows/Node.js%20CI/badge.svg)
@@ -6,7 +6,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/ninoseki/ioc-extractor/badge.svg)](https://coveralls.io/github/ninoseki/ioc-extractor)
 [![Documentation](https://img.shields.io/badge/docs-latest-brightgreen.svg)](https://ninoseki.github.io/ioc-extractor/)
 
-IOC extractor is an npm package for extracting common [IOC(Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
+IoC extractor is an npm package for extracting common [IoC (Indicator of Compromise)](https://en.wikipedia.org/wiki/Indicator_of_compromise) from a block of text.
 
 **Note**: the package is highly influenced by [cacador](https://github.com/sroberts/cacador).
 
@@ -132,6 +132,7 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 | `\.`  => `.`     | `example\.com`                         | `example.com`                   |
 | `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`       |
 | `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`            |
+| `[://]` => `://` | `http[://]example.com`                 | `http://example.com`            |
 | `hxxp` => `http` | `hxxps://google.com`                   | `https://google.com`            |
 | `[at]` => `@`    | `test[at]example.com`                  | `test@example.com`              |
 | `[@]` => `@`     | `test[@]example.com`                   | `test@example.com`              |
