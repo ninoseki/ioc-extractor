@@ -69,6 +69,11 @@ describe("refang", () => {
     expect(refang(input)).toBe("http://example.com");
   });
 
+  it("should replace [://] by ://", () => {
+    const input = "http[://]example.com";
+    expect(refang(input)).toBe("http://example.com");
+  });
+
   it("should replace . by .", () => {
     const input = "http://example.com";
     expect(refang(input)).toBe("http://example.com");

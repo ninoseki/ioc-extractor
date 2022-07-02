@@ -44,6 +44,7 @@ export function refang(s: string): string {
   ]);
   const colon = /\[:\]/gi;
   const slash = /\[\/\]/gi;
+  const colonSlash = /\[:\/\/\]/gi;
   const at = /(\[|\(|\{)(at|@)(\]|\)|\})/gi;
   const http = /h(xx|\*\*)p(s?):\/\//gi;
 
@@ -51,6 +52,7 @@ export function refang(s: string): string {
     .replace(dot, ".")
     .replace(colon, ":")
     .replace(slash, "/")
+    .replace(colonSlash, "://")
     .replace(http, "http$2://")
     .replace(at, "@");
 }
