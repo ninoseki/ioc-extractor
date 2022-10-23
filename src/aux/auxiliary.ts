@@ -1,4 +1,4 @@
-import * as arrayUnique from "array-unique";
+import arrayUnique from "array-unique";
 
 /**
  * Reject duplications from an array

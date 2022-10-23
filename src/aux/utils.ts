@@ -1,4 +1,4 @@
-import { Options } from "..";
+import type { Options } from "../types";
 
 export function normalizeOptions(options: Options): Options {
   const strictTLD = options.strictTLD !== undefined ? options.strictTLD : true;

@@ -1,8 +1,4 @@
-import { Pool, spawn, Worker } from "threads";
-import { QueuedTask } from "threads/dist/master/pool";
-import { ModuleThread } from "threads/dist/types/master";
-
-import { refang } from "./aux/auxiliary";
+import { refang } from "./aux/auxiliary.js";
 import {
   extractASN,
   extractASNs,
@@ -40,11 +36,10 @@ import {
   extractURLs,
   extractXMR,
   extractXMRs,
-} from "./aux/extractor";
-import { normalizeOptions } from "./aux/utils";
-import { convertToSTIX2, STIX2 } from "./stix2/stix2";
-import { IOC, Options } from "./types";
-import { Extractor } from "./workers/extractor";
+} from "./aux/extractor.js";
+import { normalizeOptions } from "./aux/utils.js";
+import { convertToSTIX2, STIX2 } from "./stix2/stix2.js";
+import type { IOC, Options } from "./types";
 
 export {
   extractASN,
@@ -83,10 +78,10 @@ export {
   extractURLs,
   extractXMR,
   extractXMRs,
-  IOC,
-  Options,
   refang,
 };
+
+export type { IOC, Options };
 
 export class IOCExtractor {
   /**
@@ -104,23 +99,6 @@ export class IOCExtractor {
   ): IOC {
     const extractor = new IOCExtractor(data);
     return extractor.extractIOC(options);
-  }
-
-  /**
-   * Returns an IOC in data in async
-   *
-   * @static
-   * @param {string} data A string
-   * @param {Options} options
-   * @returns {Promise<IOC>}
-   * @memberof IOCExtractor
-   */
-  public static async extractIOCAsync(
-    data: string,
-    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
-  ): Promise<IOC> {
-    const extractor = new IOCExtractor(data);
-    return await extractor.extractIOCAsync(options);
   }
 
   private data: string;
@@ -166,147 +144,6 @@ export class IOCExtractor {
     };
     return ioc;
   }
-
-  /* eslint-disable @typescript-eslint/no-unsafe-argument */
-
-  /**
-   * Returns an IOC of the data in async
-   *
-   * @returns {Promise<IOC>}
-   * @param {Options} options
-   * @memberof IOCExtractor
-   */
-  public async extractIOCAsync(
-    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
-  ): Promise<IOC> {
-    const pool = Pool(() =>
-      spawn<Extractor>(new Worker("./workers/extractor"))
-    );
-    const tasks: QueuedTask<ModuleThread<Extractor>, string[]>[] = [];
-
-    const normalizedOptions = normalizeOptions(options);
-    const normalizedData = normalizedOptions.enableRefang
-      ? refang(this.data)
-      : this.data;
-
-    const extractASNTask = pool.queue((extractor) =>
-      extractor.extractASNs(normalizedData)
-    );
-    tasks.push(extractASNTask);
-
-    const extractBTCTask = pool.queue((extractor) =>
-      extractor.extractBTCs(normalizedData)
-    );
-    tasks.push(extractBTCTask);
-
-    const extractCVETask = pool.queue((extractor) =>
-      extractor.extractCVEs(normalizedData)
-    );
-    tasks.push(extractCVETask);
-
-    const extractDomainTask = pool.queue((extractor) =>
-      extractor.extractDomains(normalizedData, normalizedOptions)
-    );
-    tasks.push(extractDomainTask);
-
-    const extractEmailTask = pool.queue((extractor) =>
-      extractor.extractEmails(normalizedData, normalizedOptions)
-    );
-    tasks.push(extractEmailTask);
-
-    const extractETHTask = pool.queue((extractor) =>
-      extractor.extractETHs(normalizedData)
-    );
-    tasks.push(extractETHTask);
-
-    const extractGAPubIDTask = pool.queue((extractor) =>
-      extractor.extractGAPubIDs(normalizedData)
-    );
-    tasks.push(extractGAPubIDTask);
-
-    const extractGATrackIDTask = pool.queue((extractor) =>
-      extractor.extractGATrackIDs(normalizedData)
-    );
-    tasks.push(extractGATrackIDTask);
-
-    const extractIPv4Task = pool.queue((extractor) =>
-      extractor.extractIPv4s(normalizedData)
-    );
-    tasks.push(extractIPv4Task);
-
-    const extractIPv6Task = pool.queue((extractor) =>
-      extractor.extractIPv6s(normalizedData)
-    );
-    tasks.push(extractIPv6Task);
-
-    const extractMacAddressTask = pool.queue((extractor) =>
-      extractor.extractMacAddresses(normalizedData)
-    );
-    tasks.push(extractMacAddressTask);
-
-    const extractMD5Task = pool.queue((extractor) =>
-      extractor.extractMD5s(normalizedData)
-    );
-    tasks.push(extractMD5Task);
-
-    const extractSHA1Task = pool.queue((extractor) =>
-      extractor.extractSHA1s(normalizedData)
-    );
-    tasks.push(extractSHA1Task);
-
-    const extractSHA256Task = pool.queue((extractor) =>
-      extractor.extractSHA256s(normalizedData)
-    );
-    tasks.push(extractSHA256Task);
-
-    const extractSHA512Task = pool.queue((extractor) =>
-      extractor.extractSHA512s(normalizedData)
-    );
-    tasks.push(extractSHA512Task);
-
-    const extractSSDEEPTask = pool.queue((extractor) =>
-      extractor.extractSSDEEPs(normalizedData)
-    );
-    tasks.push(extractSSDEEPTask);
-
-    const extractURLTask = pool.queue((extractor) =>
-      extractor.extractURLs(normalizedData, normalizedOptions)
-    );
-    tasks.push(extractURLTask);
-
-    const extractXMRTask = pool.queue((extractor) =>
-      extractor.extractXMRs(normalizedData)
-    );
-    tasks.push(extractXMRTask);
-
-    const results = await Promise.all(tasks);
-    await pool.terminate();
-
-    const ioc: IOC = {
-      asns: results[0],
-      btcs: results[1],
-      cves: results[2],
-      domains: results[3],
-      emails: results[4],
-      eths: results[5],
-      gaPubIDs: results[6],
-      gaTrackIDs: results[7],
-      ipv4s: results[8],
-      ipv6s: results[9],
-      macAddresses: results[10],
-      md5s: results[11],
-      sha1s: results[12],
-      sha256s: results[13],
-      sha512s: results[14],
-      ssdeeps: results[15],
-      urls: results[16],
-      xmrs: results[17],
-    };
-
-    return ioc;
-  }
-
-  /* eslint-enable @typescript-eslint/no-unsafe-argument */
 }
 
 /**
@@ -325,21 +162,6 @@ export function extractIOC(
 }
 
 /**
- * Returns an IOC of data in async
- *
- * @export
- * @param {string} data A string
- * @param {Options} options
- * @returns {Promise<IOC>}
- */
-export async function extractIOCAsync(
-  data: string,
-  options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
-): Promise<IOC> {
-  return await IOCExtractor.extractIOCAsync(data, options);
-}
-
-/**
  * Returns an IOC of data as STIX2 format
  *
  * @export
@@ -352,21 +174,5 @@ export function extractSTIX2(
   options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
 ): STIX2 {
   const ioc = extractIOC(data, options);
-  return convertToSTIX2(ioc);
-}
-
-/**
- * Returns an IOC of data as STIX2 format in async
- *
- * @export
- * @param {string} data
- * @param {Options} options
- * @returns {Promise<STIX2>}
- */
-export async function extractSTIX2Async(
-  data: string,
-  options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
-): Promise<STIX2> {
-  const ioc = await extractIOCAsync(data, options);
   return convertToSTIX2(ioc);
 }
