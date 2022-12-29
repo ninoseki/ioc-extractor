@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es6",
-        "module": "commonjs",
+        "target": "esnext",
+        "module": "esnext",
         "noImplicitAny": false,
         "sourceMap": true,
         "declaration": true,
@@ -15,6 +15,12 @@
                 "src/*"
             ]
         },
+        "lib": [
+            "esnext"
+        ],
+        "moduleResolution": "node",
+        "esModuleInterop": true,
+        "isolatedModules": true,
     },
     "exclude": [
         "node_modules",

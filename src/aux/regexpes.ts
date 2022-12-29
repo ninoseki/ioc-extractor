@@ -1,8 +1,8 @@
-import * as memoize from "memoizee";
+import memoize from "memoizee";
 
-import { Options } from "..";
-import { getTLDRegExpString } from "./tlds";
-import { normalizeOptions } from "./utils";
+import type { Options } from "../types";
+import { getTLDRegExpString } from "./tlds.js";
+import { normalizeOptions } from "./utils.js";
 
 /**
  * Check whether a string matches with a regexp or not

@@ -1,7 +1,7 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { extractIOC, extractIOCAsync } from "@/index";
+import { extractIOC } from "@/index";
 
 describe("IOCExtractor", () => {
   describe("simple input", () => {
@@ -110,27 +110,6 @@ describe("IOCExtractor", () => {
 
       expect(ioc.ipv4s.length).toBe(1);
       expect(ioc.ipv4s[0]).toBe("1.1.1.1");
-    });
-  });
-
-  describe("simple input (in async)", () => {
-    it("should extract IOCs from the input", async (): Promise<void> => {
-      const input =
-        "1.1.1[.]1 2.2.2 . 2 google(.)com https://www.google[.]com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4";
-      const ioc = await extractIOCAsync(input);
-
-      expect(ioc.md5s[0]).toBe("f6f8179ac71eaabff12b8c024342109b");
-      expect(ioc.md5s.length).toBe(1);
-      expect(ioc.sha256s[0]).toBe(
-        "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f"
-      );
-      expect(ioc.sha256s.length).toBe(1);
-      expect(ioc.domains[0]).toBe("google.com");
-      expect(ioc.ipv4s[0]).toBe("1.1.1.1");
-      expect(ioc.ipv4s[1]).toBe("2.2.2.2");
-      expect(ioc.urls[0]).toBe("https://www.google.com");
-      expect(ioc.cves).toEqual([]);
-      expect(ioc.gaTrackIDs[0]).toBe("UA-26296840-4");
     });
   });
 
