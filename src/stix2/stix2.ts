@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 
-import type { IOC } from "../index.js";
+import type { IOC } from "../index";
 
 export interface Indicator {
   type: string;

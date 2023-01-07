@@ -1,4 +1,4 @@
-import { refang } from "./aux/auxiliary.js";
+import { refang } from "./aux/auxiliary";
 import {
   extractASN,
   extractASNs,
@@ -36,9 +36,9 @@ import {
   extractURLs,
   extractXMR,
   extractXMRs,
-} from "./aux/extractor.js";
-import { normalizeOptions } from "./aux/utils.js";
-import { convertToSTIX2, STIX2 } from "./stix2/stix2.js";
+} from "./aux/extractor";
+import { normalizeOptions } from "./aux/utils";
+import { convertToSTIX2, STIX2 } from "./stix2/stix2";
 import type { IOC, Options } from "./types";
 
 export {

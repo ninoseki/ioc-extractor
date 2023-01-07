@@ -1,5 +1,5 @@
 import type { Options } from "../types";
-import { dedup, sortByValue } from "./auxiliary.js";
+import { dedup, sortByValue } from "./auxiliary";
 import {
   getASNRegExp,
   getBTCRegExp,
@@ -28,8 +28,8 @@ import {
   getSSDEEPRegExp,
   getURLRegExp,
   getXMRRegExp,
-} from "./regexpes.js";
-import { normalizeOptions } from "./utils.js";
+} from "./regexpes";
+import { normalizeOptions } from "./utils";
 
 /**
  * Perform String match() by using a regexp
