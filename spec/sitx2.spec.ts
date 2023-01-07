@@ -1,5 +1,5 @@
 import { extractIOC } from "@/index";
-import { convertToPattern, convertToSTIX2, isHash } from "@/stix2/stix2";
+import { convertToPattern, convertToSTIX2, isHash } from "@/stix2";
 
 describe("isHash", () => {
   it("return false", () => {

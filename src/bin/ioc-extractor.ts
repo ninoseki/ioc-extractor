@@ -3,7 +3,7 @@ import { program } from "commander";
 import getStdin from "get-stdin";
 
 import { extractIOC } from "../index";
-import { convertToSTIX2 } from "../stix2/stix2";
+import { convertToSTIX2 } from "../stix2";
 
 interface Options {
   stix2?: boolean;
