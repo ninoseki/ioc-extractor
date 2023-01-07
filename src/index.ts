@@ -38,7 +38,7 @@ import {
   extractXMRs,
 } from "./aux/extractor";
 import { normalizeOptions } from "./aux/utils";
-import { convertToSTIX2, STIX2 } from "./stix2/stix2";
+import { convertToSTIX2, STIX2 } from "./stix2";
 import type { IOC, Options } from "./types";
 
 export {
