@@ -2,8 +2,8 @@
 import { program } from "commander";
 import getStdin from "get-stdin";
 
-import { extractIOC } from "../index.js";
-import { convertToSTIX2 } from "../stix2/stix2.js";
+import { extractIOC } from "../index";
+import { convertToSTIX2 } from "../stix2/stix2";
 
 interface Options {
   stix2?: boolean;
