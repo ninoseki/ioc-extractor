@@ -1,5 +1,4 @@
 import type { Options } from "../types";
-import { dedup, sortByValue } from "./auxiliary";
 import {
   getASNRegExp,
   getBTCRegExp,
@@ -28,8 +27,8 @@ import {
   getSSDEEPRegExp,
   getURLRegExp,
   getXMRRegExp,
-} from "./regexpes";
-import { normalizeOptions } from "./utils";
+} from "./regexps";
+import { dedup, normalizeOptions, sortByValue } from "./utils";
 
 /**
  * Perform String match() by using a regexp

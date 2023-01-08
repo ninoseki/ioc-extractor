@@ -17,7 +17,7 @@ import {
   extractSSDEEP,
   extractURL,
   extractXMR,
-} from "@/aux/extractor";
+} from "@/aux/extractors";
 
 describe("extractMD5", () => {
   const value = "874058e8d8582bf85c115ce319c5b0af";

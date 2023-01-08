@@ -1,4 +1,4 @@
-import { dedup, refang, sortByValue } from "@/aux/auxiliary";
+import { dedup, refang, sortByValue } from "@/aux/utils";
 
 describe("refang", () => {
   it("should replace ' . '  by .", () => {
@@ -21,12 +21,12 @@ describe("refang", () => {
     expect(refang(input)).toBe("example.com");
   });
 
-  it("should replace mixied brackets by .", () => {
+  it("should replace mixed brackets by .", () => {
     const input = "test(.}test{.)example[.)com";
     expect(refang(input)).toBe("test.test.example.com");
   });
 
-  it("should replace mixied partial brackets by .", () => {
+  it("should replace mixed partial brackets by .", () => {
     const input = "1.)1[.1.)1";
     expect(refang(input)).toBe("1.1.1.1");
   });
