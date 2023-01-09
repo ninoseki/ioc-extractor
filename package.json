@@ -48,7 +48,8 @@
     "coverage": "jest --coverage",
     "lint": "eslint src --ext .ts",
     "docs": "typedoc",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "prepack": "npm run build"
   },
   "lint-staged": {
     "*.ts": [
