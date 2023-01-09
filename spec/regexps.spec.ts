@@ -8,7 +8,6 @@ import {
   ethRegExp,
   gaPubIDRegExp,
   gaTrackIDRegExp,
-  internationalizedDomainRegExp,
   internationalizedURLRegExp,
   ipv4RegExp,
   ipv6RegExp,

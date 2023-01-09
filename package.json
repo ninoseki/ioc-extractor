@@ -46,7 +46,7 @@
     "watch": "npm run build -- --watch src",
     "test": "jest",
     "coverage": "jest --coverage",
-    "lint": "eslint src --ext .ts",
+    "lint": "eslint src spec --ext .ts",
     "docs": "typedoc",
     "prepare": "husky install"
   },
