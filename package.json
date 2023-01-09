@@ -120,7 +120,6 @@
     "array-unique": "^0.3.2",
     "commander": "^9.4.1",
     "get-stdin": "9.0.0",
-    "memoizee": "^0.4.15",
     "uuid": "^9.0.0"
   }
 }
