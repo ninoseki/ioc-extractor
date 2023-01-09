@@ -1,32 +1,32 @@
 import type { Options } from "../types";
 import {
-  getASNRegExp,
-  getBTCRegExp,
-  getCVERegExp,
-  getDomainRegExp,
-  getEmailRegExp,
-  getETHRegExp,
-  getGAPubIDRegExp,
-  getGATrackIDRegExp,
-  getInternationalizedDomainRegExp,
-  getInternationalizedEmailRegExp,
-  getInternationalizedURLRegExp,
-  getIPv4RegExp,
-  getIPv6RegExp,
-  getMACAddressRegExp,
-  getMD5RegExp,
-  getNonStrictDomainRegExp,
-  getNonStrictEmailRegExp,
-  getNonStrictInternationalizedDomainRegExp,
-  getNonStrictInternationalizedEmailRegExp,
-  getNonStrictInternationalizedURLRegExp,
-  getNonStrictURLRegExp,
-  getSHA1RegExp,
-  getSHA256RegExp,
-  getSHA512RegExp,
-  getSSDEEPRegExp,
-  getURLRegExp,
-  getXMRRegExp,
+  asnRegExp,
+  btcRegExp,
+  cveRegExp,
+  domainRegExp,
+  emailRegExp,
+  ethRegExp,
+  gaPubIDRegExp,
+  gaTrackIDRegExp,
+  internationalizedDomainRegExp,
+  internationalizedEmailRegExp,
+  internationalizedURLRegExp,
+  ipv4RegExp,
+  ipv6RegExp,
+  macAddressRegExp,
+  md5RegExp,
+  nonStrictDomainRegExp,
+  nonStrictEmailRegExp,
+  nonStrictInternationalizedDomainRegExp,
+  nonStrictInternationalizedEmailRegExp,
+  nonStrictInternationalizedURLRegExp,
+  nonStrictURLRegExp,
+  sha1RegExp,
+  sha256RegExp,
+  sha512RegExp,
+  ssdeepRegExp,
+  urlRegExp,
+  xmrRegExp,
 } from "./regexps";
 import { normalizeOptions } from "./utils";
 
@@ -54,8 +54,7 @@ function check(s: string, regexp: RegExp): boolean {
  * @returns {boolean} return true if a string is MD5
  */
 export function isMD5(s: string): boolean {
-  const regexp = getMD5RegExp();
-  return check(s, regexp);
+  return check(s, md5RegExp);
 }
 
 /**
@@ -66,8 +65,7 @@ export function isMD5(s: string): boolean {
  * @returns {boolean} return true if a string is a SHA1
  */
 export function isSHA1(s: string): boolean {
-  const regexp = getSHA1RegExp();
-  return check(s, regexp);
+  return check(s, sha1RegExp);
 }
 
 /**
@@ -78,8 +76,7 @@ export function isSHA1(s: string): boolean {
  * @returns {boolean} return true if a string is a SHA256
  */
 export function isSHA256(s: string): boolean {
-  const regexp = getSHA256RegExp();
-  return check(s, regexp);
+  return check(s, sha256RegExp);
 }
 
 /**
@@ -90,8 +87,7 @@ export function isSHA256(s: string): boolean {
  * @returns {boolean} return true if a string is a SHA512
  */
 export function isSHA512(s: string): boolean {
-  const regexp = getSHA512RegExp();
-  return check(s, regexp);
+  return check(s, sha512RegExp);
 }
 
 /**
@@ -102,8 +98,7 @@ export function isSHA512(s: string): boolean {
  * @returns {boolean} return true if a string is a SSDEEP
  */
 export function isSSDEEP(s: string): boolean {
-  const regexp = getSSDEEPRegExp();
-  return check(s, regexp);
+  return check(s, ssdeepRegExp);
 }
 
 /**
@@ -114,8 +109,7 @@ export function isSSDEEP(s: string): boolean {
  * @returns {boolean} return true if a string is an ASN
  */
 export function isASN(s: string): boolean {
-  const regexp = getASNRegExp();
-  return check(s, regexp);
+  return check(s, asnRegExp);
 }
 
 /**
@@ -132,22 +126,17 @@ export function isDomain(
 ): boolean {
   options = normalizeOptions(options);
   if (options.enableIDN && options.strictTLD) {
-    const internationalizedDomainRegExp = getInternationalizedDomainRegExp();
     return check(s, internationalizedDomainRegExp);
   }
 
   if (options.enableIDN) {
-    const nonStrictInternationalizedDomainRegExp =
-      getNonStrictInternationalizedDomainRegExp();
     return check(s, nonStrictInternationalizedDomainRegExp);
   }
 
   if (options.strictTLD) {
-    const domainRegExp = getDomainRegExp();
     return check(s, domainRegExp);
   }
 
-  const nonStrictDomainRegExp = getNonStrictDomainRegExp();
   return check(s, nonStrictDomainRegExp);
 }
 
@@ -165,22 +154,17 @@ export function isEmail(
 ): boolean {
   options = normalizeOptions(options);
   if (options.enableIDN && options.strictTLD) {
-    const internationalizedEmailRegExp = getInternationalizedEmailRegExp();
     return check(s, internationalizedEmailRegExp);
   }
 
   if (options.enableIDN) {
-    const nonStrictInternationalizedEmailRegExp =
-      getNonStrictInternationalizedEmailRegExp();
     return check(s, nonStrictInternationalizedEmailRegExp);
   }
 
   if (options.strictTLD) {
-    const emailRegExp = getEmailRegExp();
     return check(s, emailRegExp);
   }
 
-  const nonStrictEmailRegExp = getNonStrictEmailRegExp();
   return check(s, nonStrictEmailRegExp);
 }
 
@@ -192,8 +176,7 @@ export function isEmail(
  * @returns {boolean} true if a string is an IPv4
  */
 export function isIPv4(s: string): boolean {
-  const regexp = getIPv4RegExp();
-  return check(s, regexp);
+  return check(s, ipv4RegExp);
 }
 
 /**
@@ -204,8 +187,7 @@ export function isIPv4(s: string): boolean {
  * @returns {boolean} true if a string is an IPv6
  */
 export function isIPv6(s: string): boolean {
-  const regexp = getIPv6RegExp();
-  return check(s, regexp);
+  return check(s, ipv6RegExp);
 }
 
 /**
@@ -222,22 +204,17 @@ export function isURL(
 ): boolean {
   options = normalizeOptions(options);
   if (options.enableIDN && options.strictTLD) {
-    const internationalizedURLRegExp = getInternationalizedURLRegExp();
     return check(s, internationalizedURLRegExp);
   }
 
   if (options.enableIDN) {
-    const nonStrictInternationalizedURLRegExp =
-      getNonStrictInternationalizedURLRegExp();
     return check(s, nonStrictInternationalizedURLRegExp);
   }
 
   if (options.strictTLD) {
-    const urlRegExp = getURLRegExp();
     return check(s, urlRegExp);
   }
 
-  const nonStrictURLRegExp = getNonStrictURLRegExp();
   return check(s, nonStrictURLRegExp);
 }
 
@@ -249,8 +226,7 @@ export function isURL(
  * @returns {boolean} true if a string is a CVE
  */
 export function isCVE(s: string): boolean {
-  const regexp = getCVERegExp();
-  return check(s, regexp);
+  return check(s, cveRegExp);
 }
 
 /**
@@ -261,8 +237,7 @@ export function isCVE(s: string): boolean {
  * @returns {boolean} return true if a string is a BTC
  */
 export function isBTC(s: string): boolean {
-  const regexp = getBTCRegExp();
-  return check(s, regexp);
+  return check(s, btcRegExp);
 }
 
 /**
@@ -273,8 +248,7 @@ export function isBTC(s: string): boolean {
  * @returns {boolean} true if a string is an XMR
  */
 export function isXMR(s: string): boolean {
-  const regexp = getXMRRegExp();
-  return check(s, regexp);
+  return check(s, xmrRegExp);
 }
 
 /**
@@ -285,8 +259,7 @@ export function isXMR(s: string): boolean {
  * @returns {boolean} true if a string is a Google Adsense Publisher ID
  */
 export function isGAPubID(s: string): boolean {
-  const regexp = getGAPubIDRegExp();
-  return check(s, regexp);
+  return check(s, gaPubIDRegExp);
 }
 
 /**
@@ -297,8 +270,7 @@ export function isGAPubID(s: string): boolean {
  * @returns {boolean} true if a string is a Google Analytics tracking ID
  */
 export function isGATrackID(s: string): boolean {
-  const regexp = getGATrackIDRegExp();
-  return check(s, regexp);
+  return check(s, gaTrackIDRegExp);
 }
 
 /**
@@ -309,8 +281,7 @@ export function isGATrackID(s: string): boolean {
  * @returns {boolean} true if a string is a mac address
  */
 export function isMacAddress(s: string): boolean {
-  const regexp = getMACAddressRegExp();
-  return check(s, regexp);
+  return check(s, macAddressRegExp);
 }
 
 /**
@@ -321,6 +292,5 @@ export function isMacAddress(s: string): boolean {
  * @returns {boolean} true if a string is an ETH address
  */
 export function isETH(s: string): boolean {
-  const regexp = getETHRegExp();
-  return check(s, regexp);
+  return check(s, ethRegExp);
 }
