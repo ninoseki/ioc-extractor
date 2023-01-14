@@ -144,6 +144,21 @@ For **Networks** IOCs, the following defang/refang techniques are supported:
 | Partial          | `1.1.1[.1`                             | `1.1.1.1`                       |
 | Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://test.example.com/path` |
 
+## Known limitations
+
+A domain with an IDN TLD (e.g. `みんな`) is not supported.
+Please convert an input into Punycode beforehand. Then it will work.
+
+```
+# OK
+xn--p8j9a0d9c9a.xn--q9jyb4c
+はじめよう.com
+
+# NG
+はじめよう.みんな
+example.みんな
+```
+
 ## SITX2 support
 
 This package provides a partial support of the STIX2 format.
