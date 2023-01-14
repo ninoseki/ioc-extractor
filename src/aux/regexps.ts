@@ -8,24 +8,34 @@ export const ssdeepRegExp = /\b\d{1,}:[A-Za-z0-9/+]{3,}:[A-Za-z0-9/+]{3,}/g;
 
 export const asnRegExp = /(AS|ASN)\d+/gi;
 
-const internationalizedDomainRegExpString = `(([a-z0-9\\u00a1-\\uffff]{1,63}|xn--)((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(${tldRegExpString})\\b`;
+// Each label can have 63 bytes
+const idnLabelLetters = "a-z0-9\\u00a1-\\uffff";
+const idnOneOrMoreLabel = `[${idnLabelLetters}]{1,63}`;
+const idnZeroOrMoreLabelWithHyphen = `[${idnLabelLetters}-]{0,63}`;
+const idnTwoOrMoreLabelWithHyphen = `[${idnLabelLetters}-]{2,63}`;
+const idnPrefix = "xn--";
+
+const internationalizedDomainRegExpString = `((${idnOneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${idnZeroOrMoreLabelWithHyphen}[${idnLabelLetters}])?\\.)+(${tldRegExpString})\\b`;
 export const internationalizedDomainRegExp = new RegExp(
   internationalizedDomainRegExpString,
   "gi"
 );
 
-const nonStrictInternationalizedDomainRegExpString =
-  "(([a-z0-9\\u00a1-\\uffff]{1,63}|xn--)((?!.{0,63}--)[a-z0-9\\u00a1-\\uffff-]{0,63}[a-z0-9\\u00a1-\\uffff])?\\.)+(?:[a-z0-9\\u00a1-\\uffff-]{2,63})\\b";
+const nonStrictInternationalizedDomainRegExpString = `((${idnOneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${idnZeroOrMoreLabelWithHyphen}[${idnLabelLetters}])?\\.)+(?:${idnTwoOrMoreLabelWithHyphen})\\b`;
 export const nonStrictInternationalizedDomainRegExp = new RegExp(
   nonStrictInternationalizedDomainRegExpString,
   "gi"
 );
 
-const domainRegExpString = `(([a-z0-9]{1,63}|xn--)((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(${tldRegExpString})\\b`;
+const labelLetters = "a-z0-9";
+const oneOrMoreLabel = `[${labelLetters}]{1,63}`;
+const zeroOrMoreLabelWithHyphen = `[${labelLetters}-]{0,63}`;
+const twoOrMoreLabelWithHyphen = `[${labelLetters}-]{2,}`;
+
+const domainRegExpString = `((${oneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tldRegExpString})\\b`;
 export const domainRegExp = new RegExp(domainRegExpString, "gi");
 
-const nonStrictDomainRegExpString =
-  "(([a-z0-9]{1,63}|xn--)((?!.{0,63}--)[a-z0-9-]{0,63}[a-z0-9])?\\.)+(?:[a-z-]{2,})";
+const nonStrictDomainRegExpString = `((${oneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(?:${twoOrMoreLabelWithHyphen})`;
 export const nonStrictDomainRegExp = new RegExp(
   nonStrictDomainRegExpString,
   "gi"
