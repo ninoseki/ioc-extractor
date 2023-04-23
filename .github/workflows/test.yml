@@ -17,6 +17,7 @@ jobs:
         node-version:
           - 16
           - 18
+          - 20
 
     steps:
       - uses: actions/checkout@v3
@@ -36,7 +37,7 @@ jobs:
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
-          flag-name: run-${{ matrix.ruby-version }}
+          flag-name: run-${{ matrix.node-version }}
           parallel: true
 
   coverage:
