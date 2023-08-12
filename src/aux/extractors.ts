@@ -212,7 +212,7 @@ function selectRegExpForDomain(options: Options): RegExp {
  */
 export function extractDomains(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): string[] {
   const regexp = selectRegExpForDomain(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
@@ -228,7 +228,7 @@ export function extractDomains(
  */
 export function extractDomain(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): string | null {
   const regexp = selectRegExpForDomain(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
@@ -260,7 +260,7 @@ function selectRegExpForEmail(options: Options): RegExp {
  */
 export function extractEmails(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): string[] {
   const regexp = selectRegExpForEmail(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
@@ -276,7 +276,7 @@ export function extractEmails(
  */
 export function extractEmail(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): string | null {
   const regexp = selectRegExpForEmail(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
@@ -352,7 +352,7 @@ function selectRegExpForURL(options: Options): RegExp {
  */
 export function extractURLs(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): string[] {
   const regexp = selectRegExpForURL(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
@@ -368,7 +368,7 @@ export function extractURLs(
  */
 export function extractURL(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): string | null {
   const regexp = selectRegExpForURL(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);

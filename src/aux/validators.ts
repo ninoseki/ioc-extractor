@@ -122,7 +122,7 @@ export function isASN(s: string): boolean {
  */
 export function isDomain(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): boolean {
   options = normalizeOptions(options);
   if (options.enableIDN && options.strictTLD) {
@@ -150,7 +150,7 @@ export function isDomain(
  */
 export function isEmail(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): boolean {
   options = normalizeOptions(options);
   if (options.enableIDN && options.strictTLD) {
@@ -200,7 +200,7 @@ export function isIPv6(s: string): boolean {
  */
 export function isURL(
   s: string,
-  options: Options = { enableIDN: true, strictTLD: true }
+  options: Options = { enableIDN: true, strictTLD: true },
 ): boolean {
   options = normalizeOptions(options);
   if (options.enableIDN && options.strictTLD) {

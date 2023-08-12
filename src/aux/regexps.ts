@@ -18,13 +18,13 @@ const idnPrefix = "xn--";
 const internationalizedDomainRegExpString = `((${idnOneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${idnZeroOrMoreLabelWithHyphen}[${idnLabelLetters}])?\\.)+(${tldRegExpString})\\b`;
 export const internationalizedDomainRegExp = new RegExp(
   internationalizedDomainRegExpString,
-  "gi"
+  "gi",
 );
 
 const nonStrictInternationalizedDomainRegExpString = `((${idnOneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${idnZeroOrMoreLabelWithHyphen}[${idnLabelLetters}])?\\.)+(?:${idnTwoOrMoreLabelWithHyphen})\\b`;
 export const nonStrictInternationalizedDomainRegExp = new RegExp(
   nonStrictInternationalizedDomainRegExpString,
-  "gi"
+  "gi",
 );
 
 const labelLetters = "a-z0-9";
@@ -38,26 +38,26 @@ export const domainRegExp = new RegExp(domainRegExpString, "gi");
 const nonStrictDomainRegExpString = `((${oneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(?:${twoOrMoreLabelWithHyphen})`;
 export const nonStrictDomainRegExp = new RegExp(
   nonStrictDomainRegExpString,
-  "gi"
+  "gi",
 );
 
 const localPart = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+";
 
 export const emailRegExp = new RegExp(
   `${localPart}@${domainRegExpString}`,
-  "gi"
+  "gi",
 );
 export const nonStrictEmailRegExp = new RegExp(
   `${localPart}@${nonStrictDomainRegExpString}`,
-  "gi"
+  "gi",
 );
 export const internationalizedEmailRegExp = new RegExp(
   `${localPart}@${internationalizedDomainRegExpString}`,
-  "gi"
+  "gi",
 );
 export const nonStrictInternationalizedEmailRegExp = new RegExp(
   `${localPart}@${nonStrictInternationalizedDomainRegExpString}`,
-  "gi"
+  "gi",
 );
 
 const ipv4RegExpString =
@@ -96,13 +96,13 @@ export const nonStrictURLRegExp = new RegExp(nonStrictURLRegExpString, "gi");
 const internationalizedURLRegExpString = `(?:${protocol})${auth}(?:${internationalizedDomainRegExpString}|localhost|${ipv4RegExpString})${port}${path}`;
 export const internationalizedURLRegExp = new RegExp(
   internationalizedURLRegExpString,
-  "gi"
+  "gi",
 );
 
 const nonStrictInternationalizedURLRegExpString = `(?:${protocol})${auth}(?:${nonStrictInternationalizedDomainRegExpString}|localhost|${ipv4RegExpString})${port}${path}`;
 export const nonStrictInternationalizedURLRegExp = new RegExp(
   nonStrictInternationalizedURLRegExpString,
-  "gi"
+  "gi",
 );
 
 export const cveRegExp = /(CVE-(19|20)\d{2}-\d{4,7})/gi;
