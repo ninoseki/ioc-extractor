@@ -8,20 +8,16 @@ export function normalizeOptions(options: Options): Options {
   return { strictTLD, enableIDN, enableRefang };
 }
 
-function arrayUnique(array: string[]): string[] {
-  const set = new Set(array);
-  return Array.from(set);
-}
-
 /**
  * Reject duplications from an array
  *
  * @export
  * @param {string[]} array An array of strings
- * @returns {string[]} A uniquified array of string
+ * @returns {string[]} A set of strings
  */
 export function dedup(array: string[]): string[] {
-  return arrayUnique(array);
+  const set = new Set(array);
+  return Array.from(set);
 }
 
 /**
