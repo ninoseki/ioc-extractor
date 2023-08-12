@@ -1,5 +1,3 @@
-import arrayUnique from "array-unique";
-
 import type { Options } from "../types";
 
 export function normalizeOptions(options: Options): Options {
@@ -8,6 +6,11 @@ export function normalizeOptions(options: Options): Options {
   const enableRefang =
     options.enableRefang !== undefined ? options.enableRefang : true;
   return { strictTLD, enableIDN, enableRefang };
+}
+
+function arrayUnique(array: string[]): string[] {
+  const set = new Set(array);
+  return Array.from(set);
 }
 
 /**

@@ -37,7 +37,6 @@ import {
   extractXMRs,
 } from "./aux/extractors";
 import { normalizeOptions, refang } from "./aux/utils";
-import { convertToSTIX2, STIX2 } from "./stix2";
 import type { IOC, Options } from "./types";
 
 export {
@@ -158,20 +157,4 @@ export function extractIOC(
   options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
 ): IOC {
   return IOCExtractor.extractIOC(data, options);
-}
-
-/**
- * Returns an IOC of data as STIX2 format
- *
- * @export
- * @param {string} data
- * @param {Options} options
- * @returns {STIX2}
- */
-export function extractSTIX2(
-  data: string,
-  options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
-): STIX2 {
-  const ioc = extractIOC(data, options);
-  return convertToSTIX2(ioc);
 }

@@ -27,7 +27,6 @@ $ ioc-extractor --help
 Usage: ioc-extractor [options]
 
 Options:
-  -s2, --stix2          output in STIX2 format (default: false)
   -t, --threads         use threads (default: false)
   --disable-idn         disable IDN extraction (default: false)
   --disable-strict-tld  disable strict TLD validation (default: false)
@@ -158,62 +157,6 @@ xn--p8j9a0d9c9a.xn--q9jyb4c
 はじめよう.みんな
 example.みんな
 ```
-
-## SITX2 support
-
-This package provides a partial support of the STIX2 format.
-
-```bash
-$ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor --sitx2 | jq
-{
-  "spec_version": "2.0",
-  "type": "bundle",
-  "objects": [
-    {
-      "type": "indicator",
-      "id": "indicator--e0dc210b-fc7e-4dcc-8a5e-a220b32bd070",
-      "created": "2019-09-07T12:40:13.104Z",
-      "modified": "2019-09-07T12:40:13.104Z",
-      "labels": [
-        "malicious-activity"
-      ],
-      "pattern": "[ipv4-addr:value = '1.1.1.1']",
-      "valid_from": "2019-09-07T12:40:13.104Z"
-    },
-    {
-      "type": "indicator",
-      "id": "indicator--f77971ea-37de-4ddb-a147-613fec3401b3",
-      "created": "2019-09-07T12:40:13.104Z",
-      "modified": "2019-09-07T12:40:13.104Z",
-      "labels": [
-        "malicious-activity"
-      ],
-      "pattern": "[domain-name:value = 'google.com']",
-      "valid_from": "2019-09-07T12:40:13.104Z"
-    },
-    {
-      "type": "indicator",
-      "id": "indicator--0461539a-dc75-4cd1-ab74-24d964c8609c",
-      "created": "2019-09-07T12:40:13.104Z",
-      "modified": "2019-09-07T12:40:13.104Z",
-      "labels": [
-        "malicious-activity"
-      ],
-      "pattern": "[file:hashes.md5 = 'f6f8179ac71eaabff12b8c024342109b']",
-      "valid_from": "2019-09-07T12:40:13.104Z"
-    }
-  ]
-}
-```
-
-The following indicator patterns are supported.
-
-- ipv4-addr
-- ipv6-addr
-- domain-name
-- url
-- email-addr
-- file:hashes.{md5|sha1|sha256|sha512}
 
 ## Alternatives
 

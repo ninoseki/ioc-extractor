@@ -3,10 +3,8 @@ import { program } from "commander";
 import getStdin from "get-stdin";
 
 import { extractIOC } from "../index";
-import { convertToSTIX2 } from "../stix2";
 
 interface Options {
-  stix2?: boolean;
   threads?: boolean;
   disableIdn?: boolean;
   disableStrictTld?: boolean;
@@ -18,7 +16,6 @@ interface Options {
   const str = await getStdin();
 
   program
-    .option("-s2, --stix2", "output in STIX2 format", false)
     .option("--disable-idn", "disable IDN extraction", false)
     .option("--disable-strict-tld", "disable strict TLD validation", false)
     .option("--disable-refang", "disable refang", false);
@@ -26,7 +23,6 @@ interface Options {
 
   // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const options = <Options>program.opts();
-  const stix2 = options.stix2 !== undefined ? options.stix2 : false;
 
   const disableIDN =
     options.disableIdn !== undefined ? options.disableIdn : false;
@@ -42,10 +38,5 @@ interface Options {
 
   const ioc = extractIOC(str, { enableIDN, strictTLD, enableRefang });
 
-  if (stix2) {
-    const stix2Obj = convertToSTIX2(ioc);
-    console.log(JSON.stringify(stix2Obj));
-  } else {
-    console.log(JSON.stringify(ioc));
-  }
+  console.log(JSON.stringify(ioc));
 })();
