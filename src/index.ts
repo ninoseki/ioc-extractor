@@ -93,7 +93,7 @@ export class IOCExtractor {
    */
   public static extractIOC(
     data: string,
-    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
+    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true },
   ): IOC {
     const extractor = new IOCExtractor(data);
     return extractor.extractIOC(options);
@@ -113,7 +113,7 @@ export class IOCExtractor {
    * @memberof IOCExtractor
    */
   public extractIOC(
-    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
+    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true },
   ): IOC {
     const normalizedOptions = normalizeOptions(options);
     const normalizedData = normalizedOptions.enableRefang
@@ -154,7 +154,7 @@ export class IOCExtractor {
  */
 export function extractIOC(
   data: string,
-  options: Options = { enableIDN: true, strictTLD: true, enableRefang: true }
+  options: Options = { enableIDN: true, strictTLD: true, enableRefang: true },
 ): IOC {
   return IOCExtractor.extractIOC(data, options);
 }

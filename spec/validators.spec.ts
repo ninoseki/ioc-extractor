@@ -38,8 +38,8 @@ describe("isSHA256", () => {
   it("checks whether a given value is SHA1 or not", () => {
     expect(
       isSHA256(
-        "9002a1d301adf6e0426af36a40c3c1b33db7891f3f7d93f1cf6e73fdbce0da1b"
-      )
+        "9002a1d301adf6e0426af36a40c3c1b33db7891f3f7d93f1cf6e73fdbce0da1b",
+      ),
     ).toBe(true);
   });
 });
@@ -48,8 +48,8 @@ describe("isSHA512", () => {
   it("checks whether a given value is SHA512 or not", () => {
     expect(
       isSHA512(
-        "5c815af2e56a9bcfa0751dc097321de9fbb074603d2dd12c00a4ea45ebc819310b9bc871872b27b20366b71e78f520b908f1ea4bd6458cedb748e5ea8a510f51"
-      )
+        "5c815af2e56a9bcfa0751dc097321de9fbb074603d2dd12c00a4ea45ebc819310b9bc871872b27b20366b71e78f520b908f1ea4bd6458cedb748e5ea8a510f51",
+      ),
     ).toBe(true);
   });
 });
@@ -58,8 +58,8 @@ describe("isSSDEEP", () => {
   it("checks whether a given value is SSDEEP or not", () => {
     expect(
       isSSDEEP(
-        "1536:gQA4ws6RTPdn1Jl19DzTIKu6VnGUNs+9Kf8r3Vf/WcnfYhLrJBew:uiEo/"
-      )
+        "1536:gQA4ws6RTPdn1Jl19DzTIKu6VnGUNs+9Kf8r3Vf/WcnfYhLrJBew:uiEo/",
+      ),
     ).toBe(true);
   });
 });
@@ -88,7 +88,7 @@ describe("isDomain", () => {
     "checks whether a given value is a domain or not",
     (string, enableIDN, expected) => {
       expect(isDomain(string, { enableIDN })).toBe(expected);
-    }
+    },
   );
 
   it("checks a length of a domain", () => {
@@ -151,8 +151,8 @@ describe("isXMR", () => {
   it("checks whether a given value is XMR or not", () => {
     expect(
       isXMR(
-        "48Fki6gnEN1QaiWNcsm8dVfX2JMg8xmjiQvuKpcdUD9rQH8WU4AXj9HKAF5AdnhKPSPLzTV7CX1Ks25BWrDeLnHuEFmhRxV"
-      )
+        "48Fki6gnEN1QaiWNcsm8dVfX2JMg8xmjiQvuKpcdUD9rQH8WU4AXj9HKAF5AdnhKPSPLzTV7CX1Ks25BWrDeLnHuEFmhRxV",
+      ),
     ).toBe(true);
   });
 });
