@@ -79,7 +79,7 @@
     "@typescript-eslint/parser": "6.3.0",
     "benny": "3.7.1",
     "coveralls": "3.1.1",
-    "eslint": "8.47.0",
+    "eslint": "8.51.0",
     "eslint-config-prettier": "9.0.0",
     "eslint-plugin-jest": "27.2.3",
     "eslint-plugin-prettier": "5.0.0",
