@@ -6,40 +6,31 @@ on:
   pull_request:
     branches: [master]
 
-
 jobs:
   test:
-
     runs-on: ubuntu-latest
-
     strategy:
       matrix:
         node-version:
           - 18
           - 20
-
     steps:
-      - uses: actions/checkout@v3
-
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: npm
-
       - name: Install npm dependencies
-        run: npm ci
-
+        run: npm install
       - name: Run tests
         run: npm run coverage
-
       - name: Coveralls Parallel
         uses: coverallsapp/github-action@master
         with:
           github-token: ${{ secrets.github_token }}
           flag-name: run-${{ matrix.node-version }}
           parallel: true
-
   coverage:
     name: Coverage
     needs: test
