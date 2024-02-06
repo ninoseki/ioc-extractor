@@ -37,6 +37,26 @@ import {
   extractXMRs,
 } from "./aux/extractors";
 import { normalizeOptions, refang } from "./aux/utils";
+import {
+  isASN,
+  isBTC,
+  isCVE,
+  isDomain,
+  isEmail,
+  isETH,
+  isGAPubID,
+  isGATrackID,
+  isIPv4,
+  isIPv6,
+  isMacAddress,
+  isMD5,
+  isSHA1,
+  isSHA256,
+  isSHA512,
+  isSSDEEP,
+  isURL,
+  isXMR,
+} from "./aux/validators";
 import type { IOC, Options } from "./types";
 
 export {
@@ -76,6 +96,24 @@ export {
   extractURLs,
   extractXMR,
   extractXMRs,
+  isASN,
+  isBTC,
+  isCVE,
+  isDomain,
+  isEmail,
+  isETH,
+  isGAPubID,
+  isGATrackID,
+  isIPv4,
+  isIPv6,
+  isMacAddress,
+  isMD5,
+  isSHA1,
+  isSHA256,
+  isSHA512,
+  isSSDEEP,
+  isURL,
+  isXMR,
   refang,
 };
 
