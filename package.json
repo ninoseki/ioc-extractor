@@ -10,13 +10,6 @@
       "require": "./dist/index.cjs",
       "node": "./dist/index.cjs",
       "default": "./dist/index.js"
-    },
-    "./dist/aux/*": {
-      "types": "./dist/aux/*.d.ts",
-      "import": "./dist/aux/*.js",
-      "require": "./dist/aux/*.cjs",
-      "node": "./dist/aux/*.cjs",
-      "default": "./dist/aux/*.js"
     }
   },
   "engines": {
