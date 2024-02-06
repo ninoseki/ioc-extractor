@@ -20,62 +20,78 @@ import {
 } from "@/aux/extractors";
 
 describe("extractMD5", () => {
-  const value = "874058e8d8582bf85c115ce319c5b0af";
-  it("extract a value", () => {
-    expect(extractMD5(value)).toBe(value);
-    expect(extractMD5("")).toBe(null);
+  test.each([
+    ["874058e8d8582bf85c115ce319c5b0af", "874058e8d8582bf85c115ce319c5b0af"],
+    ["", null],
+  ])(".extractMD5(%s)", (value, expected) => {
+    expect(extractMD5(value)).toBe(expected);
   });
 });
 
 describe("extractSHA1", () => {
-  const value = "a89ca560e2f0f3b081a3e7d0d91a2bcd4e2bdadb";
-  it("extract a value", () => {
-    expect(extractSHA1(value)).toBe(value);
-    expect(extractSHA1("")).toBe(null);
+  test.each([
+    [
+      "a89ca560e2f0f3b081a3e7d0d91a2bcd4e2bdadb",
+      "a89ca560e2f0f3b081a3e7d0d91a2bcd4e2bdadb",
+    ],
+    ["", null],
+  ])(".extractSHA1(%s)", (value, expected) => {
+    expect(extractSHA1(value)).toBe(expected);
   });
 });
 
 describe("extractSHA256", () => {
-  const value =
-    "9002a1d301adf6e0426af36a40c3c1b33db7891f3f7d93f1cf6e73fdbce0da1b";
-  it("extract a value", () => {
-    expect(extractSHA256(value)).toBe(value);
-    expect(extractSHA256("")).toBe(null);
+  test.each([
+    [
+      "9002a1d301adf6e0426af36a40c3c1b33db7891f3f7d93f1cf6e73fdbce0da1b",
+      "9002a1d301adf6e0426af36a40c3c1b33db7891f3f7d93f1cf6e73fdbce0da1b",
+    ],
+    ["", null],
+  ])(".extractSHA256(%s)", (value, expected) => {
+    expect(extractSHA256(value)).toBe(expected);
   });
 });
 
 describe("extractSHA512", () => {
-  const value =
-    "5c815af2e56a9bcfa0751dc097321de9fbb074603d2dd12c00a4ea45ebc819310b9bc871872b27b20366b71e78f520b908f1ea4bd6458cedb748e5ea8a510f51";
-  it("extract a value", () => {
-    expect(extractSHA512(value)).toBe(value);
-    expect(extractSHA512("")).toBe(null);
+  test.each([
+    [
+      "5c815af2e56a9bcfa0751dc097321de9fbb074603d2dd12c00a4ea45ebc819310b9bc871872b27b20366b71e78f520b908f1ea4bd6458cedb748e5ea8a510f51",
+      "5c815af2e56a9bcfa0751dc097321de9fbb074603d2dd12c00a4ea45ebc819310b9bc871872b27b20366b71e78f520b908f1ea4bd6458cedb748e5ea8a510f51",
+    ],
+    ["", null],
+  ])(".extractSHA512(%s)", (value, expected) => {
+    expect(extractSHA512(value)).toBe(expected);
   });
 });
 
 describe("extractSSDEEP", () => {
-  const value =
-    "1536:gQA4ws6RTPdn1Jl19DzTIKu6VnGUNs+9Kf8r3Vf/WcnfYhLrJBew:uiEo/";
-  it("extract a value", () => {
-    expect(extractSSDEEP(value)).toBe(value);
-    expect(extractSSDEEP("")).toBe(null);
+  test.each([
+    [
+      "1536:gQA4ws6RTPdn1Jl19DzTIKu6VnGUNs+9Kf8r3Vf/WcnfYhLrJBew:uiEo/",
+      "1536:gQA4ws6RTPdn1Jl19DzTIKu6VnGUNs+9Kf8r3Vf/WcnfYhLrJBew:uiEo/",
+    ],
+    ["", null],
+  ])(".extractSSDEEP(%s)", (value, expected) => {
+    expect(extractSSDEEP(value)).toBe(expected);
   });
 });
 
 describe("extractASN", () => {
-  const value = "ASN1111";
-  it("extract a value", () => {
-    expect(extractASN(value)).toBe(value);
-    expect(extractASN("")).toBe(null);
+  test.each([
+    ["ASN1111", "ASN1111"],
+    ["", null],
+  ])(".extractASN(%s)", (value, expected) => {
+    expect(extractASN(value)).toBe(expected);
   });
 });
 
 describe("extractDomain", () => {
-  it("extract a value", () => {
-    const value = "example.com";
-    expect(extractDomain(value)).toBe(value);
-    expect(extractDomain(value.replace(".", "[.]"))).toBe(null);
-    expect(extractDomain("")).toBe(null);
+  test.each([
+    ["example.com", "example.com"],
+    ["example[.]com", null],
+    ["", null],
+  ])(".extractDomain(%s)", (value, expected) => {
+    expect(extractDomain(value)).toBe(expected);
   });
 
   it("extract a value with strictTLD", () => {
@@ -97,6 +113,14 @@ describe("extractIPv4", () => {
     expect(extractIPv4(value)).toBe(value);
     expect(extractIPv4(value.replace(".", "[.]"))).toBe(null);
     expect(extractIPv4("")).toBe(null);
+  });
+
+  test.each([
+    ["1.1.1.1", "1.1.1.1"],
+    ["1.1.1[.]1", null],
+    ["", null],
+  ])(".extractIPv4(%s)", (value, expected) => {
+    expect(extractIPv4(value)).toBe(expected);
   });
 });
 
