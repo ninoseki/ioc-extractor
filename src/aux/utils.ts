@@ -35,6 +35,32 @@ function orRegExp(regexps: RegExp[]): RegExp {
   return new RegExp(regexps.map((r) => r.source).join("|"), "gi");
 }
 
+function hasDot(s: string): boolean {
+  return ["\\.", " . ", "[.", "(.", "{.", "[dot", "(dot", "{dot"].some((x) =>
+    s.includes(x),
+  );
+}
+
+function hasColon(s: string): boolean {
+  return ["[:", "(:", "{:"].some((x) => s.includes(x));
+}
+
+function hasSlash(s: string): boolean {
+  return ["[/", "(/", "{/"].some((x) => s.includes(x));
+}
+
+function hasColonDoubleSlash(s: string): boolean {
+  return ["[://", "(://", "{://"].some((x) => s.includes(x));
+}
+
+function hasAt(s: string): boolean {
+  return ["[@", "(@", "{@", "[at", "(at", "{at"].some((x) => s.includes(x));
+}
+
+function hasHttp(s: string): boolean {
+  return ["hxxp", "h**p"].some((x) => s.includes(x));
+}
+
 /**
  * Remove defanged symbols from a string
  *
@@ -43,25 +69,39 @@ function orRegExp(regexps: RegExp[]): RegExp {
  * @returns {string} A cleaned (aka refanged) string
  */
 export function refang(s: string): string {
-  const dot = orRegExp([
-    /\s\.\s/,
-    /(\[|\(|\{)\.(\]|\)|\})/,
-    /(\[|\(|\{)\./,
-    /\.(\]|\)|\})/,
-    /\\\./,
-    /(\[|\(|\{)dot(\]|\)|\})/,
-  ]);
-  const colon = /\[:\]/gi;
-  const slash = /\[\/\]/gi;
-  const colonSlash = /\[:\/\/\]/gi;
-  const at = /(\[|\(|\{)(at|@)(\]|\)|\})/gi;
-  const http = /h(xx|\*\*)p(s?):\/\//gi;
+  if (hasDot(s)) {
+    s = s.replace(
+      orRegExp([
+        /\s\.\s/,
+        /(\[|\(|\{)\.(\]|\)|\})/,
+        /(\[|\(|\{)\./,
+        /\.(\]|\)|\})/,
+        /\\\./,
+        /(\[|\(|\{)dot(\]|\)|\})/,
+      ]),
+      ".",
+    );
+  }
 
-  return s
-    .replace(dot, ".")
-    .replace(colon, ":")
-    .replace(slash, "/")
-    .replace(colonSlash, "://")
-    .replace(http, "http$2://")
-    .replace(at, "@");
+  if (hasColon(s)) {
+    s = s.replace(/(\[|\(|\{)(:)(\]|\)|\})/gi, ":");
+  }
+
+  if (hasSlash(s)) {
+    s = s.replace(/(\[|\(|\{)(\/)(\]|\)|\})/gi, "/");
+  }
+
+  if (hasColonDoubleSlash(s)) {
+    s = s.replace(/(\[|\(|\{)(:\/\/)(\]|\)|\})/gi, "://");
+  }
+
+  if (hasAt(s)) {
+    s = s.replace(/(\[|\(|\{)(at|@)(\]|\)|\})/gi, "@");
+  }
+
+  if (hasHttp(s)) {
+    s = s.replace(/h(xx|\*\*)p(s?):\/\//gi, "http$2://");
+  }
+
+  return s;
 }
