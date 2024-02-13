@@ -172,6 +172,9 @@ export function extractSSDEEP(s: string): string | null {
  * @returns {string[]} An array of ASNs
  */
 export function extractASNs(s: string): string[] {
+  if (!s.includes("AS")) {
+    return [];
+  }
   return matchesWithRegExp(s, asnRegExp);
 }
 
@@ -183,6 +186,9 @@ export function extractASNs(s: string): string[] {
  * @returns {string[]} ASN
  */
 export function extractASN(s: string): string | null {
+  if (!s.includes("AS")) {
+    return null;
+  }
   return getFirstMatchedValue(s, asnRegExp);
 }
 
@@ -214,6 +220,9 @@ export function extractDomains(
   s: string,
   options: Options = { enableIDN: true, strictTLD: true },
 ): string[] {
+  if (!s.includes(".")) {
+    return [];
+  }
   const regexp = selectRegExpForDomain(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
 }
@@ -230,6 +239,9 @@ export function extractDomain(
   s: string,
   options: Options = { enableIDN: true, strictTLD: true },
 ): string | null {
+  if (!s.includes(".")) {
+    return null;
+  }
   const regexp = selectRegExpForDomain(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
 }
@@ -262,6 +274,9 @@ export function extractEmails(
   s: string,
   options: Options = { enableIDN: true, strictTLD: true },
 ): string[] {
+  if (!s.includes("@") && !s.includes(".")) {
+    return [];
+  }
   const regexp = selectRegExpForEmail(normalizeOptions(options));
   return matchesWithRegExp(s, regexp);
 }
@@ -278,6 +293,9 @@ export function extractEmail(
   s: string,
   options: Options = { enableIDN: true, strictTLD: true },
 ): string | null {
+  if (!s.includes("@") && !s.includes(".")) {
+    return null;
+  }
   const regexp = selectRegExpForEmail(normalizeOptions(options));
   return getFirstMatchedValue(s, regexp);
 }
@@ -290,6 +308,9 @@ export function extractEmail(
  * @returns {string[]} An array of IPv4s
  */
 export function extractIPv4s(s: string): string[] {
+  if (!s.includes(".")) {
+    return [];
+  }
   return matchesWithRegExp(s, ipv4RegExp);
 }
 
@@ -301,6 +322,9 @@ export function extractIPv4s(s: string): string[] {
  * @returns {string | null} IPv4
  */
 export function extractIPv4(s: string): string | null {
+  if (!s.includes(".")) {
+    return null;
+  }
   return getFirstMatchedValue(s, ipv4RegExp);
 }
 
