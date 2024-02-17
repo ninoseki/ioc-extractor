@@ -36,7 +36,7 @@ import {
   extractXMR,
   extractXMRs,
 } from "./aux/extractors";
-import { normalizeOptions, refang } from "./aux/utils";
+import { refang } from "./aux/utils";
 import {
   isASN,
   isBTC,
@@ -131,7 +131,7 @@ export class IOCExtractor {
    */
   public static extractIOC(
     data: string,
-    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true },
+    options: Options = { strict: true, refang: true },
   ): IOC {
     const extractor = new IOCExtractor(data);
     return extractor.extractIOC(options);
@@ -150,20 +150,15 @@ export class IOCExtractor {
    * @param {Options} options
    * @memberof IOCExtractor
    */
-  public extractIOC(
-    options: Options = { enableIDN: true, strictTLD: true, enableRefang: true },
-  ): IOC {
-    const normalizedOptions = normalizeOptions(options);
-    const normalizedData = normalizedOptions.enableRefang
-      ? refang(this.data)
-      : this.data;
+  public extractIOC(options: Options = { strict: true, refang: true }): IOC {
+    const normalizedData = options.refang ? refang(this.data) : this.data;
 
     const ioc: IOC = {
       asns: extractASNs(normalizedData),
       btcs: extractBTCs(normalizedData),
       cves: extractCVEs(normalizedData),
-      domains: extractDomains(normalizedData, normalizedOptions),
-      emails: extractEmails(normalizedData, normalizedOptions),
+      domains: extractDomains(normalizedData, options),
+      emails: extractEmails(normalizedData, options),
       eths: extractETHs(normalizedData),
       gaPubIDs: extractGAPubIDs(normalizedData),
       gaTrackIDs: extractGATrackIDs(normalizedData),
@@ -175,7 +170,7 @@ export class IOCExtractor {
       sha256s: extractSHA256s(normalizedData),
       sha512s: extractSHA512s(normalizedData),
       ssdeeps: extractSSDEEPs(normalizedData),
-      urls: extractURLs(normalizedData, normalizedOptions),
+      urls: extractURLs(normalizedData, options),
       xmrs: extractXMRs(normalizedData),
     };
     return ioc;
@@ -192,7 +187,7 @@ export class IOCExtractor {
  */
 export function extractIOC(
   data: string,
-  options: Options = { enableIDN: true, strictTLD: true, enableRefang: true },
+  options: Options = { strict: true, refang: true },
 ): IOC {
   return IOCExtractor.extractIOC(data, options);
 }

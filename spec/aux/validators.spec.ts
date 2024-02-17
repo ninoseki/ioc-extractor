@@ -72,24 +72,15 @@ describe("isASN", () => {
 
 describe("isDomain", () => {
   it.each([
-    ["example.com", true, true],
-    ["example.com", false, true],
-    ["example.xn--zfr164b", true, true],
-    ["example.xn--zfr164b", false, true],
-    ["EXAMPLE.com", true, true],
-    ["EXAMPLE.com", false, true],
-    ["xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", true, true],
-    ["xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", false, true],
-    ["あ.com", true, true],
-    ["あ.com", false, false],
-    [".com", true, false],
-    [".com", false, false],
-  ])(
-    "checks whether a given value is a domain or not",
-    (string, enableIDN, expected) => {
-      expect(isDomain(string, { enableIDN })).toBe(expected);
-    },
-  );
+    ["example.com", true],
+    ["example.xn--zfr164b", true],
+    ["EXAMPLE.com", true],
+    ["xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", true],
+    ["あ.com", true],
+    [".com", false],
+  ])("checks whether a given value is a domain or not", (string, expected) => {
+    expect(isDomain(string)).toBe(expected);
+  });
 
   it("checks a length of a domain", () => {
     // Labels must be 63 characters or less.

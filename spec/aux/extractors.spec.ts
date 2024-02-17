@@ -96,14 +96,12 @@ describe("extractDomain", () => {
 
   it("extract a value with strictTLD", () => {
     const value = "127.127.127.127";
-    expect(extractDomain(value, { strictTLD: true })).toBe(null);
-    expect(extractDomain(value, { strictTLD: false })).toBe(null);
+    expect(extractDomain(value)).toBe(null);
   });
 
   it("extract a value with enableIDN", () => {
     const value = "127.127.127.127";
-    expect(extractDomain(value, { enableIDN: true })).toBe(null);
-    expect(extractDomain(value, { enableIDN: false })).toBe(null);
+    expect(extractDomain(value)).toBe(null);
   });
 });
 

@@ -30,11 +30,11 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with disabled IDN extraction", () => {
+  describe("simple input with strict", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, { enableIDN: false });
+      const ioc = extractIOC(input, { strict: true });
 
       expect(ioc.domains).toEqual(["example.com"]);
       expect(ioc.urls).toEqual(["http://example.com"]);
@@ -42,11 +42,11 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with non-strict TLD validation", () => {
+  describe("simple input without strict", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, { enableIDN: true, strictTLD: false });
+      const ioc = extractIOC(input, { strict: false });
 
       expect(ioc.domains).toEqual([
         "example.com",
@@ -66,22 +66,10 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with non-strict TLD validation & disabled IDN extraction", () => {
-    it("should extract IOCs from the input", () => {
-      const input =
-        "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, { enableIDN: false, strictTLD: false });
-
-      expect(ioc.domains).toEqual(["example.com", "example.nope"]);
-      expect(ioc.urls).toEqual(["http://example.com", "http://example.nope"]);
-      expect(ioc.emails).toEqual(["test@example.com", "test@example.nope"]);
-    });
-  });
-
-  describe("simple input with disabled refang option", () => {
+  describe("simple input without refang", () => {
     it("should extract IOCs from the input", () => {
       const input = "example[.]com 1.1.1.1";
-      const ioc = extractIOC(input, { enableRefang: false });
+      const ioc = extractIOC(input, { refang: false });
 
       expect(ioc.domains.length).toEqual(0);
       expect(ioc.ipv4s).toEqual(["1.1.1.1"]);
