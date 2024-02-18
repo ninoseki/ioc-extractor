@@ -1,13 +1,3 @@
-import type { Options } from "../types";
-
-export function normalizeOptions(options: Options): Options {
-  const strictTLD = options.strictTLD !== undefined ? options.strictTLD : true;
-  const enableIDN = options.enableIDN !== undefined ? options.enableIDN : true;
-  const enableRefang =
-    options.enableRefang !== undefined ? options.enableRefang : true;
-  return { strictTLD, enableIDN, enableRefang };
-}
-
 /**
  * Reject duplications from an array
  *
@@ -16,8 +6,7 @@ export function normalizeOptions(options: Options): Options {
  * @returns {string[]} A set of strings
  */
 export function dedup(array: string[]): string[] {
-  const set = new Set(array);
-  return Array.from(set);
+  return Array.from(new Set(array));
 }
 
 /**

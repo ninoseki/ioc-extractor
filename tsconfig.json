@@ -6,7 +6,10 @@
         "sourceMap": true,
         "declaration": true,
         "strict": true,
-        "rootDirs": ["src", "spec"],
+        "rootDirs": [
+            "src",
+            "spec"
+        ],
         "outDir": "dist",
         "noEmitOnError": true,
         "baseUrl": ".",

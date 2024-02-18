@@ -1,8 +1,12 @@
-export interface Options {
-  enableIDN?: boolean;
-  strictTLD?: boolean;
-  enableRefang?: boolean;
-}
+export type StrictOptions = Partial<{
+  strict: boolean;
+}>;
+
+export type Options = Partial<{
+  strict: boolean;
+  refang: boolean;
+  punycode: boolean;
+}>;
 
 export interface IOC {
   asns: string[];

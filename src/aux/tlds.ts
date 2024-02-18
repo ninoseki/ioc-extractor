@@ -1571,5 +1571,3 @@ export const tlds = [
   "zuerich",
   "zw",
 ];
-
-export const tldRegExpString = tlds.join("|");

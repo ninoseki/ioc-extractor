@@ -15,26 +15,23 @@ describe("IOCExtractor", () => {
         "275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f",
       ]);
       expect(ioc.domains).toEqual([
+        "example.com",
         "google.com",
         "www.google.com",
-        "テスト.example.com",
       ]);
       expect(ioc.ipv4s).toEqual(["1.1.1.1", "2.2.2.2"]);
-      expect(ioc.urls).toEqual([
-        "http://テスト.example.com",
-        "https://www.google.com",
-      ]);
+      expect(ioc.urls).toEqual(["https://www.google.com"]);
       expect(ioc.cves.length).toEqual(0);
       expect(ioc.gaTrackIDs).toEqual(["UA-26296840-4"]);
-      expect(ioc.emails).toEqual(["test@テスト.example.com"]);
+      expect(ioc.emails).toEqual([]);
     });
   });
 
-  describe("simple input with disabled IDN extraction", () => {
+  describe("simple input with strict", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, { enableIDN: false });
+      const ioc = extractIOC(input, { strict: true });
 
       expect(ioc.domains).toEqual(["example.com"]);
       expect(ioc.urls).toEqual(["http://example.com"]);
@@ -42,35 +39,11 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with non-strict TLD validation", () => {
+  describe("simple input without strict", () => {
     it("should extract IOCs from the input", () => {
       const input =
         "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, { enableIDN: true, strictTLD: false });
-
-      expect(ioc.domains).toEqual([
-        "example.com",
-        "example.nope",
-        "テスト.nope",
-      ]);
-      expect(ioc.urls).toEqual([
-        "http://example.com",
-        "http://example.nope",
-        "http://テスト.nope",
-      ]);
-      expect(ioc.emails).toEqual([
-        "test@example.com",
-        "test@example.nope",
-        "test@テスト.nope",
-      ]);
-    });
-  });
-
-  describe("simple input with non-strict TLD validation & disabled IDN extraction", () => {
-    it("should extract IOCs from the input", () => {
-      const input =
-        "example.com test@example.com http://example.com example.nope test@example.nope http://example.nope テスト.nope test@テスト.nope http://テスト.nope";
-      const ioc = extractIOC(input, { enableIDN: false, strictTLD: false });
+      const ioc = extractIOC(input, { strict: false });
 
       expect(ioc.domains).toEqual(["example.com", "example.nope"]);
       expect(ioc.urls).toEqual(["http://example.com", "http://example.nope"]);
@@ -78,10 +51,10 @@ describe("IOCExtractor", () => {
     });
   });
 
-  describe("simple input with disabled refang option", () => {
+  describe("simple input without refang", () => {
     it("should extract IOCs from the input", () => {
       const input = "example[.]com 1.1.1.1";
-      const ioc = extractIOC(input, { enableRefang: false });
+      const ioc = extractIOC(input, { refang: false });
 
       expect(ioc.domains.length).toEqual(0);
       expect(ioc.ipv4s).toEqual(["1.1.1.1"]);
