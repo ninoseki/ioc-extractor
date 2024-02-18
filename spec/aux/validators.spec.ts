@@ -76,7 +76,7 @@ describe("isDomain", () => {
     ["example.xn--zfr164b", true],
     ["EXAMPLE.com", true],
     ["xn--example-6q4fyliikhk162btq3b2zd4y2o.jp", true],
-    ["あ.com", true],
+    ["あ.com", false],
     [".com", false],
   ])("checks whether a given value is a domain or not", (string, expected) => {
     expect(isDomain(string)).toBe(expected);

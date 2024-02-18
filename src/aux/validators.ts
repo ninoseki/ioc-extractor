@@ -1,4 +1,4 @@
-import type { Options } from "../types";
+import type { StrictOptions } from "../types";
 import { domainRegex } from "./domain";
 import { emailRegex } from "./email";
 import { ipRegex } from "./ip";
@@ -105,12 +105,12 @@ export function isASN(s: string): boolean {
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {boolean} return true if a string is a domain
  */
 export function isDomain(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): boolean {
   const regex = domainRegex(options);
   return check(s, regex);
@@ -121,12 +121,12 @@ export function isDomain(
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {boolean} true if a string is a domain
  */
 export function isEmail(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): boolean {
   const regex = emailRegex(options);
   return check(s, regex);
@@ -159,10 +159,13 @@ export function isIPv6(s: string): boolean {
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {boolean} true if a string is a URL
  */
-export function isURL(s: string, options: Options = { strict: true }): boolean {
+export function isURL(
+  s: string,
+  options: StrictOptions = { strict: true },
+): boolean {
   const regex = urlRegex(options);
   return check(s, regex);
 }

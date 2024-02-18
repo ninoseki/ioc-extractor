@@ -1,20 +1,16 @@
-import tlds from "tlds";
-import url from "url";
+import { tlds } from "./tlds";
 
-import { dedup } from "./utils";
-
-const normalizedTlds = dedup(
-  tlds.concat(tlds.map((x) => url.domainToASCII(x))),
-);
-
-export const idnLabelLetters = "a-z0-9\\u00a1-\\uffff";
-export const idnOneOrMoreLabel = `[${idnLabelLetters}]{1,63}`;
-export const idnZeroOrMoreLabelWithHyphen = `[${idnLabelLetters}-]{0,63}`;
+const alphabets = "a-z";
+const numbers = "0-9";
+export const labelLetters = `${alphabets}${numbers}`;
+export const oneOrMoreLabel = `[${labelLetters}]{1,63}`;
+export const zeroOrMoreLabel = `[${labelLetters}]{0,63}`;
+export const zeroOrMoreLabelWithHyphen = `[${labelLetters}-]{0,63}`;
+export const nonDigitTwoOrMoreLabelWithHyphen = `[${alphabets}-]{2,63}`;
 export const idnPrefix = "xn--";
 
-export const nonStrictTld = "(?:[a-z\\u00a1-\\uffff]{2,})";
-export const strictTld = `(?:${normalizedTlds.sort((a, b) => b.length - a.length).join("|")})`;
-export const port = "(?::\\d{2,5})?";
+export const nonStrictTld = `(?:${nonDigitTwoOrMoreLabelWithHyphen})`;
+export const strictTld = `(?:${tlds.sort((a, b) => b.length - a.length).join("|")})`;
 
 export const asnRegex = /(AS|ASN)\d+/gi;
 export const btcRegex = /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/g;

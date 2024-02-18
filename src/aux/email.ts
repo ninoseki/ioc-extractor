@@ -1,11 +1,9 @@
+import { StrictOptions } from "@/types";
+
 import { domainRegex } from "./domain";
 
-type Options = Partial<{
-  strict: boolean;
-}>;
-
 export function emailRegex(
-  options: Options = {
+  options: StrictOptions = {
     strict: true,
   },
 ): RegExp {

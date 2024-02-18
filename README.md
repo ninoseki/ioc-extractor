@@ -27,19 +27,14 @@ $ ioc-extractor --help
 Usage: ioc-extractor [options]
 
 Options:
-  -t, --threads         use threads (default: false)
-  --disable-idn         disable IDN extraction (default: false)
-  --disable-strict-tld  disable strict TLD validation (default: false)
-  --disable-refang      disable refang (default: false)
-  -h, --help            display help for command
+  -ns, --no-strict  Disable strict option
+  -nr, --no-refang  Disable refang option
+  -p, --punycode    Enable punycode option
+  -h, --help        display help for command
 ```
 
 ```bash
-$ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor
-{"asns":[],"btcs":[],"cves":[],"domains":["example.com"],"emails":[],"eths":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1","8.8.8.8"],"ipv6s":[],"macAddresses":[],"md5s":[],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
-
-# Using with jq
-$ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
+$ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor | jq
 {
   "asns": [],
   "btcs": [],
@@ -65,9 +60,6 @@ $ echo "1.1.1.1 8.8.8.8 example.com " | ioc-extractor | jq
   "urls": [],
   "xmrs": []
 }
-
-# Using -t(--threads) option makes sense if you want to process a big chunk of text
-$ cat big.txt | ioc-extractor -t
 ```
 
 ### As a library
@@ -75,7 +67,7 @@ $ cat big.txt | ioc-extractor -t
 ```ts
 import { extractIOC } from "ioc-extractor";
 
-const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b';
+const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
 const ioc = extractIOC(input);
 console.log(ioc.md5s);
 // => ['f6f8179ac71eaabff12b8c024342109b']
@@ -83,15 +75,23 @@ console.log(ioc.ipv4s);
 // => ['1.1.1.1']
 console.log(ioc.domains);
 // => ['google.com']
-
-console.log(JSON.stringify(ioc))
-// => {"asns":[],"btcs":[],"cves":[],"domains":["google.com"],"emails":[],"gaPubIDs":[],"gaTrackIDs":[],"ipv4s":["1.1.1.1"],"ipv6s":[],"macAddresses":[],"md5s":["f6f8179ac71eaabff12b8c024342109b"],"sha1s":[],"sha256s":[],"sha512s":[],"ssdeeps":[],"urls":[],"xmrs":[]}
 ```
 
-If you want to extract a specific type of IOC, you can use `extractXXX` function.
+`extractIOC` takes the following options:
+
+- [strict](#strict)
+- [refang](#refang)
+- [punycode](#punycode)
+
+If you want to extract a specific type of IoC, you can use extract function.
 
 ```ts
-import { refang, extractDomains, extractIPv4s, extractMD5s } from "ioc-extractor";
+import {
+  refang,
+  extractDomains,
+  extractIPv4s,
+  extractMD5s,
+} from "ioc-extractor";
 
 const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
 const refanged = refang(input);
@@ -107,62 +107,59 @@ const md5s = extractMD5s(refanged);
 // => ['f6f8179ac71eaabff12b8c024342109b']
 ```
 
+Network related extract functions (e.g. `extractDomains`) can take the following options:
+
+- [strict](#strict)
+
 See [docs](https://ninoseki.github.io/ioc-extractor/) for more details.
 
-## Details
+## IoC Types
 
-This package supports the following IOCs:
+This package supports the following IoCs:
 
-- **Hashes**: md5, sha1, sha256, sha512, ssdeep
-- **Networks**: domain, email, ipv4, ipv6, url, asn
-- **Hardwares**: mac_address
-- **Utilities**: cve(CVE ID)
-- **Cryptocurrencies**: btc (BTC address), eth (ETH address), xmr (XMR address)
-- **Trackers**: gaTrackID (Google Analytics tracking ID), gaPubID (Google Adsense Publisher ID)
+- **Hashes**: MD5, SHA1, SHA256, SHA512, SSDEEP
+- **Networks**: domain, email, IPv4, IPv6, URL, ASN
+- **Hardwares**: MAC address
+- **Utilities**: CVE (CVE ID)
+- **Cryptocurrencies**: BTC (BTC address), ETH (ETH address), XMR (XMR address)
+- **Trackers**: GA track ID (Google Analytics tracking ID), GA pub ID (Google Adsense Publisher ID)
 
-For **Networks** IOCs, the following defang/refang techniques are supported:
+## Refang Techniques
 
-| Techniques       | Defanged                               | Refanged                        |
-|------------------|----------------------------------------|---------------------------------|
-| ` . ` => `.`     | `1.1.1 . 1`                            | `1.1.1.1`                       |
-| `[.]` => `.`     | `1.1.1[.]1`                            | `1.1.1.1`                       |
-| `(.)` => `.`     | `1.1.1(.)1`                            | `1.1.1.1`                       |
-| `{.}` => `.`     | `1.1.1{.}1`                            | `1.1.1.1`                       |
-| `\.`  => `.`     | `example\.com`                         | `example.com`                   |
-| `[/]` => `/`     | `http://example.com[/]path`            | `http://example.com/path`       |
-| `[:]` => `:`     | `http[:]//example.com`                 | `http://example.com`            |
-| `[://]` => `://` | `http[://]example.com`                 | `http://example.com`            |
-| `hxxp` => `http` | `hxxps://google.com`                   | `https://google.com`            |
-| `[at]` => `@`    | `test[at]example.com`                  | `test@example.com`              |
-| `[@]` => `@`     | `test[@]example.com`                   | `test@example.com`              |
-| `(@)` => `@`     | `test(@)example.com`                   | `test@example.com`              |
-| `{@}` => `@`     | `test{@}example.com`                   | `test@example.com`              |
-| `[dot]` => `.`   | `test@example[dot]com`                 | `test@example.com`              |
-| `(dot)` => `.`   | `test@example(dot)com`                 | `test@example.com`              |
-| `{dot}` => `.`   | `test@example{dot}com`                 | `test@example.com`              |
-| Partial          | `1.1.1[.1`                             | `1.1.1.1`                       |
-| Any combination  | `hxxps[:]//test\.example[.)com[/]path` | `https://test.example.com/path` |
+For **Networks** IoCs, the following refang techniques are supported:
 
-## Known limitations
+| Techniques                           | Defanged                               | Refanged                        |
+| ------------------------------------ | -------------------------------------- | ------------------------------- |
+| `.` in spaces                        | `1.1.1 . 1`                            | `1.1.1.1`                       |
+| `.` in brackets, parentheses, etc.   | `1.1.1[.]1`                            | `1.1.1.1`                       |
+| `dot` in brackets, parentheses, etc. | `example[dot]com`                      | `example.com`                   |
+| Back slash before `.`                | `example\.com`                         | `example.com`                   |
+| `/` in brackets, parentheses, etc.   | `http://example.com[/]path`            | `http://example.com/path`       |
+| `://` in brackets, parentheses, etc. | `http[://]example.com`                 | `http://example.com`            |
+| `:` in brackets, parentheses, etc.   | `http[:]//example.com`                 | `http://example.com`            |
+| `@` in brackets, parentheses, etc.   | `test[@]example.com`                   | `test@example.com`              |
+| `at` in brackets, parentheses, etc.  | `test[at]example.com`                  | `test@example.com`              |
+| `hxxp`                               | `hxxps://example.com`                  | `https://example.com`           |
+| Partial                              | `1.1.1[.1`                             | `1.1.1.1`                       |
+| Any combination                      | `hxxps[:]//test\.example[.)com[/]path` | `https://test.example.com/path` |
 
-A domain with an IDN TLD (e.g. `みんな`) is not supported.
-Please convert an input into Punycode beforehand. Then it will work.
+## Options
 
-```
-# OK
-xn--p8j9a0d9c9a.xn--q9jyb4c
-はじめよう.com
+### `Strict`
 
-# NG
-はじめよう.みんな
-example.みんな
-```
+Whether to do strict [TLD](https://en.wikipedia.org/wiki/Top-level_domain) matching or not. Defaults to `true`.
+
+### `Refang`
+
+Whether to do refang or not. Defaults to `false`.
+
+### `Punycode`
+
+Whether to do [Punycode](https://en.wikipedia.org/wiki/Punycode) conversion or not. Defaults to `false`.
 
 ## Alternatives
 
-- Python:
-  - [InQuest/python-iocextract](https://github.com/InQuest/python-iocextract)
-  - [cmu-sei/cyobstract](https://github.com/cmu-sei/cyobstract)
-  - [fhightower/ioc-finder](https://github.com/fhightower/ioc-finder)
-- Golang:
-  - [sroberts/cacador](https://github.com/sroberts/cacador)
+- [cmu-sei/cyobstract](https://github.com/cmu-sei/cyobstract)
+- [fhightower/ioc-finder](https://github.com/fhightower/ioc-finder)
+- [InQuest/python-iocextract](https://github.com/InQuest/python-iocextract)
+- [sroberts/cacador](https://github.com/sroberts/cacador)

@@ -7,7 +7,6 @@ describe("urlRegex", () => {
     const matches = input.match(urlRegex());
     expect(matches).toEqual([
       "https://test-1.co.jp",
-      "https://お名前.com",
       "https://google.com",
       "https://111.111.111.111/test.jsp",
     ]);

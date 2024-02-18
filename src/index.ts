@@ -1,3 +1,5 @@
+import tr46 from "tr46";
+
 import {
   extractASN,
   extractASNs,
@@ -121,7 +123,7 @@ export type { IOC, Options };
 
 export class IOCExtractor {
   /**
-   * Returns an IOC in data
+   * Returns an IoC in data
    *
    * @static
    * @param {string} data A string
@@ -131,7 +133,7 @@ export class IOCExtractor {
    */
   public static extractIOC(
     data: string,
-    options: Options = { strict: true, refang: true },
+    options: Options = { strict: true, refang: true, punycode: false },
   ): IOC {
     const extractor = new IOCExtractor(data);
     return extractor.extractIOC(options);
@@ -150,35 +152,45 @@ export class IOCExtractor {
    * @param {Options} options
    * @memberof IOCExtractor
    */
-  public extractIOC(options: Options = { strict: true, refang: true }): IOC {
-    const normalizedData = options.refang ? refang(this.data) : this.data;
+  public extractIOC(
+    options: Options = { strict: true, refang: true, punycode: false },
+  ): IOC {
+    // Apply refang
+    let normalized = options.refang ? refang(this.data) : this.data;
+    // Apply punycode conversion
+    normalized = options.punycode
+      ? tr46.toASCII(normalized, {
+          ignoreInvalidPunycode: false,
+          transitionalProcessing: false,
+        })
+      : normalized;
 
     const ioc: IOC = {
-      asns: extractASNs(normalizedData),
-      btcs: extractBTCs(normalizedData),
-      cves: extractCVEs(normalizedData),
-      domains: extractDomains(normalizedData, options),
-      emails: extractEmails(normalizedData, options),
-      eths: extractETHs(normalizedData),
-      gaPubIDs: extractGAPubIDs(normalizedData),
-      gaTrackIDs: extractGATrackIDs(normalizedData),
-      ipv4s: extractIPv4s(normalizedData),
-      ipv6s: extractIPv6s(normalizedData),
-      macAddresses: extractMacAddresses(normalizedData),
-      md5s: extractMD5s(normalizedData),
-      sha1s: extractSHA1s(normalizedData),
-      sha256s: extractSHA256s(normalizedData),
-      sha512s: extractSHA512s(normalizedData),
-      ssdeeps: extractSSDEEPs(normalizedData),
-      urls: extractURLs(normalizedData, options),
-      xmrs: extractXMRs(normalizedData),
+      asns: extractASNs(normalized),
+      btcs: extractBTCs(normalized),
+      cves: extractCVEs(normalized),
+      domains: extractDomains(normalized, options),
+      emails: extractEmails(normalized, options),
+      eths: extractETHs(normalized),
+      gaPubIDs: extractGAPubIDs(normalized),
+      gaTrackIDs: extractGATrackIDs(normalized),
+      ipv4s: extractIPv4s(normalized),
+      ipv6s: extractIPv6s(normalized),
+      macAddresses: extractMacAddresses(normalized),
+      md5s: extractMD5s(normalized),
+      sha1s: extractSHA1s(normalized),
+      sha256s: extractSHA256s(normalized),
+      sha512s: extractSHA512s(normalized),
+      ssdeeps: extractSSDEEPs(normalized),
+      urls: extractURLs(normalized, options),
+      xmrs: extractXMRs(normalized),
     };
     return ioc;
   }
 }
 
 /**
- * Returns an IOC of data
+ * Returns an IoC of data
  *
  * @export
  * @param {string} data A string

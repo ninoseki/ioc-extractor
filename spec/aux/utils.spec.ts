@@ -46,6 +46,11 @@ describe("refang", () => {
     expect(refang(input)).toBe("example.com");
   });
 
+  it("should can handle IDN", () => {
+    const input = "はじめよう.みんな";
+    expect(refang(input)).toBe("はじめよう.みんな");
+  });
+
   it.each([
     ["hxxps://google.com", "https://google.com"],
     ["hxxp://neverssl.com", "http://neverssl.com"],

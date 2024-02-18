@@ -1,23 +1,21 @@
+import { StrictOptions } from "@/types";
+
 import {
-  idnLabelLetters,
-  idnOneOrMoreLabel,
   idnPrefix,
-  idnZeroOrMoreLabelWithHyphen,
+  labelLetters,
   nonStrictTld,
+  oneOrMoreLabel,
   strictTld,
+  zeroOrMoreLabel,
+  zeroOrMoreLabelWithHyphen,
 } from "./regexes";
 
-type Options = Partial<{
-  strict: boolean;
-  localhost: boolean;
-}>;
-
 export function domainRegex(
-  options: Options = {
+  options: StrictOptions = {
     strict: true,
   },
 ): RegExp {
   const tld = options.strict ? strictTld : nonStrictTld;
-  const regex = `((${idnOneOrMoreLabel}|${idnPrefix})((?!.{0,63}--)${idnZeroOrMoreLabelWithHyphen}[${idnLabelLetters}])?\\.)+(${tld})\\b`;
+  const regex = `((${idnPrefix}${zeroOrMoreLabel}|${oneOrMoreLabel})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tld})\\b`;
   return new RegExp(regex, "ig");
 }

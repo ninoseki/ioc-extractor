@@ -90,6 +90,6 @@
   "dependencies": {
     "commander": "^12.0.0",
     "get-stdin": "9.0.0",
-    "tlds": "^1.250.0"
+    "tr46": "^5.0.0"
   }
 }

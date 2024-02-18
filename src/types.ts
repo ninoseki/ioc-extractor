@@ -1,6 +1,11 @@
+export type StrictOptions = Partial<{
+  strict: boolean;
+}>;
+
 export type Options = Partial<{
   strict: boolean;
   refang: boolean;
+  punycode: boolean;
 }>;
 
 export interface IOC {

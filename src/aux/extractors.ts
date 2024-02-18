@@ -1,4 +1,4 @@
-import type { Options } from "../types";
+import type { StrictOptions } from "../types";
 import { domainRegex } from "./domain";
 import { emailRegex } from "./email";
 import { ipRegex } from "./ip";
@@ -186,12 +186,12 @@ export function extractASN(s: string): string | null {
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {string[]} An array of domains
  */
 export function extractDomains(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): string[] {
   if (!s.includes(".")) {
     return [];
@@ -205,12 +205,12 @@ export function extractDomains(
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {string | null} Domain
  */
 export function extractDomain(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): string | null {
   if (!s.includes(".")) {
     return null;
@@ -224,12 +224,12 @@ export function extractDomain(
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {string[]} An array of emails
  */
 export function extractEmails(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): string[] {
   if (!s.includes("@") && !s.includes(".")) {
     return [];
@@ -243,12 +243,12 @@ export function extractEmails(
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {string | null} Email
  */
 export function extractEmail(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): string | null {
   if (!s.includes("@") && !s.includes(".")) {
     return null;
@@ -312,12 +312,12 @@ export function extractIPv6(s: string): string | null {
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {string[]} An array of URLs
  */
 export function extractURLs(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): string[] {
   const regexp = urlRegex(options);
   return matchesWithRegExp(s, regexp);
@@ -328,12 +328,12 @@ export function extractURLs(
  *
  * @export
  * @param {string} s A string
- * @param {Options} options
+ * @param {StrictOptions} options
  * @returns {string | null} URL
  */
 export function extractURL(
   s: string,
-  options: Options = { strict: true },
+  options: StrictOptions = { strict: true },
 ): string | null {
   const regexp = urlRegex(options);
   return getFirstMatchedValue(s, regexp);
