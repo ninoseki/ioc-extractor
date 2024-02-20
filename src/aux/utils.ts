@@ -1,3 +1,5 @@
+import tr46 from "tr46";
+
 /**
  * Reject duplications from an array
  *
@@ -93,4 +95,11 @@ export function refang(s: string): string {
   }
 
   return s;
+}
+
+export function toASCII(s: string): string {
+  return tr46.toASCII(s, {
+    ignoreInvalidPunycode: true,
+    transitionalProcessing: true,
+  });
 }

@@ -1,5 +1,3 @@
-import tr46 from "tr46";
-
 import {
   extractASN,
   extractASNs,
@@ -38,7 +36,7 @@ import {
   extractXMR,
   extractXMRs,
 } from "./aux/extractors";
-import { refang } from "./aux/utils";
+import { refang, toASCII } from "./aux/utils";
 import {
   isASN,
   isBTC,
@@ -158,12 +156,7 @@ export class IOCExtractor {
     // Apply refang
     let normalized = options.refang ? refang(this.data) : this.data;
     // Apply punycode conversion
-    normalized = options.punycode
-      ? tr46.toASCII(normalized, {
-          ignoreInvalidPunycode: false,
-          transitionalProcessing: false,
-        })
-      : normalized;
+    normalized = options.punycode ? toASCII(normalized) : normalized;
 
     const ioc: IOC = {
       asns: extractASNs(normalized),
