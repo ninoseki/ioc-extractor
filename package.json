@@ -1,6 +1,6 @@
 {
   "name": "ioc-extractor",
-  "version": "8.0.1",
+  "version": "8.0.2",
   "description": "IoC (Indicator of Compromise) extractor",
   "type": "module",
   "exports": {

@@ -115,6 +115,7 @@ export {
   isURL,
   isXMR,
   refang,
+  toASCII,
 };
 
 export type { IOC, Options };
