@@ -36,7 +36,7 @@ import {
   extractXMR,
   extractXMRs,
 } from "./aux/extractors";
-import { refang, toASCII } from "./aux/utils";
+import { refang, unicodeToASCII } from "./aux/utils";
 import {
   isASN,
   isBTC,
@@ -115,7 +115,7 @@ export {
   isURL,
   isXMR,
   refang,
-  toASCII,
+  unicodeToASCII,
 };
 
 export type { IOC, Options };
@@ -157,7 +157,12 @@ export class IOCExtractor {
     // Apply refang
     let normalized = options.refang ? refang(this.data) : this.data;
     // Apply punycode conversion
-    normalized = options.punycode ? toASCII(normalized) : normalized;
+    normalized = options.punycode
+      ? unicodeToASCII(normalized, {
+          ignoreInvalidPunycode: true,
+          transitionalProcessing: true,
+        })
+      : normalized;
 
     const ioc: IOC = {
       asns: extractASNs(normalized),

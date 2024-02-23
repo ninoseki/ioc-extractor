@@ -31,23 +31,22 @@ declare module "tr46" {
      */
     useSTD3ASCIIRules?: boolean | undefined;
     /**
-     * When set to `true`, the length of each DNS label within the input will be checked for validation.
+     * When set to `true`, uses transitional (compatibility) processing of the deviation characters.
      * @default false
      */
-    verifyDNSLength?: boolean | undefined;
-
     transitionalProcessing?: boolean | undefined;
+    /**
+     * When set to `true`, invalid Punycode strings within the input will be allowed.
+     * @default false
+     */
     ignoreInvalidPunycode?: boolean | undefined;
   }
 
   export interface ToASCIIOptions extends Options {
     /**
-     * When set to `"transitional"`, symbols within the input will be validated according to the older
-     * IDNA2003 protocol. When set to `"nontransitional"`, the current IDNA2008 protocol will be used.
-     * @default 'nontransitional'
+     * When set to `true`, the length of each DNS label within the input will be checked for validation.
+     * @default false
      */
-    processingOption?: ProcessingOption | undefined;
+    verifyDNSLength?: boolean | undefined;
   }
-
-  export type ProcessingOption = "nontransitional" | "transitional";
 }

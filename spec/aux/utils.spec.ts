@@ -1,4 +1,4 @@
-import { dedup, refang, sortByValue, toASCII } from "@/aux/utils";
+import { dedup, refang, sortByValue, unicodeToASCII } from "@/aux/utils";
 
 describe("refang", () => {
   it("should replace ' . '  by .", () => {
@@ -149,11 +149,11 @@ describe("sortByValue", () => {
   });
 });
 
-describe("toASCII", () => {
+describe("unicodeToASCII", () => {
   it.each([["はじめよう.みんな", "xn--p8j9a0d9c9a.xn--q9jyb4c"]])(
     "should convert Unicode to Punycode (ASCII)",
     (string, expected) => {
-      expect(toASCII(string)).toBe(expected);
+      expect(unicodeToASCII(string)).toBe(expected);
     },
   );
 });
