@@ -145,15 +145,15 @@ For **Networks** IoCs, the following refang techniques are supported:
 
 ## Options
 
-### `Strict`
+### `strict`
 
 Whether to do strict [TLD](https://en.wikipedia.org/wiki/Top-level_domain) matching or not. Defaults to `true`.
 
-### `Refang`
+### `refang`
 
 Whether to do refang or not. Defaults to `false`.
 
-### `Punycode`
+### `punycode`
 
 Whether to do [Punycode](https://en.wikipedia.org/wiki/Punycode) conversion or not. Defaults to `false`.
 
