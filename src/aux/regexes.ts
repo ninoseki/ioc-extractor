@@ -9,8 +9,8 @@ export const zeroOrMoreLabelWithHyphen = `[${labelLetters}-]{0,63}`;
 export const nonDigitTwoOrMoreLabelWithHyphen = `[${alphabets}-]{2,63}`;
 export const idnPrefix = "xn--";
 
-export const nonStrictTld = `(?:${nonDigitTwoOrMoreLabelWithHyphen})`;
-export const strictTld = `(?:${tlds.sort((a, b) => b.length - a.length).join("|")})`;
+export const nonStrictTld = nonDigitTwoOrMoreLabelWithHyphen;
+export const strictTld = `${tlds.sort((a, b) => b.length - a.length).join("|")}`;
 
 export const asnRegex = /(AS|ASN)\d+/gi;
 export const btcRegex = /\b[13][a-km-zA-HJ-NP-Z0-9]{26,33}\b/g;
