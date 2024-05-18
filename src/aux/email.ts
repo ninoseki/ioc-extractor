@@ -10,5 +10,5 @@ export function emailRegex(
   const domainPart = domainRegex(options).source;
   const localPart = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+";
   const regex = `${localPart}@${domainPart}`;
-  return new RegExp(regex, "ig");
+  return new RegExp(regex, "gi");
 }

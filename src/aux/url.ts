@@ -17,5 +17,5 @@ export function urlRegex(
 
   const regex = `(?:${protocol})${auth}(?:${domainPart}|localhost|${ipRegex.v4().source})${port}${path}`;
 
-  return new RegExp(regex, "ig");
+  return new RegExp(regex, "gi");
 }

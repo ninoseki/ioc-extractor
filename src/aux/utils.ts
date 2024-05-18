@@ -64,34 +64,34 @@ export function refang(s: string): string {
     s = s.replace(
       orRegExp([
         /\s\.\s/,
-        /(\[|\(|\{)\.(\]|\)|\})/,
-        /(\[|\(|\{)\./,
-        /\.(\]|\)|\})/,
+        /([[({])\.([\])}])/,
+        /([[({])\./,
+        /\.([\])}])/,
         /\\\./,
-        /(\[|\(|\{)dot(\]|\)|\})/,
+        /([[({])dot([\])}])/,
       ]),
       ".",
     );
   }
 
   if (hasColon(s)) {
-    s = s.replace(/(\[|\(|\{)(:)(\]|\)|\})/gi, ":");
+    s = s.replace(/[[({]:[\])}]/g, ":");
   }
 
   if (hasSlash(s)) {
-    s = s.replace(/(\[|\(|\{)(\/)(\]|\)|\})/gi, "/");
+    s = s.replace(/[[({]\/[\])}]/g, "/");
   }
 
   if (hasColonDoubleSlash(s)) {
-    s = s.replace(/(\[|\(|\{)(:\/\/)(\]|\)|\})/gi, "://");
+    s = s.replace(/[[({]:\/\/[\])}]/g, "://");
   }
 
   if (hasAt(s)) {
-    s = s.replace(/(\[|\(|\{)(at|@)(\]|\)|\})/gi, "@");
+    s = s.replace(/[[({](?:at|@)[\])}]/gi, "@");
   }
 
   if (hasHttp(s)) {
-    s = s.replace(/h(xx|\*\*)p(s?):\/\//gi, "http$2://");
+    s = s.replace(/h(?:xx|\*\*)p(s?):\/\//gi, "http$1://");
   }
 
   return s;
