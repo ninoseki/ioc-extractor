@@ -1,4 +1,11 @@
 {
+  "plugins": [
+    "@typescript-eslint",
+    "jest",
+    "prettier",
+    "regexp",
+    "simple-import-sort"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
@@ -6,12 +13,7 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:jest/recommended",
     "prettier",
-  ],
-  "plugins": [
-    "@typescript-eslint",
-    "jest",
-    "prettier",
-    "simple-import-sort"
+    "plugin:regexp/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -20,7 +22,12 @@
   },
   "rules": {
     "@typescript-eslint/interface-name-prefix": 0,
-    "@typescript-eslint/no-floating-promises": ["error", { "ignoreIIFE": true}],
+    "@typescript-eslint/no-floating-promises": [
+      "error",
+      {
+        "ignoreIIFE": true
+      }
+    ],
     "max-len": 0,
     "no-console": 0,
     "prettier/prettier": "error",

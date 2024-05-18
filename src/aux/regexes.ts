@@ -19,10 +19,10 @@ export const ethRegex = /\b0x[a-fA-F0-9]{40}\b/g;
 export const gaPubIDRegex = /pub-\d{16}/gi;
 export const gaTrackIDRegex = /UA-\d{4,9}(-\d{1,2})?/gi;
 export const macAddressRegex =
-  /\b(?:[A-Fa-f0-9]{2}([-:]))(?:[A-Fa-f0-9]{2}\1){4}[A-Fa-f0-9]{2}\b/g;
-export const md5Regex = /\b[A-Fa-f0-9]{32}\b/g;
-export const sha1Regex = /\b[A-Fa-f0-9]{40}\b/g;
-export const sha256Regex = /\b[A-Fa-f0-9]{64}\b/g;
-export const sha512Regex = /\b[A-Fa-f0-9]{128}\b/g;
-export const ssdeepRegex = /\b\d{1,}:[A-Za-z0-9/+]{3,}:[A-Za-z0-9/+]{3,}/g;
+  /\b[A-F0-9]{2}([-:])(?:[A-F0-9]{2}\1){4}[A-F0-9]{2}\b/gi;
+export const md5Regex = /\b[A-F0-9]{32}\b/gi;
+export const sha1Regex = /\b[A-F0-9]{40}\b/gi;
+export const sha256Regex = /\b[A-F0-9]{64}\b/gi;
+export const sha512Regex = /\b[A-F0-9]{128}\b/gi;
+export const ssdeepRegex = /\b\d+:[A-Z0-9/+]{3,}:[A-Z0-9/+]{3,}/gi;
 export const xmrRegex = /\b4[0-9AB][1-9A-HJ-NP-Za-km-z]{93}\b/g;
