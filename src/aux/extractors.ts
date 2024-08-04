@@ -38,7 +38,6 @@ function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
     regexp = new RegExp(regexp.source, flags);
   }
 
-  // eslint-disable-next-line @typescript-eslint/prefer-regexp-exec
   const matched = s.match(regexp);
   return matched === null ? null : matched[0];
 }

@@ -13,9 +13,9 @@ import { extractIOC, Options } from "../index";
     .option("-p, --punycode", "Enable punycode option");
   program.parse();
 
-  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
   const options = <Options>program.opts();
   const ioc = extractIOC(input, options);
 
+  // eslint-disable-next-line no-console
   console.log(JSON.stringify(ioc));
 })();
