@@ -38,4 +38,11 @@ describe("network RegExps", () => {
       "www.foo.bar",
     ]);
   });
+
+  it("can handle a domain-like input with many labels but without TLD (without having a performance issue)", () => {
+    const input =
+      "somelongishstring.somelongishstring.somelongishstring.somelongishstring.somelongishstring.somelongishstring";
+    const matches = input.match(domainRegex());
+    expect(matches).toBeNull();
+  }, 500);
 });

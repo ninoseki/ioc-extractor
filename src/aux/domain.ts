@@ -16,6 +16,8 @@ export function domainRegex(
   },
 ): RegExp {
   const tld = options.strict ? strictTld : nonStrictTld;
-  const regex = `((${idnPrefix}${zeroOrMoreLabel}|${oneOrMoreLabel})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tld})\\b`;
+  const regex =
+    `(?=[${labelLetters}.\\-]{1,252}\\.(${tld})\\b)` +
+    `((${idnPrefix}${zeroOrMoreLabel}|${oneOrMoreLabel})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tld})\\b`;
   return new RegExp(regex, "gi");
 }
