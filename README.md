@@ -27,10 +27,11 @@ $ ioc-extractor --help
 Usage: ioc-extractor [options]
 
 Options:
-  -ns, --no-strict  Disable strict option
-  -nr, --no-refang  Disable refang option
-  -p, --punycode    Enable punycode option
-  -h, --help        display help for command
+  --no-strict     Disable strict option
+  --no-refang     Disable refang option
+  --no-sort       Disable sort option
+  -p, --punycode  Enable punycode option
+  -h, --help      display help for command
 ```
 
 ```bash
@@ -79,9 +80,10 @@ console.log(ioc.domains);
 
 `extractIOC` takes the following options:
 
-- [strict](#strict)
-- [refang](#refang)
 - [punycode](#punycode)
+- [refang](#refang)
+- [sort](#sort)
+- [strict](#strict)
 
 If you want to extract a specific type of IoC, you can use extract function.
 
@@ -109,6 +111,7 @@ const md5s = extractMD5s(refanged);
 
 Network related extract functions (e.g. `extractDomains`) can take the following options:
 
+- [sort](#sort)
 - [strict](#strict)
 
 See [docs](https://ninoseki.github.io/ioc-extractor/) for more details.
@@ -156,6 +159,10 @@ Whether to do refang or not. Defaults to `false`.
 ### `punycode`
 
 Whether to do [Punycode](https://en.wikipedia.org/wiki/Punycode) conversion or not. Defaults to `false`.
+
+### `sort`
+
+Whether to sort values or not. Defaults to `true`.
 
 ## Alternatives
 
