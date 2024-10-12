@@ -132,7 +132,12 @@ export class IOCExtractor {
    */
   public static extractIOC(
     data: string,
-    options: Options = { strict: true, refang: true, punycode: false },
+    options: Options = {
+      strict: true,
+      refang: true,
+      punycode: false,
+      sort: true,
+    },
   ): IOC {
     const extractor = new IOCExtractor(data);
     return extractor.extractIOC(options);
@@ -152,7 +157,12 @@ export class IOCExtractor {
    * @memberof IOCExtractor
    */
   public extractIOC(
-    options: Options = { strict: true, refang: true, punycode: false },
+    options: Options = {
+      strict: true,
+      refang: true,
+      punycode: false,
+      sort: true,
+    },
   ): IOC {
     // Apply refang
     let normalized = options.refang ? refang(this.data) : this.data;
@@ -165,24 +175,24 @@ export class IOCExtractor {
       : normalized;
 
     const ioc: IOC = {
-      asns: extractASNs(normalized),
-      btcs: extractBTCs(normalized),
-      cves: extractCVEs(normalized),
+      asns: extractASNs(normalized, options),
+      btcs: extractBTCs(normalized, options),
+      cves: extractCVEs(normalized, options),
       domains: extractDomains(normalized, options),
       emails: extractEmails(normalized, options),
-      eths: extractETHs(normalized),
-      gaPubIDs: extractGAPubIDs(normalized),
-      gaTrackIDs: extractGATrackIDs(normalized),
-      ipv4s: extractIPv4s(normalized),
-      ipv6s: extractIPv6s(normalized),
-      macAddresses: extractMacAddresses(normalized),
-      md5s: extractMD5s(normalized),
-      sha1s: extractSHA1s(normalized),
-      sha256s: extractSHA256s(normalized),
-      sha512s: extractSHA512s(normalized),
-      ssdeeps: extractSSDEEPs(normalized),
+      eths: extractETHs(normalized, options),
+      gaPubIDs: extractGAPubIDs(normalized, options),
+      gaTrackIDs: extractGATrackIDs(normalized, options),
+      ipv4s: extractIPv4s(normalized, options),
+      ipv6s: extractIPv6s(normalized, options),
+      macAddresses: extractMacAddresses(normalized, options),
+      md5s: extractMD5s(normalized, options),
+      sha1s: extractSHA1s(normalized, options),
+      sha256s: extractSHA256s(normalized, options),
+      sha512s: extractSHA512s(normalized, options),
+      ssdeeps: extractSSDEEPs(normalized, options),
       urls: extractURLs(normalized, options),
-      xmrs: extractXMRs(normalized),
+      xmrs: extractXMRs(normalized, options),
     };
     return ioc;
   }
@@ -198,7 +208,12 @@ export class IOCExtractor {
  */
 export function extractIOC(
   data: string,
-  options: Options = { strict: true, refang: true },
+  options: Options = {
+    strict: true,
+    refang: true,
+    punycode: false,
+    sort: true,
+  },
 ): IOC {
   return IOCExtractor.extractIOC(data, options);
 }

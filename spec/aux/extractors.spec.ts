@@ -17,7 +17,18 @@ import {
   extractSSDEEP,
   extractURL,
   extractXMR,
+  matchesWithRegExp,
 } from "@/aux/extractors";
+
+describe("matchesWithRegExp", () => {
+  test.each([
+    ["a b c d", /\w/g, { sort: true }, ["a", "b", "c", "d"]],
+    ["d c b a", /\w/g, { sort: true }, ["a", "b", "c", "d"]],
+    ["d c b a", /\w/g, { sort: false }, ["d", "c", "b", "a"]],
+  ])(".matchesWithRegExp(%s)", (value, regex, options, expected) => {
+    expect(matchesWithRegExp(value, regex, options)).toEqual(expected);
+  });
+});
 
 describe("extractMD5", () => {
   test.each([

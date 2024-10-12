@@ -2,11 +2,18 @@ export type StrictOptions = Partial<{
   strict: boolean;
 }>;
 
-export type Options = Partial<{
-  strict: boolean;
-  refang: boolean;
-  punycode: boolean;
+export type SortOptions = Partial<{
+  sort: boolean;
 }>;
+
+export type StrictSortOptions = StrictOptions & SortOptions;
+
+export type Options = StrictOptions &
+  SortOptions &
+  Partial<{
+    refang: boolean;
+    punycode: boolean;
+  }>;
 
 export interface IOC {
   asns: string[];

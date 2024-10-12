@@ -1,4 +1,4 @@
-import type { StrictOptions } from "../types";
+import type { SortOptions, StrictOptions, StrictSortOptions } from "../types";
 import { domainRegex } from "./domain";
 import { emailRegex } from "./email";
 import { ipRegex } from "./ip";
@@ -25,11 +25,17 @@ import { dedup, sortByValue } from "./utils";
  *
  * @param {string} s A string
  * @param {RegExp} regexp A regexp to use
+ * @param {SortOptions} options
  * @returns {string[]} An array of matched strings, returns an empty array if not matched
  */
-function matchesWithRegExp(s: string, regexp: RegExp): string[] {
+export function matchesWithRegExp(
+  s: string,
+  regexp: RegExp,
+  options: SortOptions = { sort: true },
+): string[] {
   const matched = s.match(regexp);
-  return matched === null ? [] : sortByValue(dedup(matched));
+  const values = matched === null ? [] : dedup(matched);
+  return options.sort ? sortByValue(values) : values;
 }
 
 function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
@@ -47,10 +53,14 @@ function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of MD5s
  */
-export function extractMD5s(s: string): string[] {
-  return matchesWithRegExp(s, md5Regex);
+export function extractMD5s(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, md5Regex, options);
 }
 
 /**
@@ -69,10 +79,14 @@ export function extractMD5(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of SHA1s
  */
-export function extractSHA1s(s: string): string[] {
-  return matchesWithRegExp(s, sha1Regex);
+export function extractSHA1s(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, sha1Regex, options);
 }
 
 /**
@@ -91,10 +105,14 @@ export function extractSHA1(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of SHA256s
  */
-export function extractSHA256s(s: string): string[] {
-  return matchesWithRegExp(s, sha256Regex);
+export function extractSHA256s(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, sha256Regex, options);
 }
 
 /**
@@ -113,10 +131,14 @@ export function extractSHA256(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of SHA512s
  */
-export function extractSHA512s(s: string): string[] {
-  return matchesWithRegExp(s, sha512Regex);
+export function extractSHA512s(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, sha512Regex, options);
 }
 
 /**
@@ -135,10 +157,14 @@ export function extractSHA512(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of SSDEEPs
  */
-export function extractSSDEEPs(s: string): string[] {
-  return matchesWithRegExp(s, ssdeepRegex);
+export function extractSSDEEPs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, ssdeepRegex, options);
 }
 
 /**
@@ -157,13 +183,17 @@ export function extractSSDEEP(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of ASNs
  */
-export function extractASNs(s: string): string[] {
+export function extractASNs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
   if (!s.includes("AS")) {
     return [];
   }
-  return matchesWithRegExp(s, asnRegex);
+  return matchesWithRegExp(s, asnRegex, options);
 }
 
 /**
@@ -185,18 +215,19 @@ export function extractASN(s: string): string | null {
  *
  * @export
  * @param {string} s A string
- * @param {StrictOptions} options
+ * @param {StrictSortOptions} options
  * @returns {string[]} An array of domains
  */
 export function extractDomains(
   s: string,
-  options: StrictOptions = { strict: true },
+  options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
   if (!s.includes(".")) {
     return [];
   }
   const regexp = domainRegex(options);
-  return matchesWithRegExp(s, regexp);
+  const values = matchesWithRegExp(s, regexp);
+  return options.sort ? sortByValue(values) : values;
 }
 
 /**
@@ -223,18 +254,19 @@ export function extractDomain(
  *
  * @export
  * @param {string} s A string
- * @param {StrictOptions} options
+ * @param {StrictSortOptions} options
  * @returns {string[]} An array of emails
  */
 export function extractEmails(
   s: string,
-  options: StrictOptions = { strict: true },
+  options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
   if (!s.includes("@") && !s.includes(".")) {
     return [];
   }
   const regexp = emailRegex(options);
-  return matchesWithRegExp(s, regexp);
+  const values = matchesWithRegExp(s, regexp);
+  return options.sort ? sortByValue(values) : values;
 }
 
 /**
@@ -261,13 +293,17 @@ export function extractEmail(
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of IPv4s
  */
-export function extractIPv4s(s: string): string[] {
+export function extractIPv4s(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
   if (!s.includes(".")) {
     return [];
   }
-  return matchesWithRegExp(s, ipRegex.v4());
+  return matchesWithRegExp(s, ipRegex.v4(), options);
 }
 
 /**
@@ -289,10 +325,14 @@ export function extractIPv4(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of IPv6s
  */
-export function extractIPv6s(s: string): string[] {
-  return matchesWithRegExp(s, ipRegex.v6());
+export function extractIPv6s(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, ipRegex.v6(), options);
 }
 
 /**
@@ -311,15 +351,15 @@ export function extractIPv6(s: string): string | null {
  *
  * @export
  * @param {string} s A string
- * @param {StrictOptions} options
+ * @param {StrictSortOptions} options
  * @returns {string[]} An array of URLs
  */
 export function extractURLs(
   s: string,
-  options: StrictOptions = { strict: true },
+  options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
   const regexp = urlRegex(options);
-  return matchesWithRegExp(s, regexp);
+  return matchesWithRegExp(s, regexp, options);
 }
 
 /**
@@ -343,10 +383,14 @@ export function extractURL(
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of CVEs
  */
-export function extractCVEs(s: string): string[] {
-  return matchesWithRegExp(s, cveRegExp);
+export function extractCVEs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, cveRegExp, options);
 }
 
 /**
@@ -365,10 +409,14 @@ export function extractCVE(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of BTCs
  */
-export function extractBTCs(s: string): string[] {
-  return matchesWithRegExp(s, btcRegex);
+export function extractBTCs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, btcRegex, options);
 }
 
 /**
@@ -387,10 +435,14 @@ export function extractBTC(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of XMRs
  */
-export function extractXMRs(s: string): string[] {
-  return matchesWithRegExp(s, xmrRegex);
+export function extractXMRs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, xmrRegex, options);
 }
 
 /**
@@ -409,10 +461,14 @@ export function extractXMR(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of Google Adsense Publisher IDs
  */
-export function extractGAPubIDs(s: string): string[] {
-  return matchesWithRegExp(s, gaPubIDRegex);
+export function extractGAPubIDs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, gaPubIDRegex, options);
 }
 
 /**
@@ -431,10 +487,14 @@ export function extractGAPubID(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of Google Analytics tracking IDs
  */
-export function extractGATrackIDs(s: string): string[] {
-  return matchesWithRegExp(s, gaTrackIDRegex);
+export function extractGATrackIDs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, gaTrackIDRegex, options);
 }
 
 /**
@@ -453,10 +513,14 @@ export function extractGATrackID(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of mac addresses
  */
-export function extractMacAddresses(s: string): string[] {
-  return matchesWithRegExp(s, macAddressRegex);
+export function extractMacAddresses(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, macAddressRegex, options);
 }
 
 /**
@@ -475,10 +539,14 @@ export function extractMacAddress(s: string): string | null {
  *
  * @export
  * @param {string} s A string
+ * @param {SortOptions} options
  * @returns {string[]} An array of ETH addresses
  */
-export function extractETHs(s: string): string[] {
-  return matchesWithRegExp(s, ethRegex);
+export function extractETHs(
+  s: string,
+  options: SortOptions = { sort: true },
+): string[] {
+  return matchesWithRegExp(s, ethRegex, options);
 }
 
 /**

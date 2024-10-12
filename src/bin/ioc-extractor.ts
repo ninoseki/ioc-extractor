@@ -8,8 +8,9 @@ import { extractIOC, Options } from "../index";
   const input = (await getStdin()).trim();
 
   program
-    .option("-ns, --no-strict", "Disable strict option")
-    .option("-nr, --no-refang", "Disable refang option")
+    .option("--no-strict", "Disable strict option")
+    .option("--no-refang", "Disable refang option")
+    .option("--no-sort", "Disable sort option")
     .option("-p, --punycode", "Enable punycode option");
   program.parse();
 
