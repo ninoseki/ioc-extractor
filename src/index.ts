@@ -57,7 +57,7 @@ import {
   isURL,
   isXMR,
 } from "./aux/validators";
-import type { IOC, Options } from "./types";
+import type { IOC, IOCKey, Options } from "./types";
 
 export {
   extractASN,
@@ -121,36 +121,14 @@ export {
 export type { IOC, Options };
 
 export class IOCExtractor {
-  /**
-   * Returns an IoC in data
-   *
-   * @static
-   * @param {string} data A string
-   * @param {Options} options
-   * @returns {IOC}
-   * @memberof IOCExtractor
-   */
-  public static extractIOC(
-    data: string,
-    options: Options = {
-      strict: true,
-      refang: true,
-      punycode: false,
-      sort: true,
-    },
-  ): IOC {
-    const extractor = new IOCExtractor(data);
-    return extractor.extractIOC(options);
-  }
+  private s: string;
 
-  private data: string;
-
-  public constructor(data: string) {
-    this.data = data;
+  public constructor(s: string) {
+    this.s = s;
   }
 
   /**
-   * Returns an IOC of the data
+   * Extract IoCs from a string
    *
    * @returns {IOC}
    * @param {Options} options
@@ -165,7 +143,7 @@ export class IOCExtractor {
     },
   ): IOC {
     // Apply refang
-    let normalized = options.refang ? refang(this.data) : this.data;
+    let normalized = options.refang ? refang(this.s) : this.s;
     // Apply punycode conversion
     normalized = options.punycode
       ? unicodeToASCII(normalized, {
@@ -196,18 +174,71 @@ export class IOCExtractor {
     };
     return ioc;
   }
+
+  /**
+   * Partially extract IoCs a string
+   *
+   * @returns {IOC}
+   * @param {IOCKey[]} only
+   * @param {Options} options
+   * @memberof IOCExtractor
+   */
+  public partialExtractIOC(
+    only: IOCKey[],
+    options: Options = {
+      strict: true,
+      refang: true,
+      punycode: false,
+      sort: true,
+    },
+  ): Partial<IOC> {
+    // Apply refang
+    let normalized = options.refang ? refang(this.s) : this.s;
+    // Apply punycode conversion
+    normalized = options.punycode
+      ? unicodeToASCII(normalized, {
+          ignoreInvalidPunycode: true,
+          transitionalProcessing: true,
+        })
+      : normalized;
+
+    const funcByType = {
+      asns: extractASNs,
+      btcs: extractBTCs,
+      cves: extractCVEs,
+      domains: extractDomains,
+      emails: extractEmails,
+      eths: extractETHs,
+      gaPubIDs: extractGAPubIDs,
+      gaTrackIDs: extractGATrackIDs,
+      ipv4s: extractIPv4s,
+      ipv6s: extractIPv6s,
+      macAddresses: extractMacAddresses,
+      md5s: extractMD5s,
+      sha1s: extractSHA1s,
+      sha256s: extractSHA256s,
+      sha512s: extractSHA512s,
+      ssdeeps: extractSSDEEPs,
+      urls: extractURLs,
+      xmrs: extractXMRs,
+    };
+
+    return Object.fromEntries(
+      only.map((key) => [key, funcByType[key](normalized, options)]),
+    ) as Partial<IOC>;
+  }
 }
 
 /**
- * Returns an IoC of data
+ * Extract IoCs from a string
  *
  * @export
- * @param {string} data A string
+ * @param {string} s A string
  * @param {Options} options
  * @returns {IOC}
  */
 export function extractIOC(
-  data: string,
+  s: string,
   options: Options = {
     strict: true,
     refang: true,
@@ -215,5 +246,26 @@ export function extractIOC(
     sort: true,
   },
 ): IOC {
-  return IOCExtractor.extractIOC(data, options);
+  return new IOCExtractor(s).extractIOC(options);
+}
+
+/**
+ * Partially extract IoCs from a string
+ *
+ * @export
+ * @param {string} s A string
+ * @param {Options} options
+ * @returns {IOC}
+ */
+export function partialExtractIOC(
+  s: string,
+  only: IOCKey[],
+  options: Options = {
+    strict: true,
+    refang: true,
+    punycode: false,
+    sort: true,
+  },
+): Partial<IOC> {
+  return new IOCExtractor(s).partialExtractIOC(only, options);
 }
