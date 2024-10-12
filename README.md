@@ -27,11 +27,12 @@ $ ioc-extractor --help
 Usage: ioc-extractor [options]
 
 Options:
-  --no-strict     Disable strict option
-  --no-refang     Disable refang option
-  --no-sort       Disable sort option
-  -p, --punycode  Enable punycode option
-  -h, --help      display help for command
+  --no-strict            Disable strict option
+  --no-refang            Disable refang option
+  --no-sort              Disable sort option
+  -p, --punycode         Enable punycode option
+  -o, --only <types...>  Show only specific IoC types
+  -h, --help             display help for command
 ```
 
 ```bash
@@ -61,6 +62,14 @@ $ echo "1.1.1.1 8.8.8.8 example.com" | ioc-extractor | jq
   "urls": [],
   "xmrs": []
 }
+
+$ echo "1.1.1.1 8.8.8.8" | ioc-extractor --only ipv4s | jq
+{
+  "ipv4s": [
+    "1.1.1.1",
+    "8.8.8.8"
+  ]
+}
 ```
 
 ### As a library
@@ -85,7 +94,7 @@ console.log(ioc.domains);
 - [sort](#sort)
 - [strict](#strict)
 
-If you want to extract a specific type of IoC, you can use extract function.
+If you want to extract a specific type of IoC, you can use an extract function by IoC type.
 
 ```ts
 import {
@@ -115,6 +124,17 @@ Network related extract functions (e.g. `extractDomains`) can take the following
 - [strict](#strict)
 
 See [docs](https://ninoseki.github.io/ioc-extractor/) for more details.
+
+Alternatively, if you want to extract a list of specific IoC types at once, you can use `partialExtractIOC`.
+
+```ts
+import { partialExtractIOC } from "ioc-extractor";
+
+const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
+const ioc = partialExtractIOC(input, ["ipv4s", "domains"]);
+console.log(ioc);
+// => {"ipv4s":["1.1.1.1"],"domains":["google.com"]}
+```
 
 ## IoC Types
 

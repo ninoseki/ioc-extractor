@@ -1,9 +1,9 @@
 import * as fs from "fs";
 import * as path from "path";
 
-import { extractIOC } from "@/index";
+import { extractIOC, partialExtractIOC } from "@/index";
 
-describe("IOCExtractor", () => {
+describe("extractIOC", () => {
   describe("simple input", () => {
     it("should extract IOCs from the input", () => {
       const input =
@@ -110,6 +110,23 @@ describe("IOCExtractor", () => {
         "49urk473npMgWFFBBk2xLMjEqTgg1PHMzg1MjDWBST5AMEEyh58TjCvLEf58uu5kruPWu5pA1RBPKX3quEQpHKoGQ1zbTGe",
       ]);
       expect(ioc.eths).toEqual(["0x32Be343B94f860124dC4fEe278FDCBD38C102D88"]);
+    });
+  });
+});
+
+describe("partialExtractIOC", () => {
+  describe("simple input", () => {
+    it("should only extract specific IoCs from the input", () => {
+      const input =
+        "1.1.1[.]1 2.2.2 . 2 google(.)com テスト.example.com https://www.google[.]com http://テスト.example.com f6f8179ac71eaabff12b8c024342109b 275a021bbfb6489e54d471899f7db9d1663fc695ec2fe2a2c4538aabf651fd0f UA-26296840-4 test@テスト.example.com example.nope";
+      const ioc = partialExtractIOC(input, ["domains"]);
+
+      expect(ioc.domains).toEqual([
+        "example.com",
+        "google.com",
+        "www.google.com",
+      ]);
+      expect(ioc.ipv4s).toBeUndefined();
     });
   });
 });

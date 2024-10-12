@@ -2,7 +2,11 @@
 import { program } from "commander";
 import getStdin from "get-stdin";
 
-import { extractIOC, Options } from "../index";
+import { IOCKey, Options } from "@/types";
+
+import { extractIOC, partialExtractIOC } from "../index";
+
+type OnlyOptions = Options & Partial<{ only: IOCKey[] }>;
 
 (async (): Promise<void> => {
   const input = (await getStdin()).trim();
@@ -11,11 +15,15 @@ import { extractIOC, Options } from "../index";
     .option("--no-strict", "Disable strict option")
     .option("--no-refang", "Disable refang option")
     .option("--no-sort", "Disable sort option")
-    .option("-p, --punycode", "Enable punycode option");
+    .option("-p, --punycode", "Enable punycode option")
+    .option("-o, --only <types...>", "Show only specific IoC types");
   program.parse();
 
-  const options = <Options>program.opts();
-  const ioc = extractIOC(input, options);
+  const options = <OnlyOptions>program.opts();
+
+  const ioc = options.only
+    ? partialExtractIOC(input, options.only, options)
+    : extractIOC(input, options);
 
   // eslint-disable-next-line no-console
   console.log(JSON.stringify(ioc));
