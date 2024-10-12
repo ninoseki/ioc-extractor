@@ -72,7 +72,7 @@ $ echo "1.1.1.1 8.8.8.8" | ioc-extractor --only ipv4s | jq
 }
 ```
 
-### As a library
+### As a Library
 
 ```ts
 import { extractIOC } from "ioc-extractor";
