@@ -145,12 +145,7 @@ export class IOCExtractor {
     // Apply refang
     let normalized = options.refang ? refang(this.s) : this.s;
     // Apply punycode conversion
-    normalized = options.punycode
-      ? unicodeToASCII(normalized, {
-          ignoreInvalidPunycode: true,
-          transitionalProcessing: true,
-        })
-      : normalized;
+    normalized = options.punycode ? unicodeToASCII(normalized) : normalized;
 
     const ioc: IOC = {
       asns: extractASNs(normalized, options),
@@ -195,12 +190,7 @@ export class IOCExtractor {
     // Apply refang
     let normalized = options.refang ? refang(this.s) : this.s;
     // Apply punycode conversion
-    normalized = options.punycode
-      ? unicodeToASCII(normalized, {
-          ignoreInvalidPunycode: true,
-          transitionalProcessing: true,
-        })
-      : normalized;
+    normalized = options.punycode ? unicodeToASCII(normalized) : normalized;
 
     const funcByType = {
       asns: extractASNs,

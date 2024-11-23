@@ -1,4 +1,4 @@
-import tr46, { ToASCIIOptions } from "tr46";
+import punycode from "node:punycode";
 
 /**
  * Reject duplications from an array
@@ -97,6 +97,6 @@ export function refang(s: string): string {
   return s;
 }
 
-export function unicodeToASCII(s: string, options?: ToASCIIOptions): string {
-  return tr46.toASCII(s, options);
+export function unicodeToASCII(s: string): string {
+  return punycode.toASCII(s);
 }

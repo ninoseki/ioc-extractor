@@ -4,13 +4,9 @@
   "description": "IoC (Indicator of Compromise) extractor",
   "type": "module",
   "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.js",
-      "require": "./dist/index.cjs",
-      "node": "./dist/index.cjs",
-      "default": "./dist/index.js"
-    }
+    "types": "./dist/index.d.ts",
+    "import": "./dist/index.js",
+    "require": "./dist/index.cjs"
   },
   "engines": {
     "node": ">=18"
@@ -90,7 +86,6 @@
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "get-stdin": "9.0.0",
-    "tr46": "^5.0.0"
+    "get-stdin": "9.0.0"
   }
 }
