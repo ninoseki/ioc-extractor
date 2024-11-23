@@ -68,7 +68,6 @@
     "@types/eslint__js": "^8.42.3",
     "@types/get-stdin": "^7.0.0",
     "@types/node": "22.9.2",
-    "@types/tr46": "^5.0.0",
     "@vitest/coverage-v8": "^2.1.5",
     "coveralls": "3.1.1",
     "eslint": "^9.15.0",
@@ -86,6 +85,7 @@
   },
   "dependencies": {
     "commander": "^12.1.0",
-    "get-stdin": "9.0.0"
+    "get-stdin": "9.0.0",
+    "punycode.js": "^2.3.1"
   }
 }
