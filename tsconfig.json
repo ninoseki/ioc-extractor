@@ -24,6 +24,9 @@
         "moduleResolution": "node",
         "esModuleInterop": true,
         "isolatedModules": true,
+        "types": [
+            "vitest/globals"
+        ]
     },
     "exclude": [
         "node_modules",
