@@ -1,4 +1,4 @@
-import punycode from "node:punycode";
+import punycode from "punycode.js";
 
 /**
  * Reject duplications from an array
