@@ -1,5 +1,6 @@
 // @ts-check
 import eslint from "@eslint/js";
+import vitest from "@vitest/eslint-plugin";
 import * as regexpPlugin from "eslint-plugin-regexp";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import tseslint from "typescript-eslint";
@@ -20,6 +21,15 @@ export default tseslint.config(
       "simple-import-sort/exports": mode,
       "no-console": mode,
       "no-debugger": mode,
+    },
+  },
+  {
+    files: ["spec/**"],
+    plugins: {
+      vitest,
+    },
+    rules: {
+      ...vitest.configs.recommended.rules,
     },
   },
 );
