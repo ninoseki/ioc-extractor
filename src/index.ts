@@ -132,7 +132,6 @@ export class IOCExtractor {
    *
    * @returns {IOC}
    * @param {Options} options
-   * @memberof IOCExtractor
    */
   public extractIOC(
     options: Options = {
@@ -176,7 +175,6 @@ export class IOCExtractor {
    * @returns {IOC}
    * @param {IOCKey[]} only
    * @param {Options} options
-   * @memberof IOCExtractor
    */
   public partialExtractIOC(
     only: IOCKey[],
@@ -222,7 +220,6 @@ export class IOCExtractor {
 /**
  * Extract IoCs from a string
  *
- * @export
  * @param {string} s A string
  * @param {Options} options
  * @returns {IOC}
@@ -242,7 +239,6 @@ export function extractIOC(
 /**
  * Partially extract IoCs from a string
  *
- * @export
  * @param {string} s A string
  * @param {Options} options
  * @returns {IOC}

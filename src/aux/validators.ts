@@ -37,7 +37,6 @@ function check(s: string, regexp: RegExp): boolean {
 /**
  * Check whether a string is a MD5 or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is MD5
  */
@@ -48,7 +47,6 @@ export function isMD5(s: string): boolean {
 /**
  * Check whether a string is a SHA1 or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is a SHA1
  */
@@ -59,7 +57,6 @@ export function isSHA1(s: string): boolean {
 /**
  * Check whether a string is a SHA256 or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is a SHA256
  */
@@ -70,7 +67,6 @@ export function isSHA256(s: string): boolean {
 /**
  * Check whether a string is a SHA512 or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is a SHA512
  */
@@ -81,7 +77,6 @@ export function isSHA512(s: string): boolean {
 /**
  * Check whether a string is a SSDEEP or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is a SSDEEP
  */
@@ -92,7 +87,6 @@ export function isSSDEEP(s: string): boolean {
 /**
  * Check whether a string is an ASN or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is an ASN
  */
@@ -103,7 +97,6 @@ export function isASN(s: string): boolean {
 /**
  * Check whether a string is a domain or not
  *
- * @export
  * @param {string} s A string
  * @param {StrictOptions} options
  * @returns {boolean} return true if a string is a domain
@@ -119,7 +112,6 @@ export function isDomain(
 /**
  * Check whether a string is an email or not
  *
- * @export
  * @param {string} s A string
  * @param {StrictOptions} options
  * @returns {boolean} true if a string is a domain
@@ -135,7 +127,6 @@ export function isEmail(
 /**
  * Check whether a string is an IPv4 or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is an IPv4
  */
@@ -146,7 +137,6 @@ export function isIPv4(s: string): boolean {
 /**
  * Check whether a string is an IPv6 or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is an IPv6
  */
@@ -157,7 +147,6 @@ export function isIPv6(s: string): boolean {
 /**
  * Check whether a string is a URL or not
  *
- * @export
  * @param {string} s A string
  * @param {StrictOptions} options
  * @returns {boolean} true if a string is a URL
@@ -173,7 +162,6 @@ export function isURL(
 /**
  * Check whether a string is a CVE or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is a CVE
  */
@@ -184,7 +172,6 @@ export function isCVE(s: string): boolean {
 /**
  * Check whether a string is a BTC or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} return true if a string is a BTC
  */
@@ -195,7 +182,6 @@ export function isBTC(s: string): boolean {
 /**
  * Check whether a string is an XMR or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is an XMR
  */
@@ -206,7 +192,6 @@ export function isXMR(s: string): boolean {
 /**
  * Check whether a string is a Google Adsense Publisher ID or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is a Google Adsense Publisher ID
  */
@@ -217,7 +202,6 @@ export function isGAPubID(s: string): boolean {
 /**
  * Check whether a string is a Google Analytics tracking ID or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is a Google Analytics tracking ID
  */
@@ -228,7 +212,6 @@ export function isGATrackID(s: string): boolean {
 /**
  * Check whether a string is a mac address or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is a mac address
  */
@@ -239,7 +222,6 @@ export function isMacAddress(s: string): boolean {
 /**
  * Check whether a string is an ETH address or not
  *
- * @export
  * @param {string} s A string
  * @returns {boolean} true if a string is an ETH address
  */
