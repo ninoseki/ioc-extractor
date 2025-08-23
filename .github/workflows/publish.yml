@@ -1,4 +1,4 @@
-name: Publish docs
+name: Publish NPM package
 
 on:
   release:
@@ -7,6 +7,9 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      id-token: write # Required for OIDC
+      contents: read
     steps:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Setup Node.js
@@ -14,9 +17,7 @@ jobs:
         with:
           node-version: 22
           cache: npm
+      - run: npm install -g npm@11.5.2
       - run: npm install
-      - run: npm run docs
-      - uses: peaceiris/actions-gh-pages@4f9cc6602d3f66b9c108549d475ec49e8ef4d45e # v4.0.0
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs
+      - run: npm version --no-git-tag-version ${{ github.event.release.tag_name }}
+      - run: npm publish
