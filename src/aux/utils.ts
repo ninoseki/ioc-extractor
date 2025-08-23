@@ -3,7 +3,6 @@ import punycode from "punycode.js";
 /**
  * Reject duplications from an array
  *
- * @export
  * @param {string[]} array An array of strings
  * @returns {string[]} A set of strings
  */
@@ -14,7 +13,6 @@ export function dedup(array: string[]): string[] {
 /**
  * Soar an array by value
  *
- * @export
  * @param {string[]} array An array of strings
  * @returns {string[]} A sorted array
  */
@@ -55,7 +53,6 @@ function hasHttp(s: string): boolean {
 /**
  * Remove defanged symbols from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string} A cleaned (aka refanged) string
  */

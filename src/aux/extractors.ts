@@ -51,7 +51,6 @@ function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
 /**
  * Extract MD5s from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of MD5s
@@ -66,7 +65,6 @@ export function extractMD5s(
 /**
  * Extract MD5 from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} MD5
  */
@@ -77,7 +75,6 @@ export function extractMD5(s: string): string | null {
 /**
  * Extract SHA1s from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of SHA1s
@@ -92,7 +89,6 @@ export function extractSHA1s(
 /**
  * Extract SHA1 from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null } SHA1
  */
@@ -103,7 +99,6 @@ export function extractSHA1(s: string): string | null {
 /**
  * Extract SHA256s from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of SHA256s
@@ -118,7 +113,6 @@ export function extractSHA256s(
 /**
  * Extract SHA256 from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null } SHA256
  */
@@ -129,7 +123,6 @@ export function extractSHA256(s: string): string | null {
 /**
  * Extract SHA512s from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of SHA512s
@@ -144,7 +137,6 @@ export function extractSHA512s(
 /**
  * Extract SHA512 from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} SHA512
  */
@@ -155,7 +147,6 @@ export function extractSHA512(s: string): string | null {
 /**
  * Extract SSDEEPs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of SSDEEPs
@@ -170,7 +161,6 @@ export function extractSSDEEPs(
 /**
  * Extract SSDEEP from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} SSDEEP
  */
@@ -181,7 +171,6 @@ export function extractSSDEEP(s: string): string | null {
 /**
  * Extract ASNs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of ASNs
@@ -199,7 +188,6 @@ export function extractASNs(
 /**
  * Extract ASN from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string[]} ASN
  */
@@ -213,7 +201,6 @@ export function extractASN(s: string): string | null {
 /**
  * Extract domains from a string
  *
- * @export
  * @param {string} s A string
  * @param {StrictSortOptions} options
  * @returns {string[]} An array of domains
@@ -233,7 +220,6 @@ export function extractDomains(
 /**
  * Extract domain from a string
  *
- * @export
  * @param {string} s A string
  * @param {StrictOptions} options
  * @returns {string | null} Domain
@@ -252,7 +238,6 @@ export function extractDomain(
 /**
  * Extract emails from a string
  *
- * @export
  * @param {string} s A string
  * @param {StrictSortOptions} options
  * @returns {string[]} An array of emails
@@ -272,7 +257,6 @@ export function extractEmails(
 /**
  * Extract email from a string
  *
- * @export
  * @param {string} s A string
  * @param {StrictOptions} options
  * @returns {string | null} Email
@@ -291,7 +275,6 @@ export function extractEmail(
 /**
  * Extract IPv4s from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of IPv4s
@@ -309,7 +292,6 @@ export function extractIPv4s(
 /**
  * Extract IPv4 from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} IPv4
  */
@@ -323,7 +305,6 @@ export function extractIPv4(s: string): string | null {
 /**
  * Extract IPv6s from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of IPv6s
@@ -338,7 +319,6 @@ export function extractIPv6s(
 /**
  * Extract IPv6 from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} IPv6
  */
@@ -349,7 +329,6 @@ export function extractIPv6(s: string): string | null {
 /**
  * Extract URLs from a string
  *
- * @export
  * @param {string} s A string
  * @param {StrictSortOptions} options
  * @returns {string[]} An array of URLs
@@ -365,7 +344,6 @@ export function extractURLs(
 /**
  * Extract URL from a string
  *
- * @export
  * @param {string} s A string
  * @param {StrictOptions} options
  * @returns {string | null} URL
@@ -381,7 +359,6 @@ export function extractURL(
 /**
  * Extract CVEs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of CVEs
@@ -396,7 +373,6 @@ export function extractCVEs(
 /**
  * Extract CVE from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} CVE
  */
@@ -407,7 +383,6 @@ export function extractCVE(s: string): string | null {
 /**
  * Extract BTCs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of BTCs
@@ -422,7 +397,6 @@ export function extractBTCs(
 /**
  * Extract BTC from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} BTC
  */
@@ -433,7 +407,6 @@ export function extractBTC(s: string): string | null {
 /**
  * Extract XMRs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of XMRs
@@ -448,7 +421,6 @@ export function extractXMRs(
 /**
  * Extract XMR from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string[]} XMR
  */
@@ -459,7 +431,6 @@ export function extractXMR(s: string): string | null {
 /**
  * Extract Google Adsense Publisher IDs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of Google Adsense Publisher IDs
@@ -474,7 +445,6 @@ export function extractGAPubIDs(
 /**
  * Extract Google Adsense Publisher IDs from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} Adsense Publisher ID
  */
@@ -485,7 +455,6 @@ export function extractGAPubID(s: string): string | null {
 /**
  * Extract Google Analytics tracking IDs from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of Google Analytics tracking IDs
@@ -500,7 +469,6 @@ export function extractGATrackIDs(
 /**
  * Extract Google Analytics tracking ID from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string[]} Google Analytics tracking ID
  */
@@ -511,7 +479,6 @@ export function extractGATrackID(s: string): string | null {
 /**
  * Extract mac addresses from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of mac addresses
@@ -526,7 +493,6 @@ export function extractMacAddresses(
 /**
  * Extract mac address from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string[]} Mac address
  */
@@ -537,7 +503,6 @@ export function extractMacAddress(s: string): string | null {
 /**
  * Extract ETH addresses from a string
  *
- * @export
  * @param {string} s A string
  * @param {SortOptions} options
  * @returns {string[]} An array of ETH addresses
@@ -552,7 +517,6 @@ export function extractETHs(
 /**
  * Extract ETH address from a string
  *
- * @export
  * @param {string} s A string
  * @returns {string | null} ETH address
  */
