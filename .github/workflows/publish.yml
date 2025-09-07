@@ -15,9 +15,9 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
         with:
-          node-version: 22
+          node-version: 24
           cache: npm
-      - run: npm install -g npm@11.5.2
+      - run: npm install -g npm@11.6.0
       - run: npm install
       - run: npm version --no-git-tag-version ${{ github.event.release.tag_name }}
       - run: npm publish
