@@ -20,20 +20,20 @@
   "files": [
     "dist"
   ],
-  "tsup": {
+  "tsdown": {
     "format": [
       "cjs",
       "esm"
     ],
     "entry": [
-      "src"
+      "src/index.ts"
     ],
     "dts": true,
     "clean": true
   },
   "scripts": {
-    "build": "tsup",
-    "watch": "npm run build -- --watch src",
+    "build": "tsdown",
+    "watch": "tsdown --watch",
     "test": "vitest",
     "coverage": "vitest run --coverage",
     "lint": "eslint src spec --fix",
@@ -75,17 +75,17 @@
     "eslint-plugin-regexp": "^2.10.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "9.1.7",
-    "lint-staged": "16.1.6",
+    "lint-staged": "16.2.3",
     "prettier": "3.6.2",
-    "tsup": "^8.5.0",
+    "tsdown": "^0.15.6",
     "tsx": "^4.20.4",
-    "typedoc": "0.28.12",
-    "typescript": "^5.9.2",
-    "typescript-eslint": "^8.40.0",
+    "typedoc": "0.28.13",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.45.0",
     "vitest": "^3.2.4"
   },
   "dependencies": {
-    "commander": "^14.0.0",
+    "commander": "^14.0.1",
     "get-stdin": "9.0.0",
     "punycode.js": "^2.3.1"
   }
