@@ -1,6 +1,6 @@
-import { LRUCache } from "lru-cache";
+import { LRUCache } from 'lru-cache'
 
-import { StrictOptions } from "@/types";
+import { StrictOptions } from '@/types'
 
 import {
   idnPrefix,
@@ -10,18 +10,18 @@ import {
   strictTld,
   zeroOrMoreLabel,
   zeroOrMoreLabelWithHyphen,
-} from "./regexes";
+} from './regexes'
 
-const domainRegexCache = new LRUCache<boolean, RegExp>({ max: 2 });
+const domainRegexCache = new LRUCache<boolean, RegExp>({ max: 2 })
 
 function buildDomainRegex(strict: boolean): RegExp {
-  const tld = strict ? strictTld : nonStrictTld;
+  const tld = strict ? strictTld : nonStrictTld
   const regex =
     `(?=[${labelLetters}.\\-]{1,252}\\.(${tld})\\b)` +
-    `((${idnPrefix}${zeroOrMoreLabel}|${oneOrMoreLabel})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tld})\\b`;
-  const result = new RegExp(regex, "gi");
-  domainRegexCache.set(strict, result);
-  return result;
+    `((${idnPrefix}${zeroOrMoreLabel}|${oneOrMoreLabel})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tld})\\b`
+  const result = new RegExp(regex, 'gi')
+  domainRegexCache.set(strict, result)
+  return result
 }
 
 export function domainRegex(
@@ -29,6 +29,6 @@ export function domainRegex(
     strict: true,
   },
 ): RegExp {
-  const strict = options.strict ?? true;
-  return domainRegexCache.get(strict) ?? buildDomainRegex(strict);
+  const strict = options.strict ?? true
+  return domainRegexCache.get(strict) ?? buildDomainRegex(strict)
 }

@@ -5,9 +5,9 @@ on:
     branches: [master]
   pull_request:
     paths:
-      - "package-lock.json"
-      - "package.json"
-      - "tsdown.config.ts"
+      - 'package-lock.json'
+      - 'package.json'
+      - 'tsdown.config.ts'
 
 jobs:
   publint:

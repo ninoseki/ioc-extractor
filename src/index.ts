@@ -35,8 +35,8 @@ import {
   extractURLs,
   extractXMR,
   extractXMRs,
-} from "./aux/extractors";
-import { refang, unicodeToASCII } from "./aux/utils";
+} from './aux/extractors'
+import { refang, unicodeToASCII } from './aux/utils'
 import {
   isASN,
   isBTC,
@@ -56,15 +56,8 @@ import {
   isSSDEEP,
   isURL,
   isXMR,
-} from "./aux/validators";
-import type {
-  IOC,
-  IOCKey,
-  Options,
-  SortOptions,
-  StrictOptions,
-  StrictSortOptions,
-} from "./types";
+} from './aux/validators'
+import type { IOC, IOCKey, Options, SortOptions, StrictOptions, StrictSortOptions } from './types'
 
 export {
   extractASN,
@@ -123,22 +116,15 @@ export {
   isXMR,
   refang,
   unicodeToASCII,
-};
+}
 
-export type {
-  IOC,
-  IOCKey,
-  Options,
-  SortOptions,
-  StrictOptions,
-  StrictSortOptions,
-};
+export type { IOC, IOCKey, Options, SortOptions, StrictOptions, StrictSortOptions }
 
 export class IOCExtractor {
-  private s: string;
+  private s: string
 
   public constructor(s: string) {
-    this.s = s;
+    this.s = s
   }
 
   /**
@@ -156,9 +142,9 @@ export class IOCExtractor {
     },
   ): IOC {
     // Apply refang
-    let normalized = options.refang ? refang(this.s) : this.s;
+    let normalized = options.refang ? refang(this.s) : this.s
     // Apply punycode conversion
-    normalized = options.punycode ? unicodeToASCII(normalized) : normalized;
+    normalized = options.punycode ? unicodeToASCII(normalized) : normalized
 
     const ioc: IOC = {
       asns: extractASNs(normalized, options),
@@ -179,8 +165,8 @@ export class IOCExtractor {
       ssdeeps: extractSSDEEPs(normalized, options),
       urls: extractURLs(normalized, options),
       xmrs: extractXMRs(normalized, options),
-    };
-    return ioc;
+    }
+    return ioc
   }
 
   /**
@@ -200,9 +186,9 @@ export class IOCExtractor {
     },
   ): Partial<IOC> {
     // Apply refang
-    let normalized = options.refang ? refang(this.s) : this.s;
+    let normalized = options.refang ? refang(this.s) : this.s
     // Apply punycode conversion
-    normalized = options.punycode ? unicodeToASCII(normalized) : normalized;
+    normalized = options.punycode ? unicodeToASCII(normalized) : normalized
 
     const funcByType = {
       asns: extractASNs,
@@ -223,11 +209,11 @@ export class IOCExtractor {
       ssdeeps: extractSSDEEPs,
       urls: extractURLs,
       xmrs: extractXMRs,
-    };
+    }
 
     return Object.fromEntries(
       only.map((key) => [key, funcByType[key](normalized, options)]),
-    ) as Partial<IOC>;
+    ) as Partial<IOC>
   }
 }
 
@@ -247,7 +233,7 @@ export function extractIOC(
     sort: true,
   },
 ): IOC {
-  return new IOCExtractor(s).extractIOC(options);
+  return new IOCExtractor(s).extractIOC(options)
 }
 
 /**
@@ -267,5 +253,5 @@ export function partialExtractIOC(
     sort: true,
   },
 ): Partial<IOC> {
-  return new IOCExtractor(s).partialExtractIOC(only, options);
+  return new IOCExtractor(s).partialExtractIOC(only, options)
 }

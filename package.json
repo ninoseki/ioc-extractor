@@ -2,7 +2,30 @@
   "name": "ioc-extractor",
   "version": "0.0.0",
   "description": "IoC (Indicator of Compromise) extractor",
+  "keywords": [
+    "Indicator of Compromise",
+    "IoC"
+  ],
+  "homepage": "https://github.com/ninoseki/ioc-extractor",
+  "bugs": {
+    "url": "https://github.com/ninoseki/ioc-extractor/issues"
+  },
+  "license": "MIT",
+  "author": "Manabu Niseki",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ninoseki/ioc-extractor.git"
+  },
+  "bin": {
+    "ioc-extractor": "./dist/bin/ioc-extractor.mjs"
+  },
+  "files": [
+    "dist"
+  ],
   "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     "import": {
       "types": "./dist/index.d.mts",
@@ -13,64 +36,42 @@
       "default": "./dist/index.cjs"
     }
   },
-  "engines": {
-    "node": ">=20"
-  },
-  "main": "./dist/index.cjs",
-  "module": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "bin": {
-    "ioc-extractor": "./dist/bin/ioc-extractor.mjs"
-  },
-  "files": [
-    "dist"
-  ],
   "scripts": {
     "build": "tsdown",
     "watch": "tsdown --watch",
     "test": "vitest",
     "coverage": "vitest run --coverage",
-    "lint": "eslint src spec --fix",
-    "format": "prettier --write src spec",
+    "lint": "run-s lint:*",
+    "lint:oxlint": "oxlint . --fix",
+    "lint:eslint": "eslint . --fix --cache",
+    "format": "oxfmt src/ spec/",
     "docs": "typedoc",
     "prepack": "npm run build",
     "prepare": "husky"
   },
-  "lint-staged": {
-    "*.ts": [
-      "npm run lint",
-      "npm run format"
-    ]
+  "dependencies": {
+    "commander": "^14.0.3",
+    "get-stdin": "10.0.0",
+    "lru-cache": "^11.2.7",
+    "punycode.js": "^2.3.1"
   },
-  "keywords": [
-    "IoC",
-    "Indicator of Compromise"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/ninoseki/ioc-extractor.git"
-  },
-  "author": "Manabu Niseki",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/ninoseki/ioc-extractor/issues"
-  },
-  "homepage": "https://github.com/ninoseki/ioc-extractor",
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.5",
-    "@eslint/js": "^10.0.1",
-    "@types/eslint__js": "^9.14.0",
     "@types/get-stdin": "^7.0.0",
     "@types/node": "25.5.0",
     "@vitest/coverage-v8": "^4.1.0",
     "@vitest/eslint-plugin": "^1.6.11",
     "coveralls": "3.1.1",
     "eslint": "^10.0.3",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-oxlint": "^1.55.0",
     "eslint-plugin-regexp": "^3.1.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
     "husky": "9.1.7",
+    "jiti": "^2.6.1",
     "lint-staged": "16.3.3",
-    "prettier": "3.8.1",
+    "npm-run-all2": "^8.0.4",
+    "oxfmt": "^0.40.0",
+    "oxlint": "^1.55.0",
     "publint": "^0.3.18",
     "tsdown": "^0.21.2",
     "tsx": "^4.21.0",
@@ -79,10 +80,13 @@
     "typescript-eslint": "^8.57.0",
     "vitest": "^4.1.0"
   },
-  "dependencies": {
-    "commander": "^14.0.3",
-    "get-stdin": "10.0.0",
-    "lru-cache": "^11.2.7",
-    "punycode.js": "^2.3.1"
+  "lint-staged": {
+    "*.ts": [
+      "npx oxlint --fix",
+      "npx oxfmt --write"
+    ]
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
