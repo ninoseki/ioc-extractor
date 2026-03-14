@@ -1,35 +1,23 @@
 {
-    "compilerOptions": {
-        "target": "esnext",
-        "module": "esnext",
-        "noImplicitAny": false,
-        "sourceMap": true,
-        "declaration": true,
-        "strict": true,
-        "rootDirs": [
-            "src",
-            "spec"
-        ],
-        "outDir": "dist",
-        "noEmitOnError": true,
-        "baseUrl": ".",
-        "paths": {
-            "@/*": [
-                "src/*"
-            ]
-        },
-        "lib": [
-            "esnext"
-        ],
-        "moduleResolution": "bundler",
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "types": [
-            "vitest/globals"
-        ]
+  "compilerOptions": {
+    "target": "esnext",
+    "module": "esnext",
+    "noImplicitAny": false,
+    "sourceMap": true,
+    "declaration": true,
+    "strict": true,
+    "rootDirs": ["src", "spec"],
+    "outDir": "dist",
+    "noEmitOnError": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
     },
-    "exclude": [
-        "node_modules",
-        "dist"
-    ]
+    "lib": ["esnext"],
+    "moduleResolution": "bundler",
+    "esModuleInterop": true,
+    "isolatedModules": true,
+    "types": ["vitest/globals"]
+  },
+  "exclude": ["node_modules", "dist"]
 }

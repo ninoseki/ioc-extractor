@@ -75,15 +75,15 @@ $ echo "1.1.1.1 8.8.8.8" | ioc-extractor --only ipv4s | jq
 ### As a Library
 
 ```ts
-import { extractIOC } from "ioc-extractor";
+import { extractIOC } from 'ioc-extractor'
 
-const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
-const ioc = extractIOC(input);
-console.log(ioc.md5s);
+const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b'
+const ioc = extractIOC(input)
+console.log(ioc.md5s)
 // => ['f6f8179ac71eaabff12b8c024342109b']
-console.log(ioc.ipv4s);
+console.log(ioc.ipv4s)
 // => ['1.1.1.1']
-console.log(ioc.domains);
+console.log(ioc.domains)
 // => ['google.com']
 ```
 
@@ -97,24 +97,19 @@ console.log(ioc.domains);
 If you want to extract a specific type of IoC, you can use an extract function by IoC type.
 
 ```ts
-import {
-  refang,
-  extractDomains,
-  extractIPv4s,
-  extractMD5s,
-} from "ioc-extractor";
+import { refang, extractDomains, extractIPv4s, extractMD5s } from 'ioc-extractor'
 
-const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
-const refanged = refang(input);
+const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b'
+const refanged = refang(input)
 // => 1.1.1.1 google.com f6f8179ac71eaabff12b8c024342109b
 
-const ipv4s = extractIPv4s(refanged);
+const ipv4s = extractIPv4s(refanged)
 // => ['1.1.1.1']
 
-const domains = extractDomains(refanged);
+const domains = extractDomains(refanged)
 // => ['google.com']
 
-const md5s = extractMD5s(refanged);
+const md5s = extractMD5s(refanged)
 // => ['f6f8179ac71eaabff12b8c024342109b']
 ```
 
@@ -128,11 +123,11 @@ See [docs](https://ninoseki.github.io/ioc-extractor/) for more details.
 Alternatively, if you want to extract a list of specific IoC types at once, you can use `partialExtractIOC`.
 
 ```ts
-import { partialExtractIOC } from "ioc-extractor";
+import { partialExtractIOC } from 'ioc-extractor'
 
-const input = "1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b";
-const ioc = partialExtractIOC(input, ["ipv4s", "domains"]);
-console.log(ioc);
+const input = '1.1.1[.]1 google(.)com f6f8179ac71eaabff12b8c024342109b'
+const ioc = partialExtractIOC(input, ['ipv4s', 'domains'])
+console.log(ioc)
 // => {"ipv4s":["1.1.1.1"],"domains":["google.com"]}
 ```
 

@@ -1,7 +1,7 @@
-import type { SortOptions, StrictOptions, StrictSortOptions } from "../types";
-import { domainRegex } from "./domain";
-import { emailRegex } from "./email";
-import { ipRegex } from "./ip";
+import type { SortOptions, StrictOptions, StrictSortOptions } from '../types'
+import { domainRegex } from './domain'
+import { emailRegex } from './email'
+import { ipRegex } from './ip'
 import {
   asnRegex,
   btcRegex,
@@ -16,9 +16,9 @@ import {
   sha512Regex,
   ssdeepRegex,
   xmrRegex,
-} from "./regexes";
-import { urlRegex } from "./url";
-import { dedup, sortByValue } from "./utils";
+} from './regexes'
+import { urlRegex } from './url'
+import { dedup, sortByValue } from './utils'
 
 /**
  * Perform String match() by using a regexp
@@ -33,25 +33,25 @@ export function matchesWithRegExp(
   regexp: RegExp,
   options: SortOptions = { sort: true },
 ): string[] {
-  const matched = s.match(regexp);
-  const values = matched === null ? [] : dedup(matched);
-  return options.sort ? sortByValue(values) : values;
+  const matched = s.match(regexp)
+  const values = matched === null ? [] : dedup(matched)
+  return options.sort ? sortByValue(values) : values
 }
 
-const nonGlobalRegexCache = new Map<string, RegExp>();
+const nonGlobalRegexCache = new Map<string, RegExp>()
 
 function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
   if (regexp.global) {
-    let cached = nonGlobalRegexCache.get(regexp.source);
+    let cached = nonGlobalRegexCache.get(regexp.source)
     if (!cached) {
-      cached = new RegExp(regexp.source, regexp.flags.replace("g", ""));
-      nonGlobalRegexCache.set(regexp.source, cached);
+      cached = new RegExp(regexp.source, regexp.flags.replace('g', ''))
+      nonGlobalRegexCache.set(regexp.source, cached)
     }
-    regexp = cached;
+    regexp = cached
   }
 
-  const matched = s.match(regexp);
-  return matched === null ? null : matched[0];
+  const matched = s.match(regexp)
+  return matched === null ? null : matched[0]
 }
 
 /**
@@ -61,11 +61,8 @@ function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of MD5s
  */
-export function extractMD5s(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, md5Regex, options);
+export function extractMD5s(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, md5Regex, options)
 }
 
 /**
@@ -75,7 +72,7 @@ export function extractMD5s(
  * @returns {string | null} MD5
  */
 export function extractMD5(s: string): string | null {
-  return getFirstMatchedValue(s, md5Regex);
+  return getFirstMatchedValue(s, md5Regex)
 }
 
 /**
@@ -85,11 +82,8 @@ export function extractMD5(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of SHA1s
  */
-export function extractSHA1s(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, sha1Regex, options);
+export function extractSHA1s(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, sha1Regex, options)
 }
 
 /**
@@ -99,7 +93,7 @@ export function extractSHA1s(
  * @returns {string | null } SHA1
  */
 export function extractSHA1(s: string): string | null {
-  return getFirstMatchedValue(s, sha1Regex);
+  return getFirstMatchedValue(s, sha1Regex)
 }
 
 /**
@@ -109,11 +103,8 @@ export function extractSHA1(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of SHA256s
  */
-export function extractSHA256s(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, sha256Regex, options);
+export function extractSHA256s(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, sha256Regex, options)
 }
 
 /**
@@ -123,7 +114,7 @@ export function extractSHA256s(
  * @returns {string | null } SHA256
  */
 export function extractSHA256(s: string): string | null {
-  return getFirstMatchedValue(s, sha256Regex);
+  return getFirstMatchedValue(s, sha256Regex)
 }
 
 /**
@@ -133,11 +124,8 @@ export function extractSHA256(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of SHA512s
  */
-export function extractSHA512s(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, sha512Regex, options);
+export function extractSHA512s(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, sha512Regex, options)
 }
 
 /**
@@ -147,7 +135,7 @@ export function extractSHA512s(
  * @returns {string | null} SHA512
  */
 export function extractSHA512(s: string): string | null {
-  return getFirstMatchedValue(s, sha512Regex);
+  return getFirstMatchedValue(s, sha512Regex)
 }
 
 /**
@@ -157,11 +145,8 @@ export function extractSHA512(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of SSDEEPs
  */
-export function extractSSDEEPs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, ssdeepRegex, options);
+export function extractSSDEEPs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, ssdeepRegex, options)
 }
 
 /**
@@ -171,7 +156,7 @@ export function extractSSDEEPs(
  * @returns {string | null} SSDEEP
  */
 export function extractSSDEEP(s: string): string | null {
-  return getFirstMatchedValue(s, ssdeepRegex);
+  return getFirstMatchedValue(s, ssdeepRegex)
 }
 
 /**
@@ -181,14 +166,11 @@ export function extractSSDEEP(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of ASNs
  */
-export function extractASNs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  if (!s.includes("AS")) {
-    return [];
+export function extractASNs(s: string, options: SortOptions = { sort: true }): string[] {
+  if (!s.includes('AS')) {
+    return []
   }
-  return matchesWithRegExp(s, asnRegex, options);
+  return matchesWithRegExp(s, asnRegex, options)
 }
 
 /**
@@ -198,10 +180,10 @@ export function extractASNs(
  * @returns {string[]} ASN
  */
 export function extractASN(s: string): string | null {
-  if (!s.includes("AS")) {
-    return null;
+  if (!s.includes('AS')) {
+    return null
   }
-  return getFirstMatchedValue(s, asnRegex);
+  return getFirstMatchedValue(s, asnRegex)
 }
 
 /**
@@ -215,12 +197,12 @@ export function extractDomains(
   s: string,
   options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
-  if (!s.includes(".")) {
-    return [];
+  if (!s.includes('.')) {
+    return []
   }
-  const regexp = domainRegex(options);
-  const values = matchesWithRegExp(s, regexp);
-  return options.sort ? sortByValue(values) : values;
+  const regexp = domainRegex(options)
+  const values = matchesWithRegExp(s, regexp)
+  return options.sort ? sortByValue(values) : values
 }
 
 /**
@@ -230,15 +212,12 @@ export function extractDomains(
  * @param {StrictOptions} options
  * @returns {string | null} Domain
  */
-export function extractDomain(
-  s: string,
-  options: StrictOptions = { strict: true },
-): string | null {
-  if (!s.includes(".")) {
-    return null;
+export function extractDomain(s: string, options: StrictOptions = { strict: true }): string | null {
+  if (!s.includes('.')) {
+    return null
   }
-  const regexp = domainRegex(options);
-  return getFirstMatchedValue(s, regexp);
+  const regexp = domainRegex(options)
+  return getFirstMatchedValue(s, regexp)
 }
 
 /**
@@ -252,12 +231,12 @@ export function extractEmails(
   s: string,
   options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
-  if (!s.includes("@") && !s.includes(".")) {
-    return [];
+  if (!s.includes('@') && !s.includes('.')) {
+    return []
   }
-  const regexp = emailRegex(options);
-  const values = matchesWithRegExp(s, regexp);
-  return options.sort ? sortByValue(values) : values;
+  const regexp = emailRegex(options)
+  const values = matchesWithRegExp(s, regexp)
+  return options.sort ? sortByValue(values) : values
 }
 
 /**
@@ -267,15 +246,12 @@ export function extractEmails(
  * @param {StrictOptions} options
  * @returns {string | null} Email
  */
-export function extractEmail(
-  s: string,
-  options: StrictOptions = { strict: true },
-): string | null {
-  if (!s.includes("@") && !s.includes(".")) {
-    return null;
+export function extractEmail(s: string, options: StrictOptions = { strict: true }): string | null {
+  if (!s.includes('@') && !s.includes('.')) {
+    return null
   }
-  const regexp = emailRegex(options);
-  return getFirstMatchedValue(s, regexp);
+  const regexp = emailRegex(options)
+  return getFirstMatchedValue(s, regexp)
 }
 
 /**
@@ -285,14 +261,11 @@ export function extractEmail(
  * @param {SortOptions} options
  * @returns {string[]} An array of IPv4s
  */
-export function extractIPv4s(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  if (!s.includes(".")) {
-    return [];
+export function extractIPv4s(s: string, options: SortOptions = { sort: true }): string[] {
+  if (!s.includes('.')) {
+    return []
   }
-  return matchesWithRegExp(s, ipRegex.v4(), options);
+  return matchesWithRegExp(s, ipRegex.v4(), options)
 }
 
 /**
@@ -302,10 +275,10 @@ export function extractIPv4s(
  * @returns {string | null} IPv4
  */
 export function extractIPv4(s: string): string | null {
-  if (!s.includes(".")) {
-    return null;
+  if (!s.includes('.')) {
+    return null
   }
-  return getFirstMatchedValue(s, ipRegex.v4());
+  return getFirstMatchedValue(s, ipRegex.v4())
 }
 
 /**
@@ -315,11 +288,8 @@ export function extractIPv4(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of IPv6s
  */
-export function extractIPv6s(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, ipRegex.v6(), options);
+export function extractIPv6s(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, ipRegex.v6(), options)
 }
 
 /**
@@ -329,7 +299,7 @@ export function extractIPv6s(
  * @returns {string | null} IPv6
  */
 export function extractIPv6(s: string): string | null {
-  return getFirstMatchedValue(s, ipRegex.v6());
+  return getFirstMatchedValue(s, ipRegex.v6())
 }
 
 /**
@@ -343,8 +313,8 @@ export function extractURLs(
   s: string,
   options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
-  const regexp = urlRegex(options);
-  return matchesWithRegExp(s, regexp, options);
+  const regexp = urlRegex(options)
+  return matchesWithRegExp(s, regexp, options)
 }
 
 /**
@@ -354,12 +324,9 @@ export function extractURLs(
  * @param {StrictOptions} options
  * @returns {string | null} URL
  */
-export function extractURL(
-  s: string,
-  options: StrictOptions = { strict: true },
-): string | null {
-  const regexp = urlRegex(options);
-  return getFirstMatchedValue(s, regexp);
+export function extractURL(s: string, options: StrictOptions = { strict: true }): string | null {
+  const regexp = urlRegex(options)
+  return getFirstMatchedValue(s, regexp)
 }
 
 /**
@@ -369,11 +336,8 @@ export function extractURL(
  * @param {SortOptions} options
  * @returns {string[]} An array of CVEs
  */
-export function extractCVEs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, cveRegExp, options);
+export function extractCVEs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, cveRegExp, options)
 }
 
 /**
@@ -383,7 +347,7 @@ export function extractCVEs(
  * @returns {string | null} CVE
  */
 export function extractCVE(s: string): string | null {
-  return getFirstMatchedValue(s, cveRegExp);
+  return getFirstMatchedValue(s, cveRegExp)
 }
 
 /**
@@ -393,11 +357,8 @@ export function extractCVE(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of BTCs
  */
-export function extractBTCs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, btcRegex, options);
+export function extractBTCs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, btcRegex, options)
 }
 
 /**
@@ -407,7 +368,7 @@ export function extractBTCs(
  * @returns {string | null} BTC
  */
 export function extractBTC(s: string): string | null {
-  return getFirstMatchedValue(s, btcRegex);
+  return getFirstMatchedValue(s, btcRegex)
 }
 
 /**
@@ -417,11 +378,8 @@ export function extractBTC(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of XMRs
  */
-export function extractXMRs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, xmrRegex, options);
+export function extractXMRs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, xmrRegex, options)
 }
 
 /**
@@ -431,7 +389,7 @@ export function extractXMRs(
  * @returns {string[]} XMR
  */
 export function extractXMR(s: string): string | null {
-  return getFirstMatchedValue(s, xmrRegex);
+  return getFirstMatchedValue(s, xmrRegex)
 }
 
 /**
@@ -441,11 +399,8 @@ export function extractXMR(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of Google Adsense Publisher IDs
  */
-export function extractGAPubIDs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, gaPubIDRegex, options);
+export function extractGAPubIDs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, gaPubIDRegex, options)
 }
 
 /**
@@ -455,7 +410,7 @@ export function extractGAPubIDs(
  * @returns {string | null} Adsense Publisher ID
  */
 export function extractGAPubID(s: string): string | null {
-  return getFirstMatchedValue(s, gaPubIDRegex);
+  return getFirstMatchedValue(s, gaPubIDRegex)
 }
 
 /**
@@ -465,11 +420,8 @@ export function extractGAPubID(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of Google Analytics tracking IDs
  */
-export function extractGATrackIDs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, gaTrackIDRegex, options);
+export function extractGATrackIDs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, gaTrackIDRegex, options)
 }
 
 /**
@@ -479,7 +431,7 @@ export function extractGATrackIDs(
  * @returns {string[]} Google Analytics tracking ID
  */
 export function extractGATrackID(s: string): string | null {
-  return getFirstMatchedValue(s, gaTrackIDRegex);
+  return getFirstMatchedValue(s, gaTrackIDRegex)
 }
 
 /**
@@ -489,11 +441,8 @@ export function extractGATrackID(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of mac addresses
  */
-export function extractMacAddresses(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, macAddressRegex, options);
+export function extractMacAddresses(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, macAddressRegex, options)
 }
 
 /**
@@ -503,7 +452,7 @@ export function extractMacAddresses(
  * @returns {string[]} Mac address
  */
 export function extractMacAddress(s: string): string | null {
-  return getFirstMatchedValue(s, macAddressRegex);
+  return getFirstMatchedValue(s, macAddressRegex)
 }
 
 /**
@@ -513,11 +462,8 @@ export function extractMacAddress(s: string): string | null {
  * @param {SortOptions} options
  * @returns {string[]} An array of ETH addresses
  */
-export function extractETHs(
-  s: string,
-  options: SortOptions = { sort: true },
-): string[] {
-  return matchesWithRegExp(s, ethRegex, options);
+export function extractETHs(s: string, options: SortOptions = { sort: true }): string[] {
+  return matchesWithRegExp(s, ethRegex, options)
 }
 
 /**
@@ -527,5 +473,5 @@ export function extractETHs(
  * @returns {string | null} ETH address
  */
 export function extractETH(s: string): string | null {
-  return getFirstMatchedValue(s, ethRegex);
+  return getFirstMatchedValue(s, ethRegex)
 }

@@ -1,7 +1,7 @@
-import type { StrictOptions } from "../types";
-import { domainRegex } from "./domain";
-import { emailRegex } from "./email";
-import { ipRegex } from "./ip";
+import type { StrictOptions } from '../types'
+import { domainRegex } from './domain'
+import { emailRegex } from './email'
+import { ipRegex } from './ip'
 import {
   asnRegex,
   btcRegex,
@@ -16,8 +16,8 @@ import {
   sha512Regex,
   ssdeepRegex,
   xmrRegex,
-} from "./regexes";
-import { urlRegex } from "./url";
+} from './regexes'
+import { urlRegex } from './url'
 
 /**
  * Check whether a string matches with a regexp or not
@@ -27,11 +27,11 @@ import { urlRegex } from "./url";
  * @returns {boolean} returns true if a string matches with a regexp
  */
 function check(s: string, regexp: RegExp): boolean {
-  const match = s.match(regexp);
+  const match = s.match(regexp)
   if (match === null) {
-    return false;
+    return false
   }
-  return match[0].length == s.length;
+  return match[0].length == s.length
 }
 
 /**
@@ -41,7 +41,7 @@ function check(s: string, regexp: RegExp): boolean {
  * @returns {boolean} return true if a string is MD5
  */
 export function isMD5(s: string): boolean {
-  return check(s, md5Regex);
+  return check(s, md5Regex)
 }
 
 /**
@@ -51,7 +51,7 @@ export function isMD5(s: string): boolean {
  * @returns {boolean} return true if a string is a SHA1
  */
 export function isSHA1(s: string): boolean {
-  return check(s, sha1Regex);
+  return check(s, sha1Regex)
 }
 
 /**
@@ -61,7 +61,7 @@ export function isSHA1(s: string): boolean {
  * @returns {boolean} return true if a string is a SHA256
  */
 export function isSHA256(s: string): boolean {
-  return check(s, sha256Regex);
+  return check(s, sha256Regex)
 }
 
 /**
@@ -71,7 +71,7 @@ export function isSHA256(s: string): boolean {
  * @returns {boolean} return true if a string is a SHA512
  */
 export function isSHA512(s: string): boolean {
-  return check(s, sha512Regex);
+  return check(s, sha512Regex)
 }
 
 /**
@@ -81,7 +81,7 @@ export function isSHA512(s: string): boolean {
  * @returns {boolean} return true if a string is a SSDEEP
  */
 export function isSSDEEP(s: string): boolean {
-  return check(s, ssdeepRegex);
+  return check(s, ssdeepRegex)
 }
 
 /**
@@ -91,7 +91,7 @@ export function isSSDEEP(s: string): boolean {
  * @returns {boolean} return true if a string is an ASN
  */
 export function isASN(s: string): boolean {
-  return check(s, asnRegex);
+  return check(s, asnRegex)
 }
 
 /**
@@ -101,12 +101,9 @@ export function isASN(s: string): boolean {
  * @param {StrictOptions} options
  * @returns {boolean} return true if a string is a domain
  */
-export function isDomain(
-  s: string,
-  options: StrictOptions = { strict: true },
-): boolean {
-  const regex = domainRegex(options);
-  return check(s, regex);
+export function isDomain(s: string, options: StrictOptions = { strict: true }): boolean {
+  const regex = domainRegex(options)
+  return check(s, regex)
 }
 
 /**
@@ -116,12 +113,9 @@ export function isDomain(
  * @param {StrictOptions} options
  * @returns {boolean} true if a string is a domain
  */
-export function isEmail(
-  s: string,
-  options: StrictOptions = { strict: true },
-): boolean {
-  const regex = emailRegex(options);
-  return check(s, regex);
+export function isEmail(s: string, options: StrictOptions = { strict: true }): boolean {
+  const regex = emailRegex(options)
+  return check(s, regex)
 }
 
 /**
@@ -131,7 +125,7 @@ export function isEmail(
  * @returns {boolean} true if a string is an IPv4
  */
 export function isIPv4(s: string): boolean {
-  return check(s, ipRegex.v4());
+  return check(s, ipRegex.v4())
 }
 
 /**
@@ -141,7 +135,7 @@ export function isIPv4(s: string): boolean {
  * @returns {boolean} true if a string is an IPv6
  */
 export function isIPv6(s: string): boolean {
-  return check(s, ipRegex.v6());
+  return check(s, ipRegex.v6())
 }
 
 /**
@@ -151,12 +145,9 @@ export function isIPv6(s: string): boolean {
  * @param {StrictOptions} options
  * @returns {boolean} true if a string is a URL
  */
-export function isURL(
-  s: string,
-  options: StrictOptions = { strict: true },
-): boolean {
-  const regex = urlRegex(options);
-  return check(s, regex);
+export function isURL(s: string, options: StrictOptions = { strict: true }): boolean {
+  const regex = urlRegex(options)
+  return check(s, regex)
 }
 
 /**
@@ -166,7 +157,7 @@ export function isURL(
  * @returns {boolean} true if a string is a CVE
  */
 export function isCVE(s: string): boolean {
-  return check(s, cveRegExp);
+  return check(s, cveRegExp)
 }
 
 /**
@@ -176,7 +167,7 @@ export function isCVE(s: string): boolean {
  * @returns {boolean} return true if a string is a BTC
  */
 export function isBTC(s: string): boolean {
-  return check(s, btcRegex);
+  return check(s, btcRegex)
 }
 
 /**
@@ -186,7 +177,7 @@ export function isBTC(s: string): boolean {
  * @returns {boolean} true if a string is an XMR
  */
 export function isXMR(s: string): boolean {
-  return check(s, xmrRegex);
+  return check(s, xmrRegex)
 }
 
 /**
@@ -196,7 +187,7 @@ export function isXMR(s: string): boolean {
  * @returns {boolean} true if a string is a Google Adsense Publisher ID
  */
 export function isGAPubID(s: string): boolean {
-  return check(s, gaPubIDRegex);
+  return check(s, gaPubIDRegex)
 }
 
 /**
@@ -206,7 +197,7 @@ export function isGAPubID(s: string): boolean {
  * @returns {boolean} true if a string is a Google Analytics tracking ID
  */
 export function isGATrackID(s: string): boolean {
-  return check(s, gaTrackIDRegex);
+  return check(s, gaTrackIDRegex)
 }
 
 /**
@@ -216,7 +207,7 @@ export function isGATrackID(s: string): boolean {
  * @returns {boolean} true if a string is a mac address
  */
 export function isMacAddress(s: string): boolean {
-  return check(s, macAddressRegex);
+  return check(s, macAddressRegex)
 }
 
 /**
@@ -226,5 +217,5 @@ export function isMacAddress(s: string): boolean {
  * @returns {boolean} true if a string is an ETH address
  */
 export function isETH(s: string): boolean {
-  return check(s, ethRegex);
+  return check(s, ethRegex)
 }
