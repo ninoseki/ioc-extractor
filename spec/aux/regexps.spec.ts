@@ -13,6 +13,15 @@ import {
   ssdeepRegex,
   xmrRegex,
 } from "@/aux/regexes";
+import { tlds } from "@/aux/tlds";
+
+describe("tlds", () => {
+  it("should be sorted by length descending", () => {
+    for (let i = 0; i < tlds.length - 1; i++) {
+      expect(tlds[i].length).toBeGreaterThanOrEqual(tlds[i + 1].length);
+    }
+  });
+});
 
 describe("md5Regex", () => {
   it("should match with all MD5 values in the input", () => {
