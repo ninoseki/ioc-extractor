@@ -36,8 +36,15 @@ export const ipRegex = (options?: Options) =>
     "g",
   );
 
+const _v4Regex = new RegExp(`${v4}`, "g");
+const _v6Regex = new RegExp(`${v6}`, "g");
+
 ipRegex.v4 = (options?: Options) =>
-  new RegExp(`${boundary(options)}${v4}${boundary(options)}`, "g");
+  options?.includeBoundaries
+    ? new RegExp(`${boundary(options)}${v4}${boundary(options)}`, "g")
+    : _v4Regex;
 
 ipRegex.v6 = (options?: Options) =>
-  new RegExp(`${boundary(options)}${v6}${boundary(options)}`, "g");
+  options?.includeBoundaries
+    ? new RegExp(`${boundary(options)}${v6}${boundary(options)}`, "g")
+    : _v6Regex;

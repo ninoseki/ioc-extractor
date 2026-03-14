@@ -38,10 +38,16 @@ export function matchesWithRegExp(
   return options.sort ? sortByValue(values) : values;
 }
 
+const nonGlobalRegexCache = new Map<string, RegExp>();
+
 function getFirstMatchedValue(s: string, regexp: RegExp): string | null {
   if (regexp.global) {
-    const flags = regexp.flags.replace("g", "");
-    regexp = new RegExp(regexp.source, flags);
+    let cached = nonGlobalRegexCache.get(regexp.source);
+    if (!cached) {
+      cached = new RegExp(regexp.source, regexp.flags.replace("g", ""));
+      nonGlobalRegexCache.set(regexp.source, cached);
+    }
+    regexp = cached;
   }
 
   const matched = s.match(regexp);

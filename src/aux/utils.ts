@@ -20,9 +20,24 @@ export function sortByValue(array: string[]): string[] {
   return array.sort();
 }
 
-function orRegExp(regexps: RegExp[]): RegExp {
-  return new RegExp(regexps.map((r) => r.source).join("|"), "gi");
-}
+const DOT_RE = new RegExp(
+  [
+    /\s\.\s/,
+    /([[({])\.([\])}])/,
+    /([[({])\./,
+    /\.([\])}])/,
+    /\\\./,
+    /([[({])dot([\])}])/,
+  ]
+    .map((r) => r.source)
+    .join("|"),
+  "gi",
+);
+const COLON_RE = /[[({]:[\])}]/g;
+const SLASH_RE = /[[({]\/[\])}]/g;
+const COLON_SLASH_RE = /[[({]:\/\/[\])}]/g;
+const AT_RE = /[[({](?:at|@)[\])}]/gi;
+const HTTP_RE = /h(?:xx|\*\*)p(s?):\/\//gi;
 
 function hasDot(s: string): boolean {
   return ["\\.", " . ", "[.", "(.", "{.", "[dot", "(dot", "{dot"].some((x) =>
@@ -58,37 +73,27 @@ function hasHttp(s: string): boolean {
  */
 export function refang(s: string): string {
   if (hasDot(s)) {
-    s = s.replace(
-      orRegExp([
-        /\s\.\s/,
-        /([[({])\.([\])}])/,
-        /([[({])\./,
-        /\.([\])}])/,
-        /\\\./,
-        /([[({])dot([\])}])/,
-      ]),
-      ".",
-    );
+    s = s.replace(DOT_RE, ".");
   }
 
   if (hasColon(s)) {
-    s = s.replace(/[[({]:[\])}]/g, ":");
+    s = s.replace(COLON_RE, ":");
   }
 
   if (hasSlash(s)) {
-    s = s.replace(/[[({]\/[\])}]/g, "/");
+    s = s.replace(SLASH_RE, "/");
   }
 
   if (hasColonDoubleSlash(s)) {
-    s = s.replace(/[[({]:\/\/[\])}]/g, "://");
+    s = s.replace(COLON_SLASH_RE, "://");
   }
 
   if (hasAt(s)) {
-    s = s.replace(/[[({](?:at|@)[\])}]/gi, "@");
+    s = s.replace(AT_RE, "@");
   }
 
   if (hasHttp(s)) {
-    s = s.replace(/h(?:xx|\*\*)p(s?):\/\//gi, "http$1://");
+    s = s.replace(HTTP_RE, "http$1://");
   }
 
   return s;
