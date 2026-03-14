@@ -1,22 +1,23 @@
-name: Publish NPM package
+name: Publint
 
 on:
-  release:
-    types: ["created"]
+  push:
+    branches: [master]
+  pull_request:
+    paths:
+      - "package-lock.json"
+      - "package.json"
+      - "tsdown.config.ts"
 
 jobs:
-  deploy:
+  publint:
     runs-on: ubuntu-latest
-    permissions:
-      id-token: write # Required for OIDC
-      contents: read
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
-      - name: Setup Node.js
+      - name: Use Node.js
         uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
         with:
           node-version: 24
           cache: npm
       - run: npm install
-      - run: npm version --no-git-tag-version ${{ github.event.release.tag_name }}
-      - run: npm publish
+      - run: npm run build && npx publint

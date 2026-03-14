@@ -4,33 +4,27 @@
   "description": "IoC (Indicator of Compromise) extractor",
   "type": "module",
   "exports": {
-    "types": "./dist/index.d.ts",
-    "import": "./dist/index.js",
-    "require": "./dist/index.cjs"
+    "import": {
+      "types": "./dist/index.d.mts",
+      "default": "./dist/index.mjs"
+    },
+    "require": {
+      "types": "./dist/index.d.cts",
+      "default": "./dist/index.cjs"
+    }
   },
   "engines": {
     "node": ">=20"
   },
   "main": "./dist/index.cjs",
-  "module": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "bin": {
-    "ioc-extractor": "./dist/bin/ioc-extractor.js"
+    "ioc-extractor": "./dist/bin/ioc-extractor.mjs"
   },
   "files": [
     "dist"
   ],
-  "tsdown": {
-    "format": [
-      "cjs",
-      "esm"
-    ],
-    "entry": [
-      "src/index.ts"
-    ],
-    "dts": true,
-    "clean": true
-  },
   "scripts": {
     "build": "tsdown",
     "watch": "tsdown --watch",
@@ -77,6 +71,7 @@
     "husky": "9.1.7",
     "lint-staged": "16.3.3",
     "prettier": "3.8.1",
+    "publint": "^0.3.18",
     "tsdown": "^0.21.2",
     "tsx": "^4.21.0",
     "typedoc": "0.28.17",

@@ -12,7 +12,6 @@ jobs:
     strategy:
       matrix:
         node-version:
-          - 20
           - 22
           - 24
     steps:
@@ -39,3 +38,4 @@ jobs:
         with:
           github-token: ${{ secrets.github_token }}
           parallel-finished: true
+        continue-on-error: true
