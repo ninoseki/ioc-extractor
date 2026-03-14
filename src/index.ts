@@ -57,7 +57,14 @@ import {
   isURL,
   isXMR,
 } from "./aux/validators";
-import type { IOC, IOCKey, Options } from "./types";
+import type {
+  IOC,
+  IOCKey,
+  Options,
+  SortOptions,
+  StrictOptions,
+  StrictSortOptions,
+} from "./types";
 
 export {
   extractASN,
@@ -118,7 +125,14 @@ export {
   unicodeToASCII,
 };
 
-export type { IOC, Options };
+export type {
+  IOC,
+  IOCKey,
+  Options,
+  SortOptions,
+  StrictOptions,
+  StrictSortOptions,
+};
 
 export class IOCExtractor {
   private s: string;
