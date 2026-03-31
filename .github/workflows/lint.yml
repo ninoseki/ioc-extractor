@@ -19,5 +19,5 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm install
+      - run: npm ci
       - run: npm run build && npx publint
