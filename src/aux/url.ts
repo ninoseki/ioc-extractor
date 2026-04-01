@@ -12,7 +12,7 @@ function buildUrlRegex(options: StrictOptions): RegExp {
   const path = '(?:[/?#][^\\s"]*)?'
   const protocol = '(?:(?:https?)://)'
   const auth = '(?:\\S+(?::\\S*)?@)?'
-  const port = '(?::\\d{2,5})?'
+  const port = '(?::\\d{1,5})?'
   const result = new RegExp(
     `(?:${protocol})${auth}(?:${domainPart}|localhost|${ipRegex.v4().source})${port}${path}`,
     'gi',

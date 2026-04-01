@@ -88,6 +88,12 @@ describe('asnRegex', () => {
     const matches = input.match(asnRegex)
     expect(matches).toEqual(['ASN13335', 'AS13334'])
   })
+
+  it('should not match AS embedded within a word', () => {
+    const input = 'FAAS3000'
+    const matches = input.match(asnRegex)
+    expect(matches).toBeNull()
+  })
 })
 
 describe('cveRegExp', () => {
@@ -107,6 +113,13 @@ describe('btcRegex', () => {
       '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
       '3Gj9sY6PaBHdk44jktV7AXrktjMcDqnwV8',
     ])
+  })
+
+  it('should not match addresses containing digit zero (not in Base58Check)', () => {
+    // Base58Check excludes 0, O, I, l to avoid visual ambiguity
+    const input = '1J6PYEzr4CU0GbnXrELyHszoTSz3wCsCaj'
+    const matches = input.match(btcRegex)
+    expect(matches).toBeNull()
   })
 })
 
@@ -136,6 +149,18 @@ describe('gaTrackIDRegex', () => {
     const matches = input.match(gaTrackIDRegex)
     expect(matches).toEqual(['UA-26296840-4', 'UA-1111111'])
   })
+
+  it('should not match UA- embedded within a longer identifier', () => {
+    const input = 'XUA-1234567'
+    const matches = input.match(gaTrackIDRegex)
+    expect(matches).toBeNull()
+  })
+
+  it('should not truncate an ID with too many digits', () => {
+    const input = 'UA-1234567890'
+    const matches = input.match(gaTrackIDRegex)
+    expect(matches).toBeNull()
+  })
 })
 
 describe('gaPubIDRegex', () => {
@@ -143,6 +168,12 @@ describe('gaPubIDRegex', () => {
     const input = 'foo bar pub-9107453047749393 baz pub-2324633754279327'
     const matches = input.match(gaPubIDRegex)
     expect(matches).toEqual(['pub-9107453047749393', 'pub-2324633754279327'])
+  })
+
+  it('should not truncate an ID with more than 16 digits', () => {
+    const input = 'pub-91074530477493934'
+    const matches = input.match(gaPubIDRegex)
+    expect(matches).toBeNull()
   })
 })
 

@@ -22,4 +22,10 @@ describe('urlRegex', () => {
       'https://1.1.1.1.domain.com:443',
     ])
   })
+
+  it('should match URLs with single-digit ports', () => {
+    const input = 'http://example.com:8/path'
+    const matches = input.match(urlRegex())
+    expect(matches).toEqual(['http://example.com:8/path'])
+  })
 })
