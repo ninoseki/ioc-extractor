@@ -125,8 +125,11 @@ describe('isCVE', () => {
 })
 
 describe('isBTC', () => {
-  it('checks whether a given value is BTC or not', () => {
-    expect(isBTC('1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj')).toBe(true)
+  it.each([
+    ['1J6PYEzr4CUoGbnXrELyHszoTSz3wCsCaj', true],
+    ['1J6PYEzr4CU0GbnXrELyHszoTSz3wCsCaj', false], // digit zero is not in Base58Check
+  ])('checks whether a given value is BTC or not', (string, expected) => {
+    expect(isBTC(string)).toBe(expected)
   })
 })
 
@@ -144,14 +147,19 @@ describe('isGATrackID', () => {
   it.each([
     ['UA-26296840-4', true],
     ['UA-26296840', true],
+    ['UA-1234567890', false], // 10 digits exceeds max of 9
+    ['XUA-1234567', false], // must not match as a substring
   ])('checks whether a given value is GATrackID or not', (string, expected) => {
     expect(isGATrackID(string)).toBe(expected)
   })
 })
 
 describe('isGAPubID', () => {
-  it('checks whether a given value is GAPubID or not', () => {
-    expect(isGAPubID('pub-9107453047749393')).toBe(true)
+  it.each([
+    ['pub-9107453047749393', true],
+    ['pub-91074530477493934', false], // 17 digits exceeds required 16
+  ])('checks whether a given value is GAPubID or not', (string, expected) => {
+    expect(isGAPubID(string)).toBe(expected)
   })
 })
 
