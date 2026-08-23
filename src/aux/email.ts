@@ -3,7 +3,8 @@ import { StrictOptions } from '@/types'
 import { domainRegex } from './domain'
 
 const localPartLetters = "a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-"
-const localPart = `(?<![${localPartLetters}])[${localPartLetters}]+`
+// RFC 5321 caps the local part at 64 characters
+const localPart = `(?<![${localPartLetters}])[${localPartLetters}]{1,64}`
 
 function buildEmailRegex(strict: boolean): RegExp {
   const domainPart = domainRegex({ strict }).source
