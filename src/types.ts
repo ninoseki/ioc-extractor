@@ -36,22 +36,25 @@ export interface IOC {
   xmrs: string[]
 }
 
-export type IOCKey =
-  | 'asns'
-  | 'btcs'
-  | 'cves'
-  | 'domains'
-  | 'emails'
-  | 'eths'
-  | 'gaPubIDs'
-  | 'gaTrackIDs'
-  | 'ipv4s'
-  | 'ipv6s'
-  | 'macAddresses'
-  | 'md5s'
-  | 'sha1s'
-  | 'sha256s'
-  | 'sha512s'
-  | 'ssdeeps'
-  | 'urls'
-  | 'xmrs'
+export const iocKeys = [
+  'asns',
+  'btcs',
+  'cves',
+  'domains',
+  'emails',
+  'eths',
+  'gaPubIDs',
+  'gaTrackIDs',
+  'ipv4s',
+  'ipv6s',
+  'macAddresses',
+  'md5s',
+  'sha1s',
+  'sha256s',
+  'sha512s',
+  'ssdeeps',
+  'urls',
+  'xmrs',
+] as const
+
+export type IOCKey = (typeof iocKeys)[number]

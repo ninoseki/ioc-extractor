@@ -1,25 +1,27 @@
 #!/usr/bin/env node
-import { program } from 'commander'
 import getStdin from 'get-stdin'
 
-import { IOCKey, Options } from '@/types'
-
 import { extractIOC, partialExtractIOC } from '../index'
-
-type OnlyOptions = Options & Partial<{ only: IOCKey[] }>
+import { CLIError, helpText, parseCLIArgs } from './args'
 
 ;(async (): Promise<void> => {
+  let options
+  try {
+    options = parseCLIArgs(process.argv.slice(2))
+  } catch (error) {
+    if (error instanceof CLIError) {
+      process.stderr.write(`error: ${error.message}\n`)
+      process.exit(1)
+    }
+    throw error
+  }
+
+  if (options.help) {
+    process.stdout.write(helpText)
+    process.exit(0)
+  }
+
   const input = (await getStdin()).trim()
-
-  program
-    .option('--no-strict', 'Disable strict option')
-    .option('--no-refang', 'Disable refang option')
-    .option('--no-sort', 'Disable sort option')
-    .option('-p, --punycode', 'Enable punycode option')
-    .option('-o, --only <types...>', 'Show only specific IoC types')
-  program.parse()
-
-  const options = <OnlyOptions>program.opts()
 
   const ioc = options.only
     ? partialExtractIOC(input, options.only, options)
