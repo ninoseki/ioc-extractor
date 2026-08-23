@@ -1,5 +1,3 @@
-import { LRUCache } from 'lru-cache'
-
 import { StrictOptions } from '@/types'
 
 import {
@@ -12,23 +10,26 @@ import {
   zeroOrMoreLabelWithHyphen,
 } from './regexes'
 
-const domainRegexCache = new LRUCache<boolean, RegExp>({ max: 2 })
-
 function buildDomainRegex(strict: boolean): RegExp {
   const tld = strict ? strictTld : nonStrictTld
   const regex =
     `(?=[${labelLetters}.\\-]{1,252}\\.(${tld})\\b)` +
     `((${idnPrefix}${zeroOrMoreLabel}|${oneOrMoreLabel})((?!.{0,63}--)${zeroOrMoreLabelWithHyphen}[${labelLetters}])?\\.)+(${tld})\\b`
-  const result = new RegExp(regex, 'gi')
-  domainRegexCache.set(strict, result)
-  return result
+  return new RegExp(regex, 'gi')
 }
+
+// Built on first use, one instance per strictness. They carry the `g` flag and
+// thus a mutable lastIndex, so match them with String#match (which resets it)
+// rather than calling test()/exec() on them directly.
+let strictDomainRegex: RegExp | undefined
+let nonStrictDomainRegex: RegExp | undefined
 
 export function domainRegex(
   options: StrictOptions = {
     strict: true,
   },
 ): RegExp {
-  const strict = options.strict ?? true
-  return domainRegexCache.get(strict) ?? buildDomainRegex(strict)
+  return (options.strict ?? true)
+    ? (strictDomainRegex ??= buildDomainRegex(true))
+    : (nonStrictDomainRegex ??= buildDomainRegex(false))
 }
