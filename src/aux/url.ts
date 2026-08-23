@@ -5,7 +5,7 @@ import { ipRegex } from './ip'
 
 const path = '(?:[/?#][^\\s"]*)?'
 const protocol = '(?:(?:https?)://)'
-const auth = '(?:\\S+(?::\\S*)?@)?'
+const auth = '(?:(?=[^\\s/?#@])[^\\s/?#:@]*(?::[^\\s/?#]*)?@)?'
 const port = '(?::\\d{2,5})?'
 
 function buildUrlRegex(strict: boolean): RegExp {

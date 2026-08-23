@@ -2,7 +2,8 @@ import { StrictOptions } from '@/types'
 
 import { domainRegex } from './domain'
 
-const localPart = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+"
+const localPartLetters = "a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-"
+const localPart = `(?<![${localPartLetters}])[${localPartLetters}]+`
 
 function buildEmailRegex(strict: boolean): RegExp {
   const domainPart = domainRegex({ strict }).source
