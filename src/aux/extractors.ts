@@ -231,7 +231,7 @@ export function extractEmails(
   s: string,
   options: StrictSortOptions = { strict: true, sort: true },
 ): string[] {
-  if (!s.includes('@') && !s.includes('.')) {
+  if (!s.includes('@') || !s.includes('.')) {
     return []
   }
   const regexp = emailRegex(options)
@@ -247,7 +247,7 @@ export function extractEmails(
  * @returns {string | null} Email
  */
 export function extractEmail(s: string, options: StrictOptions = { strict: true }): string | null {
-  if (!s.includes('@') && !s.includes('.')) {
+  if (!s.includes('@') || !s.includes('.')) {
     return null
   }
   const regexp = emailRegex(options)
